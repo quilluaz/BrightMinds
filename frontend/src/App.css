@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-yellow: #fddf7d;
+  --color-blue: #badefc;
+  --color-light-blue: #e8f0ff;
+  --color-dark-gray: #464655;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.dark {
+  --color-yellow: #d4b84e;
+  --color-blue: #7aafcf;
+  --color-light-blue: #2a3a4f;
+  --color-dark-gray: #2d2d38;
+}
