@@ -1,6 +1,7 @@
 package JIZAS.BrightMinds.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "User")
@@ -23,6 +24,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserBadge> userBadges;
+
     public User() {}
 
     // getters/setters
@@ -40,4 +44,7 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public List<UserBadge> getUserBadges() { return userBadges; }
+    public void setUserBadges(List<UserBadge> userBadges) { this.userBadges = userBadges; }
 }
