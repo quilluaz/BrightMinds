@@ -12,11 +12,13 @@ public class Progress {
     @Column(name = "progress_id")
     private Long progressId;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "story_id", nullable = false)
-    private Long storyId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "story_id", nullable = false)
+    private Story story;
 
     @Column(name = "current_scene")
     private String currentScene;
@@ -29,15 +31,14 @@ public class Progress {
 
     public Progress() {}
 
-    // getters/setters
     public Long getProgressId() { return progressId; }
     public void setProgressId(Long progressId) { this.progressId = progressId; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public Long getStoryId() { return storyId; }
-    public void setStoryId(Long storyId) { this.storyId = storyId; }
+    public Story getStory() { return story; }
+    public void setStory(Story story) { this.story = story; }
 
     public String getCurrentScene() { return currentScene; }
     public void setCurrentScene(String currentScene) { this.currentScene = currentScene; }
