@@ -64,7 +64,7 @@ export default function Landing() {
           <div className="text-center select-none space-y-6">
             <div className="mx-auto flex items-center justify-center">
               <img
-                src="/LogoIconStackDark.svg"
+                src="/LogoIconStackLight.svg"
                 alt="BrightMinds Logo"
                 className="w-80 h-80 will-change-transform motion-safe:animate-float"
               />
@@ -79,7 +79,7 @@ export default function Landing() {
                 [text-shadow:_2px_2px_0_#000]
                 [font-family:'Press_Start_2P',cursive]
               ">
-              Press or Click to Start
+              Click to Start
             </p>
           </div>
         </div>
@@ -129,10 +129,10 @@ export default function Landing() {
             {/* Modal title: keep Press Start 2P, use orange fill + black outline */}
             <DialogTitle
               className="
-                text-center text-[18px] leading-relaxed
+                text-center text-[2rem] leading-relaxed
                 text-[#ff8e51]
-                [text-shadow:_1px_1px_0_#000]
-                [font-family:'Press_Start_2P',cursive]
+                font-spartan font-black
+                [-webkit-text-stroke:0.035em_black]
               ">
               {mode === "login" ? "Welcome back!" : "Welcome to BrightMinds!"}
             </DialogTitle>
