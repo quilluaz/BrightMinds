@@ -4,7 +4,6 @@ import JIZAS.BrightMinds.dto.ProgressRequestDTO;
 import JIZAS.BrightMinds.dto.ProgressViewDTO;
 import JIZAS.BrightMinds.entity.Progress;
 import JIZAS.BrightMinds.entity.Story;
-import JIZAS.BrightMinds.entity.User;
 import JIZAS.BrightMinds.repository.ProgressRepository;
 import JIZAS.BrightMinds.repository.UserRepository;
 import org.springframework.stereotype.Service;
