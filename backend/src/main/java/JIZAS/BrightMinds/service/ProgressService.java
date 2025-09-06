@@ -76,6 +76,14 @@ public class ProgressService {
         repo.deleteById(id);
     }
 
+    public List<ProgressViewDTO> getByUserId(Long userId) {
+        return repo.findByUser_UserId(userId).stream().map(this::toView).collect(Collectors.toList());
+    }
+
+    public List<ProgressViewDTO> getByStoryId(Integer storyId) {
+        return repo.findByStory_StoryId(storyId).stream().map(this::toView).collect(Collectors.toList());
+    }
+
     private ProgressViewDTO toView(Progress p) {
         ProgressViewDTO v = new ProgressViewDTO();
         v.setProgressId(p.getProgressId());
