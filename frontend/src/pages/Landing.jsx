@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
-import img1 from "@/assets/grid/01.webp";
-import img2 from "@/assets/grid/02.webp";
-import img3 from "@/assets/grid/03.webp";
-import img4 from "@/assets/grid/04.webp";
+import img1 from "@/assets/games/01.webp";
+import img2 from "@/assets/games/02.webp";
+import img3 from "@/assets/games/03.webp";
+import img4 from "@/assets/games/04.webp";
 import GridMotion from "../components/background/GridMotion";
 import {
   Dialog,
