@@ -54,7 +54,7 @@ public class UserBadgeService {
     public UserBadge awardBadgeToUser(User user, Long badgeId) {
         Optional<Badge> badgeOpt = badgeRepository.findById(badgeId);
         if (badgeOpt.isEmpty()) {
-            throw new RuntimeException("Badge not found with ID: " + badgeId);
+            throw new RuntimeException("Badge not found with IDs: " + badgeId);
         }
         if (user == null || user.getUserId() == null) {
             throw new RuntimeException("Valid user is required to award a badge");
