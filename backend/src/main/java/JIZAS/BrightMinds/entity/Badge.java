@@ -16,7 +16,7 @@ public class Badge {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "`condition`")
+    @Column(name = "\"condition\"")
     private int condition; // e.g., score threshold to earn this badge
 
     @OneToMany(mappedBy = "badge")
