@@ -23,3 +23,4 @@ public interface UserBadgeRepository extends JpaRepository<UserBadge, Long> {
 
 
 
+
