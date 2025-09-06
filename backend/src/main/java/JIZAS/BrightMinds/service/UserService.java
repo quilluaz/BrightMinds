@@ -24,15 +24,15 @@ public class UserService {
     }
 
     public UserViewDTO create(UserRequestDTO req) {
-        // Check if username already exists
-        if (repo.findByUsername(req.getUsername()).isPresent()) {
-            throw new RuntimeException("Username already exists");
+        // Check if email already exists
+        if (repo.findByEmail(req.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
         }
         
         User u = new User();
         u.setFName(req.getFName());
         u.setLName(req.getLName());
-        u.setUsername(req.getUsername());
+        u.setEmail(req.getEmail());
         u.setPassword(passwordEncoder.encode(req.getPassword()));
         return toView(repo.save(u));
     }
@@ -49,15 +49,15 @@ public class UserService {
         User u = repo.findById(id).orElse(null);
         if (u == null) return null;
         
-        // Check if username is being changed and if it already exists
-        if (!u.getUsername().equals(req.getUsername()) && 
-            repo.findByUsername(req.getUsername()).isPresent()) {
-            throw new RuntimeException("Username already exists");
+        // Check if email is being changed and if it already exists
+        if (!u.getEmail().equals(req.getEmail()) && 
+            repo.findByEmail(req.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
         }
         
         u.setFName(req.getFName());
         u.setLName(req.getLName());
-        u.setUsername(req.getUsername());
+        u.setEmail(req.getEmail());
         
         // Only hash password if it's being updated (not empty)
         if (req.getPassword() != null && !req.getPassword().trim().isEmpty()) {
@@ -71,8 +71,8 @@ public class UserService {
         repo.deleteById(id);
     }
 
-    public UserViewDTO getByUsername(String username) {
-        return repo.findByUsername(username).map(this::toView).orElse(null);
+    public UserViewDTO getByEmail(String email) {
+        return repo.findByEmail(email).map(this::toView).orElse(null);
     }
 
     private UserViewDTO toView(User u) {
@@ -80,7 +80,7 @@ public class UserService {
         v.setUserId(u.getUserId());
         v.setFName(u.getFName());
         v.setLName(u.getLName());
-        v.setUsername(u.getUsername());
+        v.setEmail(u.getEmail());
         return v;
     }
 }

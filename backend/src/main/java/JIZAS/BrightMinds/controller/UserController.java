@@ -29,7 +29,7 @@ public class UserController {
     @Operation(summary = "Create a new user", description = "Creates a new user account with the provided information")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data or username already exists")
+            @ApiResponse(responseCode = "400", description = "Invalid input data or email already exists")
     })
     public ResponseEntity<UserViewDTO> createUser(@Valid @RequestBody UserRequestDTO userRequest) {
         try {
@@ -95,10 +95,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/username/{username}")
-    public ResponseEntity<UserViewDTO> getUserByUsername(@PathVariable String username) {
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserViewDTO> getUserByEmail(@PathVariable String email) {
         try {
-            UserViewDTO user = userService.getByUsername(username);
+            UserViewDTO user = userService.getByEmail(email);
             if (user != null) {
                 return new ResponseEntity<>(user, HttpStatus.OK);
             } else {
