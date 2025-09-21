@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { logout } from "@/services/auth";
 
 const ITEMS = [
   {
@@ -22,6 +23,14 @@ const ITEMS = [
     ariaLabel: "About",
     rotation: 8,
     hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
+  },
+  {
+    label: "logout",
+    href: "#",
+    ariaLabel: "Logout",
+    rotation: -4,
+    hoverStyles: { bgColor: "#ef4444", textColor: "#ffffff" },
+    isLogout: true,
   },
 ];
 
@@ -66,6 +75,16 @@ export default function BubbleMenu({
     if (nextState) setShowOverlay(true);
     setIsMenuOpen(nextState);
     onMenuClick?.(nextState);
+  };
+
+  const handleMenuItemClick = (item) => {
+    if (item.isLogout) {
+      logout();
+    } else if (item.href && item.href !== "#") {
+      window.location.href = item.href;
+    }
+    // Close menu after action
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -164,6 +183,7 @@ export default function BubbleMenu({
         }
         .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
           margin-left: calc(100% / 3);
+          margin-top: 3rem;
         }
         @media (min-width: 900px) {
           .bubble-menu-items .pill-link {
@@ -176,6 +196,10 @@ export default function BubbleMenu({
           }
           .bubble-menu-items .pill-link:active {
             transform: rotate(var(--item-rot)) scale(.94);
+          }
+          .bubble-menu-items .pill-link:focus {
+            outline: 2px solid var(--hover-bg);
+            outline-offset: 2px;
           }
         }
         @media (max-width: 899px) {
@@ -312,10 +336,11 @@ export default function BubbleMenu({
                   "[flex:0_0_calc(100%/3)]",
                   "box-border",
                 ].join(" ")}>
-                <a
+                <button
+                  type="button"
                   role="menuitem"
-                  href={item.href}
                   aria-label={item.ariaLabel || item.label}
+                  onClick={() => handleMenuItemClick(item)}
                   className={[
                     "pill-link",
                     "w-full",
@@ -329,6 +354,7 @@ export default function BubbleMenu({
                     "transition-[background,color] duration-300 ease-in-out",
                     "box-border",
                     "whitespace-nowrap overflow-hidden",
+                    "border-0 cursor-pointer",
                   ].join(" ")}
                   style={{
                     ["--item-rot"]: `${item.rotation ?? 0}deg`,
@@ -362,7 +388,7 @@ export default function BubbleMenu({
                     }}>
                     {item.label}
                   </span>
-                </a>
+                </button>
               </li>
             ))}
           </ul>

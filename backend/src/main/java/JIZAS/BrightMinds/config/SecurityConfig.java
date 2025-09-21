@@ -28,17 +28,21 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/users/**").permitAll()
-                .requestMatchers("/api/progress/**").permitAll()
-                .requestMatchers("/api/questions/**").permitAll()
-                .requestMatchers("/api/choices/**").permitAll()
-                .requestMatchers("/api/answers/**").permitAll()
-                .requestMatchers("/api/stories/**").permitAll()
-                .requestMatchers("/api/scenes/**").permitAll()
-                .requestMatchers("/api/user-responses/**").permitAll()
-                .requestMatchers("/api/user-badges/**").permitAll()
-                .requestMatchers("/api/badges/**").permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/users/**").permitAll()
+                    .requestMatchers("/api/progress/**").permitAll()
+                    .requestMatchers("/api/questions/**").permitAll()
+                    .requestMatchers("/api/choices/**").permitAll()
+                    .requestMatchers("/api/answers/**").permitAll()
+                    .requestMatchers("/api/stories/**").permitAll()
+                    .requestMatchers("/api/scenes/**").permitAll()
+                    .requestMatchers("/api/user-responses/**").permitAll()
+                    .requestMatchers("/api/user-badges/**").permitAll()
+                    .requestMatchers("/api/badges/**").permitAll()
+                    .requestMatchers("/swagger-ui.html").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
+                    .requestMatchers("/api-docs/**").permitAll()
+                    .anyRequest().authenticated()
             );
         
         return http.build();
@@ -47,7 +51,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:5173" /* change to host on prod deployment */));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

@@ -1,5 +1,6 @@
 package JIZAS.BrightMinds.service;
 
+import JIZAS.BrightMinds.dto.LoginRequestDTO;
 import JIZAS.BrightMinds.dto.UserRequestDTO;
 import JIZAS.BrightMinds.dto.UserViewDTO;
 import JIZAS.BrightMinds.entity.User;
@@ -30,8 +31,8 @@ public class UserService {
         }
         
         User u = new User();
-        u.setFName(req.getFName());
-        u.setLName(req.getLName());
+        u.setFName(req.getFirstName());
+        u.setLName(req.getLastName());
         u.setEmail(req.getEmail());
         u.setPassword(passwordEncoder.encode(req.getPassword()));
         return toView(repo.save(u));
@@ -55,8 +56,8 @@ public class UserService {
             throw new RuntimeException("Email already exists");
         }
         
-        u.setFName(req.getFName());
-        u.setLName(req.getLName());
+        u.setFName(req.getFirstName());
+        u.setLName(req.getLastName());
         u.setEmail(req.getEmail());
         
         // Only hash password if it's being updated (not empty)
@@ -73,6 +74,27 @@ public class UserService {
 
     public UserViewDTO getByEmail(String email) {
         return repo.findByEmail(email).map(this::toView).orElse(null);
+    }
+
+    public UserViewDTO login(LoginRequestDTO loginRequest) {
+        User user = repo.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+        
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid email or password");
+        }
+        
+        // For now, we'll use a simple token generation
+        // In a real application, you'd use JWT or similar
+        String token = "token_" + user.getUserId() + "_" + System.currentTimeMillis();
+        
+        return new UserViewDTO(
+            user.getUserId(),
+            user.getFName(),
+            user.getLName(),
+            user.getEmail(),
+            token
+        );
     }
 
     private UserViewDTO toView(User u) {

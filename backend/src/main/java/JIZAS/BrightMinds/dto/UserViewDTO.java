@@ -1,10 +1,32 @@
 package JIZAS.BrightMinds.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserViewDTO {
     private Long userId;
+    @JsonProperty("firstName")
     private String fName;
+    @JsonProperty("lastName")
     private String lName;
     private String email;
+    private String token; // Optional field for authentication responses
+
+    public UserViewDTO() {}
+
+    public UserViewDTO(Long userId, String fName, String lName, String email) {
+        this.userId = userId;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+    }
+
+    public UserViewDTO(Long userId, String fName, String lName, String email, String token) {
+        this.userId = userId;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.token = token;
+    }
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
@@ -14,4 +36,6 @@ public class UserViewDTO {
     public void setLName(String lName) { this.lName = lName; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 }

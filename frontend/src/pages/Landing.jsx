@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+import { login, signup } from "@/services/auth";
 import img1 from "@/assets/games/01.webp";
 import img2 from "@/assets/games/02.webp";
 import img3 from "@/assets/games/03.webp";
@@ -19,6 +20,16 @@ export default function Landing() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState("login"); // "login" | "signup"
 
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signupFname, setSignupFname] = useState("");
+  const [signupLname, setSignupLname] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const baseImages = [img1, img2, img3, img4];
 
   const gridImages = Array.from({ length: 28 }, (_, i) => {
@@ -35,6 +46,59 @@ export default function Landing() {
       setOpen(true);
     }
   };
+
+  async function handleLogin() {
+    setLoading(true);
+    setError("");
+
+    // Basic validation
+    if (!loginEmail.trim() || !loginPassword) {
+      setError("Please fill in all fields.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await login({ email: loginEmail, password: loginPassword });
+      window.location.href = "/home";
+    } catch (e) {
+      setError("Login failed. Please check your credentials or try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleSignup() {
+    setLoading(true);
+    setError("");
+
+    // Basic validation
+    if (
+      !signupFname.trim() ||
+      !signupLname.trim() ||
+      !signupEmail.trim() ||
+      !signupPassword
+    ) {
+      setError("Please fill in all fields.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const signupData = {
+        fName: signupFname.trim(),
+        lName: signupLname.trim(),
+        email: signupEmail.trim(),
+        password: signupPassword,
+      };
+      await signup(signupData);
+      window.location.href = "/home";
+    } catch (e) {
+      setError("Signup failed. Please review inputs or try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div
@@ -138,6 +202,13 @@ export default function Landing() {
             </DialogTitle>
           </DialogHeader>
 
+          {/* Error display */}
+          {error && (
+            <div className="bg-red-100 border-2 border-red-500 text-red-700 px-4 py-3 rounded-lg mb-4">
+              {error}
+            </div>
+          )}
+
           {/* Forms */}
           {mode === "login" ? (
             <div className="grid grid-cols-1 gap-3 font-lexend">
@@ -150,6 +221,8 @@ export default function Landing() {
                   type="email"
                   placeholder="you@example.com"
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
@@ -161,23 +234,43 @@ export default function Landing() {
                   type="password"
                   placeholder="••••••••"
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
                 />
               </div>
-              <Button className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]">
-                Sign in
+              <Button
+                className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
+                onClick={handleLogin}
+                disabled={loading}>
+                {loading ? "Signing in..." : "Sign in"}
               </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-3 font-lexend">
               <div className="grid gap-2">
-                <Label htmlFor="signup-name" className="text-bmBlack">
-                  Full name
+                <Label htmlFor="signup-fname" className="text-bmBlack">
+                  First Name
                 </Label>
                 <Input
-                  id="signup-name"
+                  id="signup-fname"
                   type="text"
-                  placeholder="Juan Dela Cruz"
+                  placeholder="Juan"
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={signupFname}
+                  onChange={(e) => setSignupFname(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="signup-lname" className="text-bmBlack">
+                  Last Name
+                </Label>
+                <Input
+                  id="signup-lname"
+                  type="text"
+                  placeholder="Dela Cruz"
+                  className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={signupLname}
+                  onChange={(e) => setSignupLname(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
@@ -189,6 +282,8 @@ export default function Landing() {
                   type="email"
                   placeholder="you@example.com"
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={signupEmail}
+                  onChange={(e) => setSignupEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
@@ -200,10 +295,15 @@ export default function Landing() {
                   type="password"
                   placeholder="Create a password"
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={signupPassword}
+                  onChange={(e) => setSignupPassword(e.target.value)}
                 />
               </div>
-              <Button className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]">
-                Create account
+              <Button
+                className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
+                onClick={handleSignup}
+                disabled={loading}>
+                {loading ? "Creating..." : "Create account"}
               </Button>
             </div>
           )}
