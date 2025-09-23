@@ -77,6 +77,16 @@ CREATE TABLE IF NOT EXISTS answer (
     dragdrop_position INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS dialogue (
+    dialogue_id UUID PRIMARY KEY,
+    scene_id INTEGER NOT NULL REFERENCES scene(scene_id),
+    character_name TEXT,
+    line_text TEXT,
+    voice_asset_id BIGINT REFERENCES asset(asset_id),
+    order_index INTEGER,
+    metadata JSONB
+);
+
 CREATE TABLE IF NOT EXISTS "Progress" (
     progress_id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL REFERENCES "User"(user_id),
