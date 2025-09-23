@@ -2,6 +2,8 @@ package JIZAS.BrightMinds.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "stories")
@@ -29,6 +31,10 @@ public class Story {
     
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Scene> scenes;
+    
+    @Column(name = "sequence_graph", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<String> sequenceGraph;
     
     public Story() {}
     
@@ -87,6 +93,9 @@ public class Story {
     public void setScenes(List<Scene> scenes) {
         this.scenes = scenes;
     }
+    
+    public List<String> getSequenceGraph() { return sequenceGraph; }
+    public void setSequenceGraph(List<String> sequenceGraph) { this.sequenceGraph = sequenceGraph; }
 }
 
 

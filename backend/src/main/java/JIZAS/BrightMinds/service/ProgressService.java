@@ -38,6 +38,7 @@ public class ProgressService {
 
         p.setCurrentScene(req.getCurrentScene());
         p.setScore(req.getScore());
+        p.setPerQuestionState(req.getPerQuestionState());
         p.setLastAccessed(LocalDateTime.now());
 
         return toView(repo.save(p));
@@ -66,6 +67,7 @@ public class ProgressService {
 
         p.setCurrentScene(req.getCurrentScene());
         p.setScore(req.getScore());
+        p.setPerQuestionState(req.getPerQuestionState());
         p.setLastAccessed(LocalDateTime.now());
 
         return toView(repo.save(p));
@@ -91,6 +93,7 @@ public class ProgressService {
         v.setCurrentScene(p.getCurrentScene());
         v.setScore(p.getScore());
         v.setLastAccessed(p.getLastAccessed());
+        v.setPerQuestionState(p.getPerQuestionState());
         return v;
     }
 }

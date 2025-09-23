@@ -2,6 +2,9 @@ package JIZAS.BrightMinds.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Map;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "Progress")
@@ -29,6 +32,10 @@ public class Progress {
     @Column(name = "last_accessed")
     private LocalDateTime lastAccessed;
 
+    @Column(name = "per_question_state", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> perQuestionState;
+
     public Progress() {}
 
     public Long getProgressId() { return progressId; }
@@ -48,4 +55,7 @@ public class Progress {
 
     public LocalDateTime getLastAccessed() { return lastAccessed; }
     public void setLastAccessed(LocalDateTime lastAccessed) { this.lastAccessed = lastAccessed; }
+
+    public Map<String, Object> getPerQuestionState() { return perQuestionState; }
+    public void setPerQuestionState(Map<String, Object> perQuestionState) { this.perQuestionState = perQuestionState; }
 }

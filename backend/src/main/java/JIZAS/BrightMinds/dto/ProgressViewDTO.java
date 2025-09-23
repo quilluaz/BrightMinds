@@ -1,6 +1,7 @@
 package JIZAS.BrightMinds.dto;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public class ProgressViewDTO {
     private Long progressId;
@@ -9,6 +10,7 @@ public class ProgressViewDTO {
     private String currentScene;
     private Integer score;
     private LocalDateTime lastAccessed;
+    private Map<String, Object> perQuestionState;
 
     public Long getProgressId() { return progressId; }
     public void setProgressId(Long progressId) { this.progressId = progressId; }
@@ -27,4 +29,6 @@ public class ProgressViewDTO {
 
     public LocalDateTime getLastAccessed() { return lastAccessed; }
     public void setLastAccessed(LocalDateTime lastAccessed) { this.lastAccessed = lastAccessed; }
+    public Map<String, Object> getPerQuestionState() { return perQuestionState; }
+    public void setPerQuestionState(Map<String, Object> perQuestionState) { this.perQuestionState = perQuestionState; }
 }
