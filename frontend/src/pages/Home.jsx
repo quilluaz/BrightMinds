@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BubbleMenu from "@/components/ui/BubbleMenu";
 import RollingGallery from "@/components/ui/RollingGallery";
 
+import { Button } from "@/components/ui/Button";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +13,6 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 // Local images (Vite-bundled)
 import game1 from "@/assets/games/01.webp";
