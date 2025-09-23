@@ -62,7 +62,10 @@ export default function Landing() {
       await login({ email: loginEmail, password: loginPassword });
       window.location.href = "/home";
     } catch (e) {
-      setError("Login failed. Please check your credentials or try again.");
+      setError(
+        e?.message ||
+          "Login failed. Please check your credentials or try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -94,7 +97,9 @@ export default function Landing() {
       await signup(signupData);
       window.location.href = "/home";
     } catch (e) {
-      setError("Signup failed. Please review inputs or try again.");
+      setError(
+        e?.message || "Signup failed. Please review inputs or try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -223,6 +228,12 @@ export default function Landing() {
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleLogin();
+                    }
+                  }}
                 />
               </div>
               <div className="grid gap-2">
@@ -236,6 +247,12 @@ export default function Landing() {
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleLogin();
+                    }
+                  }}
                 />
               </div>
               <Button
@@ -284,6 +301,12 @@ export default function Landing() {
                   className="bg-white border-2 border-bmBlack focus-visible:ring-0"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleSignup();
+                    }
+                  }}
                 />
               </div>
               <div className="grid gap-2">

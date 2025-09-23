@@ -6,8 +6,14 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("bm_token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  const path = config.url || "";
+  const isAuthEndpoint = typeof path === "string" && /\/auth\//.test(path);
+
+  if (!isAuthEndpoint) {
+    const token = localStorage.getItem("bm_token");
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+  }
+
   return config;
 });
 

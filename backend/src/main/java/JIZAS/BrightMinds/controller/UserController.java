@@ -1,6 +1,7 @@
 package JIZAS.BrightMinds.controller;
 
-import JIZAS.BrightMinds.dto.UserRequestDTO;
+import JIZAS.BrightMinds.dto.UserCreationDTO;
+import JIZAS.BrightMinds.dto.UserUpdateDTO; // New import, was UserRequestDTO
 import JIZAS.BrightMinds.dto.UserViewDTO;
 import JIZAS.BrightMinds.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +32,7 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input data or email already exists")
     })
-    public ResponseEntity<UserViewDTO> createUser(@Valid @RequestBody UserRequestDTO userRequest) {
+    public ResponseEntity<UserViewDTO> createUser(@Valid @RequestBody UserCreationDTO userRequest) {
         try {
             UserViewDTO createdUser = userService.create(userRequest);
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
@@ -72,7 +73,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<UserViewDTO> updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequest) {
+    public ResponseEntity<UserViewDTO> updateUser(@PathVariable Long userId, @Valid @RequestBody UserUpdateDTO userRequest) {
         try {
             UserViewDTO updatedUser = userService.update(userId, userRequest);
             if (updatedUser != null) {
