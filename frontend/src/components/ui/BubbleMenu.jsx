@@ -1,25 +1,26 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { logout } from "@/services/auth";
 
 const ITEMS = [
   {
     label: "home",
-    href: "#",
+    href: "/home",
     ariaLabel: "Home",
     rotation: -8,
     hoverStyles: { bgColor: "#9c8bef", textColor: "#ffffff" },
   },
   {
     label: "settings",
-    href: "#",
+    href: "/settings",
     ariaLabel: "Settings",
     rotation: 8,
     hoverStyles: { bgColor: "#ff8e51", textColor: "#ffffff" },
   },
   {
     label: "about",
-    href: "#",
+    href: "/about",
     ariaLabel: "About",
     rotation: 8,
     hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
@@ -55,6 +56,9 @@ export default function BubbleMenu({
   const bubblesRef = useRef([]);
   const labelRefs = useRef([]);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const menuItems = items?.length ? items : ITEMS;
 
   const containerClassName = [
@@ -77,13 +81,24 @@ export default function BubbleMenu({
     onMenuClick?.(nextState);
   };
 
-  const handleMenuItemClick = (item) => {
+  const normalizePath = (href) => {
+    try {
+      const url = new URL(href, window.location.origin);
+      return url.pathname.replace(/\/$/, "");
+    } catch {
+      return href?.replace(/\/$/, "") || "";
+    }
+  };
+
+  const currentPath = normalizePath(location.pathname || "/");
+
+  const handleMenuItemClick = (item, isActive) => {
+    if (isActive) return;
     if (item.isLogout) {
       logout();
     } else if (item.href && item.href !== "#") {
-      window.location.href = item.href;
+      navigate(item.href);
     }
-    // Close menu after action
     setIsMenuOpen(false);
   };
 
@@ -326,71 +341,85 @@ export default function BubbleMenu({
             ].join(" ")}
             role="menu"
             aria-label="Menu links">
-            {menuItems.map((item, idx) => (
-              <li
-                key={idx}
-                role="none"
-                className={[
-                  "pill-col",
-                  "flex justify-center items-stretch",
-                  "[flex:0_0_calc(100%/3)]",
-                  "box-border",
-                ].join(" ")}>
-                <button
-                  type="button"
-                  role="menuitem"
-                  aria-label={item.ariaLabel || item.label}
-                  onClick={() => handleMenuItemClick(item)}
+            {menuItems.map((item, idx) => {
+              const itemPath = normalizePath(item.href || "");
+              const isActive = itemPath && itemPath === currentPath;
+              const activeBg = item.hoverStyles?.bgColor || "#f3f4f6";
+              const activeColor =
+                item.hoverStyles?.textColor || menuContentColor;
+              return (
+                <li
+                  key={idx}
+                  role="none"
                   className={[
-                    "pill-link",
-                    "w-full",
-                    "rounded-[999px]",
-                    "no-underline",
-                    "bg-white",
-                    "text-inherit",
-                    "shadow-[0_4px_14px_rgba(0,0,0,0.10)]",
-                    "flex items-center justify-center",
-                    "relative",
-                    "transition-[background,color] duration-300 ease-in-out",
+                    "pill-col",
+                    "flex justify-center items-stretch",
+                    "[flex:0_0_calc(100%/3)]",
                     "box-border",
-                    "whitespace-nowrap overflow-hidden",
-                    "border-0 cursor-pointer",
-                  ].join(" ")}
-                  style={{
-                    ["--item-rot"]: `${item.rotation ?? 0}deg`,
-                    ["--pill-bg"]: menuBg,
-                    ["--pill-color"]: menuContentColor,
-                    ["--hover-bg"]: item.hoverStyles?.bgColor || "#f3f4f6",
-                    ["--hover-color"]:
-                      item.hoverStyles?.textColor || menuContentColor,
-                    background: "var(--pill-bg)",
-                    color: "var(--pill-color)",
-                    minHeight: "var(--pill-min-h, 160px)",
-                    padding: "clamp(1.5rem, 3vw, 8rem) 0",
-                    fontSize: "clamp(1.5rem, 4vw, 4rem)",
-                    fontWeight: 400,
-                    lineHeight: 0,
-                    willChange: "transform",
-                    height: 10,
-                  }}
-                  ref={(el) => {
-                    if (el) bubblesRef.current[idx] = el;
-                  }}>
-                  <span
-                    className="pill-label inline-block"
+                  ].join(" ")}>
+                  <button
+                    type="button"
+                    role="menuitem"
+                    aria-label={item.ariaLabel || item.label}
+                    onClick={() => handleMenuItemClick(item, isActive)}
+                    aria-current={isActive ? "page" : undefined}
+                    aria-disabled={isActive ? true : undefined}
+                    className={[
+                      "pill-link",
+                      "w-full",
+                      "rounded-[999px]",
+                      "no-underline",
+                      "bg-white",
+                      "text-inherit",
+                      "shadow-[0_4px_14px_rgba(0,0,0,0.10)]",
+                      "flex items-center justify-center",
+                      "relative",
+                      "transition-[background,color] duration-300 ease-in-out",
+                      "box-border",
+                      "whitespace-nowrap overflow-hidden",
+                      isActive
+                        ? "border-0 cursor-default"
+                        : "border-0 cursor-pointer",
+                    ].join(" ")}
                     style={{
-                      willChange: "transform, opacity",
-                      height: "1.2em",
-                      lineHeight: 1.2,
+                      ["--item-rot"]: `${item.rotation ?? 0}deg`,
+                      ["--pill-bg"]: isActive ? activeBg : menuBg,
+                      ["--pill-color"]: isActive
+                        ? activeColor
+                        : menuContentColor,
+                      ["--hover-bg"]: item.hoverStyles?.bgColor || "#f3f4f6",
+                      ["--hover-color"]:
+                        item.hoverStyles?.textColor || menuContentColor,
+                      background: "var(--pill-bg)",
+                      color: "var(--pill-color)",
+                      minHeight: "var(--pill-min-h, 160px)",
+                      padding: "clamp(1.5rem, 3vw, 8rem) 0",
+                      fontSize: "clamp(1.5rem, 4vw, 4rem)",
+                      fontWeight: 400,
+                      lineHeight: 0,
+                      willChange: "transform",
+                      height: 10,
                     }}
+                    disabled={isActive}
                     ref={(el) => {
-                      if (el) labelRefs.current[idx] = el;
+                      if (el) bubblesRef.current[idx] = el;
                     }}>
-                    {item.label}
-                  </span>
-                </button>
-              </li>
-            ))}
+                    <span
+                      className="pill-label inline-block"
+                      style={{
+                        willChange: "transform, opacity",
+                        height: "1.2em",
+                        lineHeight: 1.2,
+                      }}
+                      ref={(el) => {
+                        if (el) labelRefs.current[idx] = el;
+                      }}>
+                      {item.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

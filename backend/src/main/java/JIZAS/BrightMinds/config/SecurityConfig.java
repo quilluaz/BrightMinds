@@ -25,26 +25,28 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(authz -> authz
-                    .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/api/users/**").permitAll()
-                    .requestMatchers("/api/progress/**").permitAll()
-                    .requestMatchers("/api/questions/**").permitAll()
-                    .requestMatchers("/api/choices/**").permitAll()
-                    .requestMatchers("/api/answers/**").permitAll()
-                    .requestMatchers("/api/stories/**").permitAll()
-                    .requestMatchers("/api/scenes/**").permitAll()
-                    .requestMatchers("/api/user-responses/**").permitAll()
-                    .requestMatchers("/api/user-badges/**").permitAll()
-                    .requestMatchers("/api/badges/**").permitAll()
-                    .requestMatchers("/swagger-ui.html").permitAll()
-                    .requestMatchers("/swagger-ui/**").permitAll()
-                    .requestMatchers("/api-docs/**").permitAll()
-                    .anyRequest().authenticated()
-            );
-        
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
+                        .requestMatchers("/api/progress/**").permitAll()
+                        .requestMatchers("/api/questions/**").permitAll()
+                        .requestMatchers("/api/choices/**").permitAll()
+                        .requestMatchers("/api/answers/**").permitAll()
+                        .requestMatchers("/api/stories/**").permitAll()
+                        .requestMatchers("/api/scenes/**").permitAll()
+                        .requestMatchers("/api/scene-assets/**").permitAll()
+                        .requestMatchers("/api/assets/**").permitAll()
+                        .requestMatchers("/api/user-responses/**").permitAll()
+                        .requestMatchers("/api/user-badges/**").permitAll()
+                        .requestMatchers("/api/badges/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/api-docs/**").permitAll()
+                        .anyRequest().authenticated()
+                );
+
         return http.build();
     }
 
@@ -55,7 +57,7 @@ public class SecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

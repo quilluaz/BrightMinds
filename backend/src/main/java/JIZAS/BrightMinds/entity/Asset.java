@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import java.util.Map;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "asset")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Asset {
 
 	@Id

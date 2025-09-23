@@ -18,8 +18,6 @@ public class SceneDTO {
         this.storyId = scene.getStory() != null ? scene.getStory().getStoryId() : null;
         this.sceneOrder = scene.getSceneOrder();
         this.sceneText = scene.getSceneText();
-        this.voiceoverUrl = scene.getVoiceoverUrl();
-        this.backgroundImageUrl = scene.getBackgroundImageUrl();
     }
     
     public Scene toEntity(Story story) {
@@ -28,8 +26,6 @@ public class SceneDTO {
         s.setStory(story);
         s.setSceneOrder(this.sceneOrder);
         s.setSceneText(this.sceneText);
-        s.setVoiceoverUrl(this.voiceoverUrl);
-        s.setBackgroundImageUrl(this.backgroundImageUrl);
         return s;
     }
     
@@ -41,10 +37,6 @@ public class SceneDTO {
     public void setSceneOrder(Integer sceneOrder) { this.sceneOrder = sceneOrder; }
     public String getSceneText() { return sceneText; }
     public void setSceneText(String sceneText) { this.sceneText = sceneText; }
-    public String getVoiceoverUrl() { return voiceoverUrl; }
-    public void setVoiceoverUrl(String voiceoverUrl) { this.voiceoverUrl = voiceoverUrl; }
-    public String getBackgroundImageUrl() { return backgroundImageUrl; }
-    public void setBackgroundImageUrl(String backgroundImageUrl) { this.backgroundImageUrl = backgroundImageUrl; }
 }
 
 

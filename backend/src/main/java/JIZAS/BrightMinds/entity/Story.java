@@ -1,5 +1,6 @@
 package JIZAS.BrightMinds.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -28,10 +29,11 @@ public class Story {
     
     @Column(name = "thumbnail_image")
     private String thumbnailImage;
-    
+
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Scene> scenes;
-    
+
     @Column(name = "sequence_graph", columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> sequenceGraph;

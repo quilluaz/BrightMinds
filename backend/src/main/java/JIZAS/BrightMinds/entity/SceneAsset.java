@@ -1,9 +1,12 @@
 package JIZAS.BrightMinds.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "scene_asset")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class SceneAsset {
 
 	@Id
@@ -11,13 +14,14 @@ public class SceneAsset {
 	@Column(name = "scene_asset_id")
 	private Long sceneAssetId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "scene_id", nullable = false)
-	private Scene scene;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scene_id", nullable = false)
+    @JsonIgnore
+    private Scene scene;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "asset_id", nullable = false)
-	private Asset asset;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id", nullable = false)
+    private Asset asset;
 
 	@Column(name = "position_x")
 	private Float positionX;

@@ -18,49 +18,47 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/scenes")
 @CrossOrigin(origins = "*")
 public class SceneController {
-    
+
     @Autowired
     private SceneService sceneService;
-    
+
     @Autowired
     private StoryService storyService;
-    
+
     @PostMapping
-    public ResponseEntity<Scene> create(@RequestBody SceneDTO dto) {
+    public ResponseEntity<SceneDTO> create(@RequestBody SceneDTO dto) {
         Optional<Story> story = storyService.getById(dto.getStoryId());
-        if (story.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (story.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Scene created = sceneService.create(dto.toEntity(story.get()));
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+        return new ResponseEntity<>(new SceneDTO(created), HttpStatus.CREATED);
     }
-    
+
     @GetMapping
     public ResponseEntity<List<SceneDTO>> listAll() {
         List<SceneDTO> list = sceneService.listAll().stream().map(SceneDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<SceneDTO> getById(@PathVariable Integer id) {
         Optional<Scene> s = sceneService.getById(id);
         return s.map(scene -> new ResponseEntity<>(new SceneDTO(scene), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<Scene> update(@PathVariable Integer id, @RequestBody SceneDTO dto) {
+    public ResponseEntity<SceneDTO> update(@PathVariable Integer id, @RequestBody SceneDTO dto) {
         Optional<Story> story = storyService.getById(dto.getStoryId());
-        if (story.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (story.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Scene entity = dto.toEntity(story.get());
         entity.setSceneId(id);
         Scene updated = sceneService.update(entity);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return new ResponseEntity<>(new SceneDTO(updated), HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         sceneService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
-
-

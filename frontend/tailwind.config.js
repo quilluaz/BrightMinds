@@ -64,6 +64,7 @@ export default {
       fontFamily: {
         spartan: ["'League Spartan'", "sans-serif"],
         lexend: ["'Lexend Deca'", "sans-serif"],
+        pressStart: ["'Press Start 2P'", "cursive"],
       },
 
       // ⬇️ New: floating animation
