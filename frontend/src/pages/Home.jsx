@@ -14,12 +14,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-// Local images (Vite-bundled)
-import game1 from "@/assets/games/01.webp";
-import game2 from "@/assets/games/02.webp";
-import game3 from "@/assets/games/03.webp";
-import game4 from "@/assets/games/04.webp";
-
 export default function Home() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -29,26 +23,26 @@ export default function Home() {
     () => [
       {
         id: "g1",
-        title: "Bayan Quest (Story 1)",
-        img: game1,
+        title: "The Story of the Amulet",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
         desc: "Embark on a story-driven civics adventure about community helpers. Pause for questions to progress.",
       },
       {
         id: "g2",
         title: "Kasaysayan Run (Story 2)",
-        img: game2,
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
         desc: "Discover key moments in Philippine history through an interactive, gamified storyline.",
       },
       {
         id: "g3",
         title: "Science Quest (Story 3)",
-        img: game3,
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
         desc: "Learn about basic science through puzzles and branching story paths.",
       },
       {
         id: "g4",
         title: "Math Dash (Story 4)",
-        img: game4,
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
         desc: "Sharpen math skills through arcade-style gamified lessons.",
       },
     ],
@@ -65,8 +59,12 @@ export default function Home() {
   };
 
   const goPlay = () => {
-    // Dummy navigation for now
-    navigate("/play/beta");
+    // Navigate to the correct game route based on the active game's ID
+    if (active?.id === "g1") {
+      navigate("/game1");
+    } else {
+      navigate("/play/beta");
+    }
   };
 
   return (
@@ -99,15 +97,6 @@ export default function Home() {
       {/* Game Info Modal */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-3xl bg-bmLightYellow text-bmBlack">
-          <DialogHeader>
-            <DialogTitle className="font-['League_Spartan'] text-2xl md:text-3xl">
-              {active?.title ?? "Game Info"}
-            </DialogTitle>
-            <DialogDescription className="sr-only">
-              Game details
-            </DialogDescription>
-          </DialogHeader>
-
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1.2fr]">
             {/* Left: image */}
             <div className="flex items-center justify-center">
@@ -122,15 +111,17 @@ export default function Home() {
 
             {/* Right: description */}
             <div className="space-y-3">
+              <DialogHeader>
+                <DialogTitle className="font-['League_Spartan'] text-2xl md:text-3xl">
+                  {active?.title ?? "Game Info"}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Game details
+                </DialogDescription>
+              </DialogHeader>
               <p className="font-['Lexend_Deca'] leading-relaxed">
                 {active?.desc ?? "Select a game to view its details."}
               </p>
-
-              <ul className="list-disc pl-5 text-sm opacity-90">
-                <li>Linear chapter unlocking</li>
-                <li>Auto-save after each question</li>
-                <li>Voice-over narration</li>
-              </ul>
             </div>
           </div>
 

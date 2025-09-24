@@ -1,8 +1,10 @@
 package JIZAS.BrightMinds.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @Entity
 @Table(name = "scenes")
@@ -24,6 +26,10 @@ public class Scene {
 
     @Column(name = "scene_text", columnDefinition = "TEXT")
     private String sceneText;
+
+    @OneToMany(mappedBy = "scene", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Dialogue> dialogues;
 
 
     public Scene() {
@@ -61,6 +67,7 @@ public class Scene {
         this.sceneText = sceneText;
     }
 
+    public List<Dialogue> getDialogues() { return dialogues; }
+    public void setDialogues(List<Dialogue> dialogues) { this.dialogues = dialogues; }
+
 }
-
-
