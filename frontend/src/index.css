@@ -87,15 +87,16 @@
   }
 }
 
-
 html,
 body {
   overflow-x: clip;
+  overflow-y: auto;
 }
 @supports not (overflow: clip) {
   html,
   body {
     overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 
@@ -114,4 +115,23 @@ main {
   .gallery-trap {
     overflow-x: hidden;
   }
+}
+
+.faulty-terminal-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

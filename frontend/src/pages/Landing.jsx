@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { login, signup } from "@/services/auth";
-import img1 from "@/assets/games/01.webp";
-import img2 from "@/assets/games/02.webp";
-import img3 from "@/assets/games/03.webp";
-import img4 from "@/assets/games/04.webp";
 import GridMotion from "../components/background/GridMotion";
 import {
   Dialog,
@@ -30,7 +26,12 @@ export default function Landing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const baseImages = [img1, img2, img3, img4];
+  const baseImages = [
+    "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
+    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
+    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
+    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
+  ];
 
   const gridImages = Array.from({ length: 28 }, (_, i) => {
     const row = Math.floor(i / 7);
