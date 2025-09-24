@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import BubbleMenu from "@/components/ui/BubbleMenu";
-import FaultyTerminal from "@/components/background/FaultyTerminal";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 import ProfileCard from "@/components/ui/ProfileCard/ProfileCard";
 import LogoLoop from "@/components/ui/LogoLoop";
@@ -149,7 +148,6 @@ export default function About() {
             </ScrollStackItem>
           </ScrollStack>
         </div>
-
       </section>
 
       {/* Animated Stats Section */}

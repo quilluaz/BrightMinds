@@ -1,5 +1,6 @@
 package JIZAS.BrightMinds.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +28,7 @@ public class Scene {
     private String sceneText;
 
     @OneToMany(mappedBy = "scene", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Dialogue> dialogues;
 
 
@@ -69,5 +71,3 @@ public class Scene {
     public void setDialogues(List<Dialogue> dialogues) { this.dialogues = dialogues; }
 
 }
-
-

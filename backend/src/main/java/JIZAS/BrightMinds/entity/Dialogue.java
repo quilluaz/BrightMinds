@@ -1,5 +1,6 @@
 package JIZAS.BrightMinds.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.Map;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class Dialogue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scene_id", nullable = false)
+    @JsonBackReference
     private Scene scene;
 
     @Column(name = "character_name")
@@ -60,5 +62,3 @@ public class Dialogue {
     public Map<String, Object> getMetadata() { return metadata; }
     public void setMetadata(Map<String, Object> metadata) { this.metadata = metadata; }
 }
-
-
