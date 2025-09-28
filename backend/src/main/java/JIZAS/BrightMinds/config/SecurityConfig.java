@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/scene-assets/**").permitAll()
                         .requestMatchers("/api/assets/**").permitAll()
                         .requestMatchers("/api/user-responses/**").permitAll()
+                        .requestMatchers("/api/game/**").permitAll()
                         .requestMatchers("/api/user-badges/**").permitAll()
                         .requestMatchers("/api/badges/**").permitAll()
                         .requestMatchers("/api/dialogues/**").permitAll()

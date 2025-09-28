@@ -22,25 +22,25 @@ export default function Home() {
   const games = useMemo(
     () => [
       {
-        id: "g1",
+        id: "1",
         title: "The Story of the Amulet",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
         desc: "Embark on a story-driven civics adventure about community helpers. Pause for questions to progress.",
       },
       {
-        id: "g2",
+        id: "2",
         title: "Kasaysayan Run (Story 2)",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
         desc: "Discover key moments in Philippine history through an interactive, gamified storyline.",
       },
       {
-        id: "g3",
+        id: "3",
         title: "Science Quest (Story 3)",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
         desc: "Learn about basic science through puzzles and branching story paths.",
       },
       {
-        id: "g4",
+        id: "4",
         title: "Math Dash (Story 4)",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
         desc: "Sharpen math skills through arcade-style gamified lessons.",
@@ -59,10 +59,11 @@ export default function Home() {
   };
 
   const goPlay = () => {
-    // Navigate to the correct game route based on the active game's ID
-    if (active?.id === "g1") {
-      navigate("/game1");
+    if (active?.id) {
+      // Navigate to the dynamic play route with the story ID
+      navigate(`/play/${active.id}`);
     } else {
+      // Fallback for older stories or if ID is missing
       navigate("/play/beta");
     }
   };
@@ -98,7 +99,6 @@ export default function Home() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-3xl bg-bmLightYellow text-bmBlack">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1.2fr]">
-            {/* Left: image */}
             <div className="flex items-center justify-center">
               {active?.img && (
                 <img
@@ -124,7 +124,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           <DialogFooter className="mt-4">
             <Button
               className="bg-bmYellow text-bmBlack hover:opacity-90"

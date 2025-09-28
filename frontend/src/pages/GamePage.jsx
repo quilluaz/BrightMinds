@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import api from "@/lib/api";
 import BubbleMenu from "@/components/ui/BubbleMenu";
 
-export default function Game1() {
+export default function GamePage() {
+  const { storyId } = useParams(); // Get storyId from the URL
+
   const [gameState, setGameState] = useState("loading"); // loading, intro, playing, question, finished
   const [scenes, setScenes] = useState([]);
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
@@ -15,27 +18,28 @@ export default function Game1() {
   const [isAnswerLocked, setIsAnswerLocked] = useState(false);
   const [error, setError] = useState("");
 
-  const [liamPosition, setLiamPosition] = useState("left"); // left, middle
-
   const isTransitioning = useRef(false);
 
+  // Fetch story data when the component mounts or storyId changes
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
         setGameState("loading");
-        const scenesResponse = await api.get("/stories/1/scenes");
+        const scenesResponse = await api.get(`/stories/${storyId}/scenes`);
         if (!scenesResponse.data || scenesResponse.data.length === 0) {
           throw new Error("No scenes found for this story.");
         }
         setScenes(scenesResponse.data);
-        await loadScene(scenesResponse.data[0]);
+        await loadScene(scenesResponse.data[0].sceneId);
         setGameState("intro");
       } catch (err) {
         handleError("Could not load the story. Please try again later.", err);
       }
     };
-    fetchStoryData();
-  }, []);
+    if (storyId) {
+      fetchStoryData();
+    }
+  }, [storyId]);
 
   const handleError = (message, error) => {
     console.error(message, error);
@@ -43,27 +47,24 @@ export default function Game1() {
     setGameState("error");
   };
 
-  const loadScene = async (scene) => {
-    if (!scene) return;
+  // Simplified loadScene function using the new endpoint
+  const loadScene = async (sceneId) => {
+    if (!sceneId) return;
     try {
-      const [assetsRes, dialoguesRes, questionsRes] = await Promise.all([
-        api.get(`/scene-assets/scene/${scene.sceneId}`),
-        api.get(`/dialogues/scene/${scene.sceneId}`),
-        api.get(`/questions/scene/${scene.sceneId}/full`),
-      ]);
+      const { data: gameScene } = await api.get(`/game/scene/${sceneId}`);
 
-      const backgroundAsset = assetsRes.data.find(
-        (sa) => sa.asset?.type === "background"
+      const backgroundAsset = gameScene.assets.find(
+        (asset) => asset.type === "background"
       );
-      setBackgroundUrl(backgroundAsset ? backgroundAsset.asset.filePath : "");
+      setBackgroundUrl(backgroundAsset ? backgroundAsset.filePath : "");
 
-      const spriteAssets = assetsRes.data.filter(
-        (sa) => sa.asset?.type === "sprite"
+      const spriteAssets = gameScene.assets.filter(
+        (asset) => asset.type === "sprite"
       );
-      setSprites(spriteAssets.map((sa) => sa.asset));
+      setSprites(spriteAssets);
 
-      setDialogues(dialoguesRes.data);
-      setQuestion(questionsRes.data.length > 0 ? questionsRes.data[0] : null);
+      setDialogues(gameScene.dialogues);
+      setQuestion(gameScene.question);
     } catch (err) {
       handleError("A problem occurred while loading the scene.", err);
     }
@@ -87,9 +88,6 @@ export default function Game1() {
     const nextDialogueIndex = currentDialogueIndex + 1;
     if (nextDialogueIndex < dialogues.length) {
       setCurrentDialogueIndex(nextDialogueIndex);
-      if (nextDialogueIndex === 2) {
-        setLiamPosition("middle");
-      }
     } else {
       if (question) {
         setGameState("question");
@@ -112,14 +110,13 @@ export default function Game1() {
       isTransitioning.current = true;
       setTimeout(() => {
         goToNextScene();
-      }, 1000); // Delay reduced to 1 second
+      }, 1000);
     }
   };
 
   const goToNextScene = async () => {
     isTransitioning.current = true;
     setGameState("loading");
-    setLiamPosition("left");
 
     const nextIndex = currentSceneIndex + 1;
     if (nextIndex < scenes.length) {
@@ -127,7 +124,7 @@ export default function Game1() {
       setCurrentDialogueIndex(0);
       setSelectedAnswers({});
       setIsAnswerLocked(false);
-      await loadScene(scenes[nextIndex]);
+      await loadScene(scenes[nextIndex].sceneId);
       setGameState("playing");
     } else {
       setGameState("finished");
@@ -141,12 +138,10 @@ export default function Game1() {
   const getSprite = (name) => sprites.find((s) => s.name === name);
 
   const renderSprites = () => {
+    // This function can remain the same as in Game1.jsx for now
+    // Or be updated to be more dynamic based on asset metadata
     const liamIdle = getSprite("liam_idle");
-    const liamWalk = getSprite("liam_walk");
     const litaThinking = getSprite("lita_thinking");
-
-    const showIdleLiam = liamPosition === "left";
-    const showWalkingLiam = liamPosition === "middle";
 
     return (
       <>
@@ -154,31 +149,14 @@ export default function Game1() {
           <img
             src={liamIdle.filePath}
             alt="Liam"
-            className={`absolute bottom-0 left-4 h-3/4 transition-opacity duration-500 ${
-              showIdleLiam ? "opacity-100" : "opacity-0"
-            }`}
+            className="absolute bottom-0 left-4 h-3/4"
           />
         )}
-
-        {liamWalk && (
-          <img
-            src={liamWalk.filePath}
-            alt="Liam Walking"
-            className={`absolute bottom-0 h-3/4 transition-all duration-1000 ease-in-out ${
-              showWalkingLiam
-                ? "left-1/2 -translate-x-1/2 opacity-100"
-                : "left-4 opacity-0"
-            }`}
-          />
-        )}
-
         {litaThinking && (
           <img
             src={litaThinking.filePath}
             alt="Elder Lita"
-            className={`absolute bottom-0 right-4 h-3/4 transition-opacity duration-500 ${
-              currentDialogueIndex > 1 ? "opacity-0" : "opacity-100"
-            }`}
+            className="absolute bottom-0 right-4 h-3/4"
           />
         )}
       </>
@@ -186,6 +164,7 @@ export default function Game1() {
   };
 
   const renderGameState = () => {
+    // This function remains the same as in Game1.jsx
     switch (gameState) {
       case "loading":
         return (
@@ -211,7 +190,7 @@ export default function Game1() {
         return (
           <div className="absolute inset-0 flex items-center justify-center bg-black/70">
             <h1 className="text-white text-4xl font-pressStart">
-              Demo Completed!
+              Story Completed!
             </h1>
           </div>
         );
@@ -237,26 +216,20 @@ export default function Game1() {
               {question.choices.map((choice) => {
                 const status = selectedAnswers[choice.choiceId];
                 const isCorrect = status === "correct";
-
                 return (
                   <button
                     key={choice.choiceId}
                     onClick={() => handleAnswerSelection(choice)}
                     disabled={isAnswerLocked}
-                    className={`p-3 w-full text-white font-pressStart rounded-md border-2 transition-colors text-center
-                            ${isCorrect ? "bg-bmGreen border-white" : ""}
-                            ${
-                              status === "incorrect"
-                                ? "bg-bmRed border-gray-500"
-                                : ""
-                            }
-                            ${
-                              !status
-                                ? "bg-gray-700 hover:bg-gray-600 border-bmYellow"
-                                : ""
-                            }
-                            ${isAnswerLocked ? "pointer-events-none" : ""}
-                            `}>
+                    className={`p-3 w-full text-white font-pressStart rounded-md border-2 transition-colors text-center ${
+                      isCorrect ? "bg-bmGreen border-white" : ""
+                    } ${
+                      status === "incorrect" ? "bg-bmRed border-gray-500" : ""
+                    } ${
+                      !status
+                        ? "bg-gray-700 hover:bg-gray-600 border-bmYellow"
+                        : ""
+                    } ${isAnswerLocked ? "pointer-events-none" : ""}`}>
                     {choice.choiceText}
                   </button>
                 );
