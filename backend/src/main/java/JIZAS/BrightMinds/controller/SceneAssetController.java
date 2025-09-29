@@ -53,6 +53,20 @@ public class SceneAssetController {
 		service.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
+	@PutMapping("/position")
+	public ResponseEntity<SceneAsset> updatePosition(
+			@RequestParam String assetName,
+			@RequestParam Integer sceneOrder,
+			@RequestParam Float positionX,
+			@RequestParam Float positionY) {
+		try {
+			SceneAsset updatedSceneAsset = service.updatePosition(assetName, sceneOrder, positionX, positionY);
+			return new ResponseEntity<>(updatedSceneAsset, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
 
 

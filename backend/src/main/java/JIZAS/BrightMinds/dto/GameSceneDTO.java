@@ -6,7 +6,7 @@ public class GameSceneDTO {
 
     private SceneDTO scene;
     private List<DialogueDTO> dialogues;
-    private List<AssetDTO> assets;
+    private List<SceneAssetDTO> assets;
     private QuestionDTO question;
 
     // Getters and Setters
@@ -14,8 +14,8 @@ public class GameSceneDTO {
     public void setScene(SceneDTO scene) { this.scene = scene; }
     public List<DialogueDTO> getDialogues() { return dialogues; }
     public void setDialogues(List<DialogueDTO> dialogues) { this.dialogues = dialogues; }
-    public List<AssetDTO> getAssets() { return assets; }
-    public void setAssets(List<AssetDTO> assets) { this.assets = assets; }
+    public List<SceneAssetDTO> getAssets() { return assets; }
+    public void setAssets(List<SceneAssetDTO> assets) { this.assets = assets; }
     public QuestionDTO getQuestion() { return question; }
     public void setQuestion(QuestionDTO question) { this.question = question; }
 }

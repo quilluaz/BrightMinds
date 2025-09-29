@@ -24,6 +24,19 @@ public class SceneAssetService {
 	public List<SceneAsset> listByScene(Integer sceneId) { return repo.findByScene_SceneId(sceneId); }
 	public SceneAsset update(SceneAsset s) { return repo.save(s); }
 	public void delete(Long id) { repo.deleteById(id); }
+	
+	public Optional<SceneAsset> findByAssetNameAndSceneOrder(String assetName, Integer sceneOrder) {
+		return repo.findByAssetNameAndSceneOrder(assetName, sceneOrder);
+	}
+	
+	public SceneAsset updatePosition(String assetName, Integer sceneOrder, Float newPositionX, Float newPositionY) {
+		SceneAsset sceneAsset = findByAssetNameAndSceneOrder(assetName, sceneOrder)
+			.orElseThrow(() -> new RuntimeException("SceneAsset not found with asset name: " + assetName + " and scene order: " + sceneOrder));
+		
+		sceneAsset.setPositionX(newPositionX);
+		sceneAsset.setPositionY(newPositionY);
+		return repo.save(sceneAsset);
+	}
 }
 
 

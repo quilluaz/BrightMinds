@@ -17,7 +17,6 @@ public class SeederService {
     private final QuestionRepository questionRepository;
     private final ChoiceRepository choiceRepository;
 
-    // Manual constructor for dependency injection
     public SeederService(StoryRepository storyRepository, SceneRepository sceneRepository,
                          AssetRepository assetRepository, SceneAssetRepository sceneAssetRepository,
                          DialogueRepository dialogueRepository, QuestionRepository questionRepository,
@@ -50,15 +49,25 @@ public class SeederService {
 
             if (sceneDTO.getAssets() != null) {
                 for (AssetSeedDTO assetDTO : sceneDTO.getAssets()) {
-                    Asset asset = new Asset();
-                    asset.setName(assetDTO.getName());
-                    asset.setType(assetDTO.getType());
-                    asset.setFilePath(assetDTO.getFilePath());
-                    Asset savedAsset = assetRepository.save(asset);
+                    // Check if asset exists to reuse it, otherwise create it
+                    Asset asset = assetRepository.findByName(assetDTO.getName())
+                            .orElseGet(() -> {
+                                Asset newAsset = new Asset();
+                                newAsset.setName(assetDTO.getName());
+                                newAsset.setType(assetDTO.getType());
+                                newAsset.setFilePath(assetDTO.getFilePath());
+                                newAsset.setMetadata(assetDTO.getMetadata());
+                                return assetRepository.save(newAsset);
+                            });
 
                     SceneAsset sceneAsset = new SceneAsset();
                     sceneAsset.setScene(savedScene);
-                    sceneAsset.setAsset(savedAsset);
+                    sceneAsset.setAsset(asset);
+                    // Populate SceneAsset with positioning and ordering data
+                    sceneAsset.setPositionX(assetDTO.getPositionX());
+                    sceneAsset.setPositionY(assetDTO.getPositionY());
+                    sceneAsset.setOrderIndex(assetDTO.getOrderIndex());
+                    sceneAsset.setIsInteractive(assetDTO.getIsInteractive());
                     sceneAssetRepository.save(sceneAsset);
                 }
             }

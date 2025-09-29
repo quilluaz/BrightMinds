@@ -36,7 +36,7 @@ public class GameService {
         GameSceneDTO gameSceneDTO = new GameSceneDTO();
         gameSceneDTO.setScene(new SceneDTO(scene));
         gameSceneDTO.setDialogues(dialogues.stream().map(DialogueDTO::new).collect(Collectors.toList()));
-        gameSceneDTO.setAssets(sceneAssets.stream().map(SceneAsset::getAsset).map(AssetDTO::new).collect(Collectors.toList()));
+        gameSceneDTO.setAssets(sceneAssets.stream().map(SceneAssetDTO::new).collect(Collectors.toList()));
 
         if (!questions.isEmpty()) {
             // Assuming one question per scene for now
