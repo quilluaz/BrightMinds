@@ -3,6 +3,9 @@ package JIZAS.BrightMinds.entity;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Map;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "scene_asset")
@@ -35,6 +38,10 @@ public class SceneAsset {
 	@Column(name = "order_index")
 	private Integer orderIndex;
 
+	@Column(name = "metadata", columnDefinition = "jsonb")
+	@JdbcTypeCode(SqlTypes.JSON)
+	private Map<String, Object> metadata;
+
 	public Long getSceneAssetId() { return sceneAssetId; }
 	public void setSceneAssetId(Long sceneAssetId) { this.sceneAssetId = sceneAssetId; }
 
@@ -55,6 +62,9 @@ public class SceneAsset {
 
 	public Integer getOrderIndex() { return orderIndex; }
 	public void setOrderIndex(Integer orderIndex) { this.orderIndex = orderIndex; }
+
+	public Map<String, Object> getMetadata() { return metadata; }
+	public void setMetadata(Map<String, Object> metadata) { this.metadata = metadata; }
 }
 
 

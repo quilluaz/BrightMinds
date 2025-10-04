@@ -45,6 +45,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/user-badges/**").permitAll()
                         .requestMatchers("/api/badges/**").permitAll()
                         .requestMatchers("/api/dialogues/**").permitAll()
+                        .requestMatchers("/api/game-attempts/**").permitAll()
+                        .requestMatchers("/api/story-scores/**").permitAll()
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()

@@ -26,7 +26,10 @@ public class SceneAssetDTO {
         this.positionY = sceneAsset.getPositionY();
         this.isInteractive = sceneAsset.getIsInteractive();
         this.orderIndex = sceneAsset.getOrderIndex();
-        this.metadata = sceneAsset.getAsset().getMetadata();
+        this.metadata = sceneAsset.getMetadata();
+        
+        // Debug logging
+        System.out.println("SceneAssetDTO for " + this.name + ": metadata = " + this.metadata);
     }
 
     // Getters and Setters

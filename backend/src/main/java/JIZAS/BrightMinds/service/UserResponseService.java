@@ -75,6 +75,10 @@ public class UserResponseService {
     public void delete(Long id) {
         userResponseRepository.deleteById(id);
     }
+    
+    public List<UserResponse> getByUserAndStory(Long userId, Integer storyId) {
+        return userResponseRepository.findByUserAndStory(userId, storyId);
+    }
 }
 
 

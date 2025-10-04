@@ -30,4 +30,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     // Custom query to find questions by scene ID with choices and answers
     @Query("SELECT q FROM Question q LEFT JOIN FETCH q.choices LEFT JOIN FETCH q.answers WHERE q.sceneId = :sceneId")
     List<Question> findQuestionsBySceneIdWithChoicesAndAnswers(@Param("sceneId") Integer sceneId);
+    
+    // Custom query to find all questions for a story through scenes
+    @Query("SELECT q FROM Question q JOIN Scene s ON q.sceneId = s.sceneId WHERE s.story.storyId = :storyId")
+    List<Question> findQuestionsByStoryId(@Param("storyId") Integer storyId);
 }

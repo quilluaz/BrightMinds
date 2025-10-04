@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -62,6 +63,18 @@ public class SceneAssetController {
 			@RequestParam Float positionY) {
 		try {
 			SceneAsset updatedSceneAsset = service.updatePosition(assetName, sceneOrder, positionX, positionY);
+			return new ResponseEntity<>(updatedSceneAsset, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PutMapping("/{id}/metadata")
+	public ResponseEntity<SceneAsset> updateMetadata(
+			@PathVariable Long id,
+			@RequestBody Map<String, Object> metadata) {
+		try {
+			SceneAsset updatedSceneAsset = service.updateMetadata(id, metadata);
 			return new ResponseEntity<>(updatedSceneAsset, HttpStatus.OK);
 		} catch (RuntimeException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

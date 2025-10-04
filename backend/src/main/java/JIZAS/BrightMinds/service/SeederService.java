@@ -56,7 +56,7 @@ public class SeederService {
                                 newAsset.setName(assetDTO.getName());
                                 newAsset.setType(assetDTO.getType());
                                 newAsset.setFilePath(assetDTO.getFilePath());
-                                newAsset.setMetadata(assetDTO.getMetadata());
+                                // Don't set metadata on Asset - it should be scene-specific
                                 return assetRepository.save(newAsset);
                             });
 
@@ -68,6 +68,8 @@ public class SeederService {
                     sceneAsset.setPositionY(assetDTO.getPositionY());
                     sceneAsset.setOrderIndex(assetDTO.getOrderIndex());
                     sceneAsset.setIsInteractive(assetDTO.getIsInteractive());
+                    // Set scene-specific metadata on SceneAsset
+                    sceneAsset.setMetadata(assetDTO.getMetadata());
                     sceneAssetRepository.save(sceneAsset);
                 }
             }

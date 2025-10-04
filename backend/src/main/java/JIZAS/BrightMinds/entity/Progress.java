@@ -32,9 +32,23 @@ public class Progress {
     @Column(name = "last_accessed")
     private LocalDateTime lastAccessed;
 
+    @Column(name = "game_start_time")
+    private LocalDateTime gameStartTime;
+
+    @Column(name = "mistake_count")
+    private Integer mistakeCount;
+
+    @Column(name = "answer_states", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> answerStates;
+
     @Column(name = "per_question_state", columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Object> perQuestionState;
+
+    @Column(name = "question_mistakes", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> questionMistakes;
 
     public Progress() {}
 
@@ -56,6 +70,18 @@ public class Progress {
     public LocalDateTime getLastAccessed() { return lastAccessed; }
     public void setLastAccessed(LocalDateTime lastAccessed) { this.lastAccessed = lastAccessed; }
 
+    public LocalDateTime getGameStartTime() { return gameStartTime; }
+    public void setGameStartTime(LocalDateTime gameStartTime) { this.gameStartTime = gameStartTime; }
+
+    public Integer getMistakeCount() { return mistakeCount; }
+    public void setMistakeCount(Integer mistakeCount) { this.mistakeCount = mistakeCount; }
+
+    public Map<String, Object> getAnswerStates() { return answerStates; }
+    public void setAnswerStates(Map<String, Object> answerStates) { this.answerStates = answerStates; }
+
     public Map<String, Object> getPerQuestionState() { return perQuestionState; }
     public void setPerQuestionState(Map<String, Object> perQuestionState) { this.perQuestionState = perQuestionState; }
+
+    public Map<String, Object> getQuestionMistakes() { return questionMistakes; }
+    public void setQuestionMistakes(Map<String, Object> questionMistakes) { this.questionMistakes = questionMistakes; }
 }
