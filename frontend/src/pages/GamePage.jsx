@@ -384,7 +384,12 @@ export default function GamePage() {
     }
   };
 
-  const saveWrongAnswerStateWithData = async (sceneId, answerStates) => {
+  const saveWrongAnswerStateWithData = async (
+    sceneId,
+    answerStates,
+    updatedQuestionMistakes = null,
+    updatedMistakeCount = null
+  ) => {
     try {
       const user = JSON.parse(localStorage.getItem("bm_user"));
       if (!user?.userId) return;
@@ -395,17 +400,19 @@ export default function GamePage() {
         sceneId: sceneId,
         pointsEarned: 0,
         gameStartTime: gameStartTime ? gameStartTime.toISOString() : null,
-        mistakeCount: mistakeCount,
+        mistakeCount:
+          updatedMistakeCount !== null ? updatedMistakeCount : mistakeCount,
         answerStates: answerStates,
         perQuestionState: answerStates,
-        questionMistakes: questionMistakes,
+        questionMistakes: updatedQuestionMistakes || questionMistakes,
       };
 
       await api.post("/game/save-wrong-answer", progressData);
       console.log("Wrong answer state saved with data:", {
         sceneId,
         answerStates,
-        mistakeCount,
+        mistakeCount: progressData.mistakeCount,
+        questionMistakes: progressData.questionMistakes,
       });
     } catch (error) {
       console.error("Failed to save wrong answer state with data:", error);
@@ -539,11 +546,19 @@ export default function GamePage() {
       setShowCorrectFeedback(true);
 
       // Calculate points earned based on mistakes for this specific question
-      const mistakesForThisQuestion = questionMistakes[questionId] || 0;
+      // Use a more reliable way to get the current mistake count
+      const currentMistakes = questionMistakes[questionId] || 0;
       const pointsPerQuestion = currentSceneData?.question?.points || 4;
-      const pointsEarned = Math.max(
-        0,
-        pointsPerQuestion - mistakesForThisQuestion
+      const pointsEarned = Math.max(0, pointsPerQuestion - currentMistakes);
+
+      console.log(
+        `Correct answer for question ${questionId}! Points calculation:`,
+        {
+          pointsPerQuestion,
+          mistakesForThisQuestion: currentMistakes,
+          pointsEarned,
+          questionMistakes: questionMistakes,
+        }
       );
 
       // Save progress with points earned for correct answer
@@ -566,26 +581,25 @@ export default function GamePage() {
       }, 2000); // Show "CORRECT!" for 2 seconds
     } else {
       // Increment mistake counter for this specific question
+      let updatedQuestionMistakes = { ...questionMistakes };
       if (questionId) {
-        setQuestionMistakes((prev) => {
-          const newMistakes = {
-            ...prev,
-            [questionId]: (prev[questionId] || 0) + 1,
-          };
-          console.log(
-            `Wrong answer for question ${questionId}! Mistakes for this question:`,
-            newMistakes[questionId]
-          );
-          return newMistakes;
-        });
+        updatedQuestionMistakes[questionId] =
+          (updatedQuestionMistakes[questionId] || 0) + 1;
+        setQuestionMistakes(updatedQuestionMistakes);
+        console.log(
+          `Wrong answer for question ${questionId}! Mistakes for this question:`,
+          updatedQuestionMistakes[questionId],
+          "Previous mistakes:",
+          questionMistakes[questionId] || 0,
+          "All question mistakes:",
+          updatedQuestionMistakes
+        );
       }
 
       // Also increment global mistake count for backward compatibility
-      setMistakeCount((prev) => {
-        const newCount = prev + 1;
-        console.log("Wrong answer! Global mistake count:", newCount);
-        return newCount;
-      });
+      const newGlobalMistakeCount = mistakeCount + 1;
+      setMistakeCount(newGlobalMistakeCount);
+      console.log("Wrong answer! Global mistake count:", newGlobalMistakeCount);
 
       // Save wrong answer state immediately with current state
       const currentSceneId =
@@ -598,17 +612,18 @@ export default function GamePage() {
         [choice.choiceId]: "incorrect",
       };
 
-      setTimeout(async () => {
-        try {
-          await saveWrongAnswerStateWithData(
-            currentSceneId,
-            updatedSelectedAnswers
-          );
-          console.log("Wrong answer state saved to progress");
-        } catch (error) {
-          console.error("Failed to save wrong answer progress:", error);
-        }
-      }, 100); // Small delay to ensure state is updated
+      // Save immediately with the updated mistake counts
+      try {
+        await saveWrongAnswerStateWithData(
+          currentSceneId,
+          updatedSelectedAnswers,
+          updatedQuestionMistakes,
+          newGlobalMistakeCount
+        );
+        console.log("Wrong answer state saved to progress");
+      } catch (error) {
+        console.error("Failed to save wrong answer progress:", error);
+      }
 
       // Show subtle screen shake for wrong answer
       setIsShaking(true);
