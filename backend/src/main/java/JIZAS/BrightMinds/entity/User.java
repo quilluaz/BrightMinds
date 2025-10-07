@@ -10,6 +10,11 @@ import java.util.List;
 @Table(name = "App_User", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
+    public enum Role {
+        STUDENT,
+        GAMEMASTER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -35,6 +40,17 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id")
+    private User createdBy;
+
+    @OneToMany(mappedBy = "createdBy")
+    private List<User> createdUsers;
+
     @OneToMany(mappedBy = "user")
     private List<UserBadge> userBadges;
 
@@ -55,6 +71,15 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
+
+    public User getCreatedBy() { return createdBy; }
+    public void setCreatedBy(User createdBy) { this.createdBy = createdBy; }
+
+    public List<User> getCreatedUsers() { return createdUsers; }
+    public void setCreatedUsers(List<User> createdUsers) { this.createdUsers = createdUsers; }
 
     public List<UserBadge> getUserBadges() { return userBadges; }
     public void setUserBadges(List<UserBadge> userBadges) { this.userBadges = userBadges; }

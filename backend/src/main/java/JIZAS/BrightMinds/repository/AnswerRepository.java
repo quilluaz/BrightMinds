@@ -29,4 +29,5 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     // Custom query to find answers with question details
     @Query("SELECT a FROM Answer a JOIN FETCH a.question WHERE a.question.questionId = :questionId")
     List<Answer> findAnswersWithQuestionDetails(@Param("questionId") Integer questionId);
+
 }

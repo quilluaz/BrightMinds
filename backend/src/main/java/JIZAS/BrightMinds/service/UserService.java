@@ -36,6 +36,7 @@ public class UserService {
         u.setLName(req.getLastName());
         u.setEmail(req.getEmail());
         u.setPassword(passwordEncoder.encode(req.getPassword()));
+        u.setRole(User.Role.STUDENT); // Set default role to STUDENT
         return toView(repo.save(u));
     }
 
@@ -92,7 +93,8 @@ public class UserService {
                 user.getFName(),
                 user.getLName(),
                 user.getEmail(),
-                token
+                token,
+                user.getRole()
         );
     }
 
@@ -102,6 +104,7 @@ public class UserService {
         v.setFName(u.getFName());
         v.setLName(u.getLName());
         v.setEmail(u.getEmail());
+        v.setRole(u.getRole().name());
         return v;
     }
 }
