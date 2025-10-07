@@ -24,7 +24,7 @@ export default function Home() {
       {
         id: "1",
         title: "The Story of the Amulet",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
         desc: "Embark on a story-driven civics adventure about community helpers. Pause for questions to progress.",
       },
       {
@@ -38,12 +38,6 @@ export default function Home() {
         title: "Science Quest (Story 3)",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
         desc: "Learn about basic science through puzzles and branching story paths.",
-      },
-      {
-        id: "4",
-        title: "Math Dash (Story 4)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
-        desc: "Sharpen math skills through arcade-style gamified lessons.",
       },
     ],
     []
@@ -79,7 +73,7 @@ export default function Home() {
           <div className="w-full max-w-7xl px-0 flex items-center justify-center">
             <RollingGallery
               images={images}
-              autoplay
+              autoplay={!open}
               pauseOnHover
               rotationSpeed={40}
               containerClass="w-full flex items-center justify-center"

@@ -27,10 +27,9 @@ export default function Landing() {
   const [error, setError] = useState("");
 
   const baseImages = [
-    "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
+    "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
     "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
     "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
-    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
   ];
 
   const gridImages = Array.from({ length: 28 }, (_, i) => {
