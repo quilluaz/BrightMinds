@@ -78,26 +78,6 @@ public class UserService {
         return repo.findByEmail(email).map(this::toView).orElse(null);
     }
 
-    public UserViewDTO login(LoginRequestDTO loginRequest) {
-        User user = repo.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid email or password");
-        }
-
-        String token = "token_" + user.getUserId() + "_" + System.currentTimeMillis();
-
-        return new UserViewDTO(
-                user.getUserId(),
-                user.getFName(),
-                user.getLName(),
-                user.getEmail(),
-                token,
-                user.getRole()
-        );
-    }
-
     private UserViewDTO toView(User u) {
         UserViewDTO v = new UserViewDTO();
         v.setUserId(u.getUserId());

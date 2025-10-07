@@ -26,4 +26,16 @@ public class SeederController {
             return ResponseEntity.badRequest().body("Error seeding story: " + e.getMessage());
         }
     }
+
+    @PostMapping("/create-gamemaster")
+    public ResponseEntity<String> createGameMaster() {
+        try {
+            seederService.createGameMaster();
+            return ResponseEntity.ok("GameMaster user created or already exists.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Error creating GameMaster: " + e.getMessage());
+        }
+    }
 }
+

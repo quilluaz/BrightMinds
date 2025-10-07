@@ -6,6 +6,7 @@ import JIZAS.BrightMinds.entity.User;
 import JIZAS.BrightMinds.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -83,6 +84,7 @@ public class GameMasterService {
         try (XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream())) {
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
+            DataFormatter formatter = new DataFormatter();
 
             // Skip header row
             if (rowIterator.hasNext()) {
@@ -92,10 +94,19 @@ public class GameMasterService {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 User student = new User();
-                student.setFName(row.getCell(0).getStringCellValue());
-                student.setLName(row.getCell(1).getStringCellValue());
-                student.setEmail(row.getCell(2).getStringCellValue());
-                student.setPassword(passwordEncoder.encode(row.getCell(3).getStringCellValue()));
+                String firstName = formatter.formatCellValue(row.getCell(0)).trim();
+                String lastName = formatter.formatCellValue(row.getCell(1)).trim();
+                String email = formatter.formatCellValue(row.getCell(2)).trim();
+                String rawPassword = formatter.formatCellValue(row.getCell(3)).trim();
+
+                if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty()) {
+                    continue; // skip empty rows
+                }
+
+                student.setFName(firstName);
+                student.setLName(lastName);
+                student.setEmail(email);
+                student.setPassword(passwordEncoder.encode(rawPassword));
                 student.setRole(User.Role.STUDENT);
                 student.setCreatedBy(gameMaster);
                 studentsToCreate.add(student);
