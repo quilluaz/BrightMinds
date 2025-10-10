@@ -181,7 +181,12 @@
           "metadata": {
             "object": "scrapbook",
             "mineral": "pilak",
-            "state": "puzzle_ready"
+            "state": "puzzle_ready",
+            "shakeAnimation": {
+              "trigger": "onSceneStart",
+              "duration": 500,
+              "intensity": 5
+            }
           }
         },
         {

@@ -27,15 +27,15 @@ public class SeederController {
         }
     }
 
-    @PostMapping("/create-gamemaster")
-    public ResponseEntity<String> createGameMaster() {
-        try {
-            seederService.createGameMaster();
-            return ResponseEntity.ok("GameMaster user created or already exists.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("Error creating GameMaster: " + e.getMessage());
-        }
-    }
+//    @PostMapping("/create-gamemaster")
+//    public ResponseEntity<String> createGameMaster() {
+//        try {
+//            seederService.createGameMaster();
+//            return ResponseEntity.ok("GameMaster user created or already exists.");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body("Error creating GameMaster: " + e.getMessage());
+//        }
+//    }
 }
 

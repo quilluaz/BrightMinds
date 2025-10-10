@@ -73,10 +73,16 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-12px)" }, // adjust amplitude here
         },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-5px)" },
+          "75%": { transform: "translateX(5px)" },
+        },
       },
       animation: {
         float: "float 3s ease-in-out infinite",
         "float-slow": "float 4s ease-in-out infinite",
+        shake: "shake 0.5s ease-in-out",
       },
     },
   },
