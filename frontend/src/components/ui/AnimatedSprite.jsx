@@ -37,6 +37,19 @@ const AnimatedSprite = ({
       }
 
       appearTimeoutRef.current = setTimeout(() => {
+        // Trigger background overlay slightly before sprite appears
+        if (
+          asset.metadata?.triggerBackgroundOverlay &&
+          onBackgroundOverlay &&
+          !backgroundOverlayNotifiedRef.current
+        ) {
+          console.log(
+            `AnimatedSprite ${asset.name} requesting background overlay (before appear)`
+          );
+          onBackgroundOverlay(true);
+          backgroundOverlayNotifiedRef.current = true;
+        }
+
         setIsVisible(true);
         console.log(
           `Sprite ${asset.name} starting fade in after ${asset.metadata.appearAfter} seconds`
@@ -121,19 +134,6 @@ const AnimatedSprite = ({
         fadeAnimationRef.current = requestAnimationFrame(fadeAnimate);
       } else {
         console.log(`Sprite ${asset.name} fully faded in`);
-
-        // Check if this sprite should trigger background overlay
-        if (
-          asset.metadata?.triggerBackgroundOverlay &&
-          onBackgroundOverlay &&
-          !backgroundOverlayNotifiedRef.current
-        ) {
-          console.log(
-            `AnimatedSprite ${asset.name} requesting background overlay`
-          );
-          onBackgroundOverlay(true);
-          backgroundOverlayNotifiedRef.current = true;
-        }
       }
     };
 

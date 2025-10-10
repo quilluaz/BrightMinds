@@ -46,6 +46,9 @@ const DisappearingSprite = ({ asset, onBackgroundOverlay }) => {
       onBackgroundOverlay &&
       !backgroundOverlayNotifiedRef.current
     ) {
+      console.log(
+        `DisappearingSprite ${asset.name} requesting background overlay (immediate)`
+      );
       onBackgroundOverlay(true);
       backgroundOverlayNotifiedRef.current = true;
     }
