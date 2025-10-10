@@ -24,30 +24,8 @@ export default function GamePage2() {
   const [showScore, setShowScore] = useState(false);
   const [draggedPiece, setDraggedPiece] = useState(null);
   const [error, setError] = useState("");
-  const [isShaking, setIsShaking] = useState(false);
-  const [shakeOffset, setShakeOffset] = useState(0);
 
   const isTransitioning = useRef(false);
-
-  // Shake animation function
-  const triggerShakeAnimation = (duration = 500, intensity = 5) => {
-    setIsShaking(true);
-    setShakeOffset(0);
-
-    // Create shake animation
-    const shakeInterval = setInterval(() => {
-      setShakeOffset((prev) => (prev === intensity ? -intensity : intensity));
-    }, 50);
-
-    setTimeout(() => {
-      clearInterval(shakeInterval);
-      setIsShaking(false);
-      // Ensure we return to center position
-      setTimeout(() => {
-        setShakeOffset(0);
-      }, 10);
-    }, duration);
-  };
 
   // Load story data from API
   const loadStory = async () => {
@@ -75,17 +53,6 @@ export default function GamePage2() {
     if (currentSceneIndex < scenes.length) {
       const scene = scenes[currentSceneIndex];
       setCurrentSceneData(scene);
-
-      // Check for shake animation metadata in scene assets
-      if (scene.assets) {
-        scene.assets.forEach((asset) => {
-          if (asset.metadata?.shakeAnimation?.trigger === "onSceneStart") {
-            const { duration = 500, intensity = 5 } =
-              asset.metadata.shakeAnimation;
-            triggerShakeAnimation(duration, intensity);
-          }
-        });
-      }
 
       // Extract puzzle pieces from scene question answers
       if (scene.question && scene.question.answers) {
@@ -495,13 +462,7 @@ export default function GamePage2() {
       <BubbleMenu />
       <div
         onClick={handleInteraction}
-        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 cursor-pointer ${
-          isShaking ? "animate-shake" : ""
-        }`}
-        style={{
-          transform: `translateX(${shakeOffset}px)`,
-          transition: "transform 0.05s ease-in-out",
-        }}
+        className="aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 cursor-pointer"
         onDragOver={handleDragOver}
         onDrop={handleDrop}>
         {/* Background */}

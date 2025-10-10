@@ -11,6 +11,7 @@ public class AssetSeedDTO {
     private Integer orderIndex;
     private Boolean isInteractive;
     private Map<String, Object> metadata;
+    private Float disappearAfter;
 
     // Getters and Setters
     public String getName() { return name; }
@@ -29,4 +30,6 @@ public class AssetSeedDTO {
     public void setIsInteractive(Boolean isInteractive) { this.isInteractive = isInteractive; }
     public Map<String, Object> getMetadata() { return metadata; }
     public void setMetadata(Map<String, Object> metadata) { this.metadata = metadata; }
+    public Float getDisappearAfter() { return disappearAfter; }
+    public void setDisappearAfter(Float disappearAfter) { this.disappearAfter = disappearAfter; }
 }

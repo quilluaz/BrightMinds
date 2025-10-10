@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Map;
 
 @Service
 public class SeederService {
@@ -54,9 +55,8 @@ public class SeederService {
 
             if (sceneDTO.getAssets() != null) {
                 for (AssetSeedDTO assetDTO : sceneDTO.getAssets()) {
-                    // This logic seems to have a bug, findByName is not in AssetRepository
-                    // For now, we will assume it works as intended or will be fixed later.
-                    Asset asset = assetRepository.findById(1L) // Placeholder to avoid breaking
+                    // Create or find asset by name and type
+                    Asset asset = assetRepository.findByNameAndType(assetDTO.getName(), assetDTO.getType())
                             .orElseGet(() -> {
                                 Asset newAsset = new Asset();
                                 newAsset.setName(assetDTO.getName());
@@ -72,7 +72,16 @@ public class SeederService {
                     sceneAsset.setPositionY(assetDTO.getPositionY());
                     sceneAsset.setOrderIndex(assetDTO.getOrderIndex());
                     sceneAsset.setIsInteractive(assetDTO.getIsInteractive());
-                    sceneAsset.setMetadata(assetDTO.getMetadata());
+                    
+                    // Handle metadata - merge disappearAfter if present
+                    Map<String, Object> metadata = assetDTO.getMetadata();
+                    if (assetDTO.getDisappearAfter() != null) {
+                        if (metadata == null) {
+                            metadata = new java.util.HashMap<>();
+                        }
+                        metadata.put("disappearAfter", assetDTO.getDisappearAfter());
+                    }
+                    sceneAsset.setMetadata(metadata);
                     sceneAssetRepository.save(sceneAsset);
                 }
             }
@@ -84,6 +93,7 @@ public class SeederService {
                     dialogue.setCharacterName(dialogueDTO.getCharacterName());
                     dialogue.setLineText(dialogueDTO.getLineText());
                     dialogue.setOrderIndex(dialogueDTO.getOrderIndex());
+                    // Note: voiceover field is not stored in Dialogue entity, it's handled by frontend
                     dialogueRepository.save(dialogue);
                 }
             }
