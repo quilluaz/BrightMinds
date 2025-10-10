@@ -28,7 +28,7 @@ export default function Landing() {
 
   const baseImages = [
     "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
-    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
+    "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
     "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
   ];
 

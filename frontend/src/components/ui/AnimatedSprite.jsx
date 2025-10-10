@@ -6,13 +6,14 @@ const AnimatedSprite = ({ asset, gameState, onAnimationComplete }) => {
     y: asset.positionY ?? 0,
   });
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [opacity, setOpacity] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
+  const [opacity, setOpacity] = useState(0);
   const animationRef = useRef(null);
   const startTimeRef = useRef(null);
   const hasStartedRef = useRef(false);
   const disappearTimeoutRef = useRef(null);
   const fadeAnimationRef = useRef(null);
+  const appearTimeoutRef = useRef(null);
 
   // Check if this asset has animation metadata
   const hasAnimation =
@@ -22,13 +23,40 @@ const AnimatedSprite = ({ asset, gameState, onAnimationComplete }) => {
     asset.metadata?.duration !== undefined;
 
   useEffect(() => {
-    // Only start animation once when component mounts and game is in playing state
-    if (hasAnimation && !hasStartedRef.current && gameState === "playing") {
-      hasStartedRef.current = true;
-      // Delay to ensure the scene is fully loaded and visible
-      setTimeout(() => {
-        startAnimation();
-      }, 300);
+    // Handle appearAfter timing
+    if (asset.metadata?.appearAfter) {
+      let delay = asset.metadata.appearAfter * 1000;
+      if (asset.metadata?.delay) {
+        delay += asset.metadata.delay * 1000;
+      }
+
+      appearTimeoutRef.current = setTimeout(() => {
+        setIsVisible(true);
+        console.log(
+          `Sprite ${asset.name} starting fade in after ${asset.metadata.appearAfter} seconds`
+        );
+        startFadeIn();
+
+        // Start animation after fade in if it has animation
+        if (hasAnimation && !hasStartedRef.current && gameState === "playing") {
+          hasStartedRef.current = true;
+          setTimeout(() => {
+            startAnimation();
+          }, 500); // Wait for fade in to complete
+        }
+      }, delay);
+    } else {
+      // Show immediately if no appearAfter specified
+      setIsVisible(true);
+      setOpacity(1);
+
+      // Start animation immediately if it has animation
+      if (hasAnimation && !hasStartedRef.current && gameState === "playing") {
+        hasStartedRef.current = true;
+        setTimeout(() => {
+          startAnimation();
+        }, 300);
+      }
     }
 
     // Set up disappear timer if specified
@@ -51,8 +79,40 @@ const AnimatedSprite = ({ asset, gameState, onAnimationComplete }) => {
       if (disappearTimeoutRef.current) {
         clearTimeout(disappearTimeoutRef.current);
       }
+      if (appearTimeoutRef.current) {
+        clearTimeout(appearTimeoutRef.current);
+      }
     };
-  }, [hasAnimation, asset.metadata?.disappearAfter, gameState]);
+  }, [
+    hasAnimation,
+    asset.metadata?.disappearAfter,
+    asset.metadata?.appearAfter,
+    asset.metadata?.delay,
+    gameState,
+  ]);
+
+  const startFadeIn = () => {
+    const fadeDuration = 500; // 0.5 seconds
+    const startTime = Date.now();
+    const startOpacity = 0;
+
+    const fadeAnimate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / fadeDuration, 1);
+
+      // Linear fade from 0 to 1
+      const currentOpacity = startOpacity + (1 - startOpacity) * progress;
+      setOpacity(currentOpacity);
+
+      if (progress < 1) {
+        fadeAnimationRef.current = requestAnimationFrame(fadeAnimate);
+      } else {
+        console.log(`Sprite ${asset.name} fully faded in`);
+      }
+    };
+
+    fadeAnimationRef.current = requestAnimationFrame(fadeAnimate);
+  };
 
   const startFadeOut = () => {
     const fadeDuration = 500; // 0.5 seconds
@@ -132,6 +192,38 @@ const AnimatedSprite = ({ asset, gameState, onAnimationComplete }) => {
     return null;
   }
 
+  // Check if sprite should face left (flip horizontally)
+  const shouldFaceLeft = asset.metadata?.facing === "left";
+
+  // Get scale value (default to 1 if not specified)
+  const scale = asset.metadata?.scale || 1;
+
+  // Build transform string with proper order
+  // Apply scale first, then translation, then horizontal flip
+  const transforms = [];
+
+  if (scale !== 1) {
+    transforms.push(`scale(${scale})`);
+  }
+
+  transforms.push("translateX(-50%)");
+
+  if (shouldFaceLeft) {
+    transforms.push("scaleX(-1)");
+  }
+
+  const transformStyle = transforms.join(" ");
+
+  // Debug logging
+  if (scale !== 1) {
+    console.log(
+      `AnimatedSprite ${asset.name} scale:`,
+      scale,
+      "transform:",
+      transformStyle
+    );
+  }
+
   return (
     <img
       key={asset.assetId}
@@ -141,7 +233,8 @@ const AnimatedSprite = ({ asset, gameState, onAnimationComplete }) => {
       style={{
         left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
         bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
-        transform: "translateX(-50%)",
+        transform: transformStyle,
+        transformOrigin: "center center",
         zIndex: (asset.orderIndex || 1) + 20, // Ensure sprites appear above question overlay
         opacity: opacity, // Use opacity state for smooth fade
       }}

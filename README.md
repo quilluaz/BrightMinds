@@ -30,6 +30,8 @@ The backend is a Spring Boot application that provides a RESTful API for managin
 - **Questions**: Multiple choice, drag-and-drop, and identification questions
 - **Choices**: Answer choices for multiple choice questions
 - **Answers**: Text-based answers with optional drag-and-drop positioning
+- **Game Attempts**: Track user progress and completion times
+- **Progress**: Per-scene progress tracking with auto-save functionality
 
 ### Features
 
@@ -39,10 +41,52 @@ The backend is a Spring Boot application that provides a RESTful API for managin
 - MySQL database integration
 - Comprehensive error handling
 - CORS support for frontend integration
+- Game attempt tracking and statistics
+- Auto-save progress functionality
 
-### API Documentation
+### API Endpoints
 
-For detailed API documentation, see the [Backend README](backend/README.md).
+#### Questions API
+
+- `POST /api/questions` - Create question
+- `GET /api/questions` - Get all questions
+- `GET /api/questions/{questionId}` - Get question by ID
+- `GET /api/questions/{questionId}/full` - Get question with choices and answers
+- `GET /api/questions/scene/{sceneId}` - Get questions by scene
+- `GET /api/questions/type/{type}` - Get questions by type (MCQ, DragDog, ID)
+- `PUT /api/questions/{questionId}` - Update question
+- `DELETE /api/questions/{questionId}` - Delete question
+
+#### Choices API
+
+- `POST /api/choices` - Create choice
+- `POST /api/choices/question/{questionId}` - Create choice for question
+- `GET /api/choices` - Get all choices
+- `GET /api/choices/question/{questionId}` - Get choices by question
+- `GET /api/choices/question/{questionId}/correct` - Get correct choices
+- `PUT /api/choices/{choiceId}` - Update choice
+- `DELETE /api/choices/{choiceId}` - Delete choice
+
+#### Answers API
+
+- `POST /api/answers` - Create answer
+- `POST /api/answers/question/{questionId}` - Create answer for question
+- `GET /api/answers` - Get all answers
+- `GET /api/answers/question/{questionId}` - Get answers by question
+- `PUT /api/answers/{answerId}` - Update answer
+- `DELETE /api/answers/{answerId}` - Delete answer
+
+#### Game Attempts API
+
+- `POST /api/game-attempts` - Save game attempt
+- `GET /api/game-attempts/user/{userId}` - Get user's attempts
+- `GET /api/game-attempts/user/{userId}/statistics` - Get user statistics
+
+#### Progress API
+
+- `GET /api/progress/user/{userId}/story/{storyId}` - Get user progress
+- `POST /api/progress/auto-save` - Auto-save progress
+- `PUT /api/progress/{progressId}` - Update progress
 
 ## Frontend
 
@@ -60,6 +104,7 @@ The frontend application (details to be added).
 ### Backend Setup
 
 1. Navigate to the backend directory:
+
    ```bash
    cd backend
    ```
@@ -67,6 +112,7 @@ The frontend application (details to be added).
 2. Configure your database in `src/main/resources/application.properties`
 
 3. Run the Spring Boot application:
+
    ```bash
    mvn spring-boot:run
    ```

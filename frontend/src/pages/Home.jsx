@@ -29,8 +29,8 @@ export default function Home() {
       },
       {
         id: "2",
-        title: "Kasaysayan Run (Story 2)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
+        title: "Nature's Treasures: Leah's Scrapbook Quest",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
         desc: "Discover key moments in Philippine history through an interactive, gamified storyline.",
       },
       {

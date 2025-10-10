@@ -7,6 +7,7 @@ public class QuestionSeedDTO {
     private String promptText;
     private int points;
     private List<ChoiceSeedDTO> choices;
+    private List<AnswerSeedDTO> answers;
 
     // Getters and Setters
     public String getType() { return type; }
@@ -17,4 +18,6 @@ public class QuestionSeedDTO {
     public void setPoints(int points) { this.points = points; }
     public List<ChoiceSeedDTO> getChoices() { return choices; }
     public void setChoices(List<ChoiceSeedDTO> choices) { this.choices = choices; }
+    public List<AnswerSeedDTO> getAnswers() { return answers; }
+    public void setAnswers(List<AnswerSeedDTO> answers) { this.answers = answers; }
 }

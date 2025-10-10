@@ -396,7 +396,8 @@ public class ProgressService {
                     }
                     
                     // If scene state exists and indicates completion, skip it
-                    if (sceneState instanceof Map) {
+                    if (sceneState instanceof Map<?, ?>) {
+                        @SuppressWarnings("unchecked")
                         Map<String, Object> sceneStateMap = (Map<String, Object>) sceneState;
                         Boolean isCompleted = (Boolean) sceneStateMap.get("completed");
                         if (Boolean.TRUE.equals(isCompleted)) {

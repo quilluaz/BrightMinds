@@ -60,6 +60,28 @@ const DisappearingSprite = ({ asset }) => {
   const normalizedX = ((asset.positionX ?? 0) + 10) / 20;
   const normalizedY = ((asset.positionY ?? 0) + 10) / 20;
 
+  // Check if sprite should face left (flip horizontally)
+  const shouldFaceLeft = asset.metadata?.facing === "left";
+
+  // Get scale value (default to 1 if not specified)
+  const scale = asset.metadata?.scale || 1;
+
+  // Build transform string with proper order
+  // Apply scale first, then translation, then horizontal flip
+  const transforms = [];
+
+  if (scale !== 1) {
+    transforms.push(`scale(${scale})`);
+  }
+
+  transforms.push("translateX(-50%)");
+
+  if (shouldFaceLeft) {
+    transforms.push("scaleX(-1)");
+  }
+
+  const transformStyle = transforms.join(" ");
+
   return (
     <img
       key={asset.assetId}
@@ -69,7 +91,8 @@ const DisappearingSprite = ({ asset }) => {
       style={{
         left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
         bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
-        transform: "translateX(-50%)",
+        transform: transformStyle,
+        transformOrigin: "center center",
         zIndex: (asset.orderIndex || 1) + 20, // Ensure sprites appear above question overlay
         opacity: opacity, // Use opacity state for smooth fade
       }}
@@ -78,4 +101,3 @@ const DisappearingSprite = ({ asset }) => {
 };
 
 export default DisappearingSprite;
-

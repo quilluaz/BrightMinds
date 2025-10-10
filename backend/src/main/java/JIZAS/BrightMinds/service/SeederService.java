@@ -18,15 +18,13 @@ public class SeederService {
     private final DialogueRepository dialogueRepository;
     private final QuestionRepository questionRepository;
     private final ChoiceRepository choiceRepository;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final AnswerRepository answerRepository;
 
     @Autowired
     public SeederService(StoryRepository storyRepository, SceneRepository sceneRepository,
                          AssetRepository assetRepository, SceneAssetRepository sceneAssetRepository,
                          DialogueRepository dialogueRepository, QuestionRepository questionRepository,
-                         ChoiceRepository choiceRepository, UserRepository userRepository,
-                         PasswordEncoder passwordEncoder) {
+                         ChoiceRepository choiceRepository, AnswerRepository answerRepository) {
         this.storyRepository = storyRepository;
         this.sceneRepository = sceneRepository;
         this.assetRepository = assetRepository;
@@ -34,23 +32,7 @@ public class SeederService {
         this.dialogueRepository = dialogueRepository;
         this.questionRepository = questionRepository;
         this.choiceRepository = choiceRepository;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Transactional
-    public void createGameMaster() {
-        // Check if the GameMaster already exists to avoid duplicates
-        if (userRepository.findByEmail("gamemaster@brightminds.com").isEmpty()) {
-            User gameMaster = new User();
-            gameMaster.setFName("Admin");
-            gameMaster.setLName("User");
-            gameMaster.setEmail("gamemaster@brightminds.com");
-            // Use the application's own encoder to create the correct hash
-            gameMaster.setPassword(passwordEncoder.encode("password123"));
-            gameMaster.setRole(User.Role.GAMEMASTER);
-            userRepository.save(gameMaster);
-        }
+        this.answerRepository = answerRepository;
     }
 
     @Transactional
@@ -115,6 +97,7 @@ public class SeederService {
                 question.setPoints(questionDTO.getPoints());
                 Question savedQuestion = questionRepository.save(question);
 
+                // Handle choices for MCQ questions
                 if (questionDTO.getChoices() != null) {
                     for (ChoiceSeedDTO choiceDTO : questionDTO.getChoices()) {
                         Choice choice = new Choice();
@@ -124,8 +107,18 @@ public class SeederService {
                         choiceRepository.save(choice);
                     }
                 }
+
+                // Handle answers for DragDrop questions
+                if (questionDTO.getAnswers() != null) {
+                    for (AnswerSeedDTO answerDTO : questionDTO.getAnswers()) {
+                        Answer answer = new Answer();
+                        answer.setQuestion(savedQuestion);
+                        answer.setAnswerText(answerDTO.getAnswerText());
+                        answer.setDragdropPosition(answerDTO.getDragdropPosition());
+                        answerRepository.save(answer);
+                    }
+                }
             }
         }
     }
 }
-
