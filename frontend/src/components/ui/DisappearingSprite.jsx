@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const DisappearingSprite = ({ asset, onCorrectSpriteAppear }) => {
+const DisappearingSprite = ({ asset, onBackgroundOverlay }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
   const disappearTimeoutRef = useRef(null);
   const fadeAnimationRef = useRef(null);
+  const backgroundOverlayNotifiedRef = useRef(false);
 
   const startFadeOut = () => {
     const fadeDuration = 500; // 0.5 seconds - same as fade in
@@ -27,6 +28,11 @@ const DisappearingSprite = ({ asset, onCorrectSpriteAppear }) => {
       } else {
         setIsVisible(false);
         console.log(`Sprite ${asset.name} completely disappeared`);
+
+        // Hide background overlay when sprite disappears
+        if (asset.metadata?.triggerBackgroundOverlay && onBackgroundOverlay) {
+          onBackgroundOverlay(false);
+        }
       }
     };
 
@@ -34,13 +40,14 @@ const DisappearingSprite = ({ asset, onCorrectSpriteAppear }) => {
   };
 
   useEffect(() => {
-    // Check if this is a correct sprite and notify parent immediately
+    // Check if this sprite should trigger background overlay immediately
     if (
-      asset.name &&
-      asset.name.toLowerCase().includes("correct") &&
-      onCorrectSpriteAppear
+      asset.metadata?.triggerBackgroundOverlay &&
+      onBackgroundOverlay &&
+      !backgroundOverlayNotifiedRef.current
     ) {
-      onCorrectSpriteAppear(true);
+      onBackgroundOverlay(true);
+      backgroundOverlayNotifiedRef.current = true;
     }
 
     // Handle disappearAfter timing - only set up if not already set

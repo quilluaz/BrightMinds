@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const DelayedSprite = ({ asset, onCorrectSpriteAppear }) => {
+const DelayedSprite = ({ asset, onBackgroundOverlay }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [opacity, setOpacity] = useState(0);
   const appearTimeoutRef = useRef(null);
   const fadeAnimationRef = useRef(null);
+  const backgroundOverlayNotifiedRef = useRef(false);
 
   const startFadeIn = () => {
     const fadeDuration = 500; // 0.5 seconds
@@ -27,13 +28,14 @@ const DelayedSprite = ({ asset, onCorrectSpriteAppear }) => {
       } else {
         console.log(`Sprite ${asset.name} fully faded in`);
 
-        // Check if this is a correct sprite and notify parent
+        // Check if this sprite should trigger background overlay
         if (
-          asset.name &&
-          asset.name.toLowerCase().includes("correct") &&
-          onCorrectSpriteAppear
+          asset.metadata?.triggerBackgroundOverlay &&
+          onBackgroundOverlay &&
+          !backgroundOverlayNotifiedRef.current
         ) {
-          onCorrectSpriteAppear(true);
+          onBackgroundOverlay(true);
+          backgroundOverlayNotifiedRef.current = true;
         }
       }
     };
@@ -61,13 +63,14 @@ const DelayedSprite = ({ asset, onCorrectSpriteAppear }) => {
       setIsVisible(true);
       setOpacity(1);
 
-      // Check if this is a correct sprite and notify parent
+      // Check if this sprite should trigger background overlay immediately
       if (
-        asset.name &&
-        asset.name.toLowerCase().includes("correct") &&
-        onCorrectSpriteAppear
+        asset.metadata?.triggerBackgroundOverlay &&
+        onBackgroundOverlay &&
+        !backgroundOverlayNotifiedRef.current
       ) {
-        onCorrectSpriteAppear(true);
+        onBackgroundOverlay(true);
+        backgroundOverlayNotifiedRef.current = true;
       }
     }
 

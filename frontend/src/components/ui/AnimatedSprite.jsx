@@ -4,7 +4,7 @@ const AnimatedSprite = ({
   asset,
   gameState,
   onAnimationComplete,
-  onCorrectSpriteAppear,
+  onBackgroundOverlay,
 }) => {
   const [currentPosition, setCurrentPosition] = useState({
     x: asset.positionX ?? 0,
@@ -19,6 +19,7 @@ const AnimatedSprite = ({
   const disappearTimeoutRef = useRef(null);
   const fadeAnimationRef = useRef(null);
   const appearTimeoutRef = useRef(null);
+  const backgroundOverlayNotifiedRef = useRef(false);
 
   // Check if this asset has animation metadata
   const hasAnimation =
@@ -55,13 +56,17 @@ const AnimatedSprite = ({
       setIsVisible(true);
       setOpacity(1);
 
-      // Check if this is a correct sprite and notify parent
+      // Check if this sprite should trigger background overlay immediately
       if (
-        asset.name &&
-        asset.name.toLowerCase().includes("correct") &&
-        onCorrectSpriteAppear
+        asset.metadata?.triggerBackgroundOverlay &&
+        onBackgroundOverlay &&
+        !backgroundOverlayNotifiedRef.current
       ) {
-        onCorrectSpriteAppear(true);
+        console.log(
+          `AnimatedSprite ${asset.name} requesting background overlay (immediate)`
+        );
+        onBackgroundOverlay(true);
+        backgroundOverlayNotifiedRef.current = true;
       }
 
       // Start animation immediately if it has animation
@@ -117,13 +122,17 @@ const AnimatedSprite = ({
       } else {
         console.log(`Sprite ${asset.name} fully faded in`);
 
-        // Check if this is a correct sprite and notify parent
+        // Check if this sprite should trigger background overlay
         if (
-          asset.name &&
-          asset.name.toLowerCase().includes("correct") &&
-          onCorrectSpriteAppear
+          asset.metadata?.triggerBackgroundOverlay &&
+          onBackgroundOverlay &&
+          !backgroundOverlayNotifiedRef.current
         ) {
-          onCorrectSpriteAppear(true);
+          console.log(
+            `AnimatedSprite ${asset.name} requesting background overlay`
+          );
+          onBackgroundOverlay(true);
+          backgroundOverlayNotifiedRef.current = true;
         }
       }
     };
@@ -152,6 +161,14 @@ const AnimatedSprite = ({
       } else {
         setIsVisible(false);
         console.log(`Sprite ${asset.name} completely disappeared`);
+
+        // Hide background overlay when sprite disappears
+        if (asset.metadata?.triggerBackgroundOverlay && onBackgroundOverlay) {
+          console.log(
+            `AnimatedSprite ${asset.name} releasing background overlay`
+          );
+          onBackgroundOverlay(false);
+        }
       }
     };
 

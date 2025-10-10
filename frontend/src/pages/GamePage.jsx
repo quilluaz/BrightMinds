@@ -30,17 +30,31 @@ export default function GamePage() {
   const [matchHistory, setMatchHistory] = useState([]);
   const [existingProgress, setExistingProgress] = useState(null);
   const [showProgressDialog, setShowProgressDialog] = useState(false);
-  const [showCorrectSpriteBackground, setShowCorrectSpriteBackground] =
-    useState(false);
+  const [showBackgroundOverlay, setShowBackgroundOverlay] = useState(false);
+  const backgroundOverlayCountRef = useRef(0);
 
   const isTransitioning = useRef(false);
 
-  // Handle correct sprite appearance
-  const handleCorrectSpriteAppear = (isAppearing) => {
-    setShowCorrectSpriteBackground(isAppearing);
+  // Handle background overlay control from sprites
+  const handleBackgroundOverlay = (show) => {
+    if (show) {
+      backgroundOverlayCountRef.current += 1;
+    } else {
+      backgroundOverlayCountRef.current = Math.max(
+        0,
+        backgroundOverlayCountRef.current - 1
+      );
+    }
+
+    const shouldShow = backgroundOverlayCountRef.current > 0;
     console.log(
-      `Correct sprite background ${isAppearing ? "shown" : "hidden"}`
+      `Background overlay: ${show ? "requested" : "released"}, count: ${
+        backgroundOverlayCountRef.current
+      }, showing: ${shouldShow}`
     );
+
+    // Show overlay if any sprites are requesting it, hide if none are
+    setShowBackgroundOverlay(shouldShow);
   };
 
   // Check for existing progress
@@ -278,6 +292,10 @@ export default function GamePage() {
     try {
       const { data: gameScene } = await api.get(`/game/scene/${sceneId}`);
       setCurrentSceneData(gameScene);
+
+      // Reset background overlay counter when scene changes
+      backgroundOverlayCountRef.current = 0;
+      setShowBackgroundOverlay(false);
     } catch (err) {
       handleError("A problem occurred while loading the scene.", err);
     }
@@ -861,7 +879,7 @@ export default function GamePage() {
             onAnimationComplete={(assetId) => {
               console.log(`Animation completed for asset: ${assetId}`);
             }}
-            onCorrectSpriteAppear={handleCorrectSpriteAppear}
+            onBackgroundOverlay={handleBackgroundOverlay}
           />
         );
       }
@@ -874,7 +892,7 @@ export default function GamePage() {
           <DelayedSprite
             key={`${asset.assetId}-${currentSceneIndex}`}
             asset={asset}
-            onCorrectSpriteAppear={handleCorrectSpriteAppear}
+            onBackgroundOverlay={handleBackgroundOverlay}
           />
         );
       }
@@ -887,7 +905,7 @@ export default function GamePage() {
           <DisappearingSprite
             key={`${asset.assetId}-${currentSceneIndex}`}
             asset={asset}
-            onCorrectSpriteAppear={handleCorrectSpriteAppear}
+            onBackgroundOverlay={handleBackgroundOverlay}
           />
         );
       }
@@ -1151,12 +1169,8 @@ export default function GamePage() {
             }}
           />
         )}
-        {/* Opaque black overlay during question state */}
-        {gameState === "question" && (
-          <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
-        )}
-        {/* Opaque black overlay when correct sprites appear */}
-        {showCorrectSpriteBackground && (
+        {/* Opaque black overlay controlled by sprites */}
+        {showBackgroundOverlay && (
           <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
         )}
         {gameState !== "loading" && renderSprites()}
