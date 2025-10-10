@@ -30,8 +30,18 @@ export default function GamePage() {
   const [matchHistory, setMatchHistory] = useState([]);
   const [existingProgress, setExistingProgress] = useState(null);
   const [showProgressDialog, setShowProgressDialog] = useState(false);
+  const [showCorrectSpriteBackground, setShowCorrectSpriteBackground] =
+    useState(false);
 
   const isTransitioning = useRef(false);
+
+  // Handle correct sprite appearance
+  const handleCorrectSpriteAppear = (isAppearing) => {
+    setShowCorrectSpriteBackground(isAppearing);
+    console.log(
+      `Correct sprite background ${isAppearing ? "shown" : "hidden"}`
+    );
+  };
 
   // Check for existing progress
   const checkExistingProgress = async () => {
@@ -273,6 +283,13 @@ export default function GamePage() {
     }
   };
 
+  // Check for metadata-based effects when scene data changes
+  useEffect(() => {
+    if (currentSceneData) {
+      checkSceneEffects();
+    }
+  }, [currentSceneData]);
+
   // Handle user clicks to advance the story
   const handleInteraction = async () => {
     if (
@@ -280,6 +297,23 @@ export default function GamePage() {
       ["question", "loading", "progress-check"].includes(gameState)
     ) {
       return;
+    }
+
+    // Check for interaction-based screen shake effects
+    if (currentSceneData?.assets) {
+      currentSceneData.assets.forEach((asset) => {
+        if (asset.metadata?.screenShakeOnClick) {
+          const shakeConfig = asset.metadata.screenShakeOnClick;
+          const duration = shakeConfig.duration || 500;
+          const intensity = shakeConfig.intensity || 5;
+
+          console.log(
+            `Triggering click-based screen shake for asset ${asset.name}:`,
+            shakeConfig
+          );
+          triggerScreenShake(duration, intensity);
+        }
+      });
     }
 
     if (gameState === "intro") {
@@ -520,6 +554,53 @@ export default function GamePage() {
     }
   };
 
+  // Metadata-based screen shake effect
+  const triggerScreenShake = (duration = 500, intensity = 5) => {
+    console.log(
+      `Triggering screen shake: duration=${duration}ms, intensity=${intensity}px`
+    );
+    setIsShaking(true);
+    setShakeOffset(0);
+
+    // Create shake animation
+    const shakeInterval = setInterval(() => {
+      setShakeOffset((prev) => (prev === intensity ? -intensity : intensity));
+    }, 50);
+
+    setTimeout(() => {
+      clearInterval(shakeInterval);
+      setIsShaking(false);
+      // Ensure we return to center position
+      setTimeout(() => {
+        setShakeOffset(0);
+      }, 10);
+    }, duration);
+  };
+
+  // Check for metadata-based effects on scene load
+  const checkSceneEffects = () => {
+    if (!currentSceneData?.assets) return;
+
+    // Check each asset for shake effects
+    currentSceneData.assets.forEach((asset) => {
+      if (asset.metadata?.screenShake) {
+        const shakeConfig = asset.metadata.screenShake;
+        const delay = shakeConfig.delay || 0;
+        const duration = shakeConfig.duration || 500;
+        const intensity = shakeConfig.intensity || 5;
+
+        console.log(
+          `Scheduled screen shake for asset ${asset.name}:`,
+          shakeConfig
+        );
+
+        setTimeout(() => {
+          triggerScreenShake(duration, intensity);
+        }, delay);
+      }
+    });
+  };
+
   const handleAnswerSelection = async (choice) => {
     if (isAnswerLocked) return;
 
@@ -626,22 +707,7 @@ export default function GamePage() {
       }
 
       // Show subtle screen shake for wrong answer
-      setIsShaking(true);
-      setShakeOffset(0);
-
-      // Create shake animation
-      const shakeInterval = setInterval(() => {
-        setShakeOffset((prev) => (prev === 5 ? -5 : 5));
-      }, 50);
-
-      setTimeout(() => {
-        clearInterval(shakeInterval);
-        setIsShaking(false);
-        // Ensure we return to center position
-        setTimeout(() => {
-          setShakeOffset(0);
-        }, 10);
-      }, 500); // Shake for 0.5 seconds
+      triggerScreenShake(500, 5);
     }
   };
 
@@ -789,12 +855,13 @@ export default function GamePage() {
       if (hasAnimation) {
         return (
           <AnimatedSprite
-            key={asset.assetId}
+            key={`${asset.assetId}-${currentSceneIndex}`}
             asset={asset}
             gameState={gameState}
             onAnimationComplete={(assetId) => {
               console.log(`Animation completed for asset: ${assetId}`);
             }}
+            onCorrectSpriteAppear={handleCorrectSpriteAppear}
           />
         );
       }
@@ -803,14 +870,26 @@ export default function GamePage() {
       const hasDelayedAppearance = asset.metadata?.appearAfter !== undefined;
 
       if (hasDelayedAppearance) {
-        return <DelayedSprite key={asset.assetId} asset={asset} />;
+        return (
+          <DelayedSprite
+            key={`${asset.assetId}-${currentSceneIndex}`}
+            asset={asset}
+            onCorrectSpriteAppear={handleCorrectSpriteAppear}
+          />
+        );
       }
 
       // Check if this asset needs to disappear
       const hasDisappearAfter = asset.metadata?.disappearAfter !== undefined;
 
       if (hasDisappearAfter) {
-        return <DisappearingSprite key={asset.assetId} asset={asset} />;
+        return (
+          <DisappearingSprite
+            key={`${asset.assetId}-${currentSceneIndex}`}
+            asset={asset}
+            onCorrectSpriteAppear={handleCorrectSpriteAppear}
+          />
+        );
       }
 
       // Static sprite rendering for assets without animation, delay, or disappear
@@ -853,7 +932,7 @@ export default function GamePage() {
 
       return (
         <img
-          key={asset.assetId}
+          key={`${asset.assetId}-${currentSceneIndex}`}
           src={asset.filePath}
           alt={asset.name}
           className="absolute h-3/4 max-h-[80%] object-contain"
@@ -1076,8 +1155,11 @@ export default function GamePage() {
         {gameState === "question" && (
           <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
         )}
-        {(gameState === "playing" || gameState === "question") &&
-          renderSprites()}
+        {/* Opaque black overlay when correct sprites appear */}
+        {showCorrectSpriteBackground && (
+          <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
+        )}
+        {gameState !== "loading" && renderSprites()}
         {/* Correct answer feedback */}
         {showCorrectFeedback && (
           <div className="absolute inset-0 flex items-center justify-center z-[100]">

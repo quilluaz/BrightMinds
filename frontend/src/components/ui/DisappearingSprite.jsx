@@ -1,22 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const DisappearingSprite = ({ asset }) => {
+const DisappearingSprite = ({ asset, onCorrectSpriteAppear }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
   const disappearTimeoutRef = useRef(null);
   const fadeAnimationRef = useRef(null);
 
   const startFadeOut = () => {
-    const fadeDuration = 500; // 0.5 seconds
+    const fadeDuration = 500; // 0.5 seconds - same as fade in
     const startTime = Date.now();
-    const startOpacity = opacity;
+    const startOpacity = 1; // Always start from full opacity for consistent fadeout
 
     const fadeAnimate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / fadeDuration, 1);
 
-      // Linear fade from current opacity to 0
-      const currentOpacity = startOpacity * (1 - progress);
+      // Use easing function for smooth fadeout (ease-in for fadeout)
+      const easeIn = Math.pow(progress, 2);
+
+      // Linear fade from 1 to 0 with easing
+      const currentOpacity = startOpacity * (1 - easeIn);
       setOpacity(currentOpacity);
 
       if (progress < 1) {
@@ -31,25 +34,34 @@ const DisappearingSprite = ({ asset }) => {
   };
 
   useEffect(() => {
-    // Set up disappear timer if specified
-    if (asset.metadata?.disappearAfter) {
+    // Check if this is a correct sprite and notify parent immediately
+    if (
+      asset.name &&
+      asset.name.toLowerCase().includes("correct") &&
+      onCorrectSpriteAppear
+    ) {
+      onCorrectSpriteAppear(true);
+    }
+
+    // Handle disappearAfter timing - only set up if not already set
+    if (asset.metadata?.disappearAfter && !disappearTimeoutRef.current) {
+      let delay = asset.metadata.disappearAfter * 1000;
+
       disappearTimeoutRef.current = setTimeout(() => {
         console.log(
           `Sprite ${asset.name} starting fade out after ${asset.metadata.disappearAfter} seconds`
         );
         startFadeOut();
-      }, asset.metadata.disappearAfter * 1000);
+      }, delay);
     }
 
     return () => {
       if (fadeAnimationRef.current) {
         cancelAnimationFrame(fadeAnimationRef.current);
       }
-      if (disappearTimeoutRef.current) {
-        clearTimeout(disappearTimeoutRef.current);
-      }
+      // Don't clear the disappear timeout on cleanup to prevent reset during state changes
     };
-  }, [asset.metadata?.disappearAfter]);
+  }, []); // Empty dependency array to prevent reset on re-renders
 
   // Don't render if sprite should be invisible
   if (!isVisible) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const DelayedSprite = ({ asset }) => {
+const DelayedSprite = ({ asset, onCorrectSpriteAppear }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [opacity, setOpacity] = useState(0);
   const appearTimeoutRef = useRef(null);
@@ -15,14 +15,26 @@ const DelayedSprite = ({ asset }) => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / fadeDuration, 1);
 
-      // Linear fade from 0 to 1
-      const currentOpacity = startOpacity + (1 - startOpacity) * progress;
+      // Use easing function for smooth fadein (ease-out for fadein)
+      const easeOut = 1 - Math.pow(1 - progress, 2);
+
+      // Linear fade from 0 to 1 with easing
+      const currentOpacity = startOpacity + (1 - startOpacity) * easeOut;
       setOpacity(currentOpacity);
 
       if (progress < 1) {
         fadeAnimationRef.current = requestAnimationFrame(fadeAnimate);
       } else {
         console.log(`Sprite ${asset.name} fully faded in`);
+
+        // Check if this is a correct sprite and notify parent
+        if (
+          asset.name &&
+          asset.name.toLowerCase().includes("correct") &&
+          onCorrectSpriteAppear
+        ) {
+          onCorrectSpriteAppear(true);
+        }
       }
     };
 
@@ -30,8 +42,8 @@ const DelayedSprite = ({ asset }) => {
   };
 
   useEffect(() => {
-    // Set up appear timer if specified
-    if (asset.metadata?.appearAfter) {
+    // Set up appear timer if specified and not already set
+    if (asset.metadata?.appearAfter && !appearTimeoutRef.current) {
       let delay = asset.metadata.appearAfter * 1000;
       if (asset.metadata?.delay) {
         delay += asset.metadata.delay * 1000;
@@ -44,21 +56,28 @@ const DelayedSprite = ({ asset }) => {
         );
         startFadeIn();
       }, delay);
-    } else {
-      // Show immediately if no delay specified
+    } else if (!asset.metadata?.appearAfter && !isVisible) {
+      // Show immediately if no delay specified and not already visible
       setIsVisible(true);
       setOpacity(1);
+
+      // Check if this is a correct sprite and notify parent
+      if (
+        asset.name &&
+        asset.name.toLowerCase().includes("correct") &&
+        onCorrectSpriteAppear
+      ) {
+        onCorrectSpriteAppear(true);
+      }
     }
 
     return () => {
-      if (appearTimeoutRef.current) {
-        clearTimeout(appearTimeoutRef.current);
-      }
       if (fadeAnimationRef.current) {
         cancelAnimationFrame(fadeAnimationRef.current);
       }
+      // Don't clear appear timeout on cleanup to prevent reset during state changes
     };
-  }, [asset.metadata?.appearAfter, asset.metadata?.delay]);
+  }, []); // Empty dependency array to prevent reset on re-renders
 
   // Don't render if sprite should not be visible yet
   if (!isVisible) {

@@ -5,108 +5,128 @@
   "storyOrder": 2,
   "thumbnailImage": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
   "scenes": [
-      {
-          "sceneOrder": 1,
-          "assets": [
-              {
-                  "name": "splash_art",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "GAME",
-                  "lineText": "Click to progress the story",
-                  "orderIndex": 1
-              }
-          ]
-      },
-      {
-          "sceneOrder": 2,
-          "sceneText": "Introduction: The Sparkly Surprise",
-          "assets": [
-              {
-                  "name": "bedroom_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759070240/bg1_ww1tvt.png"
-              },
-              {
-                  "name": "leah_idle",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759218165/leah_idle_v1_in7avu.png",
-                  "positionX": 6,
-                  "positionY": -8,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Leah",
-                      "state": "idle",
-                      "facing": "left",
-                      "disappearAfter": 1.5
-                  }
-              },
-              {
-                  "name": "leah_walk",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah2_vmbnfx.png",
-                  "positionX": 6,
-                  "positionY": -8,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "leah",
-                      "state": "walking",
-                      "animation": "move",
-                      "facing": "left",
-                      "appearAfter": 2,
-                      "positionX": 6,
-                      "positionY": -8,
-                      "endX": 0,
-                      "endY": -8,
-                      "duration": 2
-                  }
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "In a cozy village home, young Leah woke up one sunny morning, bubbling with curiosity. She tiptoed to her mom's bookshelf, hunting for a fun cartoon book about spring adventures.",
-                  "orderIndex": 1
-              }
-          ]
-      },
-      {
-          "sceneOrder": 3,
-          "sceneText": "Introduction: The Sparkly Surprise",
-          "assets": [
-              {
-                  "name": "bedroom_messy_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061435/bg1_w_books_famcmx.png"
-              },
-              {
-                  "name": "leah_surprised",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah3_burbj1.png",
-                  "positionX": 0,
-                  "positionY": -8,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Leah",
-                      "state": "idle",
-                      "facing": "left"
-                  }
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Oops! A dusty scrapbook tumbled to the floor, its pages all jumbled and torn",
-                  "orderIndex": 1
-              }
-          ]
-      }
+    {
+      "sceneOrder": 1,
+      "assets": [
+        {
+          "name": "splash_art",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "GAME",
+          "lineText": "Click to progress the story",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 2,
+      "sceneText": "Introduction: The Sparkly Surprise",
+      "assets": [
+        {
+          "name": "bedroom_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759070240/bg1_ww1tvt.png"
+        },
+        {
+          "name": "leah_idle",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759218165/leah_idle_v1_in7avu.png",
+          "positionX": 6,
+          "positionY": -8,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Leah",
+            "state": "idle",
+            "facing": "left",
+            "disappearAfter": 1.5
+          }
+        },
+        {
+          "name": "leah_walk",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah2_vmbnfx.png",
+          "positionX": 6,
+          "positionY": -8,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "leah",
+            "state": "walking",
+            "animation": "move",
+            "facing": "left",
+            "appearAfter": 2,
+            "positionX": 6,
+            "positionY": -8,
+            "endX": 0,
+            "endY": -8,
+            "duration": 2
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "In a cozy village home, young Leah woke up one sunny morning, bubbling with curiosity. She tiptoed to her mom's bookshelf, hunting for a fun cartoon book about spring adventures.",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 3,
+      "sceneText": "Introduction: The Sparkly Surprise",
+      "assets": [
+        {
+          "name": "bedroom_messy_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061435/bg1_w_books_famcmx.png"
+        },
+        {
+          "name": "leah_surprised",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah3_burbj1.png",
+          "positionX": 0,
+          "positionY": -8,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Leah",
+            "state": "idle",
+            "facing": "left"
+          }
+        },
+        {
+          "name": "screen_shake_effect",
+          "type": "sprite",
+          "filePath": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB2aWV3Qm94PSIwIDAgMSAxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InRyYW5zcGFyZW50Ii8+PC9zdmc+",
+          "positionX": 0,
+          "positionY": 0,
+          "orderIndex": 0,
+          "isInteractive": false,
+          "metadata": {
+            "screenShake": {
+              "delay": 1000,
+              "duration": 800,
+              "intensity": 8
+            },
+            "screenShakeOnClick": {
+              "duration": 600,
+              "intensity": 6
+            }
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Oops! A dusty scrapbook tumbled to the floor, its pages all jumbled and torn",
+          "orderIndex": 1
+        }
+      ]
+    }
   ]
 }
