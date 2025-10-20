@@ -6,6 +6,7 @@ import AnimatedSprite from "@/components/ui/AnimatedSprite";
 import DelayedSprite from "@/components/ui/DelayedSprite";
 import DisappearingSprite from "@/components/ui/DisappearingSprite";
 import VisionTransition from "@/components/ui/VisionTransition";
+import story2Local from "../../game2.json";
 
 export default function GamePage2() {
   const { storyId } = useParams();
@@ -23,6 +24,7 @@ export default function GamePage2() {
   const [gameStartTime, setGameStartTime] = useState(null);
   const [showScore, setShowScore] = useState(false);
   const [draggedPiece, setDraggedPiece] = useState(null);
+  const [slotsMap, setSlotsMap] = useState({});
   const [error, setError] = useState("");
   const [storyScore, setStoryScore] = useState(null);
   const [mistakeCount, setMistakeCount] = useState(0);
@@ -35,7 +37,12 @@ export default function GamePage2() {
   const [isShaking, setIsShaking] = useState(false);
   const [shakeOffset, setShakeOffset] = useState(0);
   const [showBackgroundOverlay, setShowBackgroundOverlay] = useState(false);
+  const [showCorrectFeedback, setShowCorrectFeedback] = useState(false);
+  const [wrongAnswers, setWrongAnswers] = useState(new Set());
+  const [piecePositions, setPiecePositions] = useState({});
+  const [isDragging, setIsDragging] = useState(false);
   const backgroundOverlayCountRef = useRef(0);
+  const puzzleAreaRef = useRef(null);
 
   const isTransitioning = useRef(false);
 
@@ -276,7 +283,7 @@ export default function GamePage2() {
     }
   };
 
-  // Load current scene data
+  // Load current scene shell from story list
   useEffect(() => {
     if (currentSceneIndex < scenes.length) {
       const scene = scenes[currentSceneIndex];
@@ -286,24 +293,100 @@ export default function GamePage2() {
       backgroundOverlayCountRef.current = 0;
       setShowBackgroundOverlay(false);
 
-      // Extract puzzle pieces from scene question answers
-      if (scene.question && scene.question.answers) {
-        const pieces = scene.question.answers.map((answer, index) => ({
+      setPlacedPieces([]);
+      setSlotsMap({});
+      setIsPuzzleComplete(false);
+      setShowCompletionEffect(false);
+      setWrongAnswers(new Set());
+      setShowCorrectFeedback(false);
+    }
+  }, [currentSceneIndex, scenes]);
+
+  // When currentSceneData has full question/answers, extract puzzle pieces
+  useEffect(() => {
+    if (
+      currentSceneData &&
+      currentSceneData.question &&
+      currentSceneData.question.answers
+    ) {
+      console.log(
+        "Using backend answers for scene:",
+        currentSceneData.sceneId || currentSceneData.sceneOrder
+      );
+      const pieces = currentSceneData.question.answers.map((answer, index) => {
+        const nx = ((answer.positionX ?? -8) + 10) / 20;
+        const ny = ((answer.positionY ?? 0) + 10) / 20;
+        const piece = {
           id: index + 1,
-          shape: answer.answerText,
-          color: answer.metadata?.color || "#FFD700",
-          dragdropPosition: answer.dragdropPosition,
-        }));
+          label: answer.answerText,
+          filePath: answer.filePath,
+          isCorrect: !!answer.isCorrect,
+          leftPct: Math.max(0, Math.min(0.48, nx)) * 100,
+          topPct: Math.max(0, Math.min(1, ny)) * 100,
+          originalLeftPct: Math.max(0, Math.min(0.48, nx)) * 100,
+          originalTopPct: Math.max(0, Math.min(1, ny)) * 100,
+        };
+        return piece;
+      });
+      console.log("Built puzzle pieces from backend:", pieces);
+      console.log("Setting puzzle pieces state with:", pieces.length, "pieces");
+      setPuzzlePieces(pieces);
+    } else if (storyId === "2") {
+      const order = currentSceneData?.sceneOrder ?? currentSceneIndex + 1;
+      const localScene = (story2Local?.scenes || []).find(
+        (s) => s.sceneOrder === order
+      );
+      const answers = (localScene?.question?.answers || [])
+        .map((a) => {
+          if (a.assetName) {
+            const asset = (localScene?.assets || []).find(
+              (as) => as.name === a.assetName
+            );
+            if (asset) {
+              return {
+                ...a,
+                type: asset.type,
+                filePath: asset.filePath,
+                positionX: asset.positionX,
+                positionY: asset.positionY,
+              };
+            }
+          }
+          return a;
+        })
+        .filter((a) => a.filePath);
+      if (answers.length) {
+        console.warn(
+          "Falling back to local game2.json answers for scene order:",
+          order
+        );
+        const pieces = answers.map((answer, index) => {
+          const nx = ((answer.positionX ?? -8) + 10) / 20;
+          const ny = ((answer.positionY ?? 0) + 10) / 20;
+          const piece = {
+            id: index + 1,
+            label: answer.answerText,
+            filePath: answer.filePath,
+            isCorrect: !!answer.isCorrect,
+            leftPct: Math.max(0, Math.min(0.48, nx)) * 100,
+            topPct: Math.max(0, Math.min(1, ny)) * 100,
+            originalLeftPct: Math.max(0, Math.min(0.48, nx)) * 100,
+            originalTopPct: Math.max(0, Math.min(1, ny)) * 100,
+          };
+          return piece;
+        });
+        console.log("Built puzzle pieces from local JSON:", pieces);
+        console.log(
+          "Setting puzzle pieces state with:",
+          pieces.length,
+          "pieces"
+        );
         setPuzzlePieces(pieces);
       } else {
         setPuzzlePieces([]);
       }
-
-      setPlacedPieces([]);
-      setIsPuzzleComplete(false);
-      setShowCompletionEffect(false);
     }
-  }, [currentSceneIndex, scenes]);
+  }, [currentSceneData]);
 
   // Check for metadata-based effects when scene data changes
   useEffect(() => {
@@ -405,16 +488,24 @@ export default function GamePage2() {
     }
 
     if (gameState === "playing") {
+      // Ensure we load full scene (with question/answers) before puzzle
+      const scene = scenes[currentSceneIndex];
+      const currentSceneId = scene?.sceneId || scene?.sceneOrder;
+      if (currentSceneId) {
+        await loadScene(currentSceneId);
+      }
       setGameState("puzzle");
       return;
     }
   };
 
   const handleDragStart = (e, piece) => {
-    if (isPuzzleComplete) return;
+    if (isPuzzleComplete || wrongAnswers.has(piece.id)) return;
     setDraggedPiece(piece);
+    setIsDragging(true);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.target.outerHTML);
+    e.dataTransfer.setData("text/plain", String(piece.id));
   };
 
   const handleDragOver = (e) => {
@@ -427,135 +518,120 @@ export default function GamePage2() {
     if (!draggedPiece || isPuzzleComplete) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Check if drop is within the target "?" area on right page
+    const targetLeft = rect.width * 0.5;
+    const targetWidth = rect.width * 0.5;
+    const cx = targetLeft + targetWidth * 0.5;
+    const cy = rect.height * 0.52;
+    const radius = Math.min(targetWidth, rect.height) * 0.14;
 
-    // Check if drop is in the puzzle area (right side of scrapbook)
-    if (x > rect.width * 0.5) {
-      const newPlacedPieces = [...placedPieces, { ...draggedPiece, x, y }];
-      setPlacedPieces(newPlacedPieces);
+    const dx = e.clientX - (rect.left + cx);
+    const dy = e.clientY - (rect.top + cy);
+    const insideTarget = dx * dx + dy * dy <= radius * radius;
 
-      // Remove from available pieces
-      setPuzzlePieces(puzzlePieces.filter((p) => p.id !== draggedPiece.id));
+    if (insideTarget) {
+      if (draggedPiece.isCorrect) {
+        // Correct answer - show success feedback
+        setShowCorrectFeedback(true);
 
-      // Check if puzzle is complete (all pieces placed)
-      if (newPlacedPieces.length === currentSceneData.question.answers.length) {
+        const placed = { ...draggedPiece, x: cx, y: cy };
+        setPlacedPieces([placed]);
+        setPuzzlePieces(puzzlePieces.filter((p) => p.id !== draggedPiece.id));
+
         setIsPuzzleComplete(true);
         setShowCompletionEffect(true);
 
-        // Calculate points earned based on mistakes for this specific question
-        const questionId = currentSceneData?.question?.questionId;
+        const questionId =
+          currentSceneData?.question?.questionId || currentSceneIndex + 1;
         const currentMistakes = questionMistakes[questionId] || 0;
         const pointsPerQuestion = currentSceneData?.question?.points || 10;
         const pointsEarned = Math.max(0, pointsPerQuestion - currentMistakes);
-
         setScore(score + pointsEarned);
 
-        console.log(
-          `Puzzle completed for question ${questionId}! Points calculation:`,
-          {
-            pointsPerQuestion,
-            mistakesForThisQuestion: currentMistakes,
-            pointsEarned,
-            questionMistakes: questionMistakes,
-          }
-        );
-
-        // Save progress with points earned for correct answer
         const currentSceneId =
           scenes[currentSceneIndex].sceneId ||
           scenes[currentSceneIndex].sceneOrder;
         await saveSceneProgress(currentSceneId, pointsEarned);
 
-        // Update progress to next scene immediately to prevent getting stuck on same question
         const nextIndex = currentSceneIndex + 1;
         if (nextIndex < scenes.length) {
           const nextSceneId =
             scenes[nextIndex].sceneId || scenes[nextIndex].sceneOrder;
-          await saveSceneProgress(nextSceneId, 0); // Update current scene to next scene
+          await saveSceneProgress(nextSceneId, 0);
         }
 
-        // Show completion effect for 2 seconds, then move to next scene
         setTimeout(() => {
-          goToNextScene(true); // Skip progress save since we already updated it
+          setShowCorrectFeedback(false);
+          goToNextScene(true);
         }, 2000);
       } else {
-        // Increment mistake counter for this specific question
-        const questionId = currentSceneData?.question?.questionId;
-        let updatedQuestionMistakes = { ...questionMistakes };
-        if (questionId) {
-          updatedQuestionMistakes[questionId] =
-            (updatedQuestionMistakes[questionId] || 0) + 1;
-          setQuestionMistakes(updatedQuestionMistakes);
-          console.log(
-            `Wrong placement for question ${questionId}! Mistakes for this question:`,
-            updatedQuestionMistakes[questionId],
-            "Previous mistakes:",
-            questionMistakes[questionId] || 0,
-            "All question mistakes:",
-            updatedQuestionMistakes
-          );
-        }
+        // Wrong answer - gray out the piece and snap back
+        setWrongAnswers((prev) => new Set([...prev, draggedPiece.id]));
 
-        // Also increment global mistake count for backward compatibility
-        const newGlobalMistakeCount = mistakeCount + 1;
-        setMistakeCount(newGlobalMistakeCount);
-        console.log(
-          "Wrong placement! Global mistake count:",
-          newGlobalMistakeCount
+        // Snap back to original position
+        setPuzzlePieces((prev) =>
+          prev.map((p) =>
+            p.id === draggedPiece.id
+              ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
+              : p
+          )
         );
 
-        // Save wrong answer state immediately with current state
-        const currentSceneId =
-          scenes[currentSceneIndex].sceneId ||
-          scenes[currentSceneIndex].sceneOrder;
+        const questionId =
+          currentSceneData?.question?.questionId || currentSceneIndex + 1;
+        const updated = { ...questionMistakes };
+        updated[questionId] = (updated[questionId] || 0) + 1;
+        setQuestionMistakes(updated);
+        const newGlobalMistakeCount = mistakeCount + 1;
+        setMistakeCount(newGlobalMistakeCount);
 
-        // Save immediately with the updated mistake counts
         try {
-          await saveWrongAnswerState(currentSceneId);
-          console.log("Wrong answer state saved to progress");
-        } catch (error) {
-          console.error("Failed to save wrong answer progress:", error);
-        }
+          await saveWrongAnswerState(
+            scenes[currentSceneIndex].sceneId ||
+              scenes[currentSceneIndex].sceneOrder
+          );
+        } catch (err) {}
 
-        // Show subtle screen shake for wrong answer
+        // Screen shake for wrong answer
         setIsShaking(true);
         setShakeOffset(0);
-
-        // Create shake animation
         const shakeInterval = setInterval(() => {
           setShakeOffset((prev) => (prev === 5 ? -5 : 5));
         }, 50);
-
         setTimeout(() => {
           clearInterval(shakeInterval);
           setIsShaking(false);
-          // Ensure we return to center position
           setTimeout(() => {
             setShakeOffset(0);
           }, 10);
-        }, 500); // Shake for 0.5 seconds
+        }, 500);
       }
     } else {
-      // Dropped outside puzzle area - count as mistake
-      const questionId = currentSceneData?.question?.questionId;
+      // Dropped outside target area - snap back to original position
+      setPuzzlePieces((prev) =>
+        prev.map((p) =>
+          p.id === draggedPiece.id
+            ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
+            : p
+        )
+      );
+
+      const questionId =
+        currentSceneData?.question?.questionId || currentSceneIndex + 1;
       let updatedQuestionMistakes = { ...questionMistakes };
       if (questionId) {
         updatedQuestionMistakes[questionId] =
           (updatedQuestionMistakes[questionId] || 0) + 1;
         setQuestionMistakes(updatedQuestionMistakes);
       }
-
       const newGlobalMistakeCount = mistakeCount + 1;
       setMistakeCount(newGlobalMistakeCount);
-
-      // Save wrong answer state
       const currentSceneId =
         scenes[currentSceneIndex].sceneId ||
         scenes[currentSceneIndex].sceneOrder;
       await saveWrongAnswerState(currentSceneId);
 
-      // Show screen shake
+      // Screen shake for wrong drop
       setIsShaking(true);
       setShakeOffset(0);
       const shakeInterval = setInterval(() => {
@@ -571,10 +647,12 @@ export default function GamePage2() {
     }
 
     setDraggedPiece(null);
+    setIsDragging(false);
   };
 
   const handleDragEnd = () => {
     setDraggedPiece(null);
+    setIsDragging(false);
   };
 
   // Metadata-based screen shake effect
@@ -875,9 +953,22 @@ export default function GamePage2() {
 
     console.log("All assets in current scene:", currentSceneData.assets);
 
-    const spriteAssets = currentSceneData.assets.filter(
-      (asset) => asset.type === "sprite"
-    );
+    // Filter out mineral sprites when in puzzle mode - they should be rendered as draggable pieces instead
+    const spriteAssets = currentSceneData.assets.filter((asset) => {
+      const isMineralSprite = asset.name?.startsWith("mineral_");
+      const isPuzzleMode = gameState === "puzzle";
+
+      // Skip mineral sprites in puzzle mode - they'll be rendered as draggable pieces
+      if (isMineralSprite && isPuzzleMode) {
+        return false;
+      }
+
+      return (
+        asset.type === "sprite" ||
+        asset.metadata?.pageText ||
+        asset.type === "text"
+      );
+    });
 
     console.log("Filtered sprite assets:", spriteAssets);
 
@@ -913,6 +1004,12 @@ export default function GamePage2() {
         );
       }
 
+      // Check if this is a text display (prioritize before delay/disappear handlers)
+      if (asset.metadata?.pageText) {
+        console.log(`Asset ${asset.name} going to text display rendering`);
+        return renderTextDisplay(asset);
+      }
+
       // Check if this asset has delayed appearance
       const hasDelayedAppearance = asset.metadata?.appearAfter !== undefined;
 
@@ -941,13 +1038,7 @@ export default function GamePage2() {
         );
       }
 
-      // Check if this is a text display
-      if (asset.metadata?.pageText) {
-        console.log(`Asset ${asset.name} going to text display rendering`);
-        return renderTextDisplay(asset);
-      }
-
-      // Static sprite rendering for assets without animation, delay, or disappear
+      // Static sprite rendering for image-based assets without animation, delay, or disappear
       console.log(`Asset ${asset.name} going to static rendering`);
       const normalizedX = ((asset.positionX ?? 0) + 10) / 20;
       const normalizedY = ((asset.positionY ?? 0) + 10) / 20;
@@ -986,6 +1077,11 @@ export default function GamePage2() {
         );
       }
 
+      // If there is no filePath (e.g., pure text asset), skip image rendering
+      if (!asset.filePath) {
+        return null;
+      }
+
       return (
         <img
           key={asset.assetId || asset.name}
@@ -1007,31 +1103,56 @@ export default function GamePage2() {
   };
 
   const renderPuzzlePiece = (piece, isPlaced = false) => {
-    const pieceStyle = {
-      backgroundColor: piece.color,
-      width: isPlaced ? "60px" : "80px",
-      height: isPlaced ? "60px" : "80px",
-      borderRadius: "50%",
-      border: "3px solid #FFD700",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-      cursor: isPlaced ? "default" : "grab",
-      position: isPlaced ? "absolute" : "relative",
-      left: isPlaced ? `${piece.x - 30}px` : "auto",
-      top: isPlaced ? `${piece.y - 30}px` : "auto",
-      zIndex: isPlaced ? 10 : 5,
-      transition: "all 0.3s ease",
-    };
+    console.log("Rendering puzzle piece:", piece, "isPlaced:", isPlaced);
+    const size = 96;
+    const isWrongAnswer = wrongAnswers.has(piece.id);
+    const isDraggingThis = isDragging && draggedPiece?.id === piece.id;
+
+    const style = isPlaced
+      ? {
+          position: "absolute",
+          left: `${piece.x - size / 2}px`,
+          top: `${piece.y - size / 2}px`,
+          width: `${size}px`,
+          height: `${size}px`,
+          zIndex: 25,
+          pointerEvents: "none",
+        }
+      : {
+          position: "absolute",
+          left: `${piece.leftPct}%`,
+          top: `${piece.topPct}%`,
+          width: `${size}px`,
+          height: `${size}px`,
+          cursor: isPuzzleComplete || isWrongAnswer ? "default" : "grab",
+          zIndex: isDraggingThis ? 30 : 22,
+          opacity: isWrongAnswer ? 0.3 : 1,
+          filter: isWrongAnswer ? "grayscale(100%)" : "none",
+          transition: isDraggingThis ? "none" : "all 0.3s ease",
+        };
 
     return (
-      <div
+      <img
         key={piece.id}
-        draggable={!isPlaced && !isPuzzleComplete}
-        onDragStart={(e) => handleDragStart(e, piece)}
+        src={piece.filePath}
+        alt={piece.label}
+        draggable={!isPlaced && !isPuzzleComplete && !isWrongAnswer}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+        onDragStart={(e) => {
+          e.stopPropagation();
+          try {
+            e.dataTransfer.setData("text/plain", String(piece.id));
+          } catch {}
+          handleDragStart(e, piece);
+        }}
         onDragEnd={handleDragEnd}
-        style={pieceStyle}
-        className={`puzzle-piece ${isPlaced ? "placed" : "draggable"} ${
-          showCompletionEffect ? "animate-pulse" : ""
-        }`}
+        style={style}
+        className={
+          !isPlaced && !isWrongAnswer
+            ? "transition-transform duration-150 hover:scale-105"
+            : ""
+        }
       />
     );
   };
@@ -1227,7 +1348,21 @@ export default function GamePage2() {
             </div>
 
             {/* Right page - Puzzle area */}
-            <div className="absolute right-0 top-0 w-1/2 h-full bg-gray-100 border-l-2 border-gray-300 relative">
+            <div
+              ref={puzzleAreaRef}
+              className="absolute right-0 top-0 w-1/2 h-full bg-gray-100 border-l-2 border-gray-300 relative">
+              {/* Target area with question mark */}
+              <div
+                className="absolute rounded-full border-4 border-dashed border-gray-500 text-gray-700/80 flex items-center justify-center font-pressStart"
+                style={{
+                  left: "calc(50% - 64px)",
+                  top: "calc(52% - 64px)",
+                  width: "128px",
+                  height: "128px",
+                  fontSize: "48px",
+                }}>
+                ?
+              </div>
               {/* Placed puzzle pieces */}
               {placedPieces.map((piece) => renderPuzzlePiece(piece, true))}
 
@@ -1241,15 +1376,25 @@ export default function GamePage2() {
           </div>
         )}
 
-        {/* Available puzzle pieces */}
+        {/* Scattered sprites on canvas */}
         {gameState === "puzzle" && (
-          <div className="absolute top-4 right-4 flex flex-wrap gap-2 max-w-48">
+          <>
+            {console.log("Rendering puzzle pieces:", puzzlePieces)}
             {puzzlePieces.map((piece) => renderPuzzlePiece(piece))}
-          </div>
+          </>
         )}
 
         {/* Completion effect */}
         {renderCompletionEffect()}
+
+        {/* Correct answer feedback */}
+        {showCorrectFeedback && (
+          <div className="absolute inset-0 flex items-center justify-center z-[100]">
+            <div className="bg-bmGreen text-white text-6xl font-pressStart px-8 py-4 rounded-xl border-4 border-white shadow-2xl animate-bounce">
+              CORRECT!
+            </div>
+          </div>
+        )}
 
         {/* Game state overlay */}
         {renderGameState()}

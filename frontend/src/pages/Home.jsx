@@ -54,8 +54,12 @@ export default function Home() {
 
   const goPlay = () => {
     if (active?.id) {
-      // Navigate to the dynamic play route with the story ID
-      navigate(`/play/${active.id}`);
+      // Route story ID "2" to GamePage2 (puzzle-based), others to GamePage (question-based)
+      if (active.id === "2") {
+        navigate(`/play2/${active.id}`);
+      } else {
+        navigate(`/play/${active.id}`);
+      }
     } else {
       // Fallback for older stories or if ID is missing
       navigate("/play/beta");

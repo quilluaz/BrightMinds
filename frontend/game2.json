@@ -1,5 +1,4 @@
 {
-  "name": "Nature's Treasures: Leah's Scrapbook Quest",
   "title": "Nature's Treasures: Leah's Scrapbook Quest",
   "description": "Help Leah fix her mineral scrapbook by completing drag and drop puzzles for 9 different minerals. Learn about tanso, pilak, ginto, bakal, and more as you piece together the beautiful mineral pictures!",
   "storyOrder": 2,
@@ -43,7 +42,7 @@
             "character": "Leah",
             "state": "idle",
             "facing": "left",
-            "disappearAfter": 1.5
+            "disappearAfter": 1
           }
         },
         {
@@ -59,12 +58,12 @@
             "state": "walking",
             "animation": "move",
             "facing": "left",
-            "appearAfter": 2,
+            "appearAfter": 1.25,
             "positionX": 6,
             "positionY": -8,
             "endX": 0,
             "endY": -8,
-            "duration": 2
+            "duration": 1.5
           }
         }
       ],
@@ -83,7 +82,14 @@
         {
           "name": "bedroom_messy_background",
           "type": "background",
-          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061435/bg1_w_books_famcmx.png"
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061435/bg1_w_books_famcmx.png",
+          "metadata": {
+            "screenShake": {
+              "delay": 500,
+              "duration": 1000,
+              "intensity": 5
+            }
+          }
         },
         {
           "name": "leah_surprised",
@@ -98,26 +104,6 @@
             "state": "idle",
             "facing": "left"
           }
-        },
-        {
-          "name": "screen_shake_effect",
-          "type": "sprite",
-          "filePath": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB2aWV3Qm94PSIwIDAgMSAxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InRyYW5zcGFyZW50Ii8+PC9zdmc+",
-          "positionX": 0,
-          "positionY": 0,
-          "orderIndex": 0,
-          "isInteractive": false,
-          "metadata": {
-            "screenShake": {
-              "delay": 1000,
-              "duration": 800,
-              "intensity": 8
-            },
-            "screenShakeOnClick": {
-              "duration": 600,
-              "intensity": 6
-            }
-          }
         }
       ],
       "dialogues": [
@@ -127,6 +113,173 @@
           "orderIndex": 1
         }
       ]
+    },
+    {
+      "sceneOrder": 4,
+      "sceneText": "The Sparkly Surprise - Tanso Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_closed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759233855/book_cover_futcbt.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "screenShake": {
+              "delay": 250,
+              "duration": 1000,
+              "intensity": 5
+            },
+            "disappearAfter": 1.5
+          }
+        },
+        {
+          "name": "book_open",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759233855/book_open_qmbxgy.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "appearAfter": 1.75
+          }
+        },
+        {
+          "name": "scene1_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222140/scene1_mineral_blank_z6zedt.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "appearAfter": 2,
+            "scale": 0.5
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The left page sparkled with words about tanso, a super cool reddish-brown mineral.",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 5,
+      "sceneText": "The Sparkly Surprise - Tanso Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_open",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759233855/book_open_qmbxgy.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 2,
+          "isInteractive": false
+        },
+        {
+          "name": "scene1_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222140/scene1_mineral_blank_z6zedt.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5
+          }
+        },
+        {
+          "name": "mineral_copper",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759220317/scene1mineral_cixvve.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5
+          }
+        },
+        {
+          "name": "mineral_silver",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222037/scene2mineral_edbwrh.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5
+          }
+        },
+        {
+          "name": "mineral_gold",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222623/scene3mineral_na5f2c.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5
+          }
+        },
+        {
+          "name": "mineral_iron",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222121/scene4mineral_hhazjr.png",
+          "positionX": -2,
+          "positionY": 4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5
+          }
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Copper",
+            "assetName": "mineral_copper",
+            "isCorrect": true
+          },
+          {
+            "answerText": "Silver",
+            "assetName": "mineral_silver",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gold",
+            "assetName": "mineral_gold",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Iron",
+            "assetName": "mineral_iron",
+            "isCorrect": false
+          }
+        ]
+      }
     }
   ]
 }
