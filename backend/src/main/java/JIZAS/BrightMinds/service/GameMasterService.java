@@ -94,10 +94,9 @@ public class GameMasterService {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 User student = new User();
-                String firstName = formatter.formatCellValue(row.getCell(0)).trim();
-                String lastName = formatter.formatCellValue(row.getCell(1)).trim();
-                String email = formatter.formatCellValue(row.getCell(2)).trim();
-                String rawPassword = formatter.formatCellValue(row.getCell(3)).trim();
+                String email = formatter.formatCellValue(row.getCell(0)).trim();
+                String firstName = formatter.formatCellValue(row.getCell(1)).trim();
+                String lastName = formatter.formatCellValue(row.getCell(2)).trim();
 
                 if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty()) {
                     continue; // skip empty rows
@@ -106,8 +105,8 @@ public class GameMasterService {
                 student.setFName(firstName);
                 student.setLName(lastName);
                 student.setEmail(email);
-                student.setPassword(passwordEncoder.encode(rawPassword));
-                student.setRole(User.Role.STUDENT);
+                student.setPassword(passwordEncoder.encode("brightmindsplayer"));
+                student.setRole(User.Role.PLAYER);
                 student.setCreatedBy(gameMaster);
                 studentsToCreate.add(student);
             }
@@ -123,7 +122,7 @@ public class GameMasterService {
 
             // Header Row
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"ID", "First Name", "Last Name", "Email"};
+            String[] headers = {"Email", "First Name", "Last Name"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -133,10 +132,9 @@ public class GameMasterService {
             int rowNum = 1;
             for (User student : students) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(student.getUserId());
+                row.createCell(0).setCellValue(student.getEmail());
                 row.createCell(1).setCellValue(student.getFName());
                 row.createCell(2).setCellValue(student.getLName());
-                row.createCell(3).setCellValue(student.getEmail());
             }
 
             workbook.write(response.getOutputStream());

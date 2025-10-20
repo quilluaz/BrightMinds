@@ -1,5 +1,6 @@
 package JIZAS.BrightMinds.config;
 
+import JIZAS.BrightMinds.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,9 +24,9 @@ import java.util.Arrays;
 @EnableMethodSecurity // Enable method-level security
 public class SecurityConfig {
 
-    private final JIZAS.BrightMinds.security.JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JIZAS.BrightMinds.security.JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -46,8 +47,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        // Secure GameMaster endpoints
-                        .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
+                        // TODO: Re-enable role-based security when JWT is fully implemented
+                        // .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
+                        .requestMatchers("/api/gamemaster/**").permitAll() // Temporary for testing
                         .requestMatchers("/api/seeder/**").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/users/**").permitAll()

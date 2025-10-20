@@ -3,37 +3,57 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { logout } from "@/services/auth";
 
-const ITEMS = [
-  {
-    label: "home",
-    href: "/home",
-    ariaLabel: "Home",
-    rotation: -8,
-    hoverStyles: { bgColor: "#9c8bef", textColor: "#ffffff" },
-  },
-  {
-    label: "settings",
-    href: "/settings",
-    ariaLabel: "Settings",
-    rotation: 8,
-    hoverStyles: { bgColor: "#ff8e51", textColor: "#ffffff" },
-  },
-  {
-    label: "about",
-    href: "/about",
-    ariaLabel: "About",
-    rotation: 8,
-    hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
-  },
-  {
+const getMenuItems = () => {
+  const user = JSON.parse(localStorage.getItem("bm_user")) || {};
+  const isGameMaster = user.role === "GAMEMASTER";
+
+  const baseItems = [
+    {
+      label: "home",
+      href: "/home",
+      ariaLabel: "Home",
+      rotation: -8,
+      hoverStyles: { bgColor: "#9c8bef", textColor: "#ffffff" },
+    },
+    {
+      label: "settings",
+      href: "/settings",
+      ariaLabel: "Settings",
+      rotation: 8,
+      hoverStyles: { bgColor: "#ff8e51", textColor: "#ffffff" },
+    },
+    {
+      label: "about",
+      href: "/about",
+      ariaLabel: "About",
+      rotation: 8,
+      hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
+    },
+  ];
+
+  // Add Game Master dashboard for Game Masters
+  if (isGameMaster) {
+    baseItems.splice(1, 0, {
+      label: "dashboard",
+      href: "/gamemaster",
+      ariaLabel: "Game Master Dashboard",
+      rotation: -4,
+      hoverStyles: { bgColor: "#feb0e1", textColor: "#ffffff" },
+    });
+  }
+
+  // Add logout at the end
+  baseItems.push({
     label: "logout",
     href: "#",
     ariaLabel: "Logout",
     rotation: -4,
     hoverStyles: { bgColor: "#ef4444", textColor: "#ffffff" },
     isLogout: true,
-  },
-];
+  });
+
+  return baseItems;
+};
 
 export default function BubbleMenu({
   logo,
@@ -59,7 +79,7 @@ export default function BubbleMenu({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const menuItems = items?.length ? items : ITEMS;
+  const menuItems = items?.length ? items : getMenuItems();
 
   const containerClassName = [
     "bubble-menu",

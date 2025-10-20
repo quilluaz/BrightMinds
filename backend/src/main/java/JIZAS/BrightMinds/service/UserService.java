@@ -6,6 +6,7 @@ import JIZAS.BrightMinds.dto.UserUpdateDTO;
 import JIZAS.BrightMinds.dto.UserViewDTO;
 import JIZAS.BrightMinds.entity.User;
 import JIZAS.BrightMinds.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,9 @@ public class UserService {
 
     private final UserRepository repo;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${brightminds.teacher-secret-code}")
+    private String teacherSecretCode;
 
     public UserService(UserRepository repo, PasswordEncoder passwordEncoder) {
         this.repo = repo;
@@ -36,7 +40,15 @@ public class UserService {
         u.setLName(req.getLastName());
         u.setEmail(req.getEmail());
         u.setPassword(passwordEncoder.encode(req.getPassword()));
-        u.setRole(User.Role.STUDENT); // Set default role to STUDENT
+
+        // Teacher code is now required for all signups
+        if (req.getTeacherCode().equals(teacherSecretCode)) {
+            u.setRole(User.Role.GAMEMASTER); // Assign GAMEMASTER role
+        } else {
+            // If the code is wrong, reject the signup
+            throw new RuntimeException("Invalid teacher code provided. Only teachers can create accounts.");
+        }
+
         return toView(repo.save(u));
     }
 

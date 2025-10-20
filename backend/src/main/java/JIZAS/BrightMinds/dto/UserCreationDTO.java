@@ -24,6 +24,9 @@ public class UserCreationDTO {
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
+    @NotBlank(message = "Teacher code is required to create an account")
+    private String teacherCode;
+
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }
@@ -32,6 +35,8 @@ public class UserCreationDTO {
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+    public String getTeacherCode() { return teacherCode; }
+    public void setTeacherCode(String teacherCode) { this.teacherCode = teacherCode; }
 
     @Override
     public String toString() {

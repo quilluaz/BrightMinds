@@ -5,11 +5,12 @@ function normalizeSignup(data) {
   const lName = (data.lName ?? data.lastName ?? "").trim();
   const email = (data.email ?? "").trim();
   const password = data.password ?? "";
+  const teacherCode = data.teacherCode ?? "";
 
   if (!fName || !lName || !email || !password) {
     throw new Error("Please complete all required fields.");
   }
-  return { firstName: fName, lastName: lName, email, password };
+  return { firstName: fName, lastName: lName, email, password, teacherCode };
 }
 
 export async function login(data) {

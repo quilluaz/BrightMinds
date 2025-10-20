@@ -312,15 +312,15 @@ export default function GamePage2() {
     }
   }, [currentSceneData]);
 
-  // Render text sprite
-  const renderTextSprite = (asset) => {
+  // Render text display
+  const renderTextDisplay = (asset) => {
     if (!asset.metadata?.pageText) return null;
 
     const textConfig = asset.metadata;
     const normalizedX = ((asset.positionX ?? 0) + 10) / 20;
     const normalizedY = ((asset.positionY ?? 0) + 10) / 20;
 
-    console.log("Rendering text sprite:", {
+    console.log("Rendering text display:", {
       assetName: asset.name,
       textConfig,
       position: { x: normalizedX, y: normalizedY },
@@ -334,11 +334,9 @@ export default function GamePage2() {
           left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
           bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
           transform: "translateX(-50%)",
-          // Container constraints
-          maxWidth: asset.metadata?.pageTextMaxWidth || "300px",
-          maxHeight: asset.metadata?.pageTextMaxHeight || "200px",
-          width: "auto",
-          height: "auto",
+          // Simple container constraints
+          width: textConfig.pageTextWidth || "250px",
+          height: textConfig.pageTextHeight || "150px",
           // Text styling
           color: textConfig.pageTextColor || "#8B4513",
           fontSize: textConfig.pageTextSize || "12px",
@@ -943,10 +941,10 @@ export default function GamePage2() {
         );
       }
 
-      // Check if this is a text sprite
+      // Check if this is a text display
       if (asset.metadata?.pageText) {
-        console.log(`Asset ${asset.name} going to text sprite rendering`);
-        return renderTextSprite(asset);
+        console.log(`Asset ${asset.name} going to text display rendering`);
+        return renderTextDisplay(asset);
       }
 
       // Static sprite rendering for assets without animation, delay, or disappear

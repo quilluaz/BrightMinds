@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
 
     public enum Role {
-        STUDENT,
+        PLAYER,
         GAMEMASTER
     }
 

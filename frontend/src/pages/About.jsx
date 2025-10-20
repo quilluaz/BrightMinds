@@ -8,57 +8,45 @@ import CountUp from "@/components/ui/CountUp";
 const teamMembers = [
   {
     name: "Isaac Quilo",
-    role: "Project Manager",
-    imageUrl: "https://via.placeholder.com/150",
+    role: "Lead Developer",
+    imageUrl:
+      "https://res.cloudinary.com/dymjwplal/image/upload/v1760725835/5_roituv.png",
   },
   {
     name: "Ezekiel Saludsod",
-    role: "Lead Developer",
-    imageUrl: "https://via.placeholder.com/150",
+    role: "Team Lead",
+    imageUrl:
+      "https://res.cloudinary.com/dymjwplal/image/upload/v1760725834/4_btmwlm.png",
   },
   {
     name: "Selina Genosolango",
-    role: "UI/UX Designer",
-    imageUrl: "https://via.placeholder.com/150",
+    role: "Frontend Lead",
+    imageUrl:
+      "https://res.cloudinary.com/dymjwplal/image/upload/v1760725833/1_i8yriu.png",
   },
   {
     name: "Jeric Melocoton",
-    role: "Backend Developer",
-    imageUrl: "https://via.placeholder.com/150",
+    role: "Backend Lead",
+    imageUrl:
+      "https://res.cloudinary.com/dymjwplal/image/upload/v1760725834/3_i9hx06.png",
   },
   {
     name: "Justin Labajos",
-    role: "Frontend Developer",
-    imageUrl: "https://via.placeholder.com/150",
+    role: "Frontend and Backend Developer",
+    imageUrl:
+      "https://res.cloudinary.com/dymjwplal/image/upload/v1760725833/2_qnpvvb.png",
   },
 ];
 
-const logos = [
-  { src: "/LogoIconLight.svg" },
-  { src: "/citu_logo.svg" },
-  { src: "/jisaz_logo.svg" },
-];
+const logos = [{ src: "/citu_logo.svg" }, { src: "/jisaz_logo.svg" }];
 
 export default function About() {
   const [scrollStackCompleted, setScrollStackCompleted] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const nextSectionRef = useRef(null);
 
   const handleScrollStackComplete = () => {
     console.log("ScrollStack animation completed");
     setScrollStackCompleted(true);
-    setIsTransitioning(true);
-
-    // Smooth scroll to the next section after a brief delay
-    setTimeout(() => {
-      if (nextSectionRef.current) {
-        nextSectionRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-      setIsTransitioning(false);
-    }, 500);
+    // Removed forced scroll - let user scroll naturally
   };
 
   return (
@@ -83,77 +71,11 @@ export default function About() {
         <h2 className="text-3xl md:text-5xl font-bold font-spartan text-center mb-12">
           Why BrightMinds?
         </h2>
-        <div className="relative">
-          <ScrollStack
-            useWindowScroll={true}
-            itemDistance={120}
-            itemScale={0.05}
-            itemStackDistance={40}
-            stackPosition="30%"
-            scaleEndPosition="20%"
-            baseScale={0.8}
-            rotationAmount={2}
-            blurAmount={1}
-            onStackComplete={handleScrollStackComplete}>
-            <ScrollStackItem>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4 text-green-400">
-                  Interactive Learning
-                </h3>
-                <p className="text-lg text-gray-300">
-                  Engaging stories and interactive elements make learning fun
-                  and memorable. Our platform transforms traditional education
-                  into an immersive experience.
-                </p>
-              </div>
-            </ScrollStackItem>
 
-            <ScrollStackItem>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4 text-blue-400">
-                  Adaptive Content
-                </h3>
-                <p className="text-lg text-gray-300">
-                  Content that adapts to each student's learning pace and style.
-                  Personalized learning paths ensure optimal comprehension and
-                  retention.
-                </p>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4 text-purple-400">
-                  Progress Tracking
-                </h3>
-                <p className="text-lg text-gray-300">
-                  Monitor learning progress with detailed analytics and
-                  insights. Real-time feedback helps students and educators
-                  track improvement.
-                </p>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4 text-yellow-400">
-                  Gamified Experience
-                </h3>
-                <p className="text-lg text-gray-300">
-                  Learning becomes a game with achievements, badges, and
-                  rewards. Students stay motivated and engaged throughout their
-                  educational journey.
-                </p>
-              </div>
-            </ScrollStackItem>
-          </ScrollStack>
-        </div>
       </section>
 
       {/* Animated Stats Section */}
-      <section
-        ref={nextSectionRef}
-        className="container mx-auto px-4 py-24 text-center">
+      <section className="container mx-auto px-4 py-24 text-center">
         <h2 className="text-3xl md:text-5xl font-bold font-spartan mb-12">
           Our Journey in Numbers
         </h2>
@@ -178,13 +100,31 @@ export default function About() {
         <h2 className="text-3xl md:text-5xl font-bold font-spartan text-center mb-12">
           Meet the Minds
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {teamMembers.map((member) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {/* First row - 3 columns */}
+          {teamMembers.slice(0, 3).map((member) => (
             <ProfileCard
               key={member.name}
               showIconPattern={false}
               showUserInfo={false}
-              {...member}
+              name={member.name}
+              title={member.role}
+              avatarUrl={member.imageUrl}
+              className="about-profile-card"
+            />
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
+          {/* Second row - 2 columns */}
+          {teamMembers.slice(3, 5).map((member) => (
+            <ProfileCard
+              key={member.name}
+              showIconPattern={false}
+              showUserInfo={false}
+              name={member.name}
+              title={member.role}
+              avatarUrl={member.imageUrl}
+              className="about-profile-card"
             />
           ))}
         </div>
@@ -195,7 +135,7 @@ export default function About() {
         <h2 className="text-3xl md:text-5xl font-bold font-spartan text-center mb-12">
           Our Supporters
         </h2>
-        <LogoLoop logos={logos} />
+        <LogoLoop logos={logos} logoHeight={70} speed={80} />
       </section>
     </main>
   );

@@ -27,32 +27,32 @@ public class GameMasterController {
     private GameMasterService gameMasterService;
 
     @GetMapping("/students")
-    @PreAuthorize("hasRole('GAMEMASTER')")
-    public ResponseEntity<List<UserViewDTO>> getMyStudents() {
-        Long gameMasterId = 1L; // Placeholder for the authenticated GameMaster's ID
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public ResponseEntity<List<UserViewDTO>> getMyStudents(@RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
         return ResponseEntity.ok(gameMasterService.findStudentsByCreator(gameMasterId));
     }
 
     @PutMapping("/student/{studentId}")
-    @PreAuthorize("hasRole('GAMEMASTER')")
-    public ResponseEntity<UserViewDTO> updateStudent(@PathVariable Long studentId, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
-        Long gameMasterId = 1L; // Placeholder
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public ResponseEntity<UserViewDTO> updateStudent(@PathVariable Long studentId, @Valid @RequestBody UserUpdateDTO userUpdateDTO, @RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
         UserViewDTO updatedStudent = gameMasterService.updateStudent(gameMasterId, studentId, userUpdateDTO);
         return ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("/student/{studentId}")
-    @PreAuthorize("hasRole('GAMEMASTER')")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Long studentId) {
-        Long gameMasterId = 1L; // Placeholder
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long studentId, @RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
         gameMasterService.deleteStudent(gameMasterId, studentId);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/students/upload")
-    @PreAuthorize("hasRole('GAMEMASTER')")
-    public ResponseEntity<?> uploadStudents(@RequestParam("file") MultipartFile file) {
-        Long gameMasterId = 1L; // Placeholder
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public ResponseEntity<?> uploadStudents(@RequestParam("file") MultipartFile file, @RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
         try {
             gameMasterService.importStudentsFromExcel(file, gameMasterId);
             return ResponseEntity.ok(Map.of("message", "Students imported successfully."));
@@ -64,9 +64,9 @@ public class GameMasterController {
     }
 
     @GetMapping("/students/export")
-    @PreAuthorize("hasRole('GAMEMASTER')")
-    public void exportStudents(HttpServletResponse response) throws IOException {
-        Long gameMasterId = 1L; // Placeholder
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public void exportStudents(HttpServletResponse response, @RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) throws IOException {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
