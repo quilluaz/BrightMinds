@@ -27,6 +27,17 @@ public class SeederController {
         }
     }
 
+    @PostMapping("/badges")
+    public ResponseEntity<String> seedBadges() {
+        try {
+            seederService.seedBadges();
+            return ResponseEntity.ok("Badges have been successfully seeded.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Error seeding badges: " + e.getMessage());
+        }
+    }
+
 //    @PostMapping("/create-gamemaster")
 //    public ResponseEntity<String> createGameMaster() {
 //        try {

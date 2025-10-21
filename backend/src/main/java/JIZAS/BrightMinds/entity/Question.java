@@ -120,6 +120,6 @@ public class Question {
 
     // QuestionType enum
     public enum QuestionType {
-        MCQ, DragDrop, ID
+        MCQ, DragDrop, ID, Sequence;
     }
 }
