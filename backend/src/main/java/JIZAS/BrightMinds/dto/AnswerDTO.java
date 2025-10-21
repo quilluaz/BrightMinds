@@ -1,11 +1,17 @@
 package JIZAS.BrightMinds.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import JIZAS.BrightMinds.entity.Answer;
 
 public class AnswerDTO {
     private Integer answerId;
     private Integer questionId;
     private String answerText;
+    private String assetName;
+    
+    @JsonProperty("isCorrect")
+    private Boolean isCorrect;
+    
     private Integer dragdropPosition;
     
     // Constructors
@@ -15,6 +21,8 @@ public class AnswerDTO {
         this.answerId = answer.getAnswerId();
         this.questionId = answer.getQuestion() != null ? answer.getQuestion().getQuestionId() : null;
         this.answerText = answer.getAnswerText();
+        this.assetName = answer.getAssetName();
+        this.isCorrect = answer.isCorrect();
         this.dragdropPosition = answer.getDragdropPosition();
     }
     
@@ -58,5 +66,21 @@ public class AnswerDTO {
     
     public void setDragdropPosition(Integer dragdropPosition) {
         this.dragdropPosition = dragdropPosition;
+    }
+    
+    public String getAssetName() {
+        return assetName;
+    }
+    
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+    
+    public Boolean isCorrect() {
+        return isCorrect;
+    }
+    
+    public void setIsCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
     }
 }

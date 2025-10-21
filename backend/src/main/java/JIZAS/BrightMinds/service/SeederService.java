@@ -26,6 +26,8 @@ public class SeederService {
         story.setStoryOrder(storyDTO.getStoryOrder());
         story.setThumbnailImage(storyDTO.getThumbnailImage());
         story.setGameplayType(storyDTO.getGameplayType());
+        story.setNarrationUrl(storyDTO.getNarrationUrl());
+        story.setSequenceGraph(storyDTO.getSequenceGraph());
         story = storyRepository.save(story);
         if (storyDTO.getScenes() != null) {
             for (SceneSeedDTO sceneDTO : storyDTO.getScenes()) {
@@ -40,13 +42,25 @@ public class SeederService {
         scene.setSceneOrder(sceneDTO.getSceneOrder());
         scene.setSceneText(sceneDTO.getSceneText());
         scene = sceneRepository.save(scene);
+        
+        // Seed assets FIRST so they exist when dialogues need to reference them
         if (sceneDTO.getAssets() != null) {
-            for (AssetSeedDTO assetDTO : sceneDTO.getAssets()) { seedAsset(assetDTO, scene); }
+            for (AssetSeedDTO assetDTO : sceneDTO.getAssets()) {
+                seedAsset(assetDTO, scene);
+            }
         }
+        
+        // Then seed dialogues (which may reference assets)
         if (sceneDTO.getDialogues() != null) {
-            for (DialogueSeedDTO dialogueDTO : sceneDTO.getDialogues()) { seedDialogue(dialogueDTO, scene); }
+            for (DialogueSeedDTO dialogueDTO : sceneDTO.getDialogues()) {
+                seedDialogue(dialogueDTO, scene);
+            }
         }
-        if (sceneDTO.getQuestion() != null) { seedQuestion(sceneDTO.getQuestion(), scene); }
+        
+        // Finally seed questions
+        if (sceneDTO.getQuestion() != null) {
+            seedQuestion(sceneDTO.getQuestion(), scene);
+        }
     }
 
     private void seedAsset(AssetSeedDTO assetDTO, Scene scene) {
@@ -72,6 +86,16 @@ public class SeederService {
         dialogue.setCharacterName(dialogueDTO.getCharacterName());
         dialogue.setLineText(dialogueDTO.getLineText());
         dialogue.setOrderIndex(dialogueDTO.getOrderIndex());
+        
+        // Link voice asset if voiceover field is provided
+        if (dialogueDTO.getVoiceover() != null && !dialogueDTO.getVoiceover().isEmpty()) {
+            Asset voiceAsset = assetRepository.findByName(dialogueDTO.getVoiceover())
+                .orElse(null);
+            if (voiceAsset != null) {
+                dialogue.setVoiceAsset(voiceAsset);
+            }
+        }
+        
         dialogueRepository.save(dialogue);
     }
 
@@ -98,6 +122,7 @@ public class SeederService {
         choice.setQuestion(question);
         choice.setChoiceText(choiceDTO.getChoiceText());
         choice.setIsCorrect(choiceDTO.isCorrect());
+        choice.setChoiceImageUrl(choiceDTO.getChoiceImageUrl());
         choiceRepository.save(choice);
     }
 
@@ -105,6 +130,8 @@ public class SeederService {
         Answer answer = new Answer();
         answer.setQuestion(question);
         answer.setAnswerText(answerDTO.getAnswerText());
+        answer.setAssetName(answerDTO.getAssetName());
+        answer.setIsCorrect(answerDTO.isCorrect());
         answer.setDragdropPosition(answerDTO.getDragdropPosition());
         answerRepository.save(answer);
     }
