@@ -8,6 +8,7 @@ public class ChoiceDTO {
     private String choiceText;
     private Boolean isCorrect;
     private String choiceImageUrl;
+    private Integer orderIndex;
     
     // Constructors
     public ChoiceDTO() {}
@@ -18,6 +19,7 @@ public class ChoiceDTO {
         this.choiceText = choice.getChoiceText();
         this.isCorrect = choice.getIsCorrect();
         this.choiceImageUrl = choice.getChoiceImageUrl();
+        this.orderIndex = choice.getOrderIndex();
     }
     
     // Convert DTO to Entity
@@ -27,6 +29,7 @@ public class ChoiceDTO {
         choice.setChoiceText(this.choiceText);
         choice.setIsCorrect(this.isCorrect);
         choice.setChoiceImageUrl(this.choiceImageUrl);
+        choice.setOrderIndex(this.orderIndex);
         return choice;
     }
     
@@ -69,5 +72,13 @@ public class ChoiceDTO {
     
     public void setChoiceImageUrl(String choiceImageUrl) {
         this.choiceImageUrl = choiceImageUrl;
+    }
+    
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+    
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
     }
 }

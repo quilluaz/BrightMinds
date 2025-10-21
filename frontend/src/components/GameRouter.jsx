@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "@/lib/api";
 import GamePageMCQ from "@/pages/GamePageMCQ";
 import GamePageDnD from "@/pages/GamePageDnD";
+import GamePageSEQ from "@/pages/GamePageSEQ";
 
 export default function GameRouter() {
   const { storyId } = useParams();
@@ -69,6 +70,8 @@ export default function GameRouter() {
   switch (gameplayType) {
     case "DragDrop":
       return <GamePageDnD />;
+    case "Sequence":
+      return <GamePageSEQ />;
     case "MCQ":
     default:
       return <GamePageMCQ />;

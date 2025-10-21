@@ -17,7 +17,7 @@ import {
 export default function Home() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(null); // { id, title, img, desc }
+  const [active, setActive] = useState(null);
 
   const games = useMemo(
     () => [
@@ -31,13 +31,13 @@ export default function Home() {
         id: "2",
         title: "Nature's Treasures: Leah's Scrapbook Quest",
         img: "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
-        desc: "Discover key moments in Philippine history through an interactive, gamified storyline.",
+        desc: "Help Leah fix her mineral scrapbook by completing drag and drop puzzles for 9 different minerals. Learn about tanso, pilak, ginto, bakal, and more as you piece together the beautiful mineral pictures!",
       },
       {
         id: "3",
-        title: "Science Quest (Story 3)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
-        desc: "Learn about basic science through puzzles and branching story paths.",
+        title: "Hiraya’s Museum Adventure: A Hero’s Journey",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1761070307/Story3CoverMuseumv3_hjq8e4.png",
+        desc: "A story about Hiraya's museum adventure on National Heroes Day, where she learns about José Rizal, Tandang Sora, Lapu-Lapu, and Sultan Kudarat.",
       },
     ],
     []
