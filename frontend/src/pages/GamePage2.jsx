@@ -41,10 +41,42 @@ export default function GamePage2() {
   const [wrongAnswers, setWrongAnswers] = useState(new Set());
   const [piecePositions, setPiecePositions] = useState({});
   const [isDragging, setIsDragging] = useState(false);
+  const [mineralPositions, setMineralPositions] = useState({});
   const backgroundOverlayCountRef = useRef(0);
   const puzzleAreaRef = useRef(null);
 
+  // Default spawn positions for mineral sprites
+  const DEFAULT_POSITIONS = [
+    { x: -8.5, y: -2 },
+    { x: 5, y: -2 },
+    { x: -8.5, y: -12 },
+    { x: 5, y: -12 },
+  ];
+
   const isTransitioning = useRef(false);
+
+  // Randomly assign positions to mineral sprites
+  const assignRandomPositions = (mineralAssets) => {
+    const shuffledPositions = [...DEFAULT_POSITIONS].sort(
+      () => Math.random() - 0.5
+    );
+    const positions = {};
+
+    mineralAssets.forEach((asset, index) => {
+      if (asset.metadata?.isDraggable) {
+        const position = shuffledPositions[index % shuffledPositions.length];
+        positions[asset.name] = {
+          positionX: position.x,
+          positionY: position.y,
+          originalPositionX: asset.positionX,
+          originalPositionY: asset.positionY,
+        };
+      }
+    });
+
+    setMineralPositions(positions);
+    return positions;
+  };
 
   // Handle background overlay control from sprites
   const handleBackgroundOverlay = (show) => {
@@ -230,13 +262,13 @@ export default function GamePage2() {
   const loadStory = async () => {
     try {
       setError("");
-      const response = await api.get(`/game/story/${storyId}`);
-      console.log("Story data loaded:", response.data);
-      setScenes(response.data.scenes || []);
-      setTotalScore((response.data.scenes || []).length * 10); // Each scene is worth 10 points
+      const response = await api.get(`/stories/${storyId}/scenes`);
+      console.log("Story scenes loaded:", response.data);
+      setScenes(response.data || []);
+      setTotalScore((response.data || []).length * 10); // Each scene is worth 10 points
 
       // Count total questions in the story
-      await countTotalQuestions(response.data.scenes || []);
+      await countTotalQuestions(response.data || []);
 
       // Check for existing progress before starting
       const progress = await checkExistingProgress();
@@ -244,7 +276,7 @@ export default function GamePage2() {
       if (!progress) {
         // No existing progress, start fresh
         const firstSceneId =
-          response.data.scenes[0].sceneId || response.data.scenes[0].sceneOrder;
+          response.data[0].sceneId || response.data[0].sceneOrder;
         await loadScene(firstSceneId);
         setGameState("intro");
       }
@@ -299,6 +331,7 @@ export default function GamePage2() {
       setShowCompletionEffect(false);
       setWrongAnswers(new Set());
       setShowCorrectFeedback(false);
+      setMineralPositions({});
     }
   }, [currentSceneIndex, scenes]);
 
@@ -494,6 +527,15 @@ export default function GamePage2() {
       if (currentSceneId) {
         await loadScene(currentSceneId);
       }
+
+      // Assign random positions to mineral sprites when entering puzzle mode
+      if (currentSceneData?.assets) {
+        const mineralAssets = currentSceneData.assets.filter(
+          (asset) => asset.metadata?.isDraggable
+        );
+        assignRandomPositions(mineralAssets);
+      }
+
       setGameState("puzzle");
       return;
     }
@@ -518,25 +560,57 @@ export default function GamePage2() {
     if (!draggedPiece || isPuzzleComplete) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
-    // Check if drop is within the target "?" area on right page
-    const targetLeft = rect.width * 0.5;
-    const targetWidth = rect.width * 0.5;
-    const cx = targetLeft + targetWidth * 0.5;
-    const cy = rect.height * 0.52;
-    const radius = Math.min(targetWidth, rect.height) * 0.14;
 
-    const dx = e.clientX - (rect.left + cx);
-    const dy = e.clientY - (rect.top + cy);
-    const insideTarget = dx * dx + dy * dy <= radius * radius;
+    // Find drop target asset dynamically
+    const dropTargetAsset = currentSceneData?.assets?.find(
+      (asset) => asset.metadata?.dropTarget === true
+    );
+
+    let insideTarget = false;
+
+    if (dropTargetAsset) {
+      // Use the drop target asset's position
+      const normalizedX = ((dropTargetAsset.positionX ?? 0) + 10) / 20;
+      const normalizedY = ((dropTargetAsset.positionY ?? 0) + 10) / 20;
+      const targetX = rect.width * normalizedX;
+      const targetY = rect.height * (1 - normalizedY);
+      const radius = Math.min(rect.width, rect.height) * 0.1; // 10% of screen size
+
+      const dx = e.clientX - (rect.left + targetX);
+      const dy = e.clientY - (rect.top + targetY);
+      insideTarget = dx * dx + dy * dy <= radius * radius;
+    } else {
+      // Fallback to hardcoded position if no drop target found
+      const targetLeft = rect.width * 0.5;
+      const targetWidth = rect.width * 0.5;
+      const cx = targetLeft + targetWidth * 0.5;
+      const cy = rect.height * 0.52;
+      const radius = Math.min(targetWidth, rect.height) * 0.14;
+
+      const dx = e.clientX - (rect.left + cx);
+      const dy = e.clientY - (rect.top + cy);
+      insideTarget = dx * dx + dy * dy <= radius * radius;
+    }
 
     if (insideTarget) {
       if (draggedPiece.isCorrect) {
         // Correct answer - show success feedback
         setShowCorrectFeedback(true);
 
-        const placed = { ...draggedPiece, x: cx, y: cy };
-        setPlacedPieces([placed]);
-        setPuzzlePieces(puzzlePieces.filter((p) => p.id !== draggedPiece.id));
+        if (draggedPiece.name) {
+          // This is a mineral sprite - mark as placed
+          const placed = {
+            ...draggedPiece,
+            x: rect.width * 0.75,
+            y: rect.height * 0.48,
+          };
+          setPlacedPieces([placed]);
+        } else {
+          // This is a regular puzzle piece
+          const placed = { ...draggedPiece, x: cx, y: cy };
+          setPlacedPieces([placed]);
+          setPuzzlePieces(puzzlePieces.filter((p) => p.id !== draggedPiece.id));
+        }
 
         setIsPuzzleComplete(true);
         setShowCompletionEffect(true);
@@ -568,14 +642,31 @@ export default function GamePage2() {
         // Wrong answer - gray out the piece and snap back
         setWrongAnswers((prev) => new Set([...prev, draggedPiece.id]));
 
-        // Snap back to original position
-        setPuzzlePieces((prev) =>
-          prev.map((p) =>
-            p.id === draggedPiece.id
-              ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
-              : p
-          )
-        );
+        // Snap back to original position for mineral sprites
+        if (draggedPiece.name) {
+          // This is a mineral sprite, update its position in mineralPositions
+          setMineralPositions((prev) => ({
+            ...prev,
+            [draggedPiece.name]: {
+              ...prev[draggedPiece.name],
+              positionX:
+                prev[draggedPiece.name]?.originalPositionX ||
+                (draggedPiece.originalLeftPct / 100) * 20 - 10,
+              positionY:
+                prev[draggedPiece.name]?.originalPositionY ||
+                (draggedPiece.originalTopPct / 100) * 20 - 10,
+            },
+          }));
+        } else {
+          // This is a regular puzzle piece
+          setPuzzlePieces((prev) =>
+            prev.map((p) =>
+              p.id === draggedPiece.id
+                ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
+                : p
+            )
+          );
+        }
 
         const questionId =
           currentSceneData?.question?.questionId || currentSceneIndex + 1;
@@ -608,13 +699,30 @@ export default function GamePage2() {
       }
     } else {
       // Dropped outside target area - snap back to original position
-      setPuzzlePieces((prev) =>
-        prev.map((p) =>
-          p.id === draggedPiece.id
-            ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
-            : p
-        )
-      );
+      if (draggedPiece.name) {
+        // This is a mineral sprite, update its position in mineralPositions
+        setMineralPositions((prev) => ({
+          ...prev,
+          [draggedPiece.name]: {
+            ...prev[draggedPiece.name],
+            positionX:
+              prev[draggedPiece.name]?.originalPositionX ||
+              (draggedPiece.originalLeftPct / 100) * 20 - 10,
+            positionY:
+              prev[draggedPiece.name]?.originalPositionY ||
+              (draggedPiece.originalTopPct / 100) * 20 - 10,
+          },
+        }));
+      } else {
+        // This is a regular puzzle piece
+        setPuzzlePieces((prev) =>
+          prev.map((p) =>
+            p.id === draggedPiece.id
+              ? { ...p, leftPct: p.originalLeftPct, topPct: p.originalTopPct }
+              : p
+          )
+        );
+      }
 
       const questionId =
         currentSceneData?.question?.questionId || currentSceneIndex + 1;
@@ -914,36 +1022,56 @@ export default function GamePage2() {
         await saveSceneProgress(currentSceneId, score);
       }
 
+      // Reset puzzle-specific states for next scene
+      setPlacedPieces([]);
+      setSlotsMap({});
+      setIsPuzzleComplete(false);
+      setShowCompletionEffect(false);
+      setWrongAnswers(new Set());
+      setShowCorrectFeedback(false);
+      setIsShaking(false);
+      setShakeOffset(0);
+      setPuzzlePieces([]);
+      setMineralPositions({});
+
+      setCurrentSceneIndex(nextIndex);
+
+      // Load the next scene data
+      const nextSceneId =
+        scenes[nextIndex].sceneId || scenes[nextIndex].sceneOrder;
+      await loadScene(nextSceneId);
+
+      setGameState("playing");
+
       setTimeout(() => {
-        setCurrentSceneIndex(nextIndex);
-        setGameState("playing");
         isTransitioning.current = false;
-      }, 500);
+      }, 200);
     } else {
-      // Game completed
+      console.log("Story completed! Setting finished state");
       // Save progress for the last scene
       const currentSceneId =
         scenes[currentSceneIndex].sceneId ||
         scenes[currentSceneIndex].sceneOrder;
       await saveSceneProgress(currentSceneId, score);
 
+      setGameState("finished");
+      // Calculate the story score using frontend counters and save the attempt
+      calculateStoryScore()
+        .then(() => {
+          console.log("Story score calculated and attempt saved");
+        })
+        .catch((error) => {
+          console.error("Error calculating score or saving attempt:", error);
+        });
+      // Show score after 3 seconds or when user clicks
       setTimeout(() => {
-        setGameState("finished");
+        console.log("3 seconds passed, showing score");
+        handleScoreDisplay();
+      }, 3000);
+
+      setTimeout(() => {
         isTransitioning.current = false;
-        // Calculate the story score using frontend counters and save the attempt
-        calculateStoryScore()
-          .then(() => {
-            console.log("Story score calculated and attempt saved");
-          })
-          .catch((error) => {
-            console.error("Error calculating score or saving attempt:", error);
-          });
-        // Show score after 3 seconds or when user clicks
-        setTimeout(() => {
-          console.log("3 seconds passed, showing score");
-          handleScoreDisplay();
-        }, 3000);
-      }, 500);
+      }, 200);
     }
   };
 
@@ -953,16 +1081,8 @@ export default function GamePage2() {
 
     console.log("All assets in current scene:", currentSceneData.assets);
 
-    // Filter out mineral sprites when in puzzle mode - they should be rendered as draggable pieces instead
+    // Keep all sprites visible, including mineral sprites in puzzle mode
     const spriteAssets = currentSceneData.assets.filter((asset) => {
-      const isMineralSprite = asset.name?.startsWith("mineral_");
-      const isPuzzleMode = gameState === "puzzle";
-
-      // Skip mineral sprites in puzzle mode - they'll be rendered as draggable pieces
-      if (isMineralSprite && isPuzzleMode) {
-        return false;
-      }
-
       return (
         asset.type === "sprite" ||
         asset.metadata?.pageText ||
@@ -1040,8 +1160,22 @@ export default function GamePage2() {
 
       // Static sprite rendering for image-based assets without animation, delay, or disappear
       console.log(`Asset ${asset.name} going to static rendering`);
-      const normalizedX = ((asset.positionX ?? 0) + 10) / 20;
-      const normalizedY = ((asset.positionY ?? 0) + 10) / 20;
+
+      // Use random position if this is a draggable mineral sprite in puzzle mode
+      let positionX = asset.positionX ?? 0;
+      let positionY = asset.positionY ?? 0;
+
+      if (
+        asset.metadata?.isDraggable &&
+        gameState === "puzzle" &&
+        mineralPositions[asset.name]
+      ) {
+        positionX = mineralPositions[asset.name].positionX;
+        positionY = mineralPositions[asset.name].positionY;
+      }
+
+      const normalizedX = (positionX + 10) / 20;
+      const normalizedY = (positionY + 10) / 20;
 
       // Check if sprite should face left (flip horizontally)
       const shouldFaceLeft = asset.metadata?.facing === "left";
@@ -1082,12 +1216,22 @@ export default function GamePage2() {
         return null;
       }
 
+      // Check if this is a draggable mineral sprite
+      const isDraggableMineral =
+        asset.metadata?.isDraggable && gameState === "puzzle";
+      const isWrongAnswer = isDraggableMineral && wrongAnswers.has(asset.name);
+      const isDraggingThis = isDragging && draggedPiece?.name === asset.name;
+
       return (
         <img
           key={asset.assetId || asset.name}
           src={asset.filePath}
           alt={asset.name}
-          className="absolute object-contain"
+          className={`absolute object-contain ${
+            isDraggableMineral && !isWrongAnswer && !isPuzzleComplete
+              ? "transition-transform duration-150 hover:scale-105 cursor-grab"
+              : ""
+          }`}
           style={{
             left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
             bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
@@ -1096,7 +1240,44 @@ export default function GamePage2() {
             zIndex: (asset.orderIndex || 1) + 20,
             height: "75%",
             maxHeight: "80%",
+            opacity: isWrongAnswer ? 0.3 : 1,
+            filter: isWrongAnswer ? "grayscale(100%)" : "none",
+            transition: isDraggingThis ? "none" : "all 0.3s ease",
           }}
+          draggable={isDraggableMineral && !isPuzzleComplete && !isWrongAnswer}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+          onDragStart={(e) => {
+            if (isDraggableMineral && !isWrongAnswer && !isPuzzleComplete) {
+              e.stopPropagation();
+              try {
+                e.dataTransfer.setData("text/plain", asset.name);
+              } catch {}
+              handleDragStart(e, {
+                id: asset.name,
+                name: asset.name,
+                label: asset.name,
+                filePath: asset.filePath,
+                isCorrect:
+                  currentSceneData?.question?.answers?.find(
+                    (answer) => answer.assetName === asset.name
+                  )?.isCorrect || false,
+                leftPct: normalizedX * 100,
+                topPct: normalizedY * 100,
+                originalLeftPct: mineralPositions[asset.name]?.originalPositionX
+                  ? ((mineralPositions[asset.name].originalPositionX + 10) /
+                      20) *
+                    100
+                  : normalizedX * 100,
+                originalTopPct: mineralPositions[asset.name]?.originalPositionY
+                  ? ((mineralPositions[asset.name].originalPositionY + 10) /
+                      20) *
+                    100
+                  : normalizedY * 100,
+              });
+            }
+          }}
+          onDragEnd={handleDragEnd}
         />
       );
     });
@@ -1301,7 +1482,13 @@ export default function GamePage2() {
       <BubbleMenu />
       <div
         onClick={handleInteraction}
-        className="aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 cursor-pointer"
+        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 cursor-pointer ${
+          isShaking ? "animate-shake" : ""
+        }`}
+        style={{
+          transform: `translateX(${shakeOffset}px)`,
+          transition: "transform 0.05s ease-in-out",
+        }}
         onDragOver={handleDragOver}
         onDrop={handleDrop}>
         {/* Background */}

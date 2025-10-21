@@ -153,7 +153,7 @@
           }
         },
         {
-          "name": "scene1_mineral_unknown",
+          "name": "question1_unknown_mineral",
           "type": "sprite",
           "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222140/scene1_mineral_blank_z6zedt.png",
           "positionX": 0.5,
@@ -162,7 +162,9 @@
           "isInteractive": false,
           "metadata": {
             "appearAfter": 2,
-            "scale": 0.5
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 1
           }
         }
       ],
@@ -201,7 +203,9 @@
           "orderIndex": 2,
           "isInteractive": false,
           "metadata": {
-            "scale": 0.5
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 1
           }
         },
         {
@@ -213,7 +217,8 @@
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.5
+            "scale": 0.5,
+            "isDraggable": true
           }
         },
         {
@@ -225,7 +230,8 @@
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.5
+            "scale": 0.5,
+            "isDraggable": true
           }
         },
         {
@@ -237,7 +243,8 @@
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.5
+            "scale": 0.5,
+            "isDraggable": true
           }
         },
         {
@@ -249,7 +256,8 @@
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.5
+            "scale": 0.5,
+            "isDraggable": true
           }
         }
       ],

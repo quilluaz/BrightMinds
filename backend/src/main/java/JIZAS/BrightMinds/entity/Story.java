@@ -30,6 +30,9 @@ public class Story {
     @Column(name = "thumbnail_image")
     private String thumbnailImage;
 
+    @Column(name = "gameplay_type")
+    private String gameplayType;
+
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Scene> scenes;
@@ -86,6 +89,14 @@ public class Story {
     
     public void setThumbnailImage(String thumbnailImage) {
         this.thumbnailImage = thumbnailImage;
+    }
+    
+    public String getGameplayType() {
+        return gameplayType;
+    }
+    
+    public void setGameplayType(String gameplayType) {
+        this.gameplayType = gameplayType;
     }
     
     public List<Scene> getScenes() {
