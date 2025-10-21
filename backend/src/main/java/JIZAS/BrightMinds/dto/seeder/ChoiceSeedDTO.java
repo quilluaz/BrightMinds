@@ -3,6 +3,7 @@ package JIZAS.BrightMinds.dto.seeder;
 public class ChoiceSeedDTO {
     private String choiceText;
     private boolean isCorrect;
+    private String choiceImageUrl;
 
     // Getters and Setters
     public String getChoiceText() {
@@ -19,5 +20,13 @@ public class ChoiceSeedDTO {
 
     public void setIsCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public String getChoiceImageUrl() {
+        return choiceImageUrl;
+    }
+
+    public void setChoiceImageUrl(String choiceImageUrl) {
+        this.choiceImageUrl = choiceImageUrl;
     }
 }

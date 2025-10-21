@@ -3,6 +3,7 @@
   "description": "Help Leah fix her mineral scrapbook by completing drag and drop puzzles for 9 different minerals. Learn about tanso, pilak, ginto, bakal, and more as you piece together the beautiful mineral pictures!",
   "storyOrder": 2,
   "thumbnailImage": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
+  "gameplayType": "DragDrop",
   "scenes": [
     {
       "sceneOrder": 1,
@@ -142,10 +143,7 @@
           "metadata": {
             "appearAfter": 2,
             "scale": 0.5,
-            "dropTarget": true,
-            "questionId": 1,
-            "dropAreaWidth": 128,
-            "dropAreaHeight": 128
+            "questionId": 1
           }
         }
       ],
@@ -233,10 +231,8 @@
           "orderIndex": 4,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.5,
-            "isDraggable": true,
-            "originalPositionX": -6,
-            "originalPositionY": 2
+            "scale": 0.75,
+            "isDraggable": true
           }
         },
         {

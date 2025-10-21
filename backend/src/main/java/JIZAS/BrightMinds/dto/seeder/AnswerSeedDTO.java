@@ -2,15 +2,17 @@ package JIZAS.BrightMinds.dto.seeder;
 
 public class AnswerSeedDTO {
     private String answerText;
-    private String assetName;  // Used for linking to assets in drag-drop games (not stored in DB)
-    private Boolean isCorrect;  // Used for drag-drop games (not stored in DB)
+    private String assetName;
+    private Boolean isCorrect;
     private Integer dragdropPosition;
 
     // Constructors
     public AnswerSeedDTO() {}
 
-    public AnswerSeedDTO(String answerText, Integer dragdropPosition) {
+    public AnswerSeedDTO(String answerText, String assetName, Boolean isCorrect, Integer dragdropPosition) {
         this.answerText = answerText;
+        this.assetName = assetName;
+        this.isCorrect = isCorrect;
         this.dragdropPosition = dragdropPosition;
     }
 
@@ -23,6 +25,14 @@ public class AnswerSeedDTO {
         this.answerText = answerText;
     }
 
+    public Integer getDragdropPosition() {
+        return dragdropPosition;
+    }
+
+    public void setDragdropPosition(Integer dragdropPosition) {
+        this.dragdropPosition = dragdropPosition;
+    }
+
     public String getAssetName() {
         return assetName;
     }
@@ -31,19 +41,11 @@ public class AnswerSeedDTO {
         this.assetName = assetName;
     }
 
-    public Boolean getIsCorrect() {
+    public Boolean isCorrect() {
         return isCorrect;
     }
 
     public void setIsCorrect(Boolean isCorrect) {
         this.isCorrect = isCorrect;
-    }
-
-    public Integer getDragdropPosition() {
-        return dragdropPosition;
-    }
-
-    public void setDragdropPosition(Integer dragdropPosition) {
-        this.dragdropPosition = dragdropPosition;
     }
 }

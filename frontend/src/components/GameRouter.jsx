@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "@/lib/api";
-import GamePage from "@/pages/GamePage";
-import GamePage2 from "@/pages/GamePage2";
+import GamePageMCQ from "@/pages/GamePageMCQ";
+import GamePageDnD from "@/pages/GamePageDnD";
 
 export default function GameRouter() {
   const { storyId } = useParams();
@@ -68,9 +68,9 @@ export default function GameRouter() {
   // Route based on gameplay type
   switch (gameplayType) {
     case "DragDrop":
-      return <GamePage2 />;
+      return <GamePageDnD />;
     case "MCQ":
     default:
-      return <GamePage />;
+      return <GamePageMCQ />;
   }
 }
