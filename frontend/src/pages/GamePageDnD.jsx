@@ -359,11 +359,14 @@ export default function GamePageDnD() {
       return newScore;
     });
 
-    // 4. Increment mistakes
-    setQuestionMistakes((prev) => ({
-      ...prev,
-      [currentSceneData.sceneId]: (prev[currentSceneData.sceneId] || 0) + 1,
-    }));
+    // 4. Increment mistakes for this question
+    const questionId = currentSceneData?.question?.questionId;
+    if (questionId) {
+      setQuestionMistakes((prev) => ({
+        ...prev,
+        [questionId]: (prev[questionId] || 0) + 1,
+      }));
+    }
 
     // 5. Disable sprite (gray out, non-interactive)
     setDisabledSprites((prev) => [...prev, sprite.name]);
@@ -526,23 +529,35 @@ export default function GamePageDnD() {
       const user = JSON.parse(localStorage.getItem("bm_user"));
       if (!user?.userId) return;
 
-      await api.post("/game/save-progress", {
+      // Get sceneId from scenes array, not from currentSceneData
+      const currentSceneId =
+        scenes[currentSceneIndex].sceneId ||
+        scenes[currentSceneIndex].sceneOrder;
+
+      const progressData = {
         userId: user.userId,
         storyId: parseInt(storyId),
-        sceneId: currentSceneData.sceneId,
+        sceneId: currentSceneId,
         pointsEarned: currentQuestionScore,
-        gameStartTime: gameStartTime,
-        mistakeCount: questionMistakes[currentSceneData.sceneId] || 0,
-      });
+        gameStartTime: gameStartTime ? gameStartTime.toISOString() : null,
+        mistakeCount: mistakeCount,
+        answerStates: selectedAnswers,
+        perQuestionState: selectedAnswers,
+        questionMistakes: questionMistakes,
+      };
 
-      console.log("Progress saved successfully");
+      await api.post("/game/save-scene-progress", progressData);
+      console.log("Progress saved successfully:", {
+        sceneId: currentSceneId,
+        pointsEarned: currentQuestionScore,
+      });
     } catch (error) {
       console.error("Error saving progress:", error);
     }
   };
 
   // Advance to next scene
-  const advanceToNextScene = () => {
+  const advanceToNextScene = async () => {
     if (isTransitioning.current) {
       console.log("Already transitioning, ignoring advance request");
       return;
@@ -564,33 +579,31 @@ export default function GamePageDnD() {
       });
     } else {
       // Game finished
-      finishGame();
-      isTransitioning.current = false;
+      console.log("Story completed! Finishing game");
+      await finishGame();
+      // Don't reset isTransitioning for finished state
     }
   };
 
-  // Finish game
+  // Finish game and save attempt
   const finishGame = async () => {
-    try {
-      const user = JSON.parse(localStorage.getItem("bm_user"));
-      if (!user?.userId) return;
+    console.log("Story completed! Setting finished state");
+    setGameState("finished");
 
-      const endTime = new Date();
-
-      await api.post("/game/finish", {
-        userId: user.userId,
-        storyId: parseInt(storyId),
-        score: totalScore,
-        totalPossibleScore: totalQuestions * 4, // Max 4 points per question
-        startAttemptDate: gameStartTime,
-        endAttemptDate: endTime,
+    // Calculate the story score using frontend counters and save the attempt
+    calculateStoryScore()
+      .then(() => {
+        console.log("Story score calculated and attempt saved");
+        // Show score after 3 seconds or when user clicks
+        setTimeout(() => {
+          console.log("3 seconds passed, showing score");
+          handleScoreDisplay();
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error calculating score or saving attempt:", error);
       });
-
-      setGameState("finished");
-      console.log("Game finished with score:", totalScore);
-    } catch (error) {
-      console.error("Error finishing game:", error);
-    }
+    // Don't reset isTransitioning for finished state
   };
 
   // Fetch the story's scene list when the component mounts
@@ -1092,19 +1105,38 @@ export default function GamePageDnD() {
     const pointsPerQuestion = 4;
     const totalPossiblePoints = totalQuestions * pointsPerQuestion;
 
-    // Calculate earned points based on per-question mistakes
+    // Calculate earned points from questionMistakes (not from totalScore state due to closure issues)
+    // For each question, start with pointsPerQuestion and subtract mistakes (min 1 point)
     let earnedPoints = 0;
     let totalWrongAttempts = 0;
 
-    // For each question, calculate points based on mistakes for that specific question
-    for (let i = 1; i <= totalQuestions; i++) {
-      const mistakesForQuestion = questionMistakes[i] || 0;
+    // Get all question IDs that were answered
+    const answeredQuestionIds = Object.keys(questionMistakes).map(Number);
+
+    // For questions with recorded mistakes, calculate their points
+    answeredQuestionIds.forEach((qId) => {
+      const mistakesForQuestion = questionMistakes[qId];
       const questionPoints = Math.max(
-        0,
+        1,
         pointsPerQuestion - mistakesForQuestion
       );
       earnedPoints += questionPoints;
       totalWrongAttempts += mistakesForQuestion;
+      console.log(
+        `Question ${qId}: ${mistakesForQuestion} mistakes = ${questionPoints} points`
+      );
+    });
+
+    // For questions without any mistakes (not in questionMistakes object), they get full points
+    const questionsWithoutMistakes =
+      totalQuestions - answeredQuestionIds.length;
+    if (questionsWithoutMistakes > 0) {
+      earnedPoints += questionsWithoutMistakes * pointsPerQuestion;
+      console.log(
+        `${questionsWithoutMistakes} questions with no mistakes = ${
+          questionsWithoutMistakes * pointsPerQuestion
+        } points`
+      );
     }
 
     // Calculate percentage
@@ -1477,7 +1509,7 @@ export default function GamePageDnD() {
         );
         if (showScore && storyScore) {
           return (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-20">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-[200]">
               <div className="text-center text-white">
                 <h1 className="text-4xl font-pressStart mb-8">
                   Story Completed!
@@ -1511,7 +1543,7 @@ export default function GamePageDnD() {
           );
         } else {
           return (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-20">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-[200]">
               <div className="text-center">
                 <h1 className="text-white text-4xl font-pressStart mb-4">
                   Story Completed!
