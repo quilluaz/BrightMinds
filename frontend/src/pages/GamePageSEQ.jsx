@@ -1207,7 +1207,7 @@ export default function GamePageSEQ() {
         return (
           question && (
             <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
-              <div className="pointer-events-auto p-4 max-w-4xl w-full">
+              <div className="pointer-events-auto p-4 max-w-5xl w-full">
                 {/* Feedback Message */}
                 {feedbackMessage && (
                   <div className="text-center mb-2 bg-bmYellow/90 p-3 rounded-lg font-pressStart">
@@ -1224,7 +1224,7 @@ export default function GamePageSEQ() {
                 </p>
 
                 {/* 2x2 Tile Grid */}
-                <div className="grid grid-cols-2 gap-3 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   {shuffledChoices.map((choice) => {
                     const isLocked = lockedCorrectTiles.has(choice.choiceId);
                     const assignedPosition = tileSelections[choice.choiceId];
@@ -1246,11 +1246,19 @@ export default function GamePageSEQ() {
                         }`}>
                         {/* Image or Text Content */}
                         {choice.choiceImageUrl ? (
-                          <img
-                            src={choice.choiceImageUrl}
-                            alt={choice.choiceText}
-                            className="w-full h-full object-cover"
-                          />
+                          <>
+                            <img
+                              src={choice.choiceImageUrl}
+                              alt={choice.choiceText}
+                              className="w-full h-full object-cover"
+                            />
+                            {/* Caption Bar at Bottom */}
+                            <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-2">
+                              <p className="text-white font-pressStart text-[0.5rem] leading-tight text-center">
+                                {choice.choiceText}
+                              </p>
+                            </div>
+                          </>
                         ) : (
                           <div className="w-full h-full bg-gray-700 flex items-center justify-center p-4">
                             <p className="text-white font-pressStart text-xs text-center leading-tight">
