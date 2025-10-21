@@ -18,6 +18,7 @@ public class SeederService {
     @Autowired private ChoiceRepository choiceRepository;
     @Autowired private AnswerRepository answerRepository;
     @Autowired private SceneAssetRepository sceneAssetRepository;
+    @Autowired private BadgeRepository badgeRepository;
 
     public void seedStory(StorySeedDTO storyDTO) {
         Story story = new Story();
@@ -123,6 +124,7 @@ public class SeederService {
         choice.setChoiceText(choiceDTO.getChoiceText());
         choice.setIsCorrect(choiceDTO.isCorrect());
         choice.setChoiceImageUrl(choiceDTO.getChoiceImageUrl());
+        choice.setOrderIndex(choiceDTO.getOrderIndex());
         choiceRepository.save(choice);
     }
 
@@ -134,5 +136,32 @@ public class SeederService {
         answer.setIsCorrect(answerDTO.isCorrect());
         answer.setDragdropPosition(answerDTO.getDragdropPosition());
         answerRepository.save(answer);
+    }
+
+    public void seedBadges() {
+        // Check if badges already exist to avoid duplicates
+        if (badgeRepository.count() > 0) {
+            System.out.println("Badges already exist. Skipping seed.");
+            return;
+        }
+
+        // Create default badges with different score thresholds
+        createBadge("Bronze Star", "Complete your first game", "/badges/bronze-star.png", 1);
+        createBadge("Silver Star", "Earn 50 points", "/badges/silver-star.png", 50);
+        createBadge("Gold Star", "Earn 100 points", "/badges/gold-star.png", 100);
+        createBadge("Platinum Star", "Earn 200 points", "/badges/platinum-star.png", 200);
+        createBadge("Diamond Star", "Earn 300 points", "/badges/diamond-star.png", 300);
+        createBadge("Master Player", "Earn 500 points", "/badges/master-player.png", 500);
+        
+        System.out.println("Successfully seeded badges.");
+    }
+
+    private void createBadge(String name, String description, String imageUrl, int condition) {
+        Badge badge = new Badge();
+        badge.setName(name);
+        badge.setDescription(description);
+        badge.setImageUrl(imageUrl);
+        badge.setCondition(condition);
+        badgeRepository.save(badge);
     }
 }

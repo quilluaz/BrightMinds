@@ -4,6 +4,7 @@ public class ChoiceSeedDTO {
     private String choiceText;
     private boolean isCorrect;
     private String choiceImageUrl;
+    private Integer orderIndex;
 
     // Getters and Setters
     public String getChoiceText() {
@@ -28,5 +29,13 @@ public class ChoiceSeedDTO {
 
     public void setChoiceImageUrl(String choiceImageUrl) {
         this.choiceImageUrl = choiceImageUrl;
+    }
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
     }
 }
