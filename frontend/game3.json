@@ -1,0 +1,462 @@
+{
+    "title": "Hiraya’s Museum Adventure: A Hero’s Journey",
+    "description": "A story about Hiraya's museum adventure on National Heroes Day, where she learns about José Rizal, Tandang Sora, Lapu-Lapu, and Sultan Kudarat.",
+    "storyOrder": 3,
+    "thumbnailImage": "path/to/story3_thumbnail.png",
+    "scenes": [
+        {
+            "sceneOrder": 1,
+            "assets": [
+                {
+                    "name": "s3_thumbnail",
+                    "type": "background",
+                    "filePath": "path/to/story3_thumbnail.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "GAME",
+                    "lineText": "Click to progress the story",
+                    "orderIndex": 1
+                }
+            ]
+        },
+        {
+            "sceneOrder": 2,
+            "assets": [
+                {
+                    "name": "s3_scene2_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_living_room.png"
+                },
+                {
+                    "name": "hiraya_idle",
+                    "type": "sprite",
+                    "filePath": "path/to/hiraya_idle.png"
+                },
+                {
+                    "name": "tita_marietta_idle",
+                    "type": "sprite",
+                    "filePath": "path/to/tita_marietta_idle.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The morning sunlight peeked through the window, painting golden lines across Hiraya’s room. She stretched and smiled — today was National Heroes Day! Her Tita Marietta entered with her usual warm smile, carrying a woven bag and a sense of excitement.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "Good morning, Hiraya! Ready for an adventure?",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "HIRAYA",
+                    "lineText": "Yes, Tita! Are we really going to the Museum of Heroes?",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "We are. They say that on this day, the museum whispers the stories of our heroes to those who truly listen.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "Hiraya’s heart raced. Today wasn’t just about seeing old artifacts — it was about meeting the soul of history.",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 3,
+            "assets": [
+                {
+                    "name": "s3_scene3_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_museum_hall.png"
+                },
+                {
+                    "name": "hiraya_wonder",
+                    "type": "sprite",
+                    "filePath": "path/to/hiraya_wonder.png"
+                },
+                {
+                    "name": "tita_marietta_wonder",
+                    "type": "sprite",
+                    "filePath": "path/to/tita_marietta_wonder.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The grand Museo ng mga Bayani shimmered like it was alive. Banners of red, blue, and gold fluttered proudly. Inside, statues of heroes stood tall beneath a dome painted with the Philippine flag.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "Each wing of this museum tells the story of our heroes — from Luzon, Visayas, and Mindanao.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "As they stepped closer, the archway ahead began to shimmer — golden and alive.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "HIRAYA",
+                    "lineText": "Tita… it’s glowing.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "The museum is inviting you, anak. Go on — your journey begins.",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 4,
+            "assets": [
+                {
+                    "name": "s3_scene4_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_rizal_exhibit.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The first room glowed softly, filled with the calm strength of learning. Before them was Calamba, Laguna — José Rizal’s hometown. The pictures on the wall began to glow one by one.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "Rizal loved to learn. He studied hard and went to Europe to study medicine, wanting to help his people.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "His books, *Noli Me Tangere* and *El Filibusterismo*, opened the eyes of many to the truth and gave them hope.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "Even when he faced death in Bagumbayan, Rizal was brave. He knew his words would wake the nation.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "Now, the panel ahead shimmered, showing four glowing tiles — but they were mixed up!",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 5,
+            "assets": [
+                {
+                    "name": "s3_scene5_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_rizal_game_bg.png"
+                }
+            ],
+            "dialogues": [],
+            "question": {
+                "type": "Sequence",
+                "promptText": "Arrange the events of Rizal’s story in the correct order.",
+                "points": 5,
+                "choices": [
+                    {
+                        "choiceText": "The Writer of Freedom: He wrote Noli Me Tangere and El Filibusterismo to help open people’s eyes.",
+                        "orderIndex": 3
+                    },
+                    {
+                        "choiceText": "The Young Scholar: Rizal studied hard in Calamba and Manila, excelling in science, art, and literature.",
+                        "orderIndex": 1
+                    },
+                    {
+                        "choiceText": "The Legacy of Courage: Rizal stood firm and bravely and was executed in Bagumbayan, but his words inspired freedom.",
+                        "orderIndex": 4
+                    },
+                    {
+                        "choiceText": "The Global Student: He traveled to Europe to learn medicine and saw the world outside the Philippines.",
+                        "orderIndex": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sceneOrder": 6,
+            "assets": [
+                {
+                    "name": "s3_scene6_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_path_of_light.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "When Hiraya placed the tiles correctly, the diorama lit up. A golden light formed beneath Hiraya’s feet, leading her onward.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "The heroes of Luzon thank you, Hiraya. They’ve passed their story to you.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "HIRAYA",
+                    "lineText": "Then let’s find the others, Tita!",
+                    "orderIndex": 3
+                }
+            ]
+        },
+        {
+            "sceneOrder": 7,
+            "assets": [
+                {
+                    "name": "s3_scene7_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_tandang_sora_exhibit.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The next room looked like a quiet bahay kubo, surrounded by bamboo and lanterns.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "This is about Melchora Aquino, or Tandang Sora. She was known for helping everyone in her neighborhood.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "When the Katipunan was formed, Tandang Sora bravely let them meet in her house in secret.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "She gave food, water, and medicine to the Katipuneros, even when it was dangerous. She was like a mother to them all.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "They called her the Mother of the Revolution for her love and courage. A wooden panel shimmered, ready for the next challenge.",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 8,
+            "assets": [
+                {
+                    "name": "s3_scene8_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_tandang_sora_game_bg.png"
+                }
+            ],
+            "dialogues": [],
+            "question": {
+                "type": "Sequence",
+                "promptText": "Arrange the story of Tandang Sora in the correct order.",
+                "points": 5,
+                "choices": [
+                    {
+                        "choiceText": "The Healer of the Brave: She nursed the wounded and fed the fighters.",
+                        "orderIndex": 3
+                    },
+                    {
+                        "choiceText": "The Storekeeper: She ran a small store and helped her neighbors.",
+                        "orderIndex": 1
+                    },
+                    {
+                        "choiceText": "The Mother of the Revolution: She was called the Mother of the Revolution for her bravery and care.",
+                        "orderIndex": 4
+                    },
+                    {
+                        "choiceText": "The Secret Refuge: She turned her home into a secret meeting place for Katipuneros.",
+                        "orderIndex": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sceneOrder": 9,
+            "assets": [
+                {
+                    "name": "s3_scene9_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_lapulapu_exhibit.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The light spread outward, forming another golden path. The next hall shimmered like the sea. This was the Visayas Heroes Wing.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "Foreign ships led by Magellan came to the Philippines. He wanted the local chiefs to obey him.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "But Lapu-Lapu, the ruler of Mactan, refused to surrender. He said the island belonged to its people.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "They fought bravely with spears and shields to protect their home.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "Magellan was defeated. Lapu-Lapu became our first hero who fought for freedom. A glass podium appeared before Hiraya.",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 10,
+            "assets": [
+                {
+                    "name": "s3_scene10_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_lapulapu_game_bg.png"
+                }
+            ],
+            "dialogues": [],
+            "question": {
+                "type": "Sequence",
+                "promptText": "Arrange the events of Lapu-Lapu’s story in the right order.",
+                "points": 5,
+                "choices": [
+                    {
+                        "choiceText": "The Battle of Mactan: His warriors fought bravely against the invaders.",
+                        "orderIndex": 3
+                    },
+                    {
+                        "choiceText": "The Arrival: Foreign ships led by Magellan arrived in Mactan.",
+                        "orderIndex": 1
+                    },
+                    {
+                        "choiceText": "The Triumph of Mactan: Magellan was defeated, and freedom was protected.",
+                        "orderIndex": 4
+                    },
+                    {
+                        "choiceText": "The Defiance: Lapu-Lapu refused to surrender his island.",
+                        "orderIndex": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sceneOrder": 11,
+            "assets": [
+                {
+                    "name": "s3_scene11_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_kudarat_exhibit.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The sound of waves echoed as the exhibit lit up. The final hallway glowed with brass and gold, with beautiful Maguindanao patterns on the walls.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "That’s Sultan Muhammad Dipatuan Kudarat. He was a wise and strong leader who wanted peace for his people.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "When foreign soldiers tried to take Mindanao, Kudarat united the Muslim clans to defend their land.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "He reminded them to stay strong and never lose their freedom.",
+                    "orderIndex": 4
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "He was never conquered. His courage still lives in the people of Mindanao.",
+                    "orderIndex": 5
+                }
+            ]
+        },
+        {
+            "sceneOrder": 12,
+            "assets": [
+                {
+                    "name": "s3_scene12_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_kudarat_game_bg.png"
+                }
+            ],
+            "dialogues": [],
+            "question": {
+                "type": "Sequence",
+                "promptText": "Arrange the events of Sultan Kudarat’s story in the correct order.",
+                "points": 5,
+                "choices": [
+                    {
+                        "choiceText": "The Voice of Unity: He inspired leaders to stay proud and brave.",
+                        "orderIndex": 3
+                    },
+                    {
+                        "choiceText": "The Sultan of Maguindanao: He ruled his land with wisdom and strength.",
+                        "orderIndex": 1
+                    },
+                    {
+                        "choiceText": "The Unconquered Legacy: He was never defeated and remains a symbol of freedom.",
+                        "orderIndex": 4
+                    },
+                    {
+                        "choiceText": "The Defender of Freedom: He united the Muslim clans against the invaders.",
+                        "orderIndex": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sceneOrder": 13,
+            "assets": [
+                {
+                    "name": "s3_scene13_background",
+                    "type": "background",
+                    "filePath": "path/to/s3_museum_exit.png"
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "The brass hall glowed as all four heroes’ lights merged into one radiant beam surrounding Hiraya.",
+                    "orderIndex": 1
+                },
+                {
+                    "characterName": "TITA MARIETTA",
+                    "lineText": "You’ve listened well, Hiraya. The spirit of our heroes lives in every part of our islands — Luzon, Visayas, and Mindanao.",
+                    "orderIndex": 2
+                },
+                {
+                    "characterName": "HIRAYA",
+                    "lineText": "I’ll remember their stories, Tita. They’re part of who we are.",
+                    "orderIndex": 3
+                },
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "And as they left the museum, the sunlight felt warmer — like the glow of every hero shining inside her heart.",
+                    "orderIndex": 4
+                }
+            ]
+        }
+    ]
+}

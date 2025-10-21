@@ -129,11 +129,7 @@
                     "isInteractive": false,
                     "metadata": {
                         "appearAfter": 2,
-                        "delay": 0.5,
-
-
-"triggerBackgroundOverlay": true
-
+                        "delay": 0.5
                     }
                 }
             ],
@@ -304,8 +300,7 @@
                     "isInteractive": false,
                     "metadata": {
                         "appearAfter": 2.5,
-                        "delay": 0.5,
-"triggerBackgroundOverlay": true
+                        "delay": 0.5
                     }
                 }
             ],
@@ -436,9 +431,7 @@
                     "isInteractive": false,
                     "metadata": {
                         "appearAfter": 2.5,
-                        "delay": 0.5,
-
-"triggerBackgroundOverlay": true
+                        "delay": 0.5
                     }
                 }
             ],
@@ -576,9 +569,7 @@
                     "isInteractive": false,
                     "metadata": {
                         "appearAfter": 2.5,
-                        "delay": 0.5,
-
-"triggerBackgroundOverlay": true
+                        "delay": 0.5
                     }
                 }
             ],
@@ -659,21 +650,6 @@
                     "name": "lita_voice_s5_1",
                     "type": "audio",
                     "filePath": ""
-                },
-                
-                {
-                    "name": "lita_thinking",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
-                    "positionX": -6,
-                    "positionY": -9,
-                    "orderIndex": 1,
-                    "appearAfter": 0.5,
-                    "isInteractive": false,
-                    "metadata": {
-                        "character": "Lita",
-                        "state": "thinking"
-                    }
                 }
             ],
             "dialogues": [
@@ -699,8 +675,7 @@
                     "type": "background",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/Story1_Scene5_jrnle0.png"
                 },
-                
-{
+                {
                     "name": "liam_idle",
                     "type": "sprite",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
@@ -711,36 +686,7 @@
                     "metadata": {
                         "character": "Liam",
                         "state": "walking",
-                        "disappearAfter": 8
-                    }
-                },
-                
-                {
-                    "name": "astral_spirit",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562637/SpectralWind-Gif-unscreen_ipwy3q.gif",
-                    "positionX": 0,
-                    "positionY": -5,
-                    "orderIndex": 4,
-                    "isInteractive": false,
-                    "metadata": {
-                        "appearAfter": 4,
-                        "disappearAfter": 8
-                          }
-                },
-                {
-                    "name": "kapatagan_correct",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897691/s1_correct_ans5_u0jfuu.png",
-                    "positionX": 0,
-                    "positionY": -5,
-                    "orderIndex": 4,
-                    "isInteractive": false,
-                    "metadata": {
-                        "appearAfter": 10,
-                        "delay": 0.5,
-
-                    "triggerBackgroundOverlay": true
+                        "disappearAfter": 2
                     }
                 }
             ],
@@ -751,7 +697,6 @@
                     "orderIndex": 1
                 }
             ],
-
             "question": {
                 "type": "MCQ",
                 "promptText": "The flat land where a village is built is called a?",
@@ -804,7 +749,6 @@
                         "duration": 2
                     }
                 }
-            
             ],
             "dialogues": [
                 {
@@ -852,7 +796,7 @@
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
                     "positionX": -6,
                     "positionY": -9,
-                    "orderIndex": 2,
+                    "orderIndex": 1,
                     "isInteractive": false,
                     "metadata": {
                         "character": "Liam",
@@ -886,23 +830,21 @@
                 {
                     "name": "lawa_correct",
                     "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760521594/miniature_lawa_vmrpab.png",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897716/s1_correct_ans6_flkc9y.png",
                     "positionX": 0,
                     "positionY": -5,
                     "orderIndex": 4,
                     "isInteractive": false,
                     "metadata": {
-                        "appearAfter": 1.5,
-                        "delay": 0.5,
-
-"triggerBackgroundOverlay": true
+                        "appearAfter": 5,
+                        "delay": 0.5
                     }
                 }
             ],
             "dialogues": [
                 {
                     "characterName": "NARRATOR",
-                    "lineText": "The lake’s surface rippled, revealing an image of Liam failing his village. He hesitated, then touched the water, declaring his resolve to save his people.",
+                    "lineText": "The lake’s surface rippled, revealing an image of Liam failing his village. He hesitated, then touched the water, declaring his resolve to save his people. The lake shimmered, and a gentle rain began to fall, filling the lawa further. The amulet pulsed in approval.",
                     "orderIndex": 1
                 }
             ],
@@ -955,25 +897,9 @@
                         "positionY": -9,
                         "endX": 0,
                         "endY": -9,
-                        "duration": 2,
-                        "disappearAfter": 2
-                    }
-                    },
-                {
-                    "name": "shimmering_figure",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562776/shimmer-f1-unscreen_panqtx.gif",
-                    "positionX": 0,
-                    "positionY": -6,
-                    "orderIndex": 2,
-                    "isInteractive": false,
-                    "metadata": {
-                        "appearAfter": 3,
-                        "disappearAfter": 5
-                            
+                        "duration": 2
                     }
                 }
-
             ],
             "dialogues": [
                 {
@@ -1045,46 +971,15 @@
                 {
                     "name": "liam_idle",
                     "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761056534/LiamRaisingTheAmulet_wdb3fa.png",
-                    "positionX": -3,
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                    "positionX": 0,
                     "positionY": -9,
                     "orderIndex": 2,
                     "isInteractive": false,
                     "metadata": {
                         "character": "Liam",
-                        "state": "idle",
-                        "disappearAfter": 3,
-                        "appearAfter": 1
-                    }
-
-                },
-                {
-                    "name": "seashell",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/seashell_pbbclz.png",
-                    "positionX": 2,
-                    "positionY": -9,
-                    "orderIndex": 3,
-                    "isInteractive": false,
-                    "metadata": {
-                        "disappearAfter": 3,
-                        "appearAfter": 1
-                    }
-                },
-
-                {
-                    "name": "coast_correct",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897716/s1_correct_ans6_flkc9y.png",
-                    "positionX": 0,
-                    "positionY": -5,
-                    "orderIndex": 4,
-                    "isInteractive": false,
-                    "metadata": {
-                        "appearAfter": 4,
-                        "delay": 0.5,
-
-"triggerBackgroundOverlay": true
+                        "state": "walking",
+                        "disappearAfter": 2
                     }
                 }
             ],
@@ -1093,7 +988,29 @@
                     "characterName": "NARRATOR",
                     "lineText": "Liam raised the amulet, its light piercing the darkening sky. He spoke of his village’s reliance on the sea, and the waves stilled. The spirit gifted him a seashell, glowing faintly, as a token of the baybayin’s trust.",
                     "orderIndex": 1
-                }                    
+                },
+                {
+                    "name": "shell",
+                    "type": "sprite",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/seashell_pbbclz.png",
+                    "positionX": 0,
+                    "positionY": -9,
+                    "orderIndex": 3,
+                    "isInteractive": false
+                },
+                {
+                    "name": "coast_correct",
+                    "type": "sprite",
+                    "filePath": "",
+                    "positionX": 0,
+                    "positionY": -5,
+                    "orderIndex": 4,
+                    "isInteractive": false,
+                    "metadata": {
+                        "appearAfter": 2.5,
+                        "delay": 0.5
+                    }
+                }
             ],
             "question": {
                 "type": "MCQ",
@@ -1137,43 +1054,20 @@
                     "name": "lighthouse",
                     "type": "sprite",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635285/lighthouse_u4dbkq.png",
-                     "positionX": 0,
+                    "positionX": 6,
                     "positionY": -9,
-                    "orderIndex": 3,
-                    "isInteractive": false,
-                    "metadata": {
-                        "disappearAfter": 6
-                        
-                    }
-                },
-                {
-                    "name": "lighthouse_spirit",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760530119/LighthouseEntity-unscreen_c9n4dw.gif",
-                     "positionX": 2.5,
-                    "positionY": -7,
-                    "orderIndex": 3,
-                    "isInteractive": false,
-                    "metadata": {
-                        "disappearAfter": 11,
-                        "appearAfter": 6
-                        
-                    }
+                    "orderIndex": 2,
+                    "isInteractive": false
                 },
                 {
                     "name": "ship",
                     "type": "sprite",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635282/sailboat_vg4n3k.png",
-                    "positionX": 6,
+                    "positionX": 0,
                     "positionY": -9,
-                    "orderIndex": 4,
-                    "isInteractive": false,
-                    "metadata": {
-                        "disappearAfter": 6
-                        
-                    }
+                    "orderIndex": 3,
+                    "isInteractive": false
                 },
-                
                 {
                     "name": "liam_idle",
                     "type": "sprite",
@@ -1216,17 +1110,44 @@
                     }
                 },
                 {
+                    "name": "lighthouse",
+                    "type": "sprite",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635285/lighthouse_u4dbkq.png",
+                    "positionX": 6,
+                    "positionY": -9,
+                    "orderIndex": 2,
+                    "isInteractive": false,
+                    "metadata": {
+                        "character": "Lighthouse",
+                        "state": "idle",
+                        "disappearAfter": 4
+                    }
+                },
+                {
+                    "name": "bay_spirit",
+                    "type": "sprite",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639482/SpectralWind_dw2aiy.gif",
+                    "positionX": 0,
+                    "positionY": -6,
+                    "orderIndex": 3,
+                    "isInteractive": false,
+                    "metadata": {
+                        "character": "bay_spirit",
+                        "state": "idle",
+                        "disappearAfter": 4
+                    }
+                },
+                {
                     "name": "bay_correct",
                     "type": "sprite",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897730/s1_correct_ans7_snanij.png",
                     "positionX": 0,
-                    "positionY": -6,
+                    "positionY": -5,
                     "orderIndex": 4,
                     "isInteractive": false,
                     "metadata": {
-                        "appearAfter": 2.5,
-                        "delay": 0.5,
-"triggerBackgroundOverlay": true
+                        "appearAfter": 4.5,
+                        "delay": 0.5
                     }
                 },
                 {
@@ -1238,7 +1159,7 @@
             "dialogues": [
                 {
                     "characterName": "LITA",
-                    "lineText": "The look shelters ships. Balance its tides by offering a token of the land.",
+                    "lineText": "The look shelters ships, Liam. Balance its tides by offering a token of the land.",
                     "orderIndex": 1,
                     "voiceover": "lita_voice_s8_1"
                 }
@@ -1274,13 +1195,13 @@
                 {
                     "name": "s1_scene8_look_background_alt2",
                     "type": "background",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/s1_scene7_b8wr9v.png"
+                    "filePath": "https://res.cloudinary.com/placeholder/image/upload/look_background_alt2.png"
                 },
                 {
                     "name": "seashell",
                     "type": "sprite",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/seashell_pbbclz.png",
-                    "positionX": 0,
+                    "positionX": -3,
                     "positionY": -5,
                     "orderIndex": 4,
                     "isInteractive": false
@@ -1315,42 +1236,12 @@
                     "name": "s1_scene9_karagatan_background",
                     "type": "background",
                     "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635281/s1_scene9_rkvlnl.jpg"
-                },
-                {
-                    "name": "liam_guided",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760724032/liam_w_amulet_m0ugre.png",
-                    "positionX": -5,
-                    "positionY": -9,
-                    "orderIndex": 1,
-                    "isInteractive": false,
-                    "metadata": {
-                        "character": "Liam",
-                        "state": "idle",
-                        "appearAfter": 2,
-                        "disappearAfter": 10
-                    }
-                },
-                {
-                    "name": "towering_deity",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562756/toweringdeity-unscreen_oskept.gif",
-                    "positionX": 4,
-                    "positionY": -5,
-                    "orderIndex": 2,
-                    "isInteractive": false,
-                    "metadata": {
-                        "character": "ToweringDeity",
-                        "state": "idle",
-                        "appearAfter": 3,
-                        "disappearAfter": 10
-                    }
                 }
             ],
             "dialogues": [
                 {
                     "characterName": "NARRATOR",
-                    "lineText": "The amulet’s light blazed, guiding Liam to the edge of the baybayin which showed the vastness of the karagatan, the vast ocean stretching to the horizon. The village’s river, still dry, depended on this final test. The ocean’s spirit rose as a towering wave, its voice echoing with ancient power.",
+                    "lineText": "The amulet’s light blazed, guiding Liam to the edge of the karagatan, the vast ocean stretching to the horizon. The village’s river, still dry, depended on this final test. The ocean’s spirit rose as a towering wave, its voice echoing with ancient power.",
                     "orderIndex": 1
                 }
             ]
@@ -1368,36 +1259,6 @@
                     "name": "lita_voice_s9_1",
                     "type": "audio",
                     "filePath": ""
-                },
-                {
-                    "name": "lita_thinking",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
-                    "positionX": -3,
-                    "positionY": -9,
-                    "orderIndex": 1,
-                    "isInteractive": false,
-                    "metadata": {
-                        "character": "Lita",
-                        "state": "thinking",
-                        "disappearAfter": 3
-                    }
-                }
-                ,
-                {
-                    "name": "dagat_correct",
-                    "type": "sprite",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897753/s1_correct_ans9_mrxuiy.png",
-                    "positionX": -1,
-                    "positionY": -5,
-                    "orderIndex": 4,
-                    "isInteractive": false,
-                    "metadata": {
-                        "appearAfter": 3,
-                        "delay": 0.5,
-                        "scale":0.8,
-"triggerBackgroundOverlay": true
-                    }
                 }
             ],
             "dialogues": [
@@ -1406,6 +1267,37 @@
                     "lineText": "The karagatan is the lifeblood of the world, Liam. Offer it your courage to awaken the river’s source.",
                     "orderIndex": 1,
                     "voiceover": "lita_voice_s9_1"
+                }
+            ]
+        },
+        {
+            "sceneOrder": 25,
+            "sceneText": "Scene 9, Dialogue 3: The Karagatan’s Final Trial",
+            "assets": [
+                {
+                    "name": "s1_scene9_karagatan_background",
+                    "type": "background",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635281/s1_scene9_rkvlnl.jpg"
+                },
+                                {
+                    "name": "dagat_correct",
+                    "type": "sprite",
+                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897753/s1_correct_ans9_mrxuiy.png",
+                    "positionX": 0,
+                    "positionY": -5,
+                    "orderIndex": 4,
+                    "isInteractive": false,
+                    "metadata": {
+                        "appearAfter": 4.5,
+                        "delay": 0.5
+                    }
+                }
+            ],
+            "dialogues": [
+                {
+                    "characterName": "NARRATOR",
+                    "lineText": "Liam stepped into the surf, holding the amulet aloft. He spoke of his journey—his fears, his resolve, and his love for his village. The amulet erupted in light, merging with the ocean. A distant rumble signaled the river’s revival, its waters flowing once more. As Liam returned to the village, the people cheered, and the amulet’s glow faded, its purpose fulfilled.",
+                    "orderIndex": 1
                 }
             ],
             "question": {
@@ -1431,25 +1323,6 @@
                     }
                 ]
             }
-        },
-        {
-            "sceneOrder": 26,
-            "sceneText": "Scene 9, Dialogue 3: The Karagatan’s Final Trial",
-            "assets": [
-                {
-                    "name": "s1lastscene",
-                    "type": "background",
-                    "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760986802/LiamRaisingTheOcean_h0hs73.png"
-                }
-            ],
-            "dialogues": [
-                {
-                    "characterName": "NARRATOR",
-                    "lineText": "Liam stepped into the surf, holding the amulet aloft. He spoke of his journey—his fears, his resolve, and his love for his village. The amulet erupted in light, merging with the ocean. A distant rumble signaled the river’s revival, its waters flowing once more. As Liam returned to the village, the people cheered, and the amulet’s glow faded, its purpose fulfilled.",
-                    "orderIndex": 1
-                }
-            ]
-            
         }
     ]
 }

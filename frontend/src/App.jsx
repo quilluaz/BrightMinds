@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "@/pages/Landing";
 import Home from "@/pages/Home";
-import GamePage from "@/pages/GamePage";
-import GamePage2 from "@/pages/GamePage2";
+import GameRouter from "@/components/GameRouter";
 import About from "@/pages/About";
 import Settings from "@/pages/Settings";
 import GameMasterDashboard from "@/pages/GameMasterDashboard";
@@ -28,15 +27,7 @@ function App() {
           path="/play/:storyId"
           element={
             <ProtectedRoute>
-              <GamePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/play2/:storyId"
-          element={
-            <ProtectedRoute>
-              <GamePage2 />
+              <GameRouter />
             </ProtectedRoute>
           }
         />

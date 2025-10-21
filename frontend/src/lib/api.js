@@ -8,8 +8,10 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const path = config.url || "";
   const isAuthEndpoint = typeof path === "string" && /\/auth\//.test(path);
+  const isUserRegistration =
+    typeof path === "string" && path === "/users" && config.method === "post";
 
-  if (!isAuthEndpoint) {
+  if (!isAuthEndpoint && !isUserRegistration) {
     const token = localStorage.getItem("bm_token");
     if (token) config.headers.Authorization = `Bearer ${token}`;
   }

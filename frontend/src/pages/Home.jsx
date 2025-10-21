@@ -54,12 +54,9 @@ export default function Home() {
 
   const goPlay = () => {
     if (active?.id) {
-      // Route story ID "2" to GamePage2 (puzzle-based), others to GamePage (question-based)
-      if (active.id === "2") {
-        navigate(`/play2/${active.id}`);
-      } else {
-        navigate(`/play/${active.id}`);
-      }
+      // All stories now use the unified /play/:storyId route
+      // GameRouter component will handle conditional rendering based on gameplayType
+      navigate(`/play/${active.id}`);
     } else {
       // Fallback for older stories or if ID is missing
       navigate("/play/beta");
