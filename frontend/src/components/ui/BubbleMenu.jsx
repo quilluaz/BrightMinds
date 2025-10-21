@@ -6,6 +6,7 @@ import { logout } from "@/services/auth";
 const getMenuItems = () => {
   const user = JSON.parse(localStorage.getItem("bm_user")) || {};
   const isGameMaster = user.role === "GAMEMASTER";
+  const isPlayer = user.role === "PLAYER";
 
   const baseItems = [
     {
@@ -31,7 +32,7 @@ const getMenuItems = () => {
     },
   ];
 
-  // Add Game Master dashboard for Game Masters
+  // Add dashboard for Game Masters
   if (isGameMaster) {
     baseItems.splice(1, 0, {
       label: "dashboard",
@@ -39,6 +40,17 @@ const getMenuItems = () => {
       ariaLabel: "Game Master Dashboard",
       rotation: -4,
       hoverStyles: { bgColor: "#feb0e1", textColor: "#ffffff" },
+    });
+  }
+
+  // Add dashboard for Players
+  if (isPlayer) {
+    baseItems.splice(1, 0, {
+      label: "dashboard",
+      href: "/dashboard",
+      ariaLabel: "Player Dashboard",
+      rotation: -4,
+      hoverStyles: { bgColor: "#3ea66b", textColor: "#ffffff" },
     });
   }
 

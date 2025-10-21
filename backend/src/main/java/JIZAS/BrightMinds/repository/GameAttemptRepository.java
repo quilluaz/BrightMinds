@@ -83,4 +83,22 @@ public interface GameAttemptRepository extends JpaRepository<GameAttempt, Long> 
     Page<GameAttempt> findByUserWithOptionalStoryFilter(@Param("userId") Long userId, 
                                                        @Param("storyId") Integer storyId, 
                                                        Pageable pageable);
+
+    /**
+     * Count distinct stories completed by a user
+     */
+    @Query("SELECT COUNT(DISTINCT ga.story.storyId) FROM GameAttempt ga WHERE ga.user.userId = :userId")
+    long countDistinctStoriesByUser(@Param("userId") Long userId);
+
+    /**
+     * Count perfect scores (100%) by a user
+     */
+    @Query("SELECT COUNT(ga) FROM GameAttempt ga WHERE ga.user.userId = :userId AND ga.percentage >= 100.0")
+    long countPerfectScoresByUser(@Param("userId") Long userId);
+
+    /**
+     * Count excellent scores (95%+) by a user
+     */
+    @Query("SELECT COUNT(ga) FROM GameAttempt ga WHERE ga.user.userId = :userId AND ga.percentage >= 95.0")
+    long countExcellentScoresByUser(@Param("userId") Long userId);
 }
