@@ -5,6 +5,7 @@ import GameRouter from "@/components/GameRouter";
 import About from "@/pages/About";
 import Settings from "@/pages/Settings";
 import GameMasterDashboard from "@/pages/GameMasterDashboard";
+import PlayerDashboard from "@/pages/PlayerDashboard";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 function App() {
@@ -43,6 +44,16 @@ function App() {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Player Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["PLAYER"]}>
+              <PlayerDashboard />
             </ProtectedRoute>
           }
         />

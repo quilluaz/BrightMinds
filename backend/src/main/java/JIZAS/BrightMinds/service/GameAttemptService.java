@@ -35,6 +35,9 @@ public class GameAttemptService {
     @Autowired
     private ProgressService progressService;
 
+    @Autowired
+    private BadgeAwardService badgeAwardService;
+
     /**
      * Save a new game attempt
      */
@@ -81,6 +84,10 @@ public class GameAttemptService {
         System.out.println("GameAttemptService: Attempting to save to database...");
         GameAttempt savedAttempt = gameAttemptRepository.save(attempt);
         System.out.println("GameAttemptService: Successfully saved attempt with ID: " + savedAttempt.getAttemptId());
+        
+        // Award badges based on performance
+        System.out.println("GameAttemptService: Checking for badge awards...");
+        badgeAwardService.awardBadgesForGameCompletion(user, story, score, totalPossibleScore, percentage);
         
         // Delete the progress after successful game attempt storage to save data
         System.out.println("GameAttemptService: Deleting progress for user " + userId + " and story " + storyId);
@@ -248,4 +255,5 @@ public class GameAttemptService {
             this.averageScore = averageScore;
         }
     }
+
 }
