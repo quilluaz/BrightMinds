@@ -50,8 +50,8 @@ export default function About() {
   };
 
   return (
-    <main className="relative text-white bg-bmGreen" style={{ zIndex: 1 }}>
-      <BubbleMenu />
+    <main className="relative text-white bg-bmGreen">
+      <BubbleMenu useFixedPosition={true} />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-24 text-center">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "@/lib/api";
 import BubbleMenu from "@/components/ui/BubbleMenu";
 import AnimatedSprite from "@/components/ui/AnimatedSprite";
@@ -9,6 +9,7 @@ import VisionTransition from "@/components/ui/VisionTransition";
 
 export default function GamePageSEQ() {
   const { storyId } = useParams();
+  const navigate = useNavigate();
 
   const [gameState, setGameState] = useState("loading"); // loading, intro, playing, question, finished, progress-check
   const [scenes, setScenes] = useState([]);
@@ -1166,14 +1167,21 @@ export default function GamePageSEQ() {
                     {storyScore.totalQuestions} questions •{" "}
                     {storyScore.wrongAttempts} wrong attempts
                   </div>
-                  <button
-                    onClick={() => {
-                      setShowMatchHistory(true);
-                      fetchMatchHistory();
-                    }}
-                    className="mt-4 bg-bmYellow text-black px-4 py-2 rounded font-pressStart hover:bg-yellow-400 transition-colors">
-                    View Match History
-                  </button>
+                  <div className="mt-4 flex gap-3">
+                    <button
+                      onClick={() => {
+                        setShowMatchHistory(true);
+                        fetchMatchHistory();
+                      }}
+                      className="bg-bmYellow text-black px-4 py-2 rounded font-pressStart hover:bg-yellow-400 transition-colors">
+                      View Match History
+                    </button>
+                    <button
+                      onClick={() => navigate("/home")}
+                      className="bg-bmGreen text-white px-4 py-2 rounded font-pressStart hover:bg-green-600 transition-colors">
+                      Back to Home
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
