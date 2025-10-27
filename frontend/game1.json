@@ -43,6 +43,11 @@
             "character": "Liam",
             "state": "idle"
           }
+        },
+        {
+          "name": "narrator_voice_s1_1",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761578675/s1_narrator1_qs9g8k.wav"
         }
       ],
       "dialogues": [

@@ -12,6 +12,7 @@ public class DialogueDTO {
     private String characterName;
     private String lineText;
     private Long voiceAssetId;
+    private String voiceover;
     private Integer orderIndex;
     private Map<String, Object> metadata;
 
@@ -23,6 +24,7 @@ public class DialogueDTO {
         this.characterName = d.getCharacterName();
         this.lineText = d.getLineText();
         this.voiceAssetId = d.getVoiceAsset() != null ? d.getVoiceAsset().getAssetId() : null;
+        this.voiceover = d.getVoiceAsset() != null ? d.getVoiceAsset().getName() : null;
         this.orderIndex = d.getOrderIndex();
         this.metadata = d.getMetadata();
     }
@@ -49,6 +51,8 @@ public class DialogueDTO {
     public void setLineText(String lineText) { this.lineText = lineText; }
     public Long getVoiceAssetId() { return voiceAssetId; }
     public void setVoiceAssetId(Long voiceAssetId) { this.voiceAssetId = voiceAssetId; }
+    public String getVoiceover() { return voiceover; }
+    public void setVoiceover(String voiceover) { this.voiceover = voiceover; }
     public Integer getOrderIndex() { return orderIndex; }
     public void setOrderIndex(Integer orderIndex) { this.orderIndex = orderIndex; }
     public Map<String, Object> getMetadata() { return metadata; }

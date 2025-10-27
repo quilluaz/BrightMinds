@@ -65,6 +65,12 @@ public class SeederService {
     }
 
     private void seedAsset(AssetSeedDTO assetDTO, Scene scene) {
+        // Skip assets with empty file paths (especially audio assets that don't have URLs yet)
+        if (assetDTO.getFilePath() == null || assetDTO.getFilePath().trim().isEmpty()) {
+            System.out.println("Skipping asset with empty file path: " + assetDTO.getName());
+            return;
+        }
+        
         Asset asset = new Asset();
         asset.setName(assetDTO.getName());
         asset.setType(assetDTO.getType());
@@ -94,6 +100,9 @@ public class SeederService {
                 .orElse(null);
             if (voiceAsset != null) {
                 dialogue.setVoiceAsset(voiceAsset);
+            } else {
+                System.out.println("Warning: Voiceover asset not found: " + dialogueDTO.getVoiceover() + 
+                                 " for dialogue: " + dialogueDTO.getCharacterName());
             }
         }
         
