@@ -65,11 +65,22 @@ public class SeederService {
     }
 
     private void seedAsset(AssetSeedDTO assetDTO, Scene scene) {
-        Asset asset = new Asset();
-        asset.setName(assetDTO.getName());
-        asset.setType(assetDTO.getType());
-        asset.setFilePath(assetDTO.getFilePath());
-        asset = assetRepository.save(asset);
+
+        if (assetDTO.getFilePath() == null || assetDTO.getFilePath().trim().isEmpty()) {
+            System.out.println("Skipping asset with empty file path: " + assetDTO.getName());
+            return;
+        }
+
+        Asset asset = assetRepository.findByName(assetDTO.getName())
+                .orElseGet(() -> {
+                    Asset newAsset = new Asset();
+                    newAsset.setName(assetDTO.getName());
+                    newAsset.setType(assetDTO.getType());
+                    newAsset.setFilePath(assetDTO.getFilePath());
+                    // The new asset is saved to the database here
+                    return assetRepository.save(newAsset);
+                });
+
         SceneAsset sceneAsset = new SceneAsset();
         sceneAsset.setScene(scene);
         sceneAsset.setAsset(asset);
@@ -94,6 +105,9 @@ public class SeederService {
                 .orElse(null);
             if (voiceAsset != null) {
                 dialogue.setVoiceAsset(voiceAsset);
+            } else {
+                System.out.println("Warning: Voiceover asset not found: " + dialogueDTO.getVoiceover() + 
+                                 " for dialogue: " + dialogueDTO.getCharacterName());
             }
         }
         
