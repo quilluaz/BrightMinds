@@ -7,6 +7,7 @@ import AnimatedSprite from "@/components/ui/AnimatedSprite";
 import DelayedSprite from "@/components/ui/DelayedSprite";
 import DisappearingSprite from "@/components/ui/DisappearingSprite";
 import VisionTransition from "@/components/ui/VisionTransition";
+import { Howl, Howler } from "howler";
 
 // Hardcoded positions for draggable mineral sprites
 const DEFAULT_CHOICE_POSITIONS = [
@@ -47,13 +48,13 @@ export default function GamePageDnD() {
   const [isTyping, setIsTyping] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [isTextComplete, setIsTextComplete] = useState(false);
-  const [currentAudio, setCurrentAudio] = useState(null);
   const [isMuted, setIsMuted] = useState(() => {
     return localStorage.getItem("bm_audio_muted") === "true";
   });
-  const audioRef = useRef(null);
   const typingIntervalRef = useRef(null);
   const preloadedAssetsRef = useRef({});
+  const isTransitioning = useRef(false);
+  const soundRef = useRef(null);
 
   // Drag-and-drop specific state
   const [draggableSprites, setDraggableSprites] = useState([]);
@@ -65,7 +66,6 @@ export default function GamePageDnD() {
   const [draggedSprite, setDraggedSprite] = useState(null);
   const [correctSprite, setCorrectSprite] = useState(null);
 
-  const isTransitioning = useRef(false);
   const containerRef = useRef(null);
 
   // Mute toggle function
@@ -73,10 +73,7 @@ export default function GamePageDnD() {
     const newMuted = !isMuted;
     setIsMuted(newMuted);
     localStorage.setItem("bm_audio_muted", newMuted.toString());
-
-    if (audioRef.current) {
-      audioRef.current.muted = newMuted;
-    }
+    Howler.mute(newMuted);
   };
 
   // Asset preloading function
@@ -96,11 +93,16 @@ export default function GamePageDnD() {
             img.src = asset.filePath;
             preloadedAssetsRef.current[key] = img;
           } else if (asset.type === "audio") {
-            const audio = new Audio();
-            audio.src = asset.filePath;
-            audio.preload = "auto";
-            audio.muted = isMuted;
-            preloadedAssetsRef.current[key] = audio;
+            if (asset.filePath && asset.filePath.trim()) {
+              const sound = new Howl({
+                src: [asset.filePath],
+                preload: true,
+                mute: isMuted,
+              });
+              preloadedAssetsRef.current[key] = sound;
+            } else {
+              console.warn("Skipping audio preload - empty filePath:", asset);
+            }
           }
         });
       } catch (err) {
@@ -716,28 +718,40 @@ export default function GamePageDnD() {
       backgroundOverlayCountRef.current = 0;
       setShowBackgroundOverlay(false);
 
-      // Cleanup previous audio
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
+      if (soundRef.current) {
+        soundRef.current.stop();
       }
 
-      // Initialize audio if dialogue has voiceover
-      if (gameScene.dialogues && gameScene.dialogues[0]?.voiceover) {
-        const dialogue = gameScene.dialogues[0];
-        const audioAsset = gameScene.assets.find(
-          (asset) => asset.type === "audio" && asset.name === dialogue.voiceover
-        );
+      const dialogue = gameScene.dialogues?.[0];
 
-        if (audioAsset && audioAsset.filePath && audioAsset.filePath.trim()) {
-          const audio = new Audio(audioAsset.filePath);
-          audio.muted = isMuted;
-          audioRef.current = audio;
-          audio.play().catch((err) => {
-            console.error("Error playing audio:", err);
-          });
-        } else {
-          console.warn("Audio asset found but filePath is empty:", audioAsset);
+      // Check for audio in dialogue voiceoverUrl first
+      if (dialogue?.voiceoverUrl) {
+        const sound = new Howl({
+          src: [dialogue.voiceoverUrl],
+          html5: true, // Good for streaming longer files
+          mute: isMuted,
+        });
+
+        sound.play();
+        soundRef.current = sound;
+      } else {
+        // Check for audio assets if no dialogue voiceover
+        const audioAssets = gameScene.assets?.filter(
+          (asset) => asset.type === "audio"
+        );
+        if (audioAssets && audioAssets.length > 0) {
+          const audioAsset = audioAssets[0]; // Play the first audio asset
+          if (audioAsset.filePath && audioAsset.filePath.trim()) {
+            const sound = new Howl({
+              src: [audioAsset.filePath],
+              html5: true,
+              mute: isMuted,
+            });
+
+            sound.play();
+            soundRef.current = sound;
+            console.log("Playing audio asset:", audioAsset.filePath);
+          }
         }
       }
 
@@ -855,8 +869,8 @@ export default function GamePageDnD() {
         setIsTextComplete(true);
 
         // Stop audio
-        if (audioRef.current) {
-          audioRef.current.pause();
+        if (soundRef.current) {
+          soundRef.current.stop();
         }
         return;
       }
@@ -1366,9 +1380,9 @@ export default function GamePageDnD() {
       setIsTyping(false);
       setDisplayedText("");
       setIsTextComplete(false);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
+      if (soundRef.current) {
+        soundRef.current.stop();
+        soundRef.current = null;
       }
 
       // Note: Don't reset questionMistakes here as we want to keep track across all questions
@@ -1811,6 +1825,17 @@ export default function GamePageDnD() {
   return (
     <main className="min-h-screen w-full bg-bmGreen flex items-center justify-center p-4 relative select-none">
       <BubbleMenu />
+
+      {/* Mute Button - Outside game screen */}
+      <div className="absolute top-4 right-4 z-[60]">
+        <button
+          onClick={toggleMute}
+          className="bg-black/70 hover:bg-black/90 text-white p-3 rounded-lg border-2 border-bmYellow/50 transition-colors">
+          <span className="font-pressStart text-xs">
+            {isMuted ? "🔇 Muted" : "🔊 Sound"}
+          </span>
+        </button>
+      </div>
       <motion.div
         ref={containerRef}
         onClick={handleInteraction}
@@ -1851,17 +1876,6 @@ export default function GamePageDnD() {
           </div>
         )}
         {renderGameState()}
-
-        {/* Mute Button */}
-        <div className="absolute top-4 right-4 z-[60]">
-          <button
-            onClick={toggleMute}
-            className="bg-black/70 hover:bg-black/90 text-white p-3 rounded-lg border-2 border-bmYellow/50 transition-colors">
-            <span className="font-pressStart text-xs">
-              {isMuted ? "🔇 Muted" : "🔊 Sound"}
-            </span>
-          </button>
-        </div>
       </motion.div>
 
       {/* Match History Modal */}
