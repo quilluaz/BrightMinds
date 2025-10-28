@@ -1139,12 +1139,11 @@ export default function GamePageMCQ() {
           key={`${asset.assetId}-${currentSceneIndex}`}
           src={asset.filePath}
           alt={asset.name}
-          className="absolute h-3/4 max-h-[80%] object-contain"
+          className="absolute h-3/4 max-h-[80%] object-contain origin-center"
           style={{
             left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
             bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
             transform: transformStyle,
-            transformOrigin: "center center",
             zIndex: (asset.orderIndex || 1) + 20, // Ensure sprites appear above question overlay
           }}
         />
@@ -1357,12 +1356,11 @@ export default function GamePageMCQ() {
       </div>
       <div
         onClick={handleInteraction}
-        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 cursor-pointer ${
+        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 ease-in-out cursor-pointer ${
           isShaking ? "animate-shake" : ""
         }`}
         style={{
           transform: `translateX(${shakeOffset}px)`,
-          transition: "transform 0.05s ease-in-out",
         }}>
         {/* Background rendering */}
         {hasVisionTransition ? (

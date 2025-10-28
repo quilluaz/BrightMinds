@@ -1485,13 +1485,12 @@ export default function GamePageDnD() {
               stiffness: 300,
               damping: 30,
             }}
-            className={`absolute h-3/4 max-h-[80%] object-contain ${
+            className={`absolute h-3/4 max-h-[80%] object-contain -translate-x-1/2 ${
               isDisabled
                 ? "cursor-not-allowed pointer-events-none"
                 : "cursor-grab active:cursor-grabbing"
             }`}
             style={{
-              transform: "translateX(-50%)",
               zIndex: 30,
             }}
             whileDrag={{ scale: scale * 1.1, zIndex: 100 }}
@@ -1611,12 +1610,11 @@ export default function GamePageDnD() {
           key={`${asset.assetId}-${currentSceneIndex}`}
           src={asset.filePath}
           alt={asset.name}
-          className="absolute h-3/4 max-h-[80%] object-contain"
+          className="absolute h-3/4 max-h-[80%] object-contain origin-center"
           style={{
             left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
             bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
             transform: transformStyle,
-            transformOrigin: "center center",
             zIndex: isCorrectSpriteAtTarget ? 50 : (asset.orderIndex || 1) + 20, // Higher z-index for correct sprite
           }}
         />
@@ -1839,12 +1837,11 @@ export default function GamePageDnD() {
       <motion.div
         ref={containerRef}
         onClick={handleInteraction}
-        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 cursor-pointer ${
+        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 ease-in-out cursor-pointer ${
           isShaking ? "animate-shake" : ""
         }`}
         style={{
           transform: `translateX(${shakeOffset}px)`,
-          transition: "transform 0.05s ease-in-out",
         }}>
         {/* Background rendering */}
         {hasVisionTransition ? (

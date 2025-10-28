@@ -109,12 +109,11 @@ const DisappearingSprite = ({ asset, onBackgroundOverlay }) => {
       key={asset.assetId}
       src={asset.filePath}
       alt={asset.name}
-      className="absolute h-3/4 max-h-[80%] object-contain"
+      className="absolute h-3/4 max-h-[80%] object-contain origin-center"
       style={{
         left: `${Math.max(0, Math.min(100, normalizedX * 100))}%`,
         bottom: `${Math.max(0, Math.min(100, normalizedY * 100))}%`,
         transform: transformStyle,
-        transformOrigin: "center center",
         zIndex: (asset.orderIndex || 1) + 20, // Ensure sprites appear above question overlay
         opacity: opacity, // Use opacity state for smooth fade
       }}
