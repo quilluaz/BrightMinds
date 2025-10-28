@@ -1,5 +1,11 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://api.brightminds.com/api/$1"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -17,7 +23,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; connect-src 'self' https://api.yourdomain.com; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-ancestors 'none'"
+          "value": "default-src 'self' https://res.cloudinary.com; connect-src 'self' https://api.brightminds.com; img-src 'self' data: https://res.cloudinary.com; media-src 'self' https://res.cloudinary.com; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'"
         }
       ]
     }
