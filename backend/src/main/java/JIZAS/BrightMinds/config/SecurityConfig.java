@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(csrfRepository)
                         .csrfTokenRequestHandler(requestHandler)
-                        .ignoringRequestMatchers("/api/auth/login", "/api/users") // Allow login and signup without CSRF token initially
+                        .ignoringRequestMatchers("/api/auth/login", "/api/users", "/api/seeder/**") // Allow seeder without CSRF
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
@@ -95,7 +95,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:5173", "https://brightminds-cit.vercel.app"));
+        
+        // Get allowed origins from environment variable, fallback to defaults
+        String allowedOrigins = System.getenv().getOrDefault("ALLOWED_ORIGINS", 
+            "http://localhost:5173,https://brightminds-cit.vercel.app");
+        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
+        
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-XSRF-TOKEN")); // Expose X-XSRF-TOKEN
         configuration.setExposedHeaders(Arrays.asList("X-XSRF-TOKEN")); // Expose the CSRF token header

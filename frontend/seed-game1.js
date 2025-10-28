@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const axios = require("axios");
-const path = require("path");
+import fs from "fs";
+import axios from "axios";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const BACKEND_URL =
