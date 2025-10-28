@@ -18,16 +18,16 @@ export async function login(data) {
     email: (data.email ?? "").trim(),
     password: data.password ?? "",
   });
-  if (user?.token) localStorage.setItem("bm_token", user.token);
-  localStorage.setItem("bm_user", JSON.stringify(user));
+  if (user?.token) sessionStorage.setItem("bm_at", user.token);
+  sessionStorage.setItem("bm_user", JSON.stringify(user));
   return user;
 }
 
 export async function signup(data) {
   const payload = normalizeSignup(data);
   const { data: user } = await api.post("/users", payload);
-  if (user?.token) localStorage.setItem("bm_token", user.token);
-  localStorage.setItem("bm_user", JSON.stringify(user));
+  if (user?.token) sessionStorage.setItem("bm_at", user.token);
+  sessionStorage.setItem("bm_user", JSON.stringify(user));
   return user;
 }
 
@@ -38,8 +38,9 @@ export async function me() {
 
 export function logout() {
   // Clear authentication data from localStorage
-  localStorage.removeItem("bm_token");
-  localStorage.removeItem("bm_user");
+  sessionStorage.removeItem("bm_at");
+  sessionStorage.removeItem("bm_user");
+  sessionStorage.removeItem("bm_csrf");
 
   // Redirect to landing page
   window.location.href = "/";
