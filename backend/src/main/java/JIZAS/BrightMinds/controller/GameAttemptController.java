@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class GameAttemptController {
     private GameAttemptService gameAttemptService;
 
     @PostMapping
+    @PreAuthorize("hasRole('PLAYER')")
     @Operation(summary = "Save a new game attempt", 
                description = "Records a new game attempt with score and completion details")
     public ResponseEntity<GameAttemptDTO> saveGameAttempt(
@@ -67,6 +69,7 @@ public class GameAttemptController {
     }
 
     @PostMapping("/complete-game")
+    @PreAuthorize("hasRole('PLAYER')")
     @Operation(summary = "Complete a game and save attempt with progress cleanup", 
                description = "Records a completed game attempt and automatically deletes the associated progress to save data")
     public ResponseEntity<GameAttemptDTO> completeGameAndSaveAttempt(

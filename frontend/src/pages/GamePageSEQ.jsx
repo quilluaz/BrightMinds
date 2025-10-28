@@ -6,7 +6,9 @@ import AnimatedSprite from "@/components/ui/AnimatedSprite";
 import DelayedSprite from "@/components/ui/DelayedSprite";
 import DisappearingSprite from "@/components/ui/DisappearingSprite";
 import VisionTransition from "@/components/ui/VisionTransition";
+import AudioLanguageControls from "@/components/ui/AudioLanguageControls";
 import { Howl, Howler } from "howler";
+import game1Data from "../../game1.json";
 
 export default function GamePageSEQ() {
   const { storyId } = useParams();
@@ -47,6 +49,17 @@ export default function GamePageSEQ() {
   const isTransitioning = useRef(false);
   const soundRef = useRef(null);
 
+  // Background music and language state
+  const [backgroundMusic, setBackgroundMusic] = useState(null);
+  const [masterVolume, setMasterVolume] = useState(() => {
+    const saved = localStorage.getItem("bm_current_volume");
+    return saved ? parseInt(saved) : 100;
+  });
+  const [currentLanguage, setCurrentLanguage] = useState(() => {
+    return localStorage.getItem("bm_preferredLanguage") || "tl";
+  });
+  const [isDemoMode, setIsDemoMode] = useState(false);
+
   // Sequence game specific state
   const [tileSelections, setTileSelections] = useState({});
   // Format: { choiceId: userAssignedPosition } e.g., { 42: 1, 43: 3 }
@@ -67,6 +80,83 @@ export default function GamePageSEQ() {
     setIsMuted(newMuted);
     localStorage.setItem("bm_audio_muted", newMuted.toString());
     Howler.mute(newMuted);
+  };
+
+  // Background music and audio functions
+  const initializeBackgroundMusic = () => {
+    if (game1Data.backgroundMusic?.filePath) {
+      const music = new Howl({
+        src: [game1Data.backgroundMusic.filePath],
+        loop: true,
+        volume: (game1Data.backgroundMusic.volume || 50) / 100,
+        mute: isMuted,
+        onload: () => {
+          console.log("Background music loaded successfully");
+        },
+        onloaderror: (id, error) => {
+          console.warn("Background music failed to load:", error);
+        }
+      });
+      
+      setBackgroundMusic(music);
+      music.play();
+    }
+  };
+
+  const updateMasterVolume = (newVolume) => {
+    setMasterVolume(newVolume);
+    localStorage.setItem("bm_current_volume", newVolume.toString());
+    
+    // Update Howler global volume
+    Howler.volume(newVolume / 100);
+    
+    // Update background music volume if it exists
+    if (backgroundMusic) {
+      const baseVolume = (game1Data.backgroundMusic?.volume || 50) / 100;
+      backgroundMusic.volume(baseVolume * (newVolume / 100));
+    }
+  };
+
+  const duckBackgroundMusic = (duck = true) => {
+    if (backgroundMusic) {
+      const baseVolume = (game1Data.backgroundMusic?.volume || 50) / 100;
+      const masterVol = masterVolume / 100;
+      
+      if (duck) {
+        // Reduce to 50% of current volume
+        backgroundMusic.volume(baseVolume * masterVol * 0.5);
+      } else {
+        // Restore to full volume
+        backgroundMusic.volume(baseVolume * masterVol);
+      }
+    }
+  };
+
+  const handleLanguageChange = (newLanguage) => {
+    setCurrentLanguage(newLanguage);
+    localStorage.setItem("bm_preferredLanguage", newLanguage);
+  };
+
+  const startTypingEffect = (dialogue) => {
+    if (!dialogue) return;
+    
+    const fullText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+    setIsTyping(true);
+    setIsTextComplete(false);
+    setDisplayedText("");
+
+    let currentIndex = 0;
+    typingIntervalRef.current = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayedText(fullText.substring(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        setIsTyping(false);
+        setIsTextComplete(true);
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+    }, 50);
   };
 
   // Asset preloading function
@@ -341,6 +431,16 @@ export default function GamePageSEQ() {
     const fetchStoryData = async () => {
       try {
         setGameState("loading");
+        
+        // Check if user is Game Master for demo mode
+        const user = JSON.parse(localStorage.getItem("bm_user"));
+        if (user && user.role === "GAMEMASTER") {
+          setIsDemoMode(true);
+        }
+        
+        // Initialize background music
+        initializeBackgroundMusic();
+        
         const scenesResponse = await api.get(`/stories/${storyId}/scenes`);
         if (!scenesResponse.data || scenesResponse.data.length === 0) {
           throw new Error("No scenes found for this story.");
@@ -399,6 +499,14 @@ export default function GamePageSEQ() {
           src: [dialogue.voiceoverUrl],
           html5: true, // Good for streaming longer files
           mute: isMuted,
+          onplay: () => {
+            // Duck background music when dialogue starts
+            duckBackgroundMusic(true);
+          },
+          onend: () => {
+            // Restore background music when dialogue ends
+            duckBackgroundMusic(false);
+          }
         });
 
         sound.play();
@@ -466,7 +574,7 @@ export default function GamePageSEQ() {
       return;
     }
 
-    const fullText = dialogue.lineText;
+    const fullText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
     setIsTyping(true);
     setIsTextComplete(false);
     setDisplayedText("");
@@ -491,6 +599,29 @@ export default function GamePageSEQ() {
       }
     };
   }, [currentSceneData, gameState]);
+
+  // Update dialogue text when language changes
+  useEffect(() => {
+    if (currentSceneData?.dialogues?.[0] && gameState === "playing") {
+      const dialogue = currentSceneData.dialogues[0];
+      const dialogueText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+      
+      if (isTextComplete) {
+        // If text is already complete, update immediately
+        setDisplayedText(dialogueText);
+      } else if (isTyping) {
+        // If currently typing, restart the typing effect with new text
+        setIsTyping(false);
+        setIsTextComplete(false);
+        setDisplayedText("");
+        
+        // Restart typing effect
+        setTimeout(() => {
+          startTypingEffect(dialogue);
+        }, 100);
+      }
+    }
+  }, [currentLanguage]);
 
   // Handle user clicks to advance the story
   const handleInteraction = async () => {
@@ -539,7 +670,8 @@ export default function GamePageSEQ() {
         }
 
         const dialogue = currentSceneData.dialogues[0];
-        setDisplayedText(dialogue.lineText);
+        const dialogueText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+        setDisplayedText(dialogueText);
         setIsTyping(false);
         setIsTextComplete(true);
 
@@ -1395,7 +1527,7 @@ export default function GamePageSEQ() {
           dialogue && (
             <div className="absolute bottom-4 left-4 right-4 p-4 bg-black/70 rounded-xl border-2 border-bmYellow/50 font-pressStart text-lg z-50">
               <p className="text-bmYellow mb-2">{dialogue.characterName}</p>
-              <p className="text-white">{displayedText || dialogue.lineText}</p>
+              <p className="text-white">{displayedText || (currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText)}</p>
               {isTextComplete && (
                 <div className="absolute top-2 right-2 animate-pulse">
                   <span className="text-bmYellow font-pressStart text-xs">
@@ -1513,17 +1645,25 @@ export default function GamePageSEQ() {
   return (
     <main className="min-h-screen w-full bg-bmGreen flex items-center justify-center p-4 relative select-none">
       <BubbleMenu />
+      
+      <AudioLanguageControls
+        masterVolume={masterVolume}
+        onVolumeChange={updateMasterVolume}
+        isMuted={isMuted}
+        onToggleMute={toggleMute}
+        currentLanguage={currentLanguage}
+        onLanguageChange={handleLanguageChange}
+      />
 
-      {/* Mute Button - Outside game screen */}
-      <div className="absolute top-4 right-4 z-[60]">
-        <button
-          onClick={toggleMute}
-          className="bg-black/70 hover:bg-black/90 text-white p-3 rounded-lg border-2 border-bmYellow/50 transition-colors">
-          <span className="font-pressStart text-xs">
-            {isMuted ? "🔇 Muted" : "🔊 Sound"}
+      {/* Demo Mode Banner */}
+      {isDemoMode && (
+        <div className="absolute top-4 left-4 z-[60] bg-bmYellow border-2 border-bmBlack rounded-lg px-4 py-2 shadow-[4px_4px_0_#000]">
+          <span className="font-pressStart text-sm text-bmBlack font-bold">
+            DEMO MODE
           </span>
-        </button>
-      </div>
+        </div>
+      )}
+
       <div
         onClick={handleInteraction}
         className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 ease-in-out cursor-pointer ${
