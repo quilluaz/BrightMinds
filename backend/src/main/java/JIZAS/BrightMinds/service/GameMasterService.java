@@ -2,7 +2,11 @@ package JIZAS.BrightMinds.service;
 
 import JIZAS.BrightMinds.dto.UserUpdateDTO;
 import JIZAS.BrightMinds.dto.UserViewDTO;
+import JIZAS.BrightMinds.entity.GameAttempt;
+import JIZAS.BrightMinds.entity.Story;
 import JIZAS.BrightMinds.entity.User;
+import JIZAS.BrightMinds.repository.GameAttemptRepository;
+import JIZAS.BrightMinds.repository.StoryRepository;
 import JIZAS.BrightMinds.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,9 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +34,12 @@ public class GameMasterService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private GameAttemptRepository gameAttemptRepository;
+
+    @Autowired
+    private StoryRepository storyRepository;
 
     public List<UserViewDTO> findStudentsByCreator(Long gameMasterId) {
         return userRepository.findByCreatedBy_UserId(gameMasterId).stream()
@@ -141,6 +150,138 @@ public class GameMasterService {
         }
     }
 
+    // Analytics methods for Game Master Dashboard
+    public Map<String, Object> getGameMasterAnalytics(Long gameMasterId) {
+        List<User> students = userRepository.findByCreatedBy_UserId(gameMasterId);
+        List<Long> studentIds = students.stream()
+                .map(User::getUserId)
+                .collect(Collectors.toList());
+
+        Map<String, Object> analytics = new HashMap<>();
+        
+        // Most played games
+        analytics.put("mostPlayedGames", getMostPlayedGames(studentIds));
+        
+        // Student performance overview
+        analytics.put("studentPerformance", getStudentPerformance(studentIds));
+        
+        // Recent activity
+        analytics.put("recentActivity", getRecentActivity(studentIds));
+        
+        // Score distribution
+        analytics.put("scoreDistribution", getScoreDistribution(studentIds));
+        
+        // Completion rates
+        analytics.put("completionRates", getCompletionRates(studentIds));
+
+        return analytics;
+    }
+
+    private List<Map<String, Object>> getMostPlayedGames(List<Long> studentIds) {
+        List<GameAttempt> attempts = gameAttemptRepository.findByUserUserIdIn(studentIds);
+        
+        Map<Integer, Long> gameCounts = attempts.stream()
+                .collect(Collectors.groupingBy(
+                    attempt -> attempt.getStory().getStoryId(),
+                    Collectors.counting()
+                ));
+
+        return gameCounts.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
+                .limit(5)
+                .map(entry -> {
+                    Map<String, Object> gameData = new HashMap<>();
+                    Story story = storyRepository.findById(entry.getKey()).orElse(null);
+                    gameData.put("storyId", entry.getKey());
+                    gameData.put("storyTitle", story != null ? story.getTitle() : "Unknown Story");
+                    gameData.put("playCount", entry.getValue());
+                    return gameData;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<Map<String, Object>> getStudentPerformance(List<Long> studentIds) {
+        return studentIds.stream()
+                .map(studentId -> {
+                    List<GameAttempt> attempts = gameAttemptRepository.findByUserUserIdOrderByEndAttemptDateDesc(studentId);
+                    User student = userRepository.findById(studentId).orElse(null);
+                    
+                    Map<String, Object> performance = new HashMap<>();
+                    performance.put("studentId", studentId);
+                    performance.put("studentName", student != null ? student.getFName() + " " + student.getLName() : "Unknown");
+                    performance.put("totalAttempts", attempts.size());
+                    
+                    if (!attempts.isEmpty()) {
+                        double avgScore = attempts.stream()
+                                .mapToDouble(GameAttempt::getPercentage)
+                                .average()
+                                .orElse(0.0);
+                        performance.put("averageScore", Math.round(avgScore * 100.0) / 100.0);
+                        performance.put("bestScore", attempts.stream()
+                                .mapToDouble(GameAttempt::getPercentage)
+                                .max()
+                                .orElse(0.0));
+                    } else {
+                        performance.put("averageScore", 0.0);
+                        performance.put("bestScore", 0.0);
+                    }
+                    
+                    return performance;
+                })
+                .sorted((a, b) -> Double.compare((Double) b.get("averageScore"), (Double) a.get("averageScore")))
+                .collect(Collectors.toList());
+    }
+
+    private List<Map<String, Object>> getRecentActivity(List<Long> studentIds) {
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusWeeks(1);
+        
+        List<GameAttempt> recentAttempts = gameAttemptRepository.findByUserUserIdInAndEndAttemptDateAfterOrderByEndAttemptDateDesc(
+                studentIds, oneWeekAgo);
+
+        return recentAttempts.stream()
+                .limit(10)
+                .map(attempt -> {
+                    Map<String, Object> activity = new HashMap<>();
+                    activity.put("studentName", attempt.getUser().getFName() + " " + attempt.getUser().getLName());
+                    activity.put("storyTitle", attempt.getStory().getTitle());
+                    activity.put("score", attempt.getPercentage());
+                    activity.put("date", attempt.getEndAttemptDate());
+                    return activity;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, Object> getScoreDistribution(List<Long> studentIds) {
+        List<GameAttempt> attempts = gameAttemptRepository.findByUserUserIdIn(studentIds);
+        
+        Map<String, Object> distribution = new HashMap<>();
+        distribution.put("excellent", attempts.stream().mapToDouble(GameAttempt::getPercentage).filter(score -> score >= 90).count());
+        distribution.put("good", attempts.stream().mapToDouble(GameAttempt::getPercentage).filter(score -> score >= 70 && score < 90).count());
+        distribution.put("average", attempts.stream().mapToDouble(GameAttempt::getPercentage).filter(score -> score >= 50 && score < 70).count());
+        distribution.put("poor", attempts.stream().mapToDouble(GameAttempt::getPercentage).filter(score -> score < 50).count());
+        
+        return distribution;
+    }
+
+    private Map<String, Object> getCompletionRates(List<Long> studentIds) {
+        List<Story> allStories = storyRepository.findAll();
+        Map<String, Object> completionRates = new HashMap<>();
+        
+        for (Story story : allStories) {
+            long totalStudents = studentIds.size();
+            long completedStudents = gameAttemptRepository.countByUserUserIdInAndStoryStoryId(studentIds, story.getStoryId());
+            
+            Map<String, Object> storyCompletion = new HashMap<>();
+            storyCompletion.put("storyTitle", story.getTitle());
+            storyCompletion.put("completed", completedStudents);
+            storyCompletion.put("total", totalStudents);
+            storyCompletion.put("completionRate", totalStudents > 0 ? (double) completedStudents / totalStudents * 100 : 0);
+            
+            completionRates.put("story_" + story.getStoryId(), storyCompletion);
+        }
+        
+        return completionRates;
+    }
 
     private UserViewDTO toView(User u) {
         UserViewDTO v = new UserViewDTO();

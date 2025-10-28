@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -76,5 +75,13 @@ public class GameMasterController {
         response.setHeader(headerKey, headerValue);
 
         gameMasterService.exportStudentsToExcel(gameMasterId, response);
+    }
+
+    @GetMapping("/analytics")
+    // @PreAuthorize("hasRole('GAMEMASTER')") // TODO: Re-enable when JWT is fully implemented
+    public ResponseEntity<Map<String, Object>> getAnalytics(@RequestHeader(value = "X-GameMaster-Id", defaultValue = "1") Long gameMasterId) {
+        // TODO: Get gameMasterId from JWT token when authentication is implemented
+        Map<String, Object> analytics = gameMasterService.getGameMasterAnalytics(gameMasterId);
+        return ResponseEntity.ok(analytics);
     }
 }
