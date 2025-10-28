@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
@@ -210,6 +211,10 @@ export default function Settings() {
             <DialogTitle className="font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-[#ff8e51]">
               Change Password
             </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              Enter your current password and new password to update your
+              account
+            </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-3 font-lexend">
             <div className="grid gap-2">

@@ -329,6 +329,9 @@ export default function GameMasterDashboard() {
             <DialogTitle className="font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
               Import Students
             </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              Upload an Excel file to import student accounts
+            </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-3 font-lexend">
             <div className="grid gap-2">

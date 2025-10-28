@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/label";
@@ -218,6 +219,11 @@ export default function Landing() {
               ">
               {mode === "login" ? "Welcome back!" : "Welcome to BrightMinds!"}
             </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              {mode === "login"
+                ? "Sign in to your account"
+                : "Create your account to get started"}
+            </DialogDescription>
           </DialogHeader>
 
           {/* Error display */}
