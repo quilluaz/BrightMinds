@@ -17,33 +17,27 @@ import {
 export default function Home() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(null); // { id, title, img, desc }
+  const [active, setActive] = useState(null);
 
   const games = useMemo(
     () => [
       {
-        id: "g1",
+        id: "1",
         title: "The Story of the Amulet",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
         desc: "Embark on a story-driven civics adventure about community helpers. Pause for questions to progress.",
       },
       {
-        id: "g2",
-        title: "Kasaysayan Run (Story 2)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
-        desc: "Discover key moments in Philippine history through an interactive, gamified storyline.",
+        id: "2",
+        title: "Nature's Treasures: Leah's Scrapbook Quest",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
+        desc: "Help Leah fix her mineral scrapbook by completing drag and drop puzzles for 9 different minerals. Learn about tanso, pilak, ginto, bakal, and more as you piece together the beautiful mineral pictures!",
       },
       {
-        id: "g3",
-        title: "Science Quest (Story 3)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
-        desc: "Learn about basic science through puzzles and branching story paths.",
-      },
-      {
-        id: "g4",
-        title: "Math Dash (Story 4)",
-        img: "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
-        desc: "Sharpen math skills through arcade-style gamified lessons.",
+        id: "3",
+        title: "Hiraya’s Museum Adventure: A Hero’s Journey",
+        img: "https://res.cloudinary.com/dymjwplal/image/upload/v1761070307/Story3CoverMuseumv3_hjq8e4.png",
+        desc: "A story about Hiraya's museum adventure on National Heroes Day, where she learns about José Rizal, Tandang Sora, Lapu-Lapu, and Sultan Kudarat.",
       },
     ],
     []
@@ -59,10 +53,12 @@ export default function Home() {
   };
 
   const goPlay = () => {
-    // Navigate to the correct game route based on the active game's ID
-    if (active?.id === "g1") {
-      navigate("/game1");
+    if (active?.id) {
+      // All stories now use the unified /play/:storyId route
+      // GameRouter component will handle conditional rendering based on gameplayType
+      navigate(`/play/${active.id}`);
     } else {
+      // Fallback for older stories or if ID is missing
       navigate("/play/beta");
     }
   };
@@ -78,7 +74,7 @@ export default function Home() {
           <div className="w-full max-w-7xl px-0 flex items-center justify-center">
             <RollingGallery
               images={images}
-              autoplay
+              autoplay={!open}
               pauseOnHover
               rotationSpeed={40}
               containerClass="w-full flex items-center justify-center"
@@ -98,7 +94,6 @@ export default function Home() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-3xl bg-bmLightYellow text-bmBlack">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1.2fr]">
-            {/* Left: image */}
             <div className="flex items-center justify-center">
               {active?.img && (
                 <img
@@ -124,7 +119,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           <DialogFooter className="mt-4">
             <Button
               className="bg-bmYellow text-bmBlack hover:opacity-90"

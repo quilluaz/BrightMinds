@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useInView, useMotionValue, useSpring } from "motion/react";
 
 function CountUp({
+  end,
   to,
   from = 0,
   direction = "up",
@@ -10,11 +11,14 @@ function CountUp({
   className = "",
   startWhen = true,
   separator = "",
+  suffix = "",
   onStart,
   onEnd,
 }) {
+  // Support both 'end' and 'to' props for backward compatibility
+  const targetValue = end !== undefined ? end : to;
   const ref = useRef(null);
-  const motionValue = useMotionValue(direction === "down" ? to : from);
+  const motionValue = useMotionValue(direction === "down" ? targetValue : from);
 
   const damping = 20 + 40 * (1 / duration);
   const stiffness = 100 * (1 / duration);
@@ -42,20 +46,25 @@ function CountUp({
     return 0;
   };
 
-  const maxDecimals = Math.max(getDecimalPlaces(from), getDecimalPlaces(to));
+  const maxDecimals = Math.max(
+    getDecimalPlaces(from),
+    getDecimalPlaces(targetValue)
+  );
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.textContent = String(direction === "down" ? to : from);
+      ref.current.textContent = String(
+        direction === "down" ? targetValue : from
+      );
     }
-  }, [from, to, direction]);
+  }, [from, targetValue, direction]);
 
   useEffect(() => {
     if (isInView && startWhen) {
       if (typeof onStart === "function") onStart();
 
       const timeoutId = setTimeout(() => {
-        motionValue.set(direction === "down" ? from : to);
+        motionValue.set(direction === "down" ? from : targetValue);
       }, delay * 1000);
 
       const durationTimeoutId = setTimeout(() => {
@@ -73,7 +82,7 @@ function CountUp({
     motionValue,
     direction,
     from,
-    to,
+    targetValue,
     delay,
     onStart,
     onEnd,
@@ -95,14 +104,16 @@ function CountUp({
           latest
         );
 
-        ref.current.textContent = separator
+        const finalText = separator
           ? formattedNumber.replace(/,/g, separator)
           : formattedNumber;
+
+        ref.current.textContent = finalText + suffix;
       }
     });
 
     return () => unsubscribe();
-  }, [springValue, separator, maxDecimals]);
+  }, [springValue, separator, maxDecimals, suffix]);
 
   return <span className={className} ref={ref} />;
 }

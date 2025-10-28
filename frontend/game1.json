@@ -1,0 +1,1438 @@
+{
+  "title": "The Story of the Amulet",
+  "description": "A story about Liam's adventure to find the Amulet of the Sun and save his village by learning about different landforms and waterforms.",
+  "storyOrder": 1,
+  "thumbnailImage": "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
+  "gameplayType": "MCQ",
+  "scenes": [
+      {
+          "sceneOrder": 1,
+          "assets": [
+              {
+                  "name": "amulet_story_thumbnail",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png"
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "GAME",
+                  "lineText": "Click to progress the story",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 2,
+          "sceneText": "Scene 1, Dialogue 1: The Mountain's Secret",
+          "assets": [
+              {
+                  "name": "s1_scene1_background1",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759105299/s1_scene1.png"
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle"
+                  }
+              },
+              {
+                  "name": "narrator_voice_st1_sc1",
+                  "type": "audio",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761578675/s1_narrator1_qs9g8k.wav"
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam's village was in trouble. The river that gave them water was drying up. Elder Lita said the only way to save it was to find the legendary 'Amulet of the Sun,' hidden at the top of the tallest bundok.",
+                  "orderIndex": 1,
+                  "voiceover": "narrator_voice_st1_sc1"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 3,
+          "sceneText": "Scene 1, Dialogue 2: The Mountain's Secret",
+          "assets": [
+              {
+                  "name": "s1_scene1_background2",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635274/s1_scene2.png"
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "thinking"
+                  }
+              },
+              {
+                  "name": "lita_voice_st1_sc2",
+                  "type": "audio",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761578670/s1_lita1_iegpwv.wav"
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "To reach it, you must climb this great bundok, a giant piece of land that towers over everything. It is a home to many plants and animals.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_st1_sc2"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 4,
+          "sceneText": "Scene 1, Dialogue 3: The Mountain's Secret",
+          "assets": [
+              {
+                  "name": "s1_scene1_background3",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635284/s1_scene3.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "positionX": -6,
+                      "positionY": -9,
+                      "endX": 0,
+                      "endY": -9,
+                      "duration": 2,
+                      "disappearAfter": 1
+                  }
+              },
+              {
+                  "name": "mountain_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/s1_q1.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 2,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam bravely began to climb, feeling the earth rise steeply beneath his feet. He could see his entire village from so high up!",
+                  "orderIndex": 1,
+                  "voiceover": "narrator_voice_s1_2"
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What landform must Liam climb to find the amulet?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Bundok",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Kapatagan",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Ilog",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Dagat",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 5,
+          "sceneText": "Scene 2, Dialogue 1: The Path Through the Valley",
+          "assets": [
+              {
+                  "name": "s1_scene2_valley_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635285/s1_scene4.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "endX": 6,
+                      "endY": -9,
+                      "duration": 3.5
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The path led Liam away from the steep mountain and into a lambak. This is a low, flat piece of land nestled between two mountains. It's often where people plant their crops because the soil is rich and protected.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 6,
+          "sceneText": "Scene 2, Dialogue 2: The Path Through the Valley",
+          "assets": [
+              {
+                  "name": "s1_scene2_valley_background_alt",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635284/s1_scene5.png"
+              },
+              {
+                  "name": "lita_voice_s2_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_walking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_walking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false
+              },
+              {
+                  "name": "liam_static",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle"
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "Be careful, Liam. The path through the lambak is narrow.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s2_1"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 7,
+          "sceneText": "Scene 2, Dialogue 3: The Path Through the Valley",
+          "assets": [
+              {
+                  "name": "s1_scene2_valley_background_alt",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635284/s1_scene5.png"
+              },
+              {
+                  "name": "lita_walking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_walking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "disappearAfter": 3,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "walking",
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "positionX": -6,
+                      "positionY": -9,
+                      "endX": 0,
+                      "endY": -9,
+                      "duration": 2,
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "valley_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758896860/correct_ans2_zfxy84.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 2.5,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam walked on, seeing lush fields of corn and rice on both sides of him.",
+                  "orderIndex": 1
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What kind of landform is a low area between mountains?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Bundok",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Lambak",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Bulkan",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Burol",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 8,
+          "sceneText": "Scene 3, Dialogue 1: The River's Riddle",
+          "assets": [
+              {
+                  "name": "s1_scene3_river_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/s1_scene3zeke_jx5kso.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "endX": 0,
+                      "endY": -9,
+                      "duration": 2
+                  }
+              },
+              {
+                  "name": "lita_walking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_walking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Blocking Liam's path was an ilog. This is a long body of fresh water that flows across the land. It's like a natural highway for water!",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 9,
+          "sceneText": "Scene 3, Dialogue 2: The River's Riddle",
+          "assets": [
+              {
+                  "name": "s1_scene3_river_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/s1_scene3zeke_jx5kso.png"
+              },
+              {
+                  "name": "lita_voice_s3_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "walking",
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": 0,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "river_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758896887/correct_ans3_kuxpje.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 2.5,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "To cross the ilog, you must solve its riddle. It will ask you what kind of place it is.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s3_1"
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What is a long, flowing body of fresh water?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Karagatan",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Ilog",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Lawa",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Talon",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 10,
+          "sceneText": "Scene 4, Dialogue 1: The Volcano's Test",
+          "assets": [
+              {
+                  "name": "s1_scene4_volcano_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635280/scene4zeke_zbmngf.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "positionX": -6,
+                      "positionY": -9,
+                      "endX": -3,
+                      "endY": -9,
+                      "duration": 3.5
+                  }
+              },
+              {
+                  "name": "amulet",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759237836/amuleet_wdo6dv.png",
+                  "positionX": 6,
+                  "positionY": -5,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 1,
+                      "delay": 0.5
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam crosses the river and finds the amulet on a rock shaped like a mountain with a smoke coming out. The amulet was not on a simple mountain. It was on a bulkan. A bulkan is a very special kind of mountain with an opening on top. Sometimes, hot melted rock called lava comes out of it.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 11,
+          "sceneText": "Scene 4, Dialogue 2: The Volcano's Test",
+          "assets": [
+              {
+                  "name": "s1_scene4_volcano_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635280/scene4zeke_zbmngf.png"
+              },
+              {
+                  "name": "lita_voice_s4_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "walking",
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -3,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "volcano_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758896942/correct_ans4_j1onkh.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 2.5,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "To claim the amulet, you must prove you understand the bulkan's power.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s4_1"
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What makes a bulkan different from a regular bundok?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "It is very flat.",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "It is surrounded by water.",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "It can erupt lava and ash.",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Talampas",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 12,
+          "sceneText": "Scene 5, Dialogue 1: The Amulet’s Challenge in the Kapatagan",
+          "assets": [
+              {
+                  "name": "s1_scene4_volcano_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635280/scene4zeke_zbmngf.png"
+              },
+              {
+                  "name": "s1_scene5_kapatagan_visions",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759254166/s1_scene4_bg2_lyylvy.png"
+              },
+              {
+                  "name": "amulet_in_hand",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759238805/amulet_inhand_onvnem.png",
+                  "positionX": 2,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "With the Amulet of the Sun glowing warmly and pulsing, Liam received his mission in a vision: awaken the land spirits to restore the dry river. The amulet flashed him a vision to his wilting village, situated on a vast kapatagan—a flat, fertile plain.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 13,
+          "sceneText": "Scene 5, Dialogue 2: The Amulet’s Challenge in the Kapatagan",
+          "assets": [
+              {
+                  "name": "s1_scene5_kapatagan_visions",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759254166/s1_scene4_bg2_lyylvy.png"
+              },
+              {
+                  "name": "lita_voice_s5_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "appearAfter": 0.5,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "thinking"
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "Liam, the kapatagan is the heart of your people. Prove your respect for its balance to earn its spirit’s blessing.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s5_1"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 14,
+          "sceneText": "Scene 5, Dialogue 3: The Amulet’s Challenge in the Kapatagan",
+          "assets": [
+              {
+                  "name": "s1_scene5_kapatagan_visions",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759254166/s1_scene4_bg2_lyylvy.png"
+              },
+              {
+                  "name": "s1_scene5_kapatagan",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/Story1_Scene5_jrnle0.png"
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "disappearAfter": 8
+                  }
+              },
+              {
+                  "name": "astral_spirit",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562637/SpectralWind-Gif-unscreen_ipwy3q.gif",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 4,
+                      "disappearAfter": 8
+                  }
+              },
+              {
+                  "name": "kapatagan_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897691/s1_correct_ans5_u0jfuu.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 10,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "A sudden gust of wind swirled around Liam, forming a spectral figure—a guardian of the plain—who challenged him to plant a seed in the cracked soil. As Liam knelt and buried a seed from his pouch, the amulet glowed, and green shoots sprouted instantly, symbolizing hope.",
+                  "orderIndex": 1
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "The flat land where a village is built is called a?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Lambak",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Bundok",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Kapatagan",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Pulo",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 15,
+          "sceneText": "Scene 6, Dialogue 1: The Lawa’s Test of Reflection",
+          "assets": [
+              {
+                  "name": "s1_scene6_lawa_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635295/Story1_Scene6_megx8s.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "positionX": -6,
+                      "positionY": -9,
+                      "endX": 0,
+                      "endY": -9,
+                      "duration": 2
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The amulet’s light grew brighter, guiding Liam to a serene lawa, a lake surrounded by lush trees. Its still surface mirrored the sky, but the reflection showed a parched village. The amulet’s warmth urged Liam to listen to the lake’s spirit.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 16,
+          "sceneText": "Scene 6, Dialogue 2: The Lawa’s Test of Reflection",
+          "assets": [
+              {
+                  "name": "s1_scene6_lawa_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635295/Story1_Scene6_megx8s.png"
+              },
+              {
+                  "name": "s1_scene6_village_ruins",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759538357/village_ruins_nhgmln.png"
+              },
+              {
+                  "name": "lita_voice_s6_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "thinking"
+                  }
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle"
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "The lawa is a place of clarity, Liam. To earn its blessing, you must face your fears reflected in its waters.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s6_1"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 17,
+          "sceneText": "Scene 6, Dialogue 3: The Lawa’s Test of Reflection",
+          "assets": [
+              {
+                  "name": "s1_scene6_village_ruins",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759538357/village_ruins_nhgmln.png"
+              },
+              {
+                  "name": "s1_scene6_lawa_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635295/Story1_Scene6_megx8s.png"
+              },
+              {
+                  "name": "lawa_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760521594/miniature_lawa_vmrpab.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 1.5,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The lake’s surface rippled, revealing an image of Liam failing his village. He hesitated, then touched the water, declaring his resolve to save his people.",
+                  "orderIndex": 1
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What is a large body of freshwater completely surrounded by land?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Ilog",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Karagatan",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Lawa",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Sapa",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 18,
+          "sceneText": "Scene 7, Dialogue 1: The Baybayin’s Call",
+          "assets": [
+              {
+                  "name": "s1_scene7_baybayin_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/s1_scene7_b8wr9v.png"
+              },
+              {
+                  "name": "liam_walk",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639079/liam_walk.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking",
+                      "animation": "move",
+                      "positionX": -6,
+                      "positionY": -9,
+                      "endX": 0,
+                      "endY": -9,
+                      "duration": 2,
+                      "disappearAfter": 2
+                  }
+              },
+              {
+                  "name": "shimmering_figure",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562776/shimmer-f1-unscreen_panqtx.gif",
+                  "positionX": 0,
+                  "positionY": -6,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 3,
+                      "disappearAfter": 5
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The amulet tugged Liam toward the baybayin, the shoreline where the land kissed the sea. Waves lapped gently, but the amulet revealed a vision of a storm threatening the village’s fishing boats. The spirit of the baybayin emerged as a shimmering figure in the waves.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 19,
+          "sceneText": "Scene 7, Dialogue 2: The Baybayin’s Call",
+          "assets": [
+              {
+                  "name": "s1_scene7_baybayin_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/s1_scene7_b8wr9v.png"
+              },
+              {
+                  "name": "lita_voice_s7_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "walking"
+                  }
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "thinking"
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "The baybayin connects land and sea, Liam. Protect its balance by calming the coming storm.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s7_1"
+              }
+          ]
+      },
+      {
+          "sceneOrder": 20,
+          "sceneText": "Scene 7, Dialogue 3: The Baybayin’s Call",
+          "assets": [
+              {
+                  "name": "s1_scene7_baybayin_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/s1_scene7_b8wr9v.png"
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -3,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle",
+                      "disappearAfter": 3,
+                      "appearAfter": 1
+                  }
+              },
+              {
+                  "name": "seashell",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/seashell_pbbclz.png",
+                  "positionX": 2,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "disappearAfter": 3,
+                      "appearAfter": 1
+                  }
+              },
+              {
+                  "name": "coast_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897716/s1_correct_ans6_flkc9y.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 4,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam raised the amulet, its light piercing the darkening sky. He spoke of his village’s reliance on the sea, and the waves stilled. The spirit gifted him a seashell, glowing faintly, as a token of the baybayin’s trust.",
+                  "orderIndex": 1
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What do we call the land where the sea meets the shore?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Look",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Pulo",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Baybayin",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Kipot",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 21,
+          "sceneText": "Scene 8, Dialogue 1: The Look’s Harmony",
+          "assets": [
+              {
+                  "name": "s1_scene8_look_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635298/story1_scene8_s9qt13.png"
+              },
+              {
+                  "name": "s1_scene8_look_visions_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635296/story1_scene8_catastrophic_amex99.png"
+              },
+              {
+                  "name": "lighthouse",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635285/lighthouse_u4dbkq.png",
+                  "positionX": 0,
+                  "positionY": -9,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "disappearAfter": 6
+                  }
+              },
+              {
+                  "name": "lighthouse_spirit",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760530119/LighthouseEntity-unscreen_c9n4dw.gif",
+                  "positionX": 2.5,
+                  "positionY": -7,
+                  "orderIndex": 3,
+                  "isInteractive": false,
+                  "metadata": {
+                      "disappearAfter": 11,
+                      "appearAfter": 6
+                  }
+              },
+              {
+                  "name": "ship",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635282/sailboat_vg4n3k.png",
+                  "positionX": 6,
+                  "positionY": -9,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "disappearAfter": 6
+                  }
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 2,
+                  "isInteractive": false
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The amulet’s glow intensified, pointing to a look, a bay where the sea curved into the land. The water was calm, but the amulet showed a vision of unbalanced tides threatening the harbor. The bay’s spirit appeared as a lighthouse’s beam, challenging Liam to restore harmony.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 22,
+          "sceneText": "Scene 8, Dialogue 2: The Look’s Harmony",
+          "assets": [
+              {
+                  "name": "s1_scene8_look_visions_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635296/story1_scene8_catastrophic_amex99.png"
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle",
+                      "disappearAfter": 4
+                  }
+              },
+              {
+                  "name": "bay_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897730/s1_correct_ans7_snanij.png",
+                  "positionX": 0,
+                  "positionY": -6,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 2.5,
+                      "delay": 0.5,
+                      "triggerBackgroundOverlay": true
+                  }
+              },
+              {
+                  "name": "lita_voice_s8_1",
+                  "type": "audio",
+                  "filePath": ""
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "The look shelters ships. Balance its tides by offering a token of the land.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s8_1"
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What is a curved part of the sea that enters the land, forming a sheltered area?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Baybayin",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Look",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Lawa",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Tangway",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 23,
+          "sceneText": "Scene 8, Dialogue 3: The Look’s Harmony",
+          "assets": [
+              {
+                  "name": "s1_scene8_look_background_alt2",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635302/s1_scene7_b8wr9v.png"
+              },
+              {
+                  "name": "seashell",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635278/seashell_pbbclz.png",
+                  "positionX": 0,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false
+              },
+              {
+                  "name": "liam_idle",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639081/liam_idle.png",
+                  "positionX": -6,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle"
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam placed the glowing seashell from the baybayin into the water. The amulet flared, and the tides steadied, ensuring safe passage for the village’s boats. The lighthouse beamed brighter, signaling the bay’s approval.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 24,
+          "sceneText": "Scene 9, Dialogue 1: The Karagatan’s Final Trial",
+          "assets": [
+              {
+                  "name": "s1_scene9_karagatan_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635281/s1_scene9_rkvlnl.jpg"
+              },
+              {
+                  "name": "liam_guided",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760724032/liam_w_amulet_m0ugre.png",
+                  "positionX": -5,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Liam",
+                      "state": "idle",
+                      "appearAfter": 2,
+                      "disappearAfter": 10
+                  }
+              },
+              {
+                  "name": "towering_deity",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759562756/toweringdeity-unscreen_oskept.gif",
+                  "positionX": 4,
+                  "positionY": -5,
+                  "orderIndex": 2,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "ToweringDeity",
+                      "state": "idle",
+                      "appearAfter": 3,
+                      "disappearAfter": 10
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "The amulet’s light blazed, guiding Liam to the edge of the baybayin which showed the vastness of the karagatan, the vast ocean stretching to the horizon. The village’s river, still dry, depended on this final test. The ocean’s spirit rose as a towering wave, its voice echoing with ancient power.",
+                  "orderIndex": 1
+              }
+          ]
+      },
+      {
+          "sceneOrder": 25,
+          "sceneText": "Scene 9, Dialogue 2: The Karagatan’s Final Trial",
+          "assets": [
+              {
+                  "name": "s1_scene9_karagatan_background",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758635281/s1_scene9_rkvlnl.jpg"
+              },
+              {
+                  "name": "lita_voice_s9_1",
+                  "type": "audio",
+                  "filePath": ""
+              },
+              {
+                  "name": "lita_thinking",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758639256/lita_thinking.png",
+                  "positionX": -3,
+                  "positionY": -9,
+                  "orderIndex": 1,
+                  "isInteractive": false,
+                  "metadata": {
+                      "character": "Lita",
+                      "state": "thinking",
+                      "disappearAfter": 3
+                  }
+              },
+              {
+                  "name": "dagat_correct",
+                  "type": "sprite",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1758897753/s1_correct_ans9_mrxuiy.png",
+                  "positionX": -1,
+                  "positionY": -5,
+                  "orderIndex": 4,
+                  "isInteractive": false,
+                  "metadata": {
+                      "appearAfter": 3,
+                      "delay": 0.5,
+                      "scale": 0.8,
+                      "triggerBackgroundOverlay": true
+                  }
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "LITA",
+                  "lineText": "The karagatan is the lifeblood of the world, Liam. Offer it your courage to awaken the river’s source.",
+                  "orderIndex": 1,
+                  "voiceover": "lita_voice_s9_1"
+              }
+          ],
+          "question": {
+              "type": "MCQ",
+              "promptText": "What is the largest and saltiest body of water on Earth?",
+              "points": 4,
+              "choices": [
+                  {
+                      "choiceText": "Ilog",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Lawa",
+                      "isCorrect": false
+                  },
+                  {
+                      "choiceText": "Karagatan",
+                      "isCorrect": true
+                  },
+                  {
+                      "choiceText": "Dagat",
+                      "isCorrect": false
+                  }
+              ]
+          }
+      },
+      {
+          "sceneOrder": 26,
+          "sceneText": "Scene 9, Dialogue 3: The Karagatan’s Final Trial",
+          "assets": [
+              {
+                  "name": "s1lastscene",
+                  "type": "background",
+                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760986802/LiamRaisingTheOcean_h0hs73.png"
+              }
+          ],
+          "dialogues": [
+              {
+                  "characterName": "NARRATOR",
+                  "lineText": "Liam stepped into the surf, holding the amulet aloft. He spoke of his journey—his fears, his resolve, and his love for his village. The amulet erupted in light, merging with the ocean. A distant rumble signaled the river’s revival, its waters flowing once more. As Liam returned to the village, the people cheered, and the amulet’s glow faded, its purpose fulfilled.",
+                  "orderIndex": 1
+              }
+          ]
+      }
+  ]
+}

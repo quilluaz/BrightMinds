@@ -56,6 +56,11 @@ public class QuestionService {
         return questionRepository.findBySceneIdAndType(sceneId, type);
     }
     
+    // Get questions by story ID
+    public List<Question> getQuestionsByStoryId(Integer storyId) {
+        return questionRepository.findQuestionsByStoryId(storyId);
+    }
+    
     // Get questions with points greater than specified value
     public List<Question> getQuestionsByPointsGreaterThan(Integer points) {
         return questionRepository.findByPointsGreaterThan(points);

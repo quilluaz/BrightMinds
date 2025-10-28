@@ -1,0 +1,148 @@
+{
+  "title": "Hiraya’s Museum Adventure: A Hero’s Journey",
+  "description": "A story about Hiraya's museum adventure on National Heroes Day, where she learns about José Rizal, Tandang Sora, Lapu-Lapu, and Sultan Kudarat.",
+  "storyOrder": 3,
+  "gameplayType": "Sequence",
+  "thumbnailImage": "https://res.cloudinary.com/dymjwplal/image/upload/v1761067923/Story3CoverMuseum_twkcyu.png",
+  "scenes": [
+    {
+      "sceneOrder": 1,
+      "assets": [
+        {
+          "name": "s3_thumbnail",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761067923/Story3CoverMuseum_twkcyu.png"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "GAME",
+          "lineText": "Click to progress the story",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 2,
+      "assets": [
+        {
+          "name": "s3_scene2_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830187/HirayaBedWakeUp_nleauv.png",
+          "metadata": {}
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The morning sunlight peeked through the window, painting golden lines across Hiraya’s room. She stretched and smiled - today was National Heroes Day!",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 3,
+      "assets": [
+        {
+          "name": "s3_scene2_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759833375/LivingRoom_nfla3k.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaDeparture_tzn3ko.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Lita",
+            "state": "thinking",
+            "appearAfter": 1,
+            "disappearAfter": 3
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Her Tita Marietta entered with her usual warm smile, carrying a woven bag and a sense of excitement.",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 4,
+      "assets": [
+        {
+          "name": "s3_scene3_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759835849/NationalHeroesDayMuseum_nx4vyn.png"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The grand Museo ng mga Bayani shimmered like it was alive. Banners of red, blue, and gold fluttered proudly. Inside, statues of heroes stood tall beneath a dome painted with the Philippine flag.",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 5,
+      "assets": [
+        {
+          "name": "s3_scene4_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761038337/HallwayMuseumCalambaLaguna_riiabv.png"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The first room glowed softly, filled with the calm strength of learning. Before them was Calamba, Laguna — José Rizal’s hometown. The pictures on the wall began to glow one by one.",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 6,
+      "assets": [
+        {
+          "name": "s3_scene5_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761039175/GlassPaneGame_s2p9d1.png"
+        }
+      ],
+      "dialogues": [],
+      "question": {
+        "type": "Sequence",
+        "promptText": "Arrange the events of Rizal's story in the correct order.",
+        "points": 5,
+        "choices": [
+          {
+            "choiceText": "The Writer of Freedom: He wrote Noli Me Tangere and El Filibusterismo to help open people's eyes.",
+            "orderIndex": 3,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
+          },
+          {
+            "choiceText": "The Young Scholar: Rizal studied hard in Calamba and Manila, excelling in science, art, and literature.",
+            "orderIndex": 1,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
+          },
+          {
+            "choiceText": "The Legacy of Courage: Rizal stood firm and bravely and was executed in Bagumbayan, but his words inspired freedom.",
+            "orderIndex": 4,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
+          },
+          {
+            "choiceText": "The Global Student: He traveled to Europe to learn medicine and saw the world outside the Philippines.",
+            "orderIndex": 2,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
+          }
+        ]
+      }
+    }
+  ]
+}

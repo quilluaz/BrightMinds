@@ -3,37 +3,80 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { logout } from "@/services/auth";
 
-const ITEMS = [
-  {
-    label: "home",
-    href: "/home",
-    ariaLabel: "Home",
-    rotation: -8,
-    hoverStyles: { bgColor: "#9c8bef", textColor: "#ffffff" },
-  },
-  {
-    label: "settings",
-    href: "/settings",
-    ariaLabel: "Settings",
-    rotation: 8,
-    hoverStyles: { bgColor: "#ff8e51", textColor: "#ffffff" },
-  },
-  {
-    label: "about",
-    href: "/about",
-    ariaLabel: "About",
-    rotation: 8,
-    hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
-  },
-  {
+const getMenuItems = () => {
+  let user = {};
+  try {
+    const userData = localStorage.getItem("bm_user");
+    if (userData) {
+      user = JSON.parse(userData);
+    }
+  } catch (error) {
+    console.error("Error parsing user data from localStorage:", error);
+    // Clear corrupted data
+    localStorage.removeItem("bm_user");
+  }
+  
+  const isGameMaster = user.role === "GAMEMASTER";
+  const isPlayer = user.role === "PLAYER";
+
+  const baseItems = [
+    {
+      label: "home",
+      href: "/home",
+      ariaLabel: "Home",
+      rotation: -8,
+      hoverStyles: { bgColor: "#9c8bef", textColor: "#ffffff" },
+    },
+    {
+      label: "settings",
+      href: "/settings",
+      ariaLabel: "Settings",
+      rotation: 8,
+      hoverStyles: { bgColor: "#ff8e51", textColor: "#ffffff" },
+    },
+    {
+      label: "about",
+      href: "/about",
+      ariaLabel: "About",
+      rotation: 8,
+      hoverStyles: { bgColor: "#ffd83f", textColor: "#ffffff" },
+    },
+  ];
+
+  // Add dashboard for Game Masters
+  if (isGameMaster) {
+    baseItems.splice(1, 0, {
+      label: "dashboard",
+      href: "/gamemaster",
+      ariaLabel: "Game Master Dashboard",
+      rotation: -4,
+      hoverStyles: { bgColor: "#feb0e1", textColor: "#ffffff" },
+    });
+  }
+
+  // Add dashboard for Players
+  if (isPlayer) {
+    baseItems.splice(1, 0, {
+      label: "dashboard",
+      href: "/dashboard",
+      ariaLabel: "Player Dashboard",
+      rotation: -4,
+      hoverStyles: { bgColor: "#3ea66b", textColor: "#ffffff" },
+    });
+  }
+
+  // Add logout at the end
+  baseItems.push({
     label: "logout",
     href: "#",
     ariaLabel: "Logout",
     rotation: -4,
     hoverStyles: { bgColor: "#ef4444", textColor: "#ffffff" },
     isLogout: true,
-  },
-];
+  });
+
+  return baseItems;
+};
 
 export default function BubbleMenu({
   logo,
@@ -59,7 +102,7 @@ export default function BubbleMenu({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const menuItems = items?.length ? items : ITEMS;
+  const menuItems = items?.length ? items : getMenuItems();
 
   const containerClassName = [
     "bubble-menu",
@@ -94,12 +137,18 @@ export default function BubbleMenu({
 
   const handleMenuItemClick = (item, isActive) => {
     if (isActive) return;
-    if (item.isLogout) {
-      logout();
-    } else if (item.href && item.href !== "#") {
-      navigate(item.href);
+    
+    try {
+      if (item.isLogout) {
+        logout();
+      } else if (item.href && item.href !== "#") {
+        navigate(item.href);
+      }
+    } catch (error) {
+      console.error("Error handling menu item click:", error);
+    } finally {
+      setIsMenuOpen(false);
     }
-    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -108,77 +157,88 @@ export default function BubbleMenu({
     const labels = labelRefs.current.filter(Boolean);
     if (!overlay || !bubbles.length) return;
 
-    if (isMenuOpen) {
-      gsap.set(overlay, { display: "flex" });
-      gsap.fromTo(
-        overlay,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.25, ease: "power2.out" }
-      );
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.set(bubbles, { scale: 0, transformOrigin: "50% 50%" });
-      gsap.set(labels, { y: 24, autoAlpha: 0 });
+    try {
+      if (isMenuOpen) {
+        gsap.set(overlay, { display: "flex" });
+        gsap.fromTo(
+          overlay,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.25, ease: "power2.out" }
+        );
+        gsap.killTweensOf([...bubbles, ...labels]);
+        gsap.set(bubbles, { scale: 0, transformOrigin: "50% 50%" });
+        gsap.set(labels, { y: 24, autoAlpha: 0 });
 
-      bubbles.forEach((bubble, i) => {
-        const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
-        const tl = gsap.timeline({ delay });
-        tl.to(bubble, {
-          scale: 1,
-          duration: animationDuration,
-          ease: animationEase,
-        });
-        if (labels[i]) {
-          tl.to(
-            labels[i],
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: animationDuration,
-              ease: "power3.out",
-            },
-            "-=" + animationDuration * 0.9
-          );
-        }
-      });
-    } else if (showOverlay) {
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.to(labels, {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.2,
-        ease: "power3.in",
-      });
-      gsap.to(bubbles, {
-        scale: 0,
-        duration: 0.2,
-        ease: "power3.in",
-        onComplete: () => {
-          gsap.to(overlay, {
-            opacity: 0,
-            duration: 0.18,
-            ease: "power2.in",
-            onComplete: () => {
-              gsap.set(overlay, { display: "none" });
-              setShowOverlay(false);
-            },
+        bubbles.forEach((bubble, i) => {
+          const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
+          const tl = gsap.timeline({ delay });
+          tl.to(bubble, {
+            scale: 1,
+            duration: animationDuration,
+            ease: animationEase,
           });
-        },
-      });
+          if (labels[i]) {
+            tl.to(
+              labels[i],
+              {
+                y: 0,
+                autoAlpha: 1,
+                duration: animationDuration,
+                ease: "power3.out",
+              },
+              "-=" + animationDuration * 0.9
+            );
+          }
+        });
+      } else if (showOverlay) {
+        gsap.killTweensOf([...bubbles, ...labels]);
+        gsap.to(labels, {
+          y: 24,
+          autoAlpha: 0,
+          duration: 0.2,
+          ease: "power3.in",
+        });
+        gsap.to(bubbles, {
+          scale: 0,
+          duration: 0.2,
+          ease: "power3.in",
+          onComplete: () => {
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.18,
+              ease: "power2.in",
+              onComplete: () => {
+                gsap.set(overlay, { display: "none" });
+                setShowOverlay(false);
+              },
+            });
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Error in GSAP animation:", error);
+      // Fallback: just close the menu
+      setIsMenuOpen(false);
+      setShowOverlay(false);
     }
   }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
 
   useEffect(() => {
     const handleResize = () => {
-      if (isMenuOpen) {
-        const bubbles = bubblesRef.current.filter(Boolean);
-        const isDesktop = window.innerWidth >= 900;
-        bubbles.forEach((bubble, i) => {
-          const item = menuItems[i];
-          if (bubble && item) {
-            const rotation = isDesktop ? item.rotation ?? 0 : 0;
-            gsap.set(bubble, { rotation });
-          }
-        });
+      try {
+        if (isMenuOpen) {
+          const bubbles = bubblesRef.current.filter(Boolean);
+          const isDesktop = window.innerWidth >= 900;
+          bubbles.forEach((bubble, i) => {
+            const item = menuItems[i];
+            if (bubble && item) {
+              const rotation = isDesktop ? item.rotation ?? 0 : 0;
+              gsap.set(bubble, { rotation });
+            }
+          });
+        }
+      } catch (error) {
+        console.error("Error in resize handler:", error);
       }
     };
     window.addEventListener("resize", handleResize);

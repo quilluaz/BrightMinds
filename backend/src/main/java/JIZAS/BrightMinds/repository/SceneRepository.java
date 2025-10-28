@@ -11,6 +11,7 @@ import java.util.List;
 public interface SceneRepository extends JpaRepository<Scene, Integer> {
     List<Scene> findByStoryOrderBySceneOrderAsc(Story story);
     List<Scene> findByStory_StoryIdOrderBySceneOrderAsc(Integer storyId);
+    List<Scene> findByStoryStoryIdOrderBySceneOrder(Integer storyId);
 }
 
 

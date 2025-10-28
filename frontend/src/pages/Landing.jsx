@@ -22,15 +22,15 @@ export default function Landing() {
   const [signupLname, setSignupLname] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
+  const [signupTeacherCode, setSignupTeacherCode] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const baseImages = [
-    "https://res.cloudinary.com/dymjwplal/image/upload/story1_landing_kxgk4k.png",
-    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene9_rkvlnl.jpg",
+    "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
+    "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
     "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene3zeke_jx5kso.png",
-    "https://res.cloudinary.com/dymjwplal/image/upload/s1_scene1zeke_hxe84n.png",
   ];
 
   const gridImages = Array.from({ length: 28 }, (_, i) => {
@@ -60,8 +60,13 @@ export default function Landing() {
     }
 
     try {
-      await login({ email: loginEmail, password: loginPassword });
-      window.location.href = "/home";
+      const user = await login({ email: loginEmail, password: loginPassword });
+      // Redirect based on user role
+      if (user.role === "GAMEMASTER") {
+        window.location.href = "/gamemaster";
+      } else {
+        window.location.href = "/home";
+      }
     } catch (e) {
       setError(
         e?.message ||
@@ -81,9 +86,10 @@ export default function Landing() {
       !signupFname.trim() ||
       !signupLname.trim() ||
       !signupEmail.trim() ||
-      !signupPassword
+      !signupPassword ||
+      !signupTeacherCode.trim()
     ) {
-      setError("Please fill in all fields.");
+      setError("Please fill in all fields including the teacher code.");
       setLoading(false);
       return;
     }
@@ -94,9 +100,15 @@ export default function Landing() {
         lName: signupLname.trim(),
         email: signupEmail.trim(),
         password: signupPassword,
+        teacherCode: signupTeacherCode.trim(),
       };
-      await signup(signupData);
-      window.location.href = "/home";
+      const user = await signup(signupData);
+      // Redirect based on user role (should always be GAMEMASTER for signup)
+      if (user.role === "GAMEMASTER") {
+        window.location.href = "/gamemaster";
+      } else {
+        window.location.href = "/home";
+      }
     } catch (e) {
       setError(
         e?.message || "Signup failed. Please review inputs or try again."
@@ -323,11 +335,30 @@ export default function Landing() {
                   onChange={(e) => setSignupPassword(e.target.value)}
                 />
               </div>
+              <div className="grid gap-2">
+                <Label htmlFor="signup-teacher-code" className="text-bmBlack">
+                  Teacher Code *
+                </Label>
+                <Input
+                  id="signup-teacher-code"
+                  type="text"
+                  placeholder="Enter teacher code (required)"
+                  className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                  value={signupTeacherCode}
+                  onChange={(e) => setSignupTeacherCode(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="text-sm text-bmBlack bg-white p-3 rounded border-2 border-bmBlack">
+                <strong>Note:</strong> Only teachers can create accounts.
+                Students will be created by their teachers through the import
+                feature.
+              </div>
               <Button
                 className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
                 onClick={handleSignup}
                 disabled={loading}>
-                {loading ? "Creating..." : "Create account"}
+                {loading ? "Creating..." : "Create Teacher Account"}
               </Button>
             </div>
           )}

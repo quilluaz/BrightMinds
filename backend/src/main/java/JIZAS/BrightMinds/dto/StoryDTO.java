@@ -11,6 +11,7 @@ public class StoryDTO {
     private String narrationUrl;
     private Integer storyOrder;
     private String thumbnailImage;
+    private String gameplayType;
     private List<SceneDTO> scenes;
     private List<String> sequenceGraph;
     
@@ -23,6 +24,7 @@ public class StoryDTO {
         this.narrationUrl = story.getNarrationUrl();
         this.storyOrder = story.getStoryOrder();
         this.thumbnailImage = story.getThumbnailImage();
+        this.gameplayType = story.getGameplayType();
         this.sequenceGraph = story.getSequenceGraph();
         if (story.getScenes() != null) {
             this.scenes = story.getScenes().stream().map(SceneDTO::new).collect(Collectors.toList());
@@ -37,6 +39,7 @@ public class StoryDTO {
         s.setNarrationUrl(this.narrationUrl);
         s.setStoryOrder(this.storyOrder);
         s.setThumbnailImage(this.thumbnailImage);
+        s.setGameplayType(this.gameplayType);
         s.setSequenceGraph(this.sequenceGraph);
         return s;
     }
@@ -53,6 +56,8 @@ public class StoryDTO {
     public void setStoryOrder(Integer storyOrder) { this.storyOrder = storyOrder; }
     public String getThumbnailImage() { return thumbnailImage; }
     public void setThumbnailImage(String thumbnailImage) { this.thumbnailImage = thumbnailImage; }
+    public String getGameplayType() { return gameplayType; }
+    public void setGameplayType(String gameplayType) { this.gameplayType = gameplayType; }
     public List<SceneDTO> getScenes() { return scenes; }
     public void setScenes(List<SceneDTO> scenes) { this.scenes = scenes; }
     public List<String> getSequenceGraph() { return sequenceGraph; }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,27 @@ public class SceneAssetService {
 	public List<SceneAsset> listByScene(Integer sceneId) { return repo.findByScene_SceneId(sceneId); }
 	public SceneAsset update(SceneAsset s) { return repo.save(s); }
 	public void delete(Long id) { repo.deleteById(id); }
+	
+	public Optional<SceneAsset> findByAssetNameAndSceneOrder(String assetName, Integer sceneOrder) {
+		return repo.findByAssetNameAndSceneOrder(assetName, sceneOrder);
+	}
+	
+	public SceneAsset updatePosition(String assetName, Integer sceneOrder, Float newPositionX, Float newPositionY) {
+		SceneAsset sceneAsset = findByAssetNameAndSceneOrder(assetName, sceneOrder)
+			.orElseThrow(() -> new RuntimeException("SceneAsset not found with asset name: " + assetName + " and scene order: " + sceneOrder));
+		
+		sceneAsset.setPositionX(newPositionX);
+		sceneAsset.setPositionY(newPositionY);
+		return repo.save(sceneAsset);
+	}
+	
+	public SceneAsset updateMetadata(Long sceneAssetId, Map<String, Object> metadata) {
+		SceneAsset sceneAsset = get(sceneAssetId)
+			.orElseThrow(() -> new RuntimeException("SceneAsset not found with ID: " + sceneAssetId));
+		
+		sceneAsset.setMetadata(metadata);
+		return repo.save(sceneAsset);
+	}
 }
 
 

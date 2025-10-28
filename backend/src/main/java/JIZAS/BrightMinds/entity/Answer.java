@@ -20,6 +20,12 @@ public class Answer {
     @Column(name = "answer_text", columnDefinition = "TEXT")
     private String answerText;
 
+    @Column(name = "asset_name")
+    private String assetName;
+
+    @Column(name = "is_correct")
+    private Boolean isCorrect;
+
     @Column(name = "dragdrop_position")
     private Integer dragdropPosition;
 
@@ -69,5 +75,21 @@ public class Answer {
 
     public void setDragdropPosition(Integer dragdropPosition) {
         this.dragdropPosition = dragdropPosition;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+
+    public Boolean isCorrect() {
+        return isCorrect;
+    }
+
+    public void setIsCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
     }
 }

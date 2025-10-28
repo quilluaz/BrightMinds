@@ -26,6 +26,9 @@ public class Choice {
     @Column(name = "choice_image_url")
     private String choiceImageUrl;
 
+    @Column(name = "order_index")
+    private Integer orderIndex;
+
     // Constructors
     public Choice() {}
 
@@ -75,5 +78,13 @@ public class Choice {
 
     public void setChoiceImageUrl(String choiceImageUrl) {
         this.choiceImageUrl = choiceImageUrl;
+    }
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
     }
 }
