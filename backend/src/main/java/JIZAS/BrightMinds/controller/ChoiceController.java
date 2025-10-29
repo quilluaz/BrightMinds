@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/choices")
-@CrossOrigin(origins = "*")
 public class ChoiceController {
     
     @Autowired

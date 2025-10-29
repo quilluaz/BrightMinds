@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/scene-assets")
-@CrossOrigin(origins = "*")
 public class SceneAssetController {
 
 	private final SceneAssetService service;

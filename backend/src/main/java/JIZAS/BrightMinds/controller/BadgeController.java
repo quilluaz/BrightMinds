@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/badges")
 @Tag(name = "Badges", description = "API for managing badges")
-@CrossOrigin(origins = "*")
 public class BadgeController {
 
     @Autowired

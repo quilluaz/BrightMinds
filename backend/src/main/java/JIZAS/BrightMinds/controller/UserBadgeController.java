@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/user-badges")
 @Tag(name = "User Badges", description = "API for managing user badge relationships")
-@CrossOrigin(origins = "*")
 public class UserBadgeController {
 
     @Autowired

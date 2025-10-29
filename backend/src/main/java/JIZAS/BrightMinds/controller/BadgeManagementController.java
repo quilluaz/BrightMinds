@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/badge-management")
 @Tag(name = "Badge Management", description = "API for managing badge system and retroactive badge awarding")
-@CrossOrigin(origins = "*")
 public class BadgeManagementController {
 
     @Autowired

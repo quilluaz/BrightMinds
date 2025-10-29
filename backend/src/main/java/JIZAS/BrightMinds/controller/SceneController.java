@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/scenes")
-@CrossOrigin(origins = "*")
 public class SceneController {
 
     @Autowired
