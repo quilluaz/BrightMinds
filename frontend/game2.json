@@ -35,7 +35,7 @@
           "name": "leah_idle",
           "type": "sprite",
           "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759218165/leah_idle_v1_in7avu.png",
-          "positionX": 6,
+          "positionX": 2,
           "positionY": -8,
           "orderIndex": 1,
           "isInteractive": false,
@@ -43,6 +43,7 @@
             "character": "Leah",
             "state": "idle",
             "facing": "left",
+            "appearAfter": 0.5,
             "disappearAfter": 1
           }
         },
@@ -50,7 +51,7 @@
           "name": "leah_walk",
           "type": "sprite",
           "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah2_vmbnfx.png",
-          "positionX": 6,
+          "positionX": 2,
           "positionY": -8,
           "orderIndex": 2,
           "isInteractive": false,
@@ -60,19 +61,23 @@
             "animation": "move",
             "facing": "left",
             "appearAfter": 1.25,
-            "positionX": 6,
-            "positionY": -8,
-            "endX": 0,
+            "endX": -4,
             "endY": -8,
             "duration": 1.5
           }
+        },
+        {
+          "name": "s2_ntr1",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667958/s2_narrator1_qzbnaf.mp3"
         }
       ],
       "dialogues": [
         {
           "characterName": "NARRATOR",
           "lineText": "In a cozy village home, young Leah woke up one sunny morning, bubbling with curiosity. She tiptoed to her mom's bookshelf, hunting for a fun cartoon book about spring adventures.",
-          "orderIndex": 1
+          "orderIndex": 1,
+          "voiceover": "s2_ntr1"
         }
       ]
     },
@@ -96,7 +101,7 @@
           "name": "leah_surprised",
           "type": "sprite",
           "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759061259/leah3_burbj1.png",
-          "positionX": 0,
+          "positionX": -4,
           "positionY": -8,
           "orderIndex": 1,
           "isInteractive": false,
@@ -105,19 +110,25 @@
             "state": "idle",
             "facing": "left"
           }
+        },
+        {
+          "name": "s2_ntr2",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667957/s2_narrator2_tk8toc.mp3"
         }
       ],
       "dialogues": [
         {
           "characterName": "NARRATOR",
-          "lineText": "Oops! A dusty scrapbook tumbled to the floor, its pages all jumbled and torn",
-          "orderIndex": 1
+          "lineText": "Oops! A dusty scrapbook tumbled to the floor, its pages all jumbled and torn.",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr2"
         }
       ]
     },
     {
       "sceneOrder": 4,
-      "sceneText": "The Sparkly Surprise - Tanso Puzzle",
+      "sceneText": "The Sparkly Surprise - Tanso Intro",
       "assets": [
         {
           "name": "table_background",
@@ -133,18 +144,13 @@
           "orderIndex": 1,
           "isInteractive": false,
           "metadata": {
-            "screenShake": {
-              "delay": 250,
-              "duration": 1000,
-              "intensity": 5
-            },
             "disappearAfter": 1.5
           }
         },
         {
           "name": "book_open",
           "type": "sprite",
-          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759233855/book_open_qmbxgy.png",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981113/s2_1_wdjlkj.png",
           "positionX": 0,
           "positionY": -7,
           "orderIndex": 2,
@@ -159,21 +165,25 @@
           "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222140/scene1_mineral_blank_z6zedt.png",
           "positionX": 0.5,
           "positionY": -6,
-          "orderIndex": 2,
+          "orderIndex": 3,
           "isInteractive": false,
           "metadata": {
             "appearAfter": 2,
-            "scale": 0.5,
-            "dropTarget": true,
-            "questionId": 1
+            "scale": 0.5
           }
+        },
+        {
+          "name": "s2_ntr3",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667958/s2_narrator3_ynyks2.mp3"
         }
       ],
       "dialogues": [
         {
           "characterName": "NARRATOR",
           "lineText": "The left page sparkled with words about tanso, a super cool reddish-brown mineral.",
-          "orderIndex": 1
+          "orderIndex": 1,
+          "voiceover": "s2_ntr3"
         }
       ]
     },
@@ -189,11 +199,18 @@
         {
           "name": "book_open",
           "type": "sprite",
-          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759233855/book_open_qmbxgy.png",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981113/s2_1_wdjlkj.png",
           "positionX": 0,
           "positionY": -7,
           "orderIndex": 1,
-          "isInteractive": false
+          "isInteractive": false,
+          "metadata": {
+            "screenShake": {
+              "delay": 500,
+              "duration": 1000,
+              "intensity": 5
+            }
+          }
         },
         {
           "name": "scene1_mineral_unknown",
@@ -238,13 +255,13 @@
         {
           "name": "mineral_gold",
           "type": "sprite",
-          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222623/scene3mineral_na5f2c.png",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761063463/scene3minerall_ht0eaj.png",
           "positionX": -6,
           "positionY": 2,
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.75,
+            "scale": 0.5,
             "isDraggable": true
           }
         },
@@ -260,6 +277,19 @@
             "scale": 0.5,
             "isDraggable": true
           }
+        },
+        {
+          "name": "s2_ntr4",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667957/s2_narrator4_wqixcb.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Suddenly, four minerals popped out of the book! Can you help Leah drag the correct one to the empty spot?",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr4"
         }
       ],
       "question": {
@@ -287,7 +317,24 @@
             "assetName": "mineral_iron",
             "isCorrect": false
           }
-        ]
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "That's it! The shiny reddish-brown Tanso fits perfectly. Leah smiled, one step closer to fixing the scrapbook!",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr5"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr5",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667957/s2_narrator5_xnuaoc.mp3"
+            }
+          ]
+        }
       }
     },
     {
@@ -319,7 +366,7 @@
           "metadata": {
             "scale": 0.5,
             "dropTarget": true,
-            "questionId": 1
+            "questionId": 2
           }
         },
         {
@@ -351,13 +398,13 @@
         {
           "name": "mineral_gold",
           "type": "sprite",
-          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222623/scene3mineral_na5f2c.png",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761063463/scene3minerall_ht0eaj.png",
           "positionX": -6,
           "positionY": 2,
           "orderIndex": 3,
           "isInteractive": true,
           "metadata": {
-            "scale": 0.75,
+            "scale": 0.5,
             "isDraggable": true
           }
         },
@@ -373,6 +420,19 @@
             "scale": 0.5,
             "isDraggable": true
           }
+        },
+        {
+          "name": "s2_ntr6",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667956/s2_narrator6_a4jymq.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Leah turned the page. This one glowed with words about 'Pilak'. The minerals appeared again, ready to be placed!",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr6"
         }
       ],
       "question": {
@@ -400,8 +460,929 @@
             "assetName": "mineral_iron",
             "isCorrect": false
           }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "Amazing! The dazzling Pilak is in its place. The scrapbook is starting to look beautiful again!",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr7"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr7",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667970/s2_narrator7_kfmtav.mp3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 7,
+      "sceneText": "A Golden Glow - Ginto Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_3",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981171/s2_3_ppwlle.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question3_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759223403/scene2_mineral_blank_oy8wjy.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 3
+          }
+        },
+        {
+          "name": "mineral_copper",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759220317/scene1mineral_cixvve.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_silver",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222037/scene2mineral_edbwrh.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gold",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761063463/scene3minerall_ht0eaj.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_iron",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222121/scene4mineral_hhazjr.png",
+          "positionX": -2,
+          "positionY": 4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr8",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667969/s2_narrator8_liupm8.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The scrapbook was starting to shine! Now for a page about ginto. Can you find the golden mineral?",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr8"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Copper",
+            "assetName": "mineral_copper",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Silver",
+            "assetName": "mineral_silver",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gold",
+            "assetName": "mineral_gold",
+            "isCorrect": true
+          },
+          {
+            "answerText": "Iron",
+            "assetName": "mineral_iron",
+            "isCorrect": false
+          }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "Perfect! The Ginto picture is sparkling like a tiny sun. Great job!",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr9"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr9",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667968/s2_narrator9_enuszk.mp3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 8,
+      "sceneText": "A Mighty Mineral - Bakal Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_4",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981176/s2_4_z10noz.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question4_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759225409/scene4mineral_blank_icrxqd.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 4
+          }
+        },
+        {
+          "name": "mineral_copper",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759220317/scene1mineral_cixvve.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_silver",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222037/scene2mineral_edbwrh.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gold",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761063463/scene3minerall_ht0eaj.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_iron",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222121/scene4mineral_hhazjr.png",
+          "positionX": -2,
+          "positionY": 4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr10",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667966/s2_narrator10_tpmrgd.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Leah flipped to a page about bakal, a strong, dark mineral. Help her find the right one!",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr10"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Copper",
+            "assetName": "mineral_copper",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Silver",
+            "assetName": "mineral_silver",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gold",
+            "assetName": "mineral_gold",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Iron",
+            "assetName": "mineral_iron",
+            "isCorrect": true
+          }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "That's the one! The tough-looking Bakal picture is complete.",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr11"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr11",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667965/s2_narrator11_ecyscg.mp3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 9,
+      "sceneText": "The Magic of Minerals",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_5",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761087568/image_3_updvx8.png",
+          "positionX": 3.8,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 1.8,
+            "dropTarget": true,
+            "questionId": 5
+          }
+        },
+        {
+          "name": "s2_ntr12",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667964/s2_narrator12_jusrat.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Leah paused to admire her sparkly scrapbook. The next page explained that these treasures are called minerals—special rocks that help people every day!",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr12"
+        }
+      ]
+    },
+    {
+      "sceneOrder": 10,
+      "sceneText": "A Salty Sparkle - Asin Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_6",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981501/s2_6_vejtls.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question5_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759227376/scene5mineral_blank_kp6egn.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 5
+          }
+        },
+        {
+          "name": "mineral_salt",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222133/scene5mineral_crk1ks.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gems",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761683932/scene8mineral_2_qjfobq.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_oil",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222210/scene7mineral_dlludv.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_coal",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222192/scene6mineral_n3bkzy.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr13",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667963/s2_narrator13_pdbyqq.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Leah flipped to a page about asin, a white mineral from the sea. Which one is it?",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr13"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Salt",
+            "assetName": "mineral_salt",
+            "isCorrect": true
+          },
+          {
+            "answerText": "Coal",
+            "assetName": "mineral_coal",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gems",
+            "assetName": "mineral_gems",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Oil",
+            "assetName": "mineral_oil",
+            "isCorrect": false
+          }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "You got it! The crystal picture of Asin is shining bright.",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr14"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr14",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667962/s2_narrator14_mwibbu.mp3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 11,
+      "sceneText": "A Fiery Find - Karbon Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_7",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981476/s2_7_e4pqjm.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question6_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759227257/scene6mineral_blank_wnnzmy.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 6
+          }
+        },
+        {
+          "name": "mineral_salt",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222133/scene5mineral_crk1ks.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gems",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761683932/scene8mineral_2_qjfobq.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_oil",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222210/scene7mineral_dlludv.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_coal",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222192/scene6mineral_n3bkzy.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr15",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667960/s2_narrator15_dcvklb.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The next page glowed with karbon, a dark mineral that powers the world. Which one is it?",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr15"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Salt",
+            "assetName": "mineral_salt",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Coal",
+            "assetName": "mineral_coal",
+            "isCorrect": true
+          },
+          {
+            "answerText": "Gems",
+            "assetName": "mineral_gems",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Oil",
+            "assetName": "mineral_oil",
+            "isCorrect": false
+          }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "Yes! The shiny coal picture is complete. You've lit up the page!",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr16"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr16",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761667961/s2_narrator16_kpeebo.mp3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 12,
+      "sceneText": "A Liquid Treasure - Langis Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_8",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981407/s2_8_uufpxw.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question7_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759826528/scene7mineral_blank_eqr9tu.png",
+          "positionX": 0.5,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 7
+          }
+        },
+        {
+          "name": "mineral_salt",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222133/scene5mineral_crk1ks.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gems",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761683932/scene8mineral_2_qjfobq.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_oil",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222210/scene7mineral_dlludv.png",
+          "positionX": -6,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_coal",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222192/scene6mineral_n3bkzy.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr17",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761676817/s2_narrator17_hym5ox.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Leah turned to a page about langis, a special liquid mineral. Help her finish the picture!",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr17"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Salt",
+            "assetName": "mineral_salt",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Coal",
+            "assetName": "mineral_coal",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gems",
+            "assetName": "mineral_gems",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Oil",
+            "assetName": "mineral_oil",
+            "isCorrect": true
+          }
+        ],
+        "onCorrect": {
+          "dialogues": [
+            {
+              "characterName": "NARRATOR",
+              "lineText": "Wonderful! The oil drop picture is complete!",
+              "orderIndex": 1,
+              "voiceover": "s2_ntr18"
+            }
+          ],
+          "assets": [
+            {
+              "name": "s2_ntr18",
+              "type": "audio",
+              "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761676824/s2_narrator18_qaxzg2.wav"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneOrder": 13,
+      "sceneText": "A Dazzling Finish - Hiyas Puzzle",
+      "assets": [
+        {
+          "name": "table_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759219660/table_fq0uto.png"
+        },
+        {
+          "name": "book_page_9",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760981274/s2_8_mkycbn.png",
+          "positionX": 0,
+          "positionY": -7,
+          "orderIndex": 1,
+          "isInteractive": false
+        },
+        {
+          "name": "question8_mineral_unknown",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761685809/missingscene8_ucvmeu.png",
+          "positionX": 2.1,
+          "positionY": -6,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "scale": 0.5,
+            "dropTarget": true,
+            "questionId": 8
+          }
+        },
+        {
+          "name": "mineral_copper",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759220317/scene1mineral_cixvve.png",
+          "positionX": -7,
+          "positionY": -4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_silver",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222037/scene2mineral_edbwrh.png",
+          "positionX": -3,
+          "positionY": -1,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_gems",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761683932/scene8mineral_2_qjfobq.png",
+          "positionX": -7,
+          "positionY": 2,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "mineral_iron",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759222121/scene4mineral_hhazjr.png",
+          "positionX": -2,
+          "positionY": 4,
+          "orderIndex": 3,
+          "isInteractive": true,
+          "metadata": {
+            "scale": 0.5,
+            "isDraggable": true
+          }
+        },
+        {
+          "name": "s2_ntr19",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761676819/s2_narrator19_fjk3sk.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The final page sparkled with hiyas, the most beautiful minerals. Which one is it?",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr19"
+        }
+      ],
+      "question": {
+        "type": "DragDrop",
+        "promptText": "Drag the correct mineral sprite to the ? on the right page.",
+        "points": 4,
+        "answers": [
+          {
+            "answerText": "Salt",
+            "assetName": "mineral_salt",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Coal",
+            "assetName": "mineral_coal",
+            "isCorrect": false
+          },
+          {
+            "answerText": "Gems",
+            "assetName": "mineral_gems",
+            "isCorrect": true
+          },
+          {
+            "answerText": "Oil",
+            "assetName": "mineral_oil",
+            "isCorrect": false
+          }
         ]
       }
+    },
+    {
+      "sceneOrder": 14,
+      "sceneText": "FINALIZATION",
+      "assets": [
+        {
+          "name": "Infinity_Finish",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761687297/FinaleScene_tcxvbc.png"
+        },
+        {
+          "name": "s2_ntr20",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761676819/s2_narrator20_mhwr7j.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "You did it! The scrapbook is complete! All the beautiful minerals are back where they belong.",
+          "orderIndex": 1,
+          "voiceover": "s2_ntr20"
+        }
+      ]
     }
   ]
 }
+
