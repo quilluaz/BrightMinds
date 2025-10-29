@@ -13,13 +13,14 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*")
 @Tag(name = "User Management", description = "APIs for managing users in the BrightMinds system")
 public class UserController {
 
@@ -107,6 +108,26 @@ public class UserController {
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/me/password")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Map<String, String>> changePassword(@RequestBody Map<String, String> passwordData) {
+        try {
+            String newPassword = passwordData.get("password");
+            if (newPassword == null || newPassword.trim().isEmpty()) {
+                return new ResponseEntity<>(Map.of("error", "Password is required"), HttpStatus.BAD_REQUEST);
+            }
+            
+            // TODO: Get current user from JWT token when authentication is implemented
+            // For now, we'll need to get user ID from request header or implement proper JWT extraction
+            Long userId = 1L; // Placeholder - should be extracted from JWT token
+            
+            userService.changePassword(userId, newPassword);
+            return new ResponseEntity<>(Map.of("message", "Password changed successfully"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(Map.of("error", "Failed to change password"), HttpStatus.BAD_REQUEST);
         }
     }
 }

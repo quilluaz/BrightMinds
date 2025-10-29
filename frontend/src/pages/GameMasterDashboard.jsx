@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
 import BubbleMenu from "@/components/ui/BubbleMenu";
@@ -204,6 +205,46 @@ export default function GameMasterDashboard() {
     }
   };
 
+  const handleResetPassword = async (studentId) => {
+    if (
+      !confirm(
+        "Are you sure you want to reset this student's password to the default?"
+      )
+    )
+      return;
+
+    if (!user?.userId) {
+      setError("Game Master ID not available");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(""); // Clear previous errors
+
+      console.log("Resetting password for student:", studentId); // Debug log
+
+      await api.post(
+        `/gamemaster/student/${studentId}/reset-password`,
+        {},
+        {
+          headers: {
+            "X-GameMaster-Id": user.userId.toString(),
+          },
+        }
+      );
+      setSuccess(
+        "Student password reset successfully! Default password: brightmindsplayer"
+      );
+      fetchStudents(user.userId);
+    } catch (e) {
+      console.error("Error resetting password:", e); // Debug log
+      setError(`Failed to reset password: ${e.message || e}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!user) {
     return (
       <main className="min-h-screen bg-bmGreen flex items-center justify-center">
@@ -352,6 +393,12 @@ export default function GameMasterDashboard() {
                     </div>
                     <div className="flex gap-2">
                       <Button
+                        onClick={() => handleResetPassword(student.userId)}
+                        className="bg-bmOrange hover:bg-orange-600 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]"
+                        disabled={loading}>
+                        Reset Password
+                      </Button>
+                      <Button
                         onClick={() => handleDeleteStudent(student.userId)}
                         className="bg-bmRed hover:bg-red-700 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]"
                         disabled={loading}>
@@ -371,22 +418,22 @@ export default function GameMasterDashboard() {
             <h2 className="text-3xl font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
               ANALYTICS DASHBOARD
             </h2>
-            
+
             {/* Charts Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Played Games */}
               <MostPlayedGamesChart data={analytics.mostPlayedGames} />
-              
+
               {/* Score Distribution */}
               <ScoreDistributionChart data={analytics.scoreDistribution} />
-              
+
               {/* Student Performance */}
               <StudentPerformanceChart data={analytics.studentPerformance} />
-              
+
               {/* Completion Rates */}
               <CompletionRatesChart data={analytics.completionRates} />
             </div>
-            
+
             {/* Recent Activity - Full Width */}
             <RecentActivityList data={analytics.recentActivity} />
           </div>
@@ -410,6 +457,9 @@ export default function GameMasterDashboard() {
             <DialogTitle className="font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
               Import Students
             </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              Upload an Excel file to import student accounts
+            </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-3 font-lexend">
             <div className="grid gap-2">

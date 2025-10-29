@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/dialogues")
-@CrossOrigin(origins = "*")
 public class DialogueController {
 
     @Autowired

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/story-scores")
-@CrossOrigin(origins = "*")
 public class StoryScoreController {
 
     @Autowired

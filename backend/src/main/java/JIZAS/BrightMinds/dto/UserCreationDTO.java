@@ -3,6 +3,7 @@ package JIZAS.BrightMinds.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserCreationDTO {
@@ -18,6 +19,7 @@ public class UserCreationDTO {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
+    @Pattern(regexp = ".*@cit\\.edu$", message = "Please use your CIT institutional email (@cit.edu)", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
 
     @NotBlank(message = "Password is required")

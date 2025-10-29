@@ -12,6 +12,7 @@ public class StoryDTO {
     private Integer storyOrder;
     private String thumbnailImage;
     private String gameplayType;
+    private BackgroundMusicDTO backgroundMusic;
     private List<SceneDTO> scenes;
     private List<String> sequenceGraph;
     
@@ -25,6 +26,15 @@ public class StoryDTO {
         this.storyOrder = story.getStoryOrder();
         this.thumbnailImage = story.getThumbnailImage();
         this.gameplayType = story.getGameplayType();
+        
+        // Create nested backgroundMusic object
+        if (story.getBackgroundMusicFilePath() != null || story.getBackgroundMusicVolume() != null) {
+            this.backgroundMusic = new BackgroundMusicDTO(
+                story.getBackgroundMusicFilePath(), 
+                story.getBackgroundMusicVolume()
+            );
+        }
+        
         this.sequenceGraph = story.getSequenceGraph();
         if (story.getScenes() != null) {
             this.scenes = story.getScenes().stream().map(SceneDTO::new).collect(Collectors.toList());
@@ -40,6 +50,13 @@ public class StoryDTO {
         s.setStoryOrder(this.storyOrder);
         s.setThumbnailImage(this.thumbnailImage);
         s.setGameplayType(this.gameplayType);
+        
+        // Handle nested backgroundMusic object
+        if (this.backgroundMusic != null) {
+            s.setBackgroundMusicFilePath(this.backgroundMusic.getFilePath());
+            s.setBackgroundMusicVolume(this.backgroundMusic.getVolume());
+        }
+        
         s.setSequenceGraph(this.sequenceGraph);
         return s;
     }
@@ -62,6 +79,9 @@ public class StoryDTO {
     public void setScenes(List<SceneDTO> scenes) { this.scenes = scenes; }
     public List<String> getSequenceGraph() { return sequenceGraph; }
     public void setSequenceGraph(List<String> sequenceGraph) { this.sequenceGraph = sequenceGraph; }
+    
+    public BackgroundMusicDTO getBackgroundMusic() { return backgroundMusic; }
+    public void setBackgroundMusic(BackgroundMusicDTO backgroundMusic) { this.backgroundMusic = backgroundMusic; }
 }
 
 

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { logout } from "@/services/auth";
+import "./BubbleMenu.css";
 
 const getMenuItems = () => {
   let user = {};
@@ -15,7 +16,7 @@ const getMenuItems = () => {
     // Clear corrupted data
     localStorage.removeItem("bm_user");
   }
-  
+
   const isGameMaster = user.role === "GAMEMASTER";
   const isPlayer = user.role === "PLAYER";
 
@@ -137,7 +138,7 @@ export default function BubbleMenu({
 
   const handleMenuItemClick = (item, isActive) => {
     if (isActive) return;
-    
+
     try {
       if (item.isLogout) {
         logout();
@@ -247,64 +248,6 @@ export default function BubbleMenu({
 
   return (
     <>
-      {/* Workaround for silly Tailwind capabilities */}
-      <style>{`
-        .bubble-menu .menu-line {
-          transition: transform 0.3s ease, opacity 0.3s ease;
-          transform-origin: center;
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-          margin-left: calc(100% / 6);
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-          margin-left: calc(100% / 3);
-          margin-top: 3rem;
-        }
-        @media (min-width: 900px) {
-          .bubble-menu-items .pill-link {
-            transform: rotate(var(--item-rot));
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: rotate(var(--item-rot)) scale(1.06);
-            background: var(--hover-bg) !important;
-            color: var(--hover-color) !important;
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: rotate(var(--item-rot)) scale(.94);
-          }
-          .bubble-menu-items .pill-link:focus {
-            outline: 2px solid var(--hover-bg);
-            outline-offset: 2px;
-          }
-        }
-        @media (max-width: 899px) {
-          .bubble-menu-items {
-            padding-top: 120px;
-            align-items: flex-start;
-          }
-          .bubble-menu-items .pill-list {
-            row-gap: 16px;
-          }
-          .bubble-menu-items .pill-list .pill-col {
-            flex: 0 0 100% !important;
-            margin-left: 0 !important;
-            overflow: visible;
-          }
-          .bubble-menu-items .pill-link {
-            font-size: clamp(1.2rem, 3vw, 4rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 80px !important;
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
-            background: var(--hover-bg);
-            color: var(--hover-color);
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
-          }
-        }
-      `}</style>
       <nav
         className={containerClassName}
         style={style}

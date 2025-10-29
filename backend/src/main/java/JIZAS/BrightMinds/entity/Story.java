@@ -33,6 +33,12 @@ public class Story {
     @Column(name = "gameplay_type")
     private String gameplayType;
 
+    @Column(name = "background_music_file_path")
+    private String backgroundMusicFilePath;
+
+    @Column(name = "background_music_volume")
+    private Integer backgroundMusicVolume;
+
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Scene> scenes;
@@ -109,6 +115,12 @@ public class Story {
     
     public List<String> getSequenceGraph() { return sequenceGraph; }
     public void setSequenceGraph(List<String> sequenceGraph) { this.sequenceGraph = sequenceGraph; }
+    
+    public String getBackgroundMusicFilePath() { return backgroundMusicFilePath; }
+    public void setBackgroundMusicFilePath(String backgroundMusicFilePath) { this.backgroundMusicFilePath = backgroundMusicFilePath; }
+    
+    public Integer getBackgroundMusicVolume() { return backgroundMusicVolume; }
+    public void setBackgroundMusicVolume(Integer backgroundMusicVolume) { this.backgroundMusicVolume = backgroundMusicVolume; }
 }
 
 

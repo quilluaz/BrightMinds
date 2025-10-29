@@ -12,10 +12,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
 
@@ -42,52 +42,53 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        CookieCsrfTokenRepository csrfRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        csrfRepository.setCookiePath("/");
+        csrfRepository.setCookieCustomizer(c -> c.secure(true).sameSite("Lax"));
+
+        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
+        requestHandler.setCsrfRequestAttributeName(null); // Use default _csrf
+
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
+                // Enable CORS using our CorsConfigurationSource bean
+                .cors(cors -> {})
+                // For stateless JWT APIs, disable CSRF for API endpoints
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(csrfRepository)
+                        .csrfTokenRequestHandler(requestHandler)
+                        .ignoringRequestMatchers("/api/**")
+                )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        // TODO: Re-enable role-based security when JWT is fully implemented
-                        // .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
-                        .requestMatchers("/api/gamemaster/**").permitAll() // Temporary for testing
-                        .requestMatchers("/api/seeder/**").permitAll()
+                        // Allow CORS preflight requests (OPTIONS) for all endpoints
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        
+                        // Game Master endpoints - require GAMEMASTER role
+                        .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
+                        
+                        // Public endpoints
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/users/**").permitAll()
-                        .requestMatchers("/api/progress/**").permitAll()
-                        .requestMatchers("/api/questions/**").permitAll()
-                        .requestMatchers("/api/choices/**").permitAll()
-                        .requestMatchers("/api/answers/**").permitAll()
-                        .requestMatchers("/api/stories/**").permitAll()
-                        .requestMatchers("/api/scenes/**").permitAll()
-                        .requestMatchers("/api/scene-assets/**").permitAll()
-                        .requestMatchers("/api/assets/**").permitAll()
-                        .requestMatchers("/api/user-responses/**").permitAll()
-                        .requestMatchers("/api/game/**").permitAll()
-                        .requestMatchers("/api/user-badges/**").permitAll()
-                        .requestMatchers("/api/badges/**").permitAll()
-                        .requestMatchers("/api/dialogues/**").permitAll()
-                        .requestMatchers("/api/game-attempts/**").permitAll()
-                        .requestMatchers("/api/story-scores/**").permitAll()
+                        .requestMatchers("/api/auth/refresh").permitAll()
+                        .requestMatchers("/api/users").permitAll() // Allow user creation without auth
+                        .requestMatchers("/api/stories/**").permitAll() // Allow public access to stories for game loading
+                        .requestMatchers("/api/game/scene/**").permitAll() // Allow public access to scene data for game loading
+                        
+                        // TODO: Remove seeder permitAll after production seeding is complete
+                        .requestMatchers("/api/seeder/**").permitAll()
+                        
+                        // All other API endpoints require authentication
+                        .requestMatchers("/api/**").authenticated()
+                        
+                        // Swagger/API docs
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
+                        
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:5173", "https://brightminds-cit.vercel.app"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 }
 

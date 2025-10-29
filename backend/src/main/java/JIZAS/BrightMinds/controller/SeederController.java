@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/seeder") // Using a more neutral path
-@CrossOrigin(origins = "*")
 public class SeederController {
 
     private final SeederService seederService;

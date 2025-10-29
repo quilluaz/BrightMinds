@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { login, signup } from "@/services/auth";
+import api from "@/lib/api";
 import GridMotion from "../components/background/GridMotion";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/label";
@@ -26,6 +28,9 @@ export default function Landing() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPasswordChange, setShowPasswordChange] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const baseImages = [
     "https://res.cloudinary.com/dymjwplal/image/upload/v1758651667/story1_landing.png",
@@ -61,6 +66,14 @@ export default function Landing() {
 
     try {
       const user = await login({ email: loginEmail, password: loginPassword });
+
+      // Check if user must change password
+      if (user.mustChangePassword) {
+        setShowPasswordChange(true);
+        setLoading(false);
+        return;
+      }
+
       // Redirect based on user role
       if (user.role === "GAMEMASTER") {
         window.location.href = "/gamemaster";
@@ -72,6 +85,51 @@ export default function Landing() {
         e?.message ||
           "Login failed. Please check your credentials or try again."
       );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handlePasswordChange() {
+    setLoading(true);
+    setError("");
+
+    // Basic validation
+    if (!newPassword || !confirmPassword) {
+      setError("Please fill in all fields.");
+      setLoading(false);
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match.");
+      setLoading(false);
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Update password via API
+      await api.put("/users/me/password", { password: newPassword });
+
+      // Update user in session storage to clear mustChangePassword flag
+      const user = JSON.parse(localStorage.getItem("bm_user"));
+      user.mustChangePassword = false;
+      localStorage.setItem("bm_user", JSON.stringify(user));
+
+      // Redirect based on user role
+      if (user.role === "GAMEMASTER") {
+        window.location.href = "/gamemaster";
+      } else {
+        window.location.href = "/home";
+      }
+    } catch (e) {
+      setError(e?.message || "Password change failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -218,6 +276,11 @@ export default function Landing() {
               ">
               {mode === "login" ? "Welcome back!" : "Welcome to BrightMinds!"}
             </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              {mode === "login"
+                ? "Sign in to your account"
+                : "Create your account to get started"}
+            </DialogDescription>
           </DialogHeader>
 
           {/* Error display */}
@@ -362,6 +425,88 @@ export default function Landing() {
               </Button>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Password Change Modal */}
+      <Dialog
+        open={showPasswordChange}
+        onOpenChange={() => {
+          /* keep open intentionally */
+        }}>
+        <DialogContent
+          className="sm:max-w-md bg-bmLightYellow text-bmBlack border-4 border-bmBlack rounded-2xl shadow-[6px_6px_0_#000] [&>button]:hidden"
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}>
+          <DialogHeader className="pb-2">
+            <DialogTitle
+              className="
+                text-center text-[2rem] leading-relaxed
+                text-[#ff8e51]
+                font-spartan font-black
+                [-webkit-text-stroke:0.035em_black]
+              ">
+              Set New Password
+            </DialogTitle>
+            <DialogDescription className="text-center text-bmBlack">
+              Please set a new password for your account
+            </DialogDescription>
+          </DialogHeader>
+
+          {/* Error display */}
+          {error && (
+            <div className="bg-red-100 border-2 border-red-500 text-red-700 px-4 py-3 rounded-lg mb-4">
+              {error}
+            </div>
+          )}
+
+          {/* Password Change Form */}
+          <div className="grid grid-cols-1 gap-3 font-lexend">
+            <div className="grid gap-2">
+              <Label htmlFor="new-password" className="text-bmBlack">
+                New Password
+              </Label>
+              <Input
+                id="new-password"
+                type="password"
+                placeholder="Enter new password"
+                className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handlePasswordChange();
+                  }
+                }}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="confirm-password" className="text-bmBlack">
+                Confirm Password
+              </Label>
+              <Input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm new password"
+                className="bg-white border-2 border-bmBlack focus-visible:ring-0"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handlePasswordChange();
+                  }
+                }}
+              />
+            </div>
+            <Button
+              className="w-full mt-2 bg-bmYellow hover:bg-bmRed hover:text-white text-bmBlack font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
+              onClick={handlePasswordChange}
+              disabled={loading}>
+              {loading ? "Updating..." : "Update Password"}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

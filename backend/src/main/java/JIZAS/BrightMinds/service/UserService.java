@@ -90,6 +90,15 @@ public class UserService {
         return repo.findByEmail(email).map(this::toView).orElse(null);
     }
 
+    public void changePassword(Long userId, String newPassword) {
+        User user = repo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setMustChangePassword(false); // Clear the flag after password change
+        repo.save(user);
+    }
+
     private UserViewDTO toView(User u) {
         UserViewDTO v = new UserViewDTO();
         v.setUserId(u.getUserId());
@@ -97,6 +106,7 @@ public class UserService {
         v.setLName(u.getLName());
         v.setEmail(u.getEmail());
         v.setRole(u.getRole().name());
+        v.setMustChangePassword(u.getMustChangePassword());
         return v;
     }
 }

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/stories")
-@CrossOrigin(origins = "*")
 public class StoryController {
     
     @Autowired

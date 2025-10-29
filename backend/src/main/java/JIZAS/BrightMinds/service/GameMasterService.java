@@ -116,6 +116,7 @@ public class GameMasterService {
                 student.setEmail(email);
                 student.setPassword(passwordEncoder.encode("brightmindsplayer"));
                 student.setRole(User.Role.PLAYER);
+                student.setMustChangePassword(true); // Force password change on first login
                 student.setCreatedBy(gameMaster);
                 studentsToCreate.add(student);
             }
@@ -291,5 +292,22 @@ public class GameMasterService {
         v.setEmail(u.getEmail());
         v.setRole(u.getRole().name());
         return v;
+    }
+
+    public void resetStudentPassword(Long gameMasterId, Long studentId) {
+        User gameMaster = userRepository.findById(gameMasterId)
+                .orElseThrow(() -> new RuntimeException("GameMaster not found"));
+
+        User student = userRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        if (student.getCreatedBy() == null || !student.getCreatedBy().getUserId().equals(gameMaster.getUserId())) {
+            throw new RuntimeException("You are not authorized to reset this student's password.");
+        }
+
+        // Reset to default password and force change on next login
+        student.setPassword(passwordEncoder.encode("brightmindsplayer"));
+        student.setMustChangePassword(true);
+        userRepository.save(student);
     }
 }
