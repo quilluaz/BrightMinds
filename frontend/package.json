@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seed:game1": "node seed-game1.js"
+    "seed:game1": "node seed-game1.js",
+    "seed:game2": "node seed-game1.js",
+    "seed:game3": "node seed-game1.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
