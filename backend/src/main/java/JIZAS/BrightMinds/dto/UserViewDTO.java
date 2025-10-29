@@ -12,6 +12,7 @@ public class UserViewDTO {
     private String email;
     private String token; // Optional field for authentication responses
     private String role;
+    private Boolean mustChangePassword;
 
     public UserViewDTO() {}
 
@@ -52,4 +53,6 @@ public class UserViewDTO {
     public void setToken(String token) { this.token = token; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+    public Boolean getMustChangePassword() { return mustChangePassword; }
+    public void setMustChangePassword(Boolean mustChangePassword) { this.mustChangePassword = mustChangePassword; }
 }

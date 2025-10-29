@@ -3,6 +3,7 @@ package JIZAS.BrightMinds.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class User {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
+    @Pattern(regexp = ".*@cit\\.edu$", message = "Please use your CIT institutional email (@cit.edu)", flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -43,6 +45,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @Column(name = "must_change_password", nullable = false)
+    private Boolean mustChangePassword = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
@@ -83,4 +88,7 @@ public class User {
 
     public List<UserBadge> getUserBadges() { return userBadges; }
     public void setUserBadges(List<UserBadge> userBadges) { this.userBadges = userBadges; }
+
+    public Boolean getMustChangePassword() { return mustChangePassword; }
+    public void setMustChangePassword(Boolean mustChangePassword) { this.mustChangePassword = mustChangePassword; }
 }

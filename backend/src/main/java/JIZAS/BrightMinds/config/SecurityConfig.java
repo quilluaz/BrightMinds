@@ -60,32 +60,27 @@ public class SecurityConfig {
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        // TODO: Re-enable role-based security when JWT is fully implemented
-                        // .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
-                        .requestMatchers("/api/gamemaster/**").permitAll() // Temporary for testing
-                        .requestMatchers("/api/seeder/**").permitAll()
+                        // Game Master endpoints - require GAMEMASTER role
+                        .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
+                        
+                        // Public endpoints
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/refresh").permitAll() // Refresh endpoint needs to be accessible
+                        .requestMatchers("/api/auth/refresh").permitAll()
                         .requestMatchers("/api/users").permitAll() // Allow user creation without auth
-                        .requestMatchers("/api/users/**").permitAll()
-                        .requestMatchers("/api/progress/**").permitAll()
-                        .requestMatchers("/api/questions/**").permitAll()
-                        .requestMatchers("/api/choices/**").permitAll()
-                        .requestMatchers("/api/answers/**").permitAll()
-                        .requestMatchers("/api/stories/**").permitAll()
-                        .requestMatchers("/api/scenes/**").permitAll()
-                        .requestMatchers("/api/scene-assets/**").permitAll()
-                        .requestMatchers("/api/assets/**").permitAll()
-                        .requestMatchers("/api/user-responses/**").permitAll()
-                        .requestMatchers("/api/game/**").permitAll()
-                        .requestMatchers("/api/user-badges/**").permitAll()
-                        .requestMatchers("/api/badges/**").permitAll()
-                        .requestMatchers("/api/dialogues/**").permitAll()
-                        .requestMatchers("/api/game-attempts/**").permitAll()
-                        .requestMatchers("/api/story-scores/**").permitAll()
+                        .requestMatchers("/api/stories/**").permitAll() // Allow public access to stories for game loading
+                        .requestMatchers("/api/game/scene/**").permitAll() // Allow public access to scene data for game loading
+                        
+                        // TODO: Remove seeder permitAll after production seeding is complete
+                        .requestMatchers("/api/seeder/**").permitAll()
+                        
+                        // All other API endpoints require authentication
+                        .requestMatchers("/api/**").authenticated()
+                        
+                        // Swagger/API docs
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
+                        
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -30,6 +30,9 @@ public class Dialogue {
     @Column(name = "line_text", columnDefinition = "TEXT")
     private String lineText;
 
+    @Column(name = "line_text_tl", columnDefinition = "TEXT")
+    private String lineTextTl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voice_asset_id")
     private Asset voiceAsset;
@@ -52,6 +55,9 @@ public class Dialogue {
 
     public String getLineText() { return lineText; }
     public void setLineText(String lineText) { this.lineText = lineText; }
+
+    public String getLineTextTl() { return lineTextTl; }
+    public void setLineTextTl(String lineTextTl) { this.lineTextTl = lineTextTl; }
 
     public Asset getVoiceAsset() { return voiceAsset; }
     public void setVoiceAsset(Asset voiceAsset) { this.voiceAsset = voiceAsset; }

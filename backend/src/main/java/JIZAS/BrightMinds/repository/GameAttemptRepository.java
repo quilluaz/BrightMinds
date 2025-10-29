@@ -101,4 +101,19 @@ public interface GameAttemptRepository extends JpaRepository<GameAttempt, Long> 
      */
     @Query("SELECT COUNT(ga) FROM GameAttempt ga WHERE ga.user.userId = :userId AND ga.percentage >= 95.0")
     long countExcellentScoresByUser(@Param("userId") Long userId);
+
+    /**
+     * Find attempts by multiple users (for analytics)
+     */
+    List<GameAttempt> findByUserUserIdIn(List<Long> userIds);
+
+    /**
+     * Find attempts by multiple users after a specific date
+     */
+    List<GameAttempt> findByUserUserIdInAndEndAttemptDateAfterOrderByEndAttemptDateDesc(List<Long> userIds, LocalDateTime date);
+
+    /**
+     * Count attempts by multiple users for a specific story
+     */
+    long countByUserUserIdInAndStoryStoryId(List<Long> userIds, Integer storyId);
 }

@@ -28,6 +28,13 @@ public class SeederService {
         story.setThumbnailImage(storyDTO.getThumbnailImage());
         story.setGameplayType(storyDTO.getGameplayType());
         story.setNarrationUrl(storyDTO.getNarrationUrl());
+        
+        // Handle nested backgroundMusic object
+        if (storyDTO.getBackgroundMusic() != null) {
+            story.setBackgroundMusicFilePath(storyDTO.getBackgroundMusic().getFilePath());
+            story.setBackgroundMusicVolume(storyDTO.getBackgroundMusic().getVolume());
+        }
+        
         story.setSequenceGraph(storyDTO.getSequenceGraph());
         story = storyRepository.save(story);
         if (storyDTO.getScenes() != null) {
@@ -97,6 +104,7 @@ public class SeederService {
         dialogue.setScene(scene);
         dialogue.setCharacterName(dialogueDTO.getCharacterName());
         dialogue.setLineText(dialogueDTO.getLineText());
+        dialogue.setLineTextTl(dialogueDTO.getLineTextTl());
         dialogue.setOrderIndex(dialogueDTO.getOrderIndex());
         
         // Link voice asset if voiceover field is provided

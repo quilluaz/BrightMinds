@@ -25,6 +25,11 @@ export default function Settings() {
     email: user.email || "",
   });
 
+  // Language preference state
+  const [preferredLanguage, setPreferredLanguage] = useState(() => {
+    return localStorage.getItem("bm_preferredLanguage") || "en";
+  });
+
   const [passwordData, setPasswordData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -43,6 +48,11 @@ export default function Settings() {
   const handlePasswordInputChange = (e) => {
     const { id, value } = e.target;
     setPasswordData({ ...passwordData, [id]: value });
+  };
+
+  const handleLanguageChange = (newLanguage) => {
+    setPreferredLanguage(newLanguage);
+    localStorage.setItem("bm_preferredLanguage", newLanguage);
   };
 
   const handleProfileSave = async (e) => {
@@ -181,6 +191,36 @@ export default function Settings() {
                     className="bg-white border-2 border-bmBlack focus-visible:ring-0 font-lexend"
                     disabled={loading}
                   />
+                </div>
+
+                {/* Language Preference */}
+                <div className="space-y-2 font-lexend">
+                  <Label className="text-bmBlack">Preferred Language</Label>
+                  <div className="flex items-center space-x-4">
+                    <button
+                      type="button"
+                      onClick={() => handleLanguageChange("en")}
+                      className={`px-4 py-2 rounded-lg border-2 font-spartan font-bold transition-all ${
+                        preferredLanguage === "en"
+                          ? "bg-bmYellow text-bmBlack border-bmBlack shadow-[4px_4px_0_#000]"
+                          : "bg-white text-bmBlack border-bmBlack hover:bg-gray-100"
+                      }`}>
+                      English
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleLanguageChange("tl")}
+                      className={`px-4 py-2 rounded-lg border-2 font-spartan font-bold transition-all ${
+                        preferredLanguage === "tl"
+                          ? "bg-bmYellow text-bmBlack border-bmBlack shadow-[4px_4px_0_#000]"
+                          : "bg-white text-bmBlack border-bmBlack hover:bg-gray-100"
+                      }`}>
+                      Tagalog
+                    </button>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    This will be your default language for game dialogues
+                  </p>
                 </div>
 
                 <div className="flex justify-end pt-2 space-x-4">
