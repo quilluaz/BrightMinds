@@ -66,7 +66,7 @@ export default function GamePageDnD() {
     return saved ? parseInt(saved) : 100;
   });
   const [currentLanguage, setCurrentLanguage] = useState(() => {
-    return localStorage.getItem("bm_preferredLanguage") || "tl";
+    return localStorage.getItem("bm_preferredLanguage") || "en";
   });
 
   // Drag-and-drop specific state
@@ -98,13 +98,21 @@ export default function GamePageDnD() {
         volume: (game1Data.backgroundMusic.volume || 50) / 100,
         mute: isMuted,
         onload: () => {
-          console.log("Background music loaded successfully");
+          console.log(
+            `Background music loaded successfully with volume: ${
+              game1Data.backgroundMusic.volume
+            }% (JSON) * ${masterVolume}% (master) = ${(
+              (game1Data.backgroundMusic.volume / 100) *
+              (masterVolume / 100) *
+              100
+            ).toFixed(1)}%`
+          );
         },
         onloaderror: (id, error) => {
           console.warn("Background music failed to load:", error);
-        }
+        },
       });
-      
+
       setBackgroundMusic(music);
       music.play();
     }
@@ -113,14 +121,19 @@ export default function GamePageDnD() {
   const updateMasterVolume = (newVolume) => {
     setMasterVolume(newVolume);
     localStorage.setItem("bm_current_volume", newVolume.toString());
-    
-    // Update Howler global volume
+
+    // Update Howler global volume (affects all sounds)
     Howler.volume(newVolume / 100);
-    
+
     // Update background music volume if it exists
     if (backgroundMusic) {
       const baseVolume = (game1Data.backgroundMusic?.volume || 50) / 100;
       backgroundMusic.volume(baseVolume * (newVolume / 100));
+    }
+
+    // Update current voiceline volume if it exists
+    if (soundRef.current) {
+      soundRef.current.volume(newVolume / 100);
     }
   };
 
@@ -128,13 +141,22 @@ export default function GamePageDnD() {
     if (backgroundMusic) {
       const baseVolume = (game1Data.backgroundMusic?.volume || 50) / 100;
       const masterVol = masterVolume / 100;
-      
+      const currentVolume = baseVolume * masterVol;
+
       if (duck) {
-        // Reduce to 50% of current volume
-        backgroundMusic.volume(baseVolume * masterVol * 0.5);
+        // Duck to 30% of current volume
+        backgroundMusic.volume(currentVolume * 0.3);
+        console.log(
+          `Ducking background music to ${(currentVolume * 0.3 * 100).toFixed(
+            1
+          )}%`
+        );
       } else {
         // Restore to full volume
-        backgroundMusic.volume(baseVolume * masterVol);
+        backgroundMusic.volume(currentVolume);
+        console.log(
+          `Restoring background music to ${(currentVolume * 100).toFixed(1)}%`
+        );
       }
     }
   };
@@ -146,8 +168,11 @@ export default function GamePageDnD() {
 
   const startTypingEffect = (dialogue) => {
     if (!dialogue) return;
-    
-    const fullText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+
+    const fullText =
+      currentLanguage === "tl" && dialogue.lineTextTl
+        ? dialogue.lineTextTl
+        : dialogue.lineText;
     setIsTyping(true);
     setIsTextComplete(false);
     setDisplayedText("");
@@ -752,21 +777,38 @@ export default function GamePageDnD() {
     // Don't reset isTransitioning for finished state
   };
 
+  // Cleanup function for audio when component unmounts
+  useEffect(() => {
+    return () => {
+      // Stop all audio when component unmounts
+      if (soundRef.current) {
+        soundRef.current.stop();
+        soundRef.current = null;
+      }
+      if (backgroundMusic) {
+        backgroundMusic.stop();
+        backgroundMusic = null;
+      }
+      // Stop all Howler sounds
+      Howler.stop();
+    };
+  }, []);
+
   // Fetch the story's scene list when the component mounts
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
         setGameState("loading");
-        
+
         // Check if user is Game Master for demo mode
         const user = JSON.parse(localStorage.getItem("bm_user"));
         if (user && user.role === "GAMEMASTER") {
           setIsDemoMode(true);
         }
-        
+
         // Initialize background music
         initializeBackgroundMusic();
-        
+
         const scenesResponse = await api.get(`/stories/${storyId}/scenes`);
         if (!scenesResponse.data || scenesResponse.data.length === 0) {
           throw new Error("No scenes found for this story.");
@@ -829,6 +871,7 @@ export default function GamePageDnD() {
         const sound = new Howl({
           src: [dialogue.voiceoverUrl],
           html5: true, // Good for streaming longer files
+          volume: masterVolume / 100, // Use master volume
           mute: isMuted,
           onplay: () => {
             // Duck background music when dialogue starts
@@ -837,7 +880,7 @@ export default function GamePageDnD() {
           onend: () => {
             // Restore background music when dialogue ends
             duckBackgroundMusic(false);
-          }
+          },
         });
 
         sound.play();
@@ -853,6 +896,7 @@ export default function GamePageDnD() {
             const sound = new Howl({
               src: [audioAsset.filePath],
               html5: true,
+              volume: masterVolume / 100, // Use master volume
               mute: isMuted,
             });
 
@@ -905,7 +949,10 @@ export default function GamePageDnD() {
       return;
     }
 
-    const fullText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+    const fullText =
+      currentLanguage === "tl" && dialogue.lineTextTl
+        ? dialogue.lineTextTl
+        : dialogue.lineText;
     setIsTyping(true);
     setIsTextComplete(false);
     setDisplayedText("");
@@ -935,8 +982,11 @@ export default function GamePageDnD() {
   useEffect(() => {
     if (currentSceneData?.dialogues?.[0] && gameState === "playing") {
       const dialogue = currentSceneData.dialogues[0];
-      const dialogueText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
-      
+      const dialogueText =
+        currentLanguage === "tl" && dialogue.lineTextTl
+          ? dialogue.lineTextTl
+          : dialogue.lineText;
+
       if (isTextComplete) {
         // If text is already complete, update immediately
         setDisplayedText(dialogueText);
@@ -945,7 +995,7 @@ export default function GamePageDnD() {
         setIsTyping(false);
         setIsTextComplete(false);
         setDisplayedText("");
-        
+
         // Restart typing effect
         setTimeout(() => {
           startTypingEffect(dialogue);
@@ -995,7 +1045,10 @@ export default function GamePageDnD() {
         }
 
         const dialogue = currentSceneData.dialogues[0];
-        const dialogueText = currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText;
+        const dialogueText =
+          currentLanguage === "tl" && dialogue.lineTextTl
+            ? dialogue.lineTextTl
+            : dialogue.lineText;
         setDisplayedText(dialogueText);
         setIsTyping(false);
         setIsTextComplete(true);
@@ -1033,6 +1086,11 @@ export default function GamePageDnD() {
     }
 
     if (currentSceneData?.question) {
+      // Stop any currently playing voiceline when transitioning to question
+      if (soundRef.current) {
+        soundRef.current.stop();
+        soundRef.current = null;
+      }
       setGameState("question");
     } else {
       goToNextScene();
@@ -1908,7 +1966,12 @@ export default function GamePageDnD() {
           dialogue && (
             <div className="absolute bottom-4 left-4 right-4 p-4 bg-black/70 rounded-xl border-2 border-bmYellow/50 font-pressStart text-lg z-50">
               <p className="text-bmYellow mb-2">{dialogue.characterName}</p>
-              <p className="text-white">{displayedText || (currentLanguage === 'tl' && dialogue.lineTextTl ? dialogue.lineTextTl : dialogue.lineText)}</p>
+              <p className="text-white">
+                {displayedText ||
+                  (currentLanguage === "tl" && dialogue.lineTextTl
+                    ? dialogue.lineTextTl
+                    : dialogue.lineText)}
+              </p>
               {isTextComplete && (
                 <div className="absolute top-2 right-2 animate-pulse">
                   <span className="text-bmYellow font-pressStart text-xs">
@@ -1971,17 +2034,8 @@ export default function GamePageDnD() {
   };
 
   return (
-    <main className="min-h-screen w-full bg-bmGreen flex items-center justify-center p-4 relative select-none">
+    <main className="min-h-screen w-full bg-bmGreen flex flex-col items-center justify-center p-4 relative select-none">
       <BubbleMenu />
-      
-      <AudioLanguageControls
-        masterVolume={masterVolume}
-        onVolumeChange={updateMasterVolume}
-        isMuted={isMuted}
-        onToggleMute={toggleMute}
-        currentLanguage={currentLanguage}
-        onLanguageChange={handleLanguageChange}
-      />
 
       {/* Demo Mode Banner */}
       {isDemoMode && (
@@ -1992,107 +2046,122 @@ export default function GamePageDnD() {
         </div>
       )}
 
-      <motion.div
-        ref={containerRef}
-        onClick={handleInteraction}
-        className={`aspect-video w-full max-w-7xl max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 ease-in-out cursor-pointer ${
-          isShaking ? "animate-shake" : ""
-        }`}
-        style={{
-          transform: `translateX(${shakeOffset}px)`,
-        }}>
-        {/* Background rendering */}
-        {hasVisionTransition ? (
-          <VisionTransition
-            backgrounds={backgroundAssets}
-            gameState={gameState}
+      {/* Game Screen Container with Audio Controls */}
+      <div className="w-full max-w-7xl relative">
+        {/* Audio and Language Controls - Positioned at top-right of game screen */}
+        <div className="absolute top-0 right-0 z-[70]">
+          <AudioLanguageControls
+            masterVolume={masterVolume}
+            onVolumeChange={updateMasterVolume}
+            isMuted={isMuted}
+            onToggleMute={toggleMute}
+            currentLanguage={currentLanguage}
+            onLanguageChange={handleLanguageChange}
           />
-        ) : (
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-all duration-500"
-            style={{
-              backgroundImage: backgroundAssets[0]?.filePath
-                ? `url('${backgroundAssets[0].filePath}')`
-                : "",
-            }}
-          />
-        )}
-        {/* Opaque black overlay controlled by sprites */}
-        {showBackgroundOverlay && (
-          <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
-        )}
-        {gameState !== "loading" && renderSprites()}
-        {/* Correct answer feedback */}
-        {showCorrectFeedback && (
-          <div className="absolute inset-0 flex items-center justify-center z-[100]">
-            <div className="bg-bmGreen text-white text-6xl font-pressStart px-8 py-4 rounded-xl border-4 border-white shadow-2xl animate-bounce">
-              CORRECT!
-            </div>
-          </div>
-        )}
-        {renderGameState()}
-      </motion.div>
-
-      {/* Match History Modal */}
-      {showMatchHistory && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/80 z-[200]">
-          <div className="bg-gray-800 border-2 border-bmYellow rounded-xl p-6 max-w-2xl max-h-[80vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-pressStart text-bmYellow">
-                Match History
-              </h2>
-              <button
-                onClick={() => setShowMatchHistory(false)}
-                className="text-white hover:text-bmRed font-pressStart text-xl">
-                ✕
-              </button>
-            </div>
-
-            {matchHistory.length === 0 ? (
-              <p className="text-white font-pressStart text-center py-8">
-                No attempts recorded yet. Complete a story to see your match
-                history!
-              </p>
-            ) : (
-              <div className="space-y-3">
-                {matchHistory.map((attempt, index) => (
-                  <div
-                    key={attempt.attemptId || index}
-                    className="bg-gray-700 border border-bmGreen rounded-lg p-4">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-lg font-pressStart text-bmYellow">
-                          {attempt.storyTitle || `Story ${attempt.storyId}`}
-                        </h3>
-                        <p className="text-white font-pressStart text-sm">
-                          {new Date(attempt.endAttemptDate).toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-pressStart text-bmGreen">
-                          {attempt.percentage?.toFixed(1)}%
-                        </div>
-                        <div className="text-sm font-pressStart text-gray-300">
-                          {attempt.score} / {attempt.totalPossibleScore} pts
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-2 text-xs font-pressStart text-gray-400">
-                      {attempt.completionTimeSeconds && (
-                        <span>
-                          Completed in{" "}
-                          {Math.floor(attempt.completionTimeSeconds / 60)}m{" "}
-                          {attempt.completionTimeSeconds % 60}s
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
-      )}
+
+        <motion.div
+          ref={containerRef}
+          onClick={handleInteraction}
+          className={`aspect-video w-full max-h-[90vh] bg-gray-800 rounded-lg shadow-2xl relative overflow-hidden border-4 border-gray-600 transition-transform duration-75 ease-in-out cursor-pointer ${
+            isShaking ? "animate-shake" : ""
+          }`}
+          style={{
+            transform: `translateX(${shakeOffset}px)`,
+          }}>
+          {/* Background rendering */}
+          {hasVisionTransition ? (
+            <VisionTransition
+              backgrounds={backgroundAssets}
+              gameState={gameState}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-all duration-500"
+              style={{
+                backgroundImage: backgroundAssets[0]?.filePath
+                  ? `url('${backgroundAssets[0].filePath}')`
+                  : "",
+              }}
+            />
+          )}
+          {/* Opaque black overlay controlled by sprites */}
+          {showBackgroundOverlay && (
+            <div className="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
+          )}
+          {gameState !== "loading" && renderSprites()}
+          {/* Correct answer feedback */}
+          {showCorrectFeedback && (
+            <div className="absolute inset-0 flex items-center justify-center z-[100]">
+              <div className="bg-bmGreen text-white text-6xl font-pressStart px-8 py-4 rounded-xl border-4 border-white shadow-2xl animate-bounce">
+                CORRECT!
+              </div>
+            </div>
+          )}
+          {renderGameState()}
+        </motion.div>
+
+        {/* Match History Modal */}
+        {showMatchHistory && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/80 z-[200]">
+            <div className="bg-gray-800 border-2 border-bmYellow rounded-xl p-6 max-w-2xl max-h-[80vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-pressStart text-bmYellow">
+                  Match History
+                </h2>
+                <button
+                  onClick={() => setShowMatchHistory(false)}
+                  className="text-white hover:text-bmRed font-pressStart text-xl">
+                  ✕
+                </button>
+              </div>
+
+              {matchHistory.length === 0 ? (
+                <p className="text-white font-pressStart text-center py-8">
+                  No attempts recorded yet. Complete a story to see your match
+                  history!
+                </p>
+              ) : (
+                <div className="space-y-3">
+                  {matchHistory.map((attempt, index) => (
+                    <div
+                      key={attempt.attemptId || index}
+                      className="bg-gray-700 border border-bmGreen rounded-lg p-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-lg font-pressStart text-bmYellow">
+                            {attempt.storyTitle || `Story ${attempt.storyId}`}
+                          </h3>
+                          <p className="text-white font-pressStart text-sm">
+                            {new Date(attempt.endAttemptDate).toLocaleString()}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-pressStart text-bmGreen">
+                            {attempt.percentage?.toFixed(1)}%
+                          </div>
+                          <div className="text-sm font-pressStart text-gray-300">
+                            {attempt.score} / {attempt.totalPossibleScore} pts
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-2 text-xs font-pressStart text-gray-400">
+                        {attempt.completionTimeSeconds && (
+                          <span>
+                            Completed in{" "}
+                            {Math.floor(attempt.completionTimeSeconds / 60)}m{" "}
+                            {attempt.completionTimeSeconds % 60}s
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </main>
   );
 }

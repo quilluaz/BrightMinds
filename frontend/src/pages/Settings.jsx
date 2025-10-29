@@ -27,7 +27,7 @@ export default function Settings() {
 
   // Language preference state
   const [preferredLanguage, setPreferredLanguage] = useState(() => {
-    return localStorage.getItem("bm_preferredLanguage") || "tl";
+    return localStorage.getItem("bm_preferredLanguage") || "en";
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -195,9 +195,7 @@ export default function Settings() {
 
                 {/* Language Preference */}
                 <div className="space-y-2 font-lexend">
-                  <Label className="text-bmBlack">
-                    Preferred Language
-                  </Label>
+                  <Label className="text-bmBlack">Preferred Language</Label>
                   <div className="flex items-center space-x-4">
                     <button
                       type="button"

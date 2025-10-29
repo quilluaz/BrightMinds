@@ -67,12 +67,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/refresh").permitAll()
                         .requestMatchers("/api/users").permitAll() // Allow user creation without auth
+                        .requestMatchers("/api/stories/**").permitAll() // Allow public access to stories for game loading
+                        .requestMatchers("/api/game/scene/**").permitAll() // Allow public access to scene data for game loading
                         
                         // TODO: Remove seeder permitAll after production seeding is complete
                         .requestMatchers("/api/seeder/**").permitAll()
-                        
-                        // Game endpoints - authenticated users only
-                        .requestMatchers("/api/game/**").authenticated()
                         
                         // All other API endpoints require authentication
                         .requestMatchers("/api/**").authenticated()

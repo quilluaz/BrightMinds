@@ -9,6 +9,7 @@ public class StorySeedDTO {
     private String thumbnailImage;
     private String gameplayType;
     private String narrationUrl;
+    private BackgroundMusicSeedDTO backgroundMusic;
     private List<String> sequenceGraph;
     private List<SceneSeedDTO> scenes;
 
@@ -28,4 +29,7 @@ public class StorySeedDTO {
     public void setSequenceGraph(List<String> sequenceGraph) { this.sequenceGraph = sequenceGraph; }
     public List<SceneSeedDTO> getScenes() { return scenes; }
     public void setScenes(List<SceneSeedDTO> scenes) { this.scenes = scenes; }
+    
+    public BackgroundMusicSeedDTO getBackgroundMusic() { return backgroundMusic; }
+    public void setBackgroundMusic(BackgroundMusicSeedDTO backgroundMusic) { this.backgroundMusic = backgroundMusic; }
 }

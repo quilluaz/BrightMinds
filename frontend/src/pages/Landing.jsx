@@ -66,14 +66,14 @@ export default function Landing() {
 
     try {
       const user = await login({ email: loginEmail, password: loginPassword });
-      
+
       // Check if user must change password
       if (user.mustChangePassword) {
         setShowPasswordChange(true);
         setLoading(false);
         return;
       }
-      
+
       // Redirect based on user role
       if (user.role === "GAMEMASTER") {
         window.location.href = "/gamemaster";
@@ -116,12 +116,12 @@ export default function Landing() {
     try {
       // Update password via API
       await api.put("/users/me/password", { password: newPassword });
-      
+
       // Update user in session storage to clear mustChangePassword flag
-      const user = JSON.parse(sessionStorage.getItem("bm_user"));
+      const user = JSON.parse(localStorage.getItem("bm_user"));
       user.mustChangePassword = false;
-      sessionStorage.setItem("bm_user", JSON.stringify(user));
-      
+      localStorage.setItem("bm_user", JSON.stringify(user));
+
       // Redirect based on user role
       if (user.role === "GAMEMASTER") {
         window.location.href = "/gamemaster";
@@ -129,10 +129,7 @@ export default function Landing() {
         window.location.href = "/home";
       }
     } catch (e) {
-      setError(
-        e?.message ||
-          "Password change failed. Please try again."
-      );
+      setError(e?.message || "Password change failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -441,7 +438,6 @@ export default function Landing() {
           className="sm:max-w-md bg-bmLightYellow text-bmBlack border-4 border-bmBlack rounded-2xl shadow-[6px_6px_0_#000] [&>button]:hidden"
           onInteractOutside={(e) => e.preventDefault()}
           onEscapeKeyDown={(e) => e.preventDefault()}>
-          
           <DialogHeader className="pb-2">
             <DialogTitle
               className="

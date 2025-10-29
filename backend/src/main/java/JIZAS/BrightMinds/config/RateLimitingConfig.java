@@ -28,14 +28,14 @@ public class RateLimitingConfig implements WebMvcConfigurer {
         // In-memory rate limiting store (for production, consider Redis)
         private final ConcurrentHashMap<String, RateLimitInfo> rateLimitStore = new ConcurrentHashMap<>();
         
-        // Rate limits
-        private static final int LOGIN_ATTEMPTS = 5;
+        // Rate limits - Increased for development
+        private static final int LOGIN_ATTEMPTS = 20;
         private static final int LOGIN_WINDOW_MINUTES = 15;
-        private static final int REGISTRATION_ATTEMPTS = 3;
+        private static final int REGISTRATION_ATTEMPTS = 10;
         private static final int REGISTRATION_WINDOW_MINUTES = 60;
-        private static final int PASSWORD_RESET_ATTEMPTS = 3;
+        private static final int PASSWORD_RESET_ATTEMPTS = 10;
         private static final int PASSWORD_RESET_WINDOW_MINUTES = 60;
-        private static final int GENERAL_REQUESTS = 100;
+        private static final int GENERAL_REQUESTS = 500;
         private static final int GENERAL_WINDOW_MINUTES = 1;
 
         @Override

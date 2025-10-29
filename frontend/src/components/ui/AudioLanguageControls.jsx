@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX, Globe, Languages } from "lucide-react";
 
-export default function AudioLanguageControls({ 
-  masterVolume, 
-  onVolumeChange, 
-  isMuted, 
+export default function AudioLanguageControls({
+  masterVolume,
+  onVolumeChange,
+  isMuted,
   onToggleMute,
   currentLanguage,
-  onLanguageChange 
+  onLanguageChange,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
@@ -38,7 +38,7 @@ export default function AudioLanguageControls({
   };
 
   const handleLanguageToggle = () => {
-    const newLanguage = currentLanguage === 'en' ? 'tl' : 'en';
+    const newLanguage = currentLanguage === "en" ? "tl" : "en";
     onLanguageChange(newLanguage);
   };
 
@@ -54,31 +54,28 @@ export default function AudioLanguageControls({
   return (
     <div
       ref={containerRef}
-      className="fixed top-4 right-4 z-[70] transition-all duration-300 ease-in-out"
+      className="transition-all duration-300 ease-in-out"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+      onMouseLeave={handleMouseLeave}>
       {/* Folder Tab Container */}
       <div
         className={`
           bg-bmYellow border-2 border-bmBlack rounded-t-lg shadow-[4px_4px_0_#000]
           transition-all duration-300 ease-in-out
-          ${isExpanded ? 'w-64 h-32' : 'w-16 h-12'}
+          ${isExpanded ? "w-64 h-32" : "w-16 h-12"}
         `}
         style={{
-          clipPath: isExpanded 
-            ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' 
-            : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-        }}
-      >
+          clipPath: isExpanded
+            ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)"
+            : "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        }}>
         {/* Collapsed State - Icon Strip */}
         {!isExpanded && (
-          <div className="flex flex-col items-center justify-center h-full space-y-1">
+          <div className="flex flex-row items-center justify-center h-full space-x-1">
             <button
               onClick={handleMuteClick}
               className="p-1 hover:bg-bmBlack/10 rounded transition-colors"
-              title={isMuted ? "Unmute" : "Mute"}
-            >
+              title={isMuted ? "Unmute" : "Mute"}>
               {isMuted ? (
                 <VolumeX className="w-4 h-4 text-bmBlack" />
               ) : (
@@ -88,8 +85,9 @@ export default function AudioLanguageControls({
             <button
               onClick={handleLanguageToggle}
               className="p-1 hover:bg-bmBlack/10 rounded transition-colors"
-              title={`Switch to ${currentLanguage === 'en' ? 'Tagalog' : 'English'}`}
-            >
+              title={`Switch to ${
+                currentLanguage === "en" ? "Tagalog" : "English"
+              }`}>
               <Globe className="w-4 h-4 text-bmBlack" />
             </button>
           </div>
@@ -112,8 +110,7 @@ export default function AudioLanguageControls({
                 <button
                   onClick={handleMuteClick}
                   className="p-1 hover:bg-bmBlack/10 rounded transition-colors"
-                  title={isMuted ? "Unmute" : "Mute"}
-                >
+                  title={isMuted ? "Unmute" : "Mute"}>
                   {isMuted ? (
                     <VolumeX className="w-4 h-4 text-bmBlack" />
                   ) : (
@@ -128,7 +125,7 @@ export default function AudioLanguageControls({
                   onChange={handleVolumeSliderChange}
                   className="flex-1 h-2 bg-bmBlack/20 rounded-lg appearance-none cursor-pointer slider"
                   style={{
-                    background: `linear-gradient(to right, #3ea66b 0%, #3ea66b ${masterVolume}%, #e5e7eb ${masterVolume}%, #e5e7eb 100%)`
+                    background: `linear-gradient(to right, #3ea66b 0%, #3ea66b ${masterVolume}%, #e5e7eb ${masterVolume}%, #e5e7eb 100%)`,
                   }}
                 />
               </div>
@@ -141,17 +138,18 @@ export default function AudioLanguageControls({
                   Language
                 </span>
                 <span className="text-xs font-pressStart text-bmBlack">
-                  {currentLanguage === 'en' ? 'English' : 'Tagalog'}
+                  {currentLanguage === "en" ? "English" : "Tagalog"}
                 </span>
               </div>
               <button
                 onClick={handleLanguageToggle}
                 className="w-full flex items-center justify-center space-x-2 p-2 bg-bmBlack/10 hover:bg-bmBlack/20 rounded transition-colors"
-                title={`Switch to ${currentLanguage === 'en' ? 'Tagalog' : 'English'}`}
-              >
+                title={`Switch to ${
+                  currentLanguage === "en" ? "Tagalog" : "English"
+                }`}>
                 <Globe className="w-4 h-4 text-bmBlack" />
                 <span className="text-xs font-pressStart text-bmBlack">
-                  {currentLanguage === 'en' ? '🇵🇭 Tagalog' : '🇺🇸 English'}
+                  {currentLanguage === "en" ? "🇵🇭 Tagalog" : "🇺🇸 English"}
                 </span>
               </button>
             </div>

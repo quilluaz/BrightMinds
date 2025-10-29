@@ -205,6 +205,46 @@ export default function GameMasterDashboard() {
     }
   };
 
+  const handleResetPassword = async (studentId) => {
+    if (
+      !confirm(
+        "Are you sure you want to reset this student's password to the default?"
+      )
+    )
+      return;
+
+    if (!user?.userId) {
+      setError("Game Master ID not available");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(""); // Clear previous errors
+
+      console.log("Resetting password for student:", studentId); // Debug log
+
+      await api.post(
+        `/gamemaster/student/${studentId}/reset-password`,
+        {},
+        {
+          headers: {
+            "X-GameMaster-Id": user.userId.toString(),
+          },
+        }
+      );
+      setSuccess(
+        "Student password reset successfully! Default password: brightmindsplayer"
+      );
+      fetchStudents(user.userId);
+    } catch (e) {
+      console.error("Error resetting password:", e); // Debug log
+      setError(`Failed to reset password: ${e.message || e}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!user) {
     return (
       <main className="min-h-screen bg-bmGreen flex items-center justify-center">
@@ -352,6 +392,12 @@ export default function GameMasterDashboard() {
                       </span>
                     </div>
                     <div className="flex gap-2">
+                      <Button
+                        onClick={() => handleResetPassword(student.userId)}
+                        className="bg-bmOrange hover:bg-orange-600 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]"
+                        disabled={loading}>
+                        Reset Password
+                      </Button>
                       <Button
                         onClick={() => handleDeleteStudent(student.userId)}
                         className="bg-bmRed hover:bg-red-700 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]"

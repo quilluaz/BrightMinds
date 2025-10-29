@@ -27,11 +27,12 @@ export default function PlayerDashboard() {
       setError("");
 
       // Fetch data in parallel
-      const [attemptsResponse, badgesResponse, allBadgesResponse] = await Promise.all([
-        api.get(`/game-attempts/user/${userId}`),
-        api.get(`/user-badges/user/${userId}/with-badge`),
-        api.get("/badges")
-      ]);
+      const [attemptsResponse, badgesResponse, allBadgesResponse] =
+        await Promise.all([
+          api.get(`/game-attempts/user/${userId}`),
+          api.get(`/user-badges/user/${userId}/with-badge`),
+          api.get("/badges"),
+        ]);
 
       setGameAttempts(attemptsResponse.data || []);
       setUserBadges(badgesResponse.data || []);
@@ -45,12 +46,12 @@ export default function PlayerDashboard() {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -76,7 +77,7 @@ export default function PlayerDashboard() {
   };
 
   const getBadgeEarnedStatus = (badgeId) => {
-    return userBadges.some(userBadge => userBadge.badgeId === badgeId);
+    return userBadges.some((userBadge) => userBadge.badgeId === badgeId);
   };
 
   const getBadgeProgress = (badge) => {
@@ -202,9 +203,15 @@ export default function PlayerDashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-spartan font-black text-center text-bmBlack">
-                    {gameAttempts.length > 0 
-                      ? Math.round(gameAttempts.reduce((sum, attempt) => sum + (attempt.percentage || 0), 0) / gameAttempts.length)
-                      : 0}%
+                    {gameAttempts.length > 0
+                      ? Math.round(
+                          gameAttempts.reduce(
+                            (sum, attempt) => sum + (attempt.percentage || 0),
+                            0
+                          ) / gameAttempts.length
+                        )
+                      : 0}
+                    %
                   </div>
                 </CardContent>
               </Card>
@@ -217,9 +224,16 @@ export default function PlayerDashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-spartan font-black text-center text-bmBlack">
-                    {gameAttempts.length > 0 
-                      ? Math.round(Math.max(...gameAttempts.map(attempt => attempt.percentage || 0)))
-                      : 0}%
+                    {gameAttempts.length > 0
+                      ? Math.round(
+                          Math.max(
+                            ...gameAttempts.map(
+                              (attempt) => attempt.percentage || 0
+                            )
+                          )
+                        )
+                      : 0}
+                    %
                   </div>
                 </CardContent>
               </Card>
@@ -253,7 +267,10 @@ export default function PlayerDashboard() {
                             </p>
                           </div>
                           <div className="text-right">
-                            <div className={`text-2xl font-spartan font-black ${getScoreColor(attempt.percentage)}`}>
+                            <div
+                              className={`text-2xl font-spartan font-black ${getScoreColor(
+                                attempt.percentage
+                              )}`}>
                               {Math.round(attempt.percentage || 0)}%
                             </div>
                             <p className="font-lexend text-bmBlack text-sm">
@@ -332,13 +349,17 @@ export default function PlayerDashboard() {
                             {formatDate(attempt.endAttemptDate)}
                           </p>
                         </div>
-                        
+
                         <div className="text-center">
-                          <div className={`text-3xl font-spartan font-black ${getScoreColor(attempt.percentage)}`}>
+                          <div
+                            className={`text-3xl font-spartan font-black ${getScoreColor(
+                              attempt.percentage
+                            )}`}>
                             {Math.round(attempt.percentage || 0)}%
                           </div>
                           <p className="font-lexend text-bmBlack text-sm">
-                            {attempt.score || 0} / {attempt.totalPossibleScore || 0} points
+                            {attempt.score || 0} /{" "}
+                            {attempt.totalPossibleScore || 0} points
                           </p>
                         </div>
 
@@ -346,15 +367,24 @@ export default function PlayerDashboard() {
                           <div className="text-xl font-spartan font-bold text-bmBlack">
                             {formatDuration(attempt.completionTimeSeconds)}
                           </div>
-                          <p className="font-lexend text-bmBlack text-sm">Duration</p>
+                          <p className="font-lexend text-bmBlack text-sm">
+                            Duration
+                          </p>
                         </div>
 
                         <div className="text-center">
-                          <div className={`inline-block px-3 py-1 rounded-full border-2 ${getScoreBadgeColor(attempt.percentage)}`}>
+                          <div
+                            className={`inline-block px-3 py-1 rounded-full border-2 ${getScoreBadgeColor(
+                              attempt.percentage
+                            )}`}>
                             <span className="font-lexend font-bold text-sm">
-                              {attempt.percentage >= 90 ? "Excellent" :
-                               attempt.percentage >= 75 ? "Good" :
-                               attempt.percentage >= 60 ? "Passing" : "Needs Improvement"}
+                              {attempt.percentage >= 90
+                                ? "Excellent"
+                                : attempt.percentage >= 75
+                                ? "Good"
+                                : attempt.percentage >= 60
+                                ? "Passing"
+                                : "Needs Improvement"}
                             </span>
                           </div>
                         </div>
@@ -382,14 +412,17 @@ export default function PlayerDashboard() {
                   <div className="text-4xl font-spartan font-black text-bmBlack mb-2">
                     {userBadges.length} / {allBadges.length}
                   </div>
-                  <p className="font-lexend text-bmBlack">
-                    Badges Earned
-                  </p>
+                  <p className="font-lexend text-bmBlack">Badges Earned</p>
                   <div className="w-full bg-white border-2 border-bmBlack rounded-full h-4 mt-4">
-                    <div 
+                    <div
                       className="bg-bmYellow h-full rounded-full border-2 border-bmBlack"
-                      style={{ width: `${allBadges.length > 0 ? (userBadges.length / allBadges.length) * 100 : 0}%` }}
-                    ></div>
+                      style={{
+                        width: `${
+                          allBadges.length > 0
+                            ? (userBadges.length / allBadges.length) * 100
+                            : 0
+                        }%`,
+                      }}></div>
                   </div>
                 </div>
               </CardContent>
@@ -412,17 +445,20 @@ export default function PlayerDashboard() {
                     {allBadges.map((badge) => {
                       const isEarned = getBadgeEarnedStatus(badge.badgeId);
                       const progress = getBadgeProgress(badge);
-                      const userBadge = userBadges.find(ub => ub.badgeId === badge.badgeId);
-                      
+                      const userBadge = userBadges.find(
+                        (ub) => ub.badgeId === badge.badgeId
+                      );
+
                       return (
                         <div
                           key={badge.badgeId}
                           className={`border-2 border-bmBlack rounded-lg p-4 text-center ${
                             isEarned ? "bg-bmYellow" : "bg-white"
                           }`}>
-                          <div className={`w-20 h-20 border-2 border-bmBlack rounded-full mx-auto mb-3 flex items-center justify-center ${
-                            isEarned ? "bg-bmYellow" : "bg-gray-200"
-                          }`}>
+                          <div
+                            className={`w-20 h-20 border-2 border-bmBlack rounded-full mx-auto mb-3 flex items-center justify-center ${
+                              isEarned ? "bg-bmYellow" : "bg-gray-200"
+                            }`}>
                             <span className="text-3xl">
                               {isEarned ? "🏆" : "🔒"}
                             </span>
@@ -440,10 +476,9 @@ export default function PlayerDashboard() {
                           )}
                           {!isEarned && (
                             <div className="w-full bg-gray-200 border border-bmBlack rounded-full h-2">
-                              <div 
+                              <div
                                 className="bg-bmYellow h-full rounded-full"
-                                style={{ width: `${progress}%` }}
-                              ></div>
+                                style={{ width: `${progress}%` }}></div>
                             </div>
                           )}
                         </div>
