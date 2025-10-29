@@ -99,12 +99,19 @@ public class SecurityConfig {
         System.out.println("CORS Configuration - ALLOWED_ORIGINS from env: " + System.getenv("ALLOWED_ORIGINS"));
         System.out.println("CORS Configuration - Using allowedOrigins: " + allowedOrigins);
         
-        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
+        // Use setAllowedOrigins for exact matches instead of patterns
+        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
         
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-XSRF-TOKEN")); // Expose X-XSRF-TOKEN
         configuration.setExposedHeaders(Arrays.asList("X-XSRF-TOKEN")); // Expose the CSRF token header
         configuration.setAllowCredentials(true);
+
+        // Debug logging for CORS configuration
+        System.out.println("CORS Configuration - Allowed Origins: " + configuration.getAllowedOrigins());
+        System.out.println("CORS Configuration - Allowed Methods: " + configuration.getAllowedMethods());
+        System.out.println("CORS Configuration - Allowed Headers: " + configuration.getAllowedHeaders());
+        System.out.println("CORS Configuration - Allow Credentials: " + configuration.getAllowCredentials());
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
