@@ -4,6 +4,10 @@
   "storyOrder": 2,
   "thumbnailImage": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837660/Story2Cover_blt3gt.png",
   "gameplayType": "DragDrop",
+  "backgroundMusic": {
+    "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761686280/normal_scenes_yt0d5j.wav",
+    "volume": 30
+  },
   "scenes": [
     {
       "sceneOrder": 1,
