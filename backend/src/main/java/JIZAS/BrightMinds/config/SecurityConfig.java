@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
 
@@ -60,6 +61,9 @@ public class SecurityConfig {
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
+                        // Allow CORS preflight requests (OPTIONS) for all endpoints
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        
                         // Game Master endpoints - require GAMEMASTER role
                         .requestMatchers("/api/gamemaster/**").hasRole("GAMEMASTER")
                         
