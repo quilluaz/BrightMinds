@@ -50,11 +50,13 @@ public class SecurityConfig {
         requestHandler.setCsrfRequestAttributeName(null); // Use default _csrf
 
         http
-                .cors(cors -> cors.disable()) // Disable Spring Security CORS, use our dedicated filter
+                // Enable CORS using our CorsConfigurationSource bean
+                .cors(cors -> {})
+                // For stateless JWT APIs, disable CSRF for API endpoints
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(csrfRepository)
                         .csrfTokenRequestHandler(requestHandler)
-                        .ignoringRequestMatchers("/api/auth/login", "/api/users", "/api/seeder/**") // Allow seeder without CSRF
+                        .ignoringRequestMatchers("/api/**")
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
