@@ -113,18 +113,25 @@ public class UserController {
 
     @PutMapping("/me/password")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Map<String, String>> changePassword(@RequestBody Map<String, String> passwordData) {
+    public ResponseEntity<Map<String, String>> changePassword(@RequestBody Map<String, String> passwordData,
+                                                              @org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.User principal) {
         try {
             String newPassword = passwordData.get("password");
             if (newPassword == null || newPassword.trim().isEmpty()) {
                 return new ResponseEntity<>(Map.of("error", "Password is required"), HttpStatus.BAD_REQUEST);
             }
-            
-            // TODO: Get current user from JWT token when authentication is implemented
-            // For now, we'll need to get user ID from request header or implement proper JWT extraction
-            Long userId = 1L; // Placeholder - should be extracted from JWT token
-            
-            userService.changePassword(userId, newPassword);
+
+            if (principal == null) {
+                return new ResponseEntity<>(Map.of("error", "Unauthorized"), HttpStatus.UNAUTHORIZED);
+            }
+
+            // Resolve current user by email from JWT principal
+            UserViewDTO me = userService.getByEmail(principal.getUsername());
+            if (me == null) {
+                return new ResponseEntity<>(Map.of("error", "User not found"), HttpStatus.NOT_FOUND);
+            }
+
+            userService.changePassword(me.getUserId(), newPassword);
             return new ResponseEntity<>(Map.of("message", "Password changed successfully"), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(Map.of("error", "Failed to change password"), HttpStatus.BAD_REQUEST);
