@@ -21,7 +21,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*")
 @Tag(name = "User Management", description = "APIs for managing users in the BrightMinds system")
 public class UserController {
 

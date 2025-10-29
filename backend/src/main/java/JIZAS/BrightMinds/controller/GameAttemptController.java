@@ -20,7 +20,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/game-attempts")
 @Tag(name = "Game Attempts", description = "API for managing game attempts and match history")
-@CrossOrigin(origins = "*")
 public class GameAttemptController {
 
     @Autowired

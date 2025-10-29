@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/answers")
-@CrossOrigin(origins = "*")
 public class AnswerController {
     
     @Autowired
