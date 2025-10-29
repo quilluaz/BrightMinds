@@ -15,9 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
@@ -53,7 +50,7 @@ public class SecurityConfig {
         requestHandler.setCsrfRequestAttributeName(null); // Use default _csrf
 
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.disable()) // Disable Spring Security CORS, use our dedicated filter
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(csrfRepository)
                         .csrfTokenRequestHandler(requestHandler)
@@ -91,35 +88,5 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Get allowed origins from environment variable, fallback to defaults
-        String allowedOrigins = System.getenv().getOrDefault("ALLOWED_ORIGINS", 
-            "http://localhost:5173,https://brightminds-cit.vercel.app");
-        
-        // Debug logging
-        System.out.println("CORS Configuration - ALLOWED_ORIGINS from env: " + System.getenv("ALLOWED_ORIGINS"));
-        System.out.println("CORS Configuration - Using allowedOrigins: " + allowedOrigins);
-        
-        // Use setAllowedOrigins for exact matches instead of patterns
-        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
-        
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-XSRF-TOKEN")); // Expose X-XSRF-TOKEN
-        configuration.setExposedHeaders(Arrays.asList("X-XSRF-TOKEN")); // Expose the CSRF token header
-        configuration.setAllowCredentials(true);
-
-        // Debug logging for CORS configuration
-        System.out.println("CORS Configuration - Allowed Origins: " + configuration.getAllowedOrigins());
-        System.out.println("CORS Configuration - Allowed Methods: " + configuration.getAllowedMethods());
-        System.out.println("CORS Configuration - Allowed Headers: " + configuration.getAllowedHeaders());
-        System.out.println("CORS Configuration - Allow Credentials: " + configuration.getAllowCredentials());
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 }
 
