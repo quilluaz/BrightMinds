@@ -94,6 +94,11 @@ public class SecurityConfig {
         // Get allowed origins from environment variable, fallback to defaults
         String allowedOrigins = System.getenv().getOrDefault("ALLOWED_ORIGINS", 
             "http://localhost:5173,https://brightminds-cit.vercel.app");
+        
+        // Debug logging
+        System.out.println("CORS Configuration - ALLOWED_ORIGINS from env: " + System.getenv("ALLOWED_ORIGINS"));
+        System.out.println("CORS Configuration - Using allowedOrigins: " + allowedOrigins);
+        
         configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
         
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
