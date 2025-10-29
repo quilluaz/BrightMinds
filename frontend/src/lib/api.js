@@ -12,9 +12,9 @@ api.interceptors.request.use((config) => {
     typeof path === "string" && path === "/users" && config.method === "post";
 
   if (!isAuthEndpoint && !isUserRegistration) {
-    const token = sessionStorage.getItem("bm_at");
+    const token = localStorage.getItem("bm_at");
     if (token) config.headers.Authorization = `Bearer ${token}`;
-    const csrf = sessionStorage.getItem("bm_csrf");
+    const csrf = localStorage.getItem("bm_csrf");
     if (csrf && /^(post|put|patch|delete)$/i.test(String(config.method))) {
       config.headers["X-XSRF-TOKEN"] = csrf;
     }
@@ -39,8 +39,8 @@ api.interceptors.response.use(
             const m = document.cookie.match(/(?:^|; )XSRF-TOKEN=([^;]+)/);
             if (m) csrf = decodeURIComponent(m[1]);
           }
-          if (at) sessionStorage.setItem("bm_at", at);
-          if (csrf) sessionStorage.setItem("bm_csrf", csrf);
+          if (at) localStorage.setItem("bm_at", at);
+          if (csrf) localStorage.setItem("bm_csrf", csrf);
           const original = err.config;
           original.headers = original.headers || {};
           if (at) original.headers.Authorization = `Bearer ${at}`;
@@ -53,9 +53,9 @@ api.interceptors.response.use(
           return api.request(original);
         })
         .catch((e) => {
-          sessionStorage.removeItem("bm_at");
-          sessionStorage.removeItem("bm_user");
-          sessionStorage.removeItem("bm_csrf");
+          localStorage.removeItem("bm_at");
+          localStorage.removeItem("bm_user");
+          localStorage.removeItem("bm_csrf");
           window.location.href = "/";
           return Promise.reject(e);
         });
