@@ -9,6 +9,8 @@ import VisionTransition from "@/components/ui/VisionTransition";
 import { Howl, Howler } from "howler";
 import game1Data from "../../game1.json";
 import AudioLanguageControls from "@/components/ui/AudioLanguageControls";
+import { awardBadge } from '../lib/api';
+
 
 export default function GamePageMCQ() {
   const { storyId } = useParams();
@@ -26,6 +28,8 @@ export default function GamePageMCQ() {
   const [shakeOffset, setShakeOffset] = useState(0);
   const [storyScore, setStoryScore] = useState(null);
   const [showScore, setShowScore] = useState(false);
+  const [showBadgeModal, setShowBadgeModal] = useState(false);
+  const [earnedBadge, setEarnedBadge] = useState(null);
   const [mistakeCount, setMistakeCount] = useState(0); // Keep for backward compatibility
   const [questionMistakes, setQuestionMistakes] = useState({}); // Track mistakes per question
   const [totalQuestions, setTotalQuestions] = useState(0);
@@ -950,6 +954,9 @@ export default function GamePageMCQ() {
         url: error.config?.url,
       });
     }
+    if (deservesBadge) {
+  await awardBadge(userId, badgeId);
+}
   };
 
   const fetchMatchHistory = async () => {
@@ -1245,6 +1252,20 @@ export default function GamePageMCQ() {
       setTimeout(() => {
         console.log("3 seconds passed, showing score");
         handleScoreDisplay();
+        // Badge check: Amulet Ace
+        if (
+          storyScore &&
+          storyScore.percentage === 100 &&
+          storyData?.title === "The Secret of the Amulet"
+        ) {
+          setEarnedBadge({
+            name: "Amulet Ace",
+            description:
+              "Score a perfect 100% on The Secret of the Amulet! You're Liam's superstar, saving the village!",
+            imageUrl: "/images/badges/amulet-ace.png",
+          });
+          setShowBadgeModal(true);
+        }
       }, 3000);
       // Don't reset isTransitioning for finished state
     }
@@ -1438,69 +1459,24 @@ export default function GamePageMCQ() {
           </div>
         );
       case "finished":
-        console.log(
-          "Rendering finished state, showScore:",
-          showScore,
-          "storyScore:",
-          storyScore
-        );
-        if (showScore && storyScore) {
+        if (showBadgeModal && earnedBadge) {
           return (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-20">
-              <div className="text-center text-white">
-                <h1 className="text-4xl font-pressStart mb-8">
-                  Story Completed!
-                </h1>
-                <div className="bg-bmGreen/20 border-2 border-bmYellow/50 rounded-xl p-8 max-w-md">
-                  <h2 className="text-2xl font-pressStart mb-4 text-bmYellow">
-                    Your Score
-                  </h2>
-                  <div className="text-6xl font-pressStart mb-4 text-bmGreen">
-                    {storyScore.percentage}%
-                  </div>
-                  <div className="text-lg font-pressStart mb-2">
-                    {storyScore.earnedPoints} / {storyScore.totalPossiblePoints}{" "}
-                    points
-                  </div>
-                  <div className="text-sm font-pressStart text-gray-300">
-                    {storyScore.totalQuestions} questions •{" "}
-                    {storyScore.wrongAttempts} wrong attempts
-                  </div>
-                  <div className="mt-4 flex gap-3">
-                    <button
-                      onClick={() => {
-                        setShowMatchHistory(true);
-                        fetchMatchHistory();
-                      }}
-                      className="bg-bmYellow text-black px-4 py-2 rounded font-pressStart hover:bg-yellow-400 transition-colors">
-                      View Match History
-                    </button>
-                    <button
-                      onClick={() => navigate("/home")}
-                      className="bg-bmGreen text-white px-4 py-2 rounded font-pressStart hover:bg-green-600 transition-colors">
-                      Back to Home
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-20">
-              <div className="text-center">
-                <h1 className="text-white text-4xl font-pressStart mb-4">
-                  Story Completed!
-                </h1>
+            <div className="absolute inset-0 flex items-center justify-center bg-black/80 z-[300]">
+              <div className="bg-white border-4 border-bmYellow rounded-2xl p-8 max-w-md text-center shadow-2xl">
+                <img src={earnedBadge.imageUrl} alt={earnedBadge.name} className="mx-auto mb-6 w-32 h-32 object-contain" />
+                <h2 className="text-3xl font-pressStart text-bmYellow mb-4">Badge Earned!</h2>
+                <h3 className="text-2xl font-pressStart text-bmGreen mb-2">{earnedBadge.name}</h3>
+                <p className="text-lg font-pressStart text-gray-700 mb-6">{earnedBadge.description}</p>
                 <button
-                  onClick={handleScoreDisplay}
-                  className="bg-bmGreen text-white px-4 py-2 rounded font-pressStart">
-                  Show Score (Test)
+                  onClick={() => setShowBadgeModal(false)}
+                  className="bg-bmGreen text-white px-6 py-3 rounded font-pressStart text-xl hover:bg-green-600 transition-colors">
+                  Continue
                 </button>
               </div>
             </div>
           );
         }
+        // ...existing code...
       case "playing":
         return (
           dialogue && (

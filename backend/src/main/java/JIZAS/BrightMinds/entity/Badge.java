@@ -16,8 +16,8 @@ public class Badge {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "\"condition\"")
-    private int condition; // e.g., score threshold to earn this badge
+    @Column(name = "condition_json", columnDefinition = "jsonb")
+    private String conditionJson; // JSON string for complex badge condition
 
     @OneToMany(mappedBy = "badge")
     private List<UserBadge> userBadges;
@@ -31,8 +31,8 @@ public class Badge {
     public void setDescription(String description) { this.description = description; }
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-    public int getCondition() { return condition; }
-    public void setCondition(int condition) { this.condition = condition; }
+    public String getConditionJson() { return conditionJson; }
+    public void setConditionJson(String conditionJson) { this.conditionJson = conditionJson; }
     public List<UserBadge> getUserBadges() { return userBadges; }
     public void setUserBadges(List<UserBadge> userBadges) { this.userBadges = userBadges; }
 }

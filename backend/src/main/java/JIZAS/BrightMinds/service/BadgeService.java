@@ -32,9 +32,7 @@ public class BadgeService {
         return badgeRepository.findByName(name);
     }
 
-    public List<Badge> getBadgesEarnableAtOrBelowCondition(Integer condition) {
-        return badgeRepository.findByConditionLessThanEqual(condition);
-    }
+    // Remove getBadgesEarnableAtOrBelowCondition, use getAllBadges and filter in service if needed
 
     public Badge updateBadge(Badge badge) {
         if (badge.getBadgeId() != null && badgeRepository.existsById(badge.getBadgeId())) {

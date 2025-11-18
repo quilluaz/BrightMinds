@@ -64,16 +64,7 @@ public class BadgeController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/condition/{condition}")
-    @Operation(summary = "Get badges by condition", description = "Retrieves badges that can be earned at or below the specified condition")
-    public ResponseEntity<List<BadgeDTO>> getBadgesByConditionAtOrBelow(
-            @Parameter(description = "Condition threshold") @PathVariable Integer condition) {
-        List<Badge> badges = badgeService.getBadgesEarnableAtOrBelowCondition(condition);
-        List<BadgeDTO> badgeDTOs = badges.stream()
-                .map(BadgeDTO::new)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(badgeDTOs, HttpStatus.OK);
-    }
+    // Removed condition-based endpoint, use getAllBadges and filter in frontend/backend as needed
 
     @PutMapping("/{badgeId}")
     @Operation(summary = "Update a badge", description = "Updates an existing badge")

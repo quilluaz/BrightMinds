@@ -7,7 +7,7 @@ public class BadgeDTO {
     private String name;
     private String description;
     private String imageUrl;
-    private Integer condition;
+    private String conditionJson;
 
     public BadgeDTO() {}
 
@@ -16,7 +16,7 @@ public class BadgeDTO {
         this.name = badge.getName();
         this.description = badge.getDescription();
         this.imageUrl = badge.getImageUrl();
-        this.condition = badge.getCondition();
+        this.conditionJson = badge.getConditionJson();
     }
 
     public Badge toEntity() {
@@ -25,9 +25,7 @@ public class BadgeDTO {
         badge.setName(this.name);
         badge.setDescription(this.description);
         badge.setImageUrl(this.imageUrl);
-        if (this.condition != null) {
-            badge.setCondition(this.condition);
-        }
+        badge.setConditionJson(this.conditionJson);
         return badge;
     }
 
@@ -39,8 +37,8 @@ public class BadgeDTO {
     public void setDescription(String description) { this.description = description; }
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-    public Integer getCondition() { return condition; }
-    public void setCondition(Integer condition) { this.condition = condition; }
+    public String getConditionJson() { return conditionJson; }
+    public void setConditionJson(String conditionJson) { this.conditionJson = conditionJson; }
 }
 
 

@@ -87,7 +87,7 @@ public class GameAttemptService {
         
         // Award badges based on performance
         System.out.println("GameAttemptService: Checking for badge awards...");
-        badgeAwardService.awardBadgesForGameCompletion(user, story, score, totalPossibleScore, percentage);
+        badgeAwardService.awardBadgesForGameCompletion(user, story, score, totalPossibleScore, percentage, completionTimeSeconds);
         
         // Delete the progress after successful game attempt storage to save data
         System.out.println("GameAttemptService: Deleting progress for user " + userId + " and story " + storyId);

@@ -167,23 +167,23 @@ public class SeederService {
             return;
         }
 
-        // Create default badges with different score thresholds
-        createBadge("Bronze Star", "Complete your first game", "/badges/bronze-star.png", 1);
-        createBadge("Silver Star", "Earn 50 points", "/badges/silver-star.png", 50);
-        createBadge("Gold Star", "Earn 100 points", "/badges/gold-star.png", 100);
-        createBadge("Platinum Star", "Earn 200 points", "/badges/platinum-star.png", 200);
-        createBadge("Diamond Star", "Earn 300 points", "/badges/diamond-star.png", 300);
-        createBadge("Master Player", "Earn 500 points", "/badges/master-player.png", 500);
-        
+        // Create default badges with different score thresholds as JSON
+        createBadgeJson("Bronze Star", "Complete your first game", "/badges/bronze-star.png", "{\"type\":\"score\",\"value\":1}");
+        createBadgeJson("Silver Star", "Earn 50 points", "/badges/silver-star.png", "{\"type\":\"score\",\"value\":50}");
+        createBadgeJson("Gold Star", "Earn 100 points", "/badges/gold-star.png", "{\"type\":\"score\",\"value\":100}");
+        createBadgeJson("Platinum Star", "Earn 200 points", "/badges/platinum-star.png", "{\"type\":\"score\",\"value\":200}");
+        createBadgeJson("Diamond Star", "Earn 300 points", "/badges/diamond-star.png", "{\"type\":\"score\",\"value\":300}");
+        createBadgeJson("Master Player", "Earn 500 points", "/badges/master-player.png", "{\"type\":\"score\",\"value\":500}");
+
         System.out.println("Successfully seeded badges.");
     }
 
-    private void createBadge(String name, String description, String imageUrl, int condition) {
+    private void createBadgeJson(String name, String description, String imageUrl, String conditionJson) {
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(description);
         badge.setImageUrl(imageUrl);
-        badge.setCondition(condition);
+        badge.setConditionJson(conditionJson);
         badgeRepository.save(badge);
     }
 }

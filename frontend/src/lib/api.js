@@ -73,4 +73,13 @@ api.interceptors.response.use(
   }
 );
 
+export async function awardBadge(userId, badgeId) {
+  return fetch('/api/award-badge', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, badgeId }),
+    credentials: 'include'
+  }).then(res => res.json());
+}
+
 export default api;

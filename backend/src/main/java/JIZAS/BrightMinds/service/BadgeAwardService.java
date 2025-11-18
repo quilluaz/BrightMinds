@@ -28,156 +28,49 @@ public class BadgeAwardService {
     /**
      * Award badges based on game completion performance
      */
-    public void awardBadgesForGameCompletion(User user, Story story, Integer score, Integer totalPossibleScore, Double percentage) {
+    public void awardBadgesForGameCompletion(User user, Story story, Integer score, Integer totalPossibleScore, Double percentage, Integer completionTimeSeconds) {
         try {
             System.out.println("BadgeAwardService: Checking badges for user " + user.getUserId() + 
                              ", story " + story.getStoryId() + ", percentage " + percentage);
-            
-            // Award score-based badges
-            awardScoreBasedBadges(user, percentage);
-            
-            // Award completion-based badges
-            awardCompletionBasedBadges(user, story);
-            
-            // Award performance-based badges
-            awardPerformanceBasedBadges(user, story, percentage);
-            
-            // Award special achievement badges
-            awardSpecialAchievementBadges(user, story, percentage);
-            
+            List<Badge> allBadges = badgeRepository.findAll();
+            for (Badge badge : allBadges) {
+                String condJson = badge.getConditionJson();
+                if (condJson == null || condJson.isEmpty()) continue;
+                try {
+                    // Parse JSON condition
+                    com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+                    @SuppressWarnings("unchecked")
+                    java.util.Map<String, Object> cond = mapper.readValue(condJson, java.util.Map.class);
+                    String type = (String) cond.get("type");
+                    String storyTitle = cond.containsKey("story") ? (String) cond.get("story") : null;
+                    if (storyTitle != null && !storyTitle.equals(story.getTitle())) continue;
+                    if (type != null) {
+                        if (type.equals("score")) {
+                            int value = cond.containsKey("value") ? (int) cond.get("value") : 0;
+                            if (percentage != null && percentage >= value) {
+                                awardBadgeByName(user, badge.getName());
+                            }
+                        } else if (type.equals("score_time")) {
+                            int timeMin = cond.containsKey("time_minutes") ? (int) cond.get("time_minutes") : 0;
+                            if (completionTimeSeconds != null && completionTimeSeconds <= timeMin * 60) {
+                                awardBadgeByName(user, badge.getName());
+                            }
+                        }
+                        // Add more types as needed
+                    }
+                } catch (Exception e) {
+                    System.err.println("BadgeAwardService: Error parsing badge condition for badge " + badge.getName() + ": " + e.getMessage());
+                }
+            }
         } catch (Exception e) {
             System.err.println("BadgeAwardService: Error awarding badges: " + e.getMessage());
             e.printStackTrace();
-            // Don't throw exception to avoid breaking game completion
         }
     }
 
     /**
      * Award badges based on score thresholds
      */
-    private void awardScoreBasedBadges(User user, Double percentage) {
-        // Perfect Score Badge (100%)
-        if (percentage >= 100.0) {
-            awardBadgeByName(user, "Perfect Score");
-        }
-        
-        // Excellent Performance Badge (90%+)
-        if (percentage >= 90.0) {
-            awardBadgeByName(user, "Excellent Performance");
-        }
-        
-        // Good Performance Badge (75%+)
-        if (percentage >= 75.0) {
-            awardBadgeByName(user, "Good Performance");
-        }
-        
-        // Passing Grade Badge (60%+)
-        if (percentage >= 60.0) {
-            awardBadgeByName(user, "Passing Grade");
-        }
-    }
-
-    /**
-     * Award badges based on completion milestones
-     */
-    private void awardCompletionBasedBadges(User user, Story story) {
-        // First Steps Badge (first completion)
-        long totalCompletions = gameAttemptRepository.countByUserUserId(user.getUserId());
-        if (totalCompletions == 1) {
-            awardBadgeByName(user, "First Steps");
-        }
-        
-        // Story Master Badge (completed this specific story multiple times)
-        long storyCompletions = gameAttemptRepository.countByUserUserIdAndStoryStoryId(user.getUserId(), story.getStoryId());
-        if (storyCompletions >= 3) {
-            awardBadgeByName(user, "Story Master");
-        }
-        
-        // Story Explorer Badge (completed 5 different stories)
-        long uniqueStories = gameAttemptRepository.countDistinctStoriesByUser(user.getUserId());
-        if (uniqueStories >= 5) {
-            awardBadgeByName(user, "Story Explorer");
-        }
-        
-        // Completionist Badge (completed 10 different stories)
-        if (uniqueStories >= 10) {
-            awardBadgeByName(user, "Completionist");
-        }
-        
-        // Dedicated Learner Badge (completed 20 stories total)
-        if (totalCompletions >= 20) {
-            awardBadgeByName(user, "Dedicated Learner");
-        }
-    }
-
-    /**
-     * Award badges based on performance metrics
-     */
-    private void awardPerformanceBasedBadges(User user, Story story, Double percentage) {
-        // Consistent Performer Badge (multiple good scores)
-        List<GameAttempt> recentAttempts = gameAttemptRepository.findByUserUserIdOrderByEndAttemptDateDesc(user.getUserId());
-        if (recentAttempts.size() >= 3) {
-            long goodScores = recentAttempts.stream()
-                    .limit(3)
-                    .filter(attempt -> attempt.getPercentage() != null && attempt.getPercentage() >= 80.0)
-                    .count();
-            
-            if (goodScores >= 3) {
-                awardBadgeByName(user, "Consistent Performer");
-            }
-        }
-        
-        // Speed Demon Badge (completed quickly with good score)
-        if (percentage >= 85.0) {
-            List<GameAttempt> storyAttempts = gameAttemptRepository.findByUserUserIdAndStoryStoryIdOrderByEndAttemptDateDesc(user.getUserId(), story.getStoryId());
-            if (!storyAttempts.isEmpty()) {
-                GameAttempt latestAttempt = storyAttempts.get(0);
-                if (latestAttempt.getCompletionTimeSeconds() != null && latestAttempt.getCompletionTimeSeconds() <= 300) { // 5 minutes
-                    awardBadgeByName(user, "Speed Demon");
-                }
-            }
-        }
-        
-        // Perfectionist Badge (100% on 3 different stories)
-        long perfectScores = gameAttemptRepository.countPerfectScoresByUser(user.getUserId());
-        if (perfectScores >= 3) {
-            awardBadgeByName(user, "Perfectionist");
-        }
-        
-        // Bright Mind Badge (95%+ on 5 different stories)
-        long excellentScores = gameAttemptRepository.countExcellentScoresByUser(user.getUserId());
-        if (excellentScores >= 5) {
-            awardBadgeByName(user, "Bright Mind");
-        }
-    }
-
-    /**
-     * Award special achievement badges
-     */
-    private void awardSpecialAchievementBadges(User user, Story story, Double percentage) {
-        // Rising Star Badge (improvement on retry)
-        List<GameAttempt> storyAttempts = gameAttemptRepository.findByUserUserIdAndStoryStoryIdOrderByEndAttemptDateDesc(user.getUserId(), story.getStoryId());
-        if (storyAttempts.size() >= 2) {
-            GameAttempt latest = storyAttempts.get(0);
-            GameAttempt previous = storyAttempts.get(1);
-            
-            if (latest.getPercentage() != null && previous.getPercentage() != null) {
-                double improvement = latest.getPercentage() - previous.getPercentage();
-                if (improvement >= 20.0) {
-                    awardBadgeByName(user, "Rising Star");
-                }
-            }
-        }
-        
-        // Legend Badge (90%+ average across all stories)
-        Double averageScore = gameAttemptRepository.findAverageScoreByUser(user.getUserId());
-        if (averageScore != null && averageScore >= 90.0) {
-            long totalStories = gameAttemptRepository.countDistinctStoriesByUser(user.getUserId());
-            if (totalStories >= 5) { // At least 5 stories completed
-                awardBadgeByName(user, "Legend");
-            }
-        }
-    }
 
     /**
      * Award a badge to a user by badge name

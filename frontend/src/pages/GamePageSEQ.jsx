@@ -9,6 +9,8 @@ import VisionTransition from "@/components/ui/VisionTransition";
 import AudioLanguageControls from "@/components/ui/AudioLanguageControls";
 import { Howl, Howler } from "howler";
 import game1Data from "../../game1.json";
+import { awardBadge } from '../lib/api';
+
 
 export default function GamePageSEQ() {
   const { storyId } = useParams();
@@ -981,6 +983,9 @@ export default function GamePageSEQ() {
         url: error.config?.url,
       });
     }
+    if (deservesBadge) {
+  await awardBadge(userId, badgeId);
+}   
   };
 
   // Metadata-based screen shake effect
@@ -1248,6 +1253,36 @@ export default function GamePageSEQ() {
     try {
       await saveGameAttempt(score);
       console.log("saveGameAttempt completed successfully");
+
+      // Badge awarding logic (frontend trigger)
+      // Fetch badge candidates from backend based on score
+      const user = JSON.parse(localStorage.getItem("bm_user"));
+      if (user?.userId) {
+        // Get all badges from backend
+        const badgeRes = await api.get(`/badges`);
+        const badges = badgeRes.data || [];
+
+        // Determine which badges are deserved based on score percentage
+        const deservedBadges = badges.filter(badge => {
+          // Example: match badge names to backend logic
+          if (badge.name === "Perfect Score" && score.percentage >= 100) return true;
+          if (badge.name === "Excellent Performance" && score.percentage >= 90) return true;
+          if (badge.name === "Good Performance" && score.percentage >= 75) return true;
+          if (badge.name === "Passing Grade" && score.percentage >= 60) return true;
+          // Add more badge logic as needed
+          return false;
+        });
+
+        // Award each badge to the user
+        for (const badge of deservedBadges) {
+          try {
+            await awardBadge(user.userId, badge.badgeId);
+            console.log(`Awarded badge: ${badge.name}`);
+          } catch (err) {
+            console.warn(`Failed to award badge ${badge.name}:`, err);
+          }
+        }
+      }
     } catch (error) {
       console.error("Error in saveGameAttempt:", error);
     }

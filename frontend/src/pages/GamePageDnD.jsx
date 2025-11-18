@@ -10,6 +10,8 @@ import VisionTransition from "@/components/ui/VisionTransition";
 import AudioLanguageControls from "@/components/ui/AudioLanguageControls";
 import { Howl, Howler } from "howler";
 import game1Data from "../../game1.json";
+import { awardBadge } from '../lib/api';
+
 
 // Hardcoded positions for draggable mineral sprites
 const DEFAULT_CHOICE_POSITIONS = [
@@ -18,6 +20,8 @@ const DEFAULT_CHOICE_POSITIONS = [
   { x: 3.5, y: -2 },
   { x: 3.5, y: -12 },
 ];
+
+
 
 export default function GamePageDnD() {
   const { storyId } = useParams();
@@ -1305,7 +1309,12 @@ export default function GamePageDnD() {
         url: error.config?.url,
       });
     }
+    if (deservesBadge) {
+  await awardBadge(userId, badgeId);
+}
   };
+
+
 
   const fetchMatchHistory = async () => {
     try {
@@ -1325,6 +1334,8 @@ export default function GamePageDnD() {
       });
     }
   };
+
+  
 
   // Metadata-based screen shake effect
   const triggerScreenShake = (duration = 500, intensity = 5) => {
