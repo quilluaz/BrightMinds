@@ -303,14 +303,30 @@ export default function PlayerDashboard() {
                       <div
                         key={userBadge.userBadgeId}
                         className="bg-white border-2 border-bmBlack rounded-lg p-4 text-center">
-                        <div className="w-16 h-16 bg-bmYellow border-2 border-bmBlack rounded-full mx-auto mb-2 flex items-center justify-center">
-                          <span className="text-2xl">🏆</span>
+                        <div className="w-24 h-24 bg-bmYellow border-2 border-bmBlack rounded-full mx-auto mb-2 flex items-center justify-center overflow-hidden">
+                          {userBadge.badge?.imageUrl ? (
+                            <img 
+                              src={userBadge.badge.imageUrl} 
+                              alt={userBadge.badge?.name || "Badge"} 
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.display = 'none';
+                                e.target.parentNode.innerHTML = '<span class="text-2xl">🏆</span>';
+                              }}
+                            />
+                          ) : (
+                            <span className="text-2xl">🏆</span>
+                          )}
                         </div>
-                        <h3 className="font-spartan font-bold text-bmBlack text-sm">
+                        <h3 className="font-spartan font-bold text-bmBlack text-sm mb-1">
                           {userBadge.badge?.name || "Unknown Badge"}
                         </h3>
-                        <p className="font-lexend text-bmBlack text-xs">
-                          {formatDate(userBadge.earnedAt)}
+                        <p className="font-lexend text-bmBlack text-xs mb-2 italic">
+                            {userBadge.badge?.description || userBadge.badge?.name}
+                        </p>
+                        <p className="font-lexend text-bmBlack text-xs font-bold text-green-700">
+                          Obtained: {formatDate(userBadge.earnedAt)}
                         </p>
                       </div>
                     ))}
@@ -456,12 +472,31 @@ export default function PlayerDashboard() {
                             isEarned ? "bg-bmYellow" : "bg-white"
                           }`}>
                           <div
-                            className={`w-20 h-20 border-2 border-bmBlack rounded-full mx-auto mb-3 flex items-center justify-center ${
-                              isEarned ? "bg-bmYellow" : "bg-gray-200"
+                            className={`w-28 h-28 border-2 border-bmBlack rounded-full mx-auto mb-3 flex items-center justify-center overflow-hidden ${
+                              isEarned ? "bg-white" : "bg-gray-200"
                             }`}>
-                            <span className="text-3xl">
-                              {isEarned ? "🏆" : "🔒"}
-                            </span>
+                            {badge.imageUrl ? (
+                                <img 
+                                  src={badge.imageUrl} 
+                                  alt={badge.name} 
+                                  className={`w-full h-full object-cover ${!isEarned ? "grayscale opacity-50" : ""}`}
+                                  onError={(e) => {
+                                    e.target.onerror = null; 
+                                    e.target.parentElement.classList.remove('bg-white');
+                                    e.target.parentElement.classList.add(isEarned ? 'bg-bmYellow' : 'bg-gray-200');
+                                    e.target.style.display = 'none';
+                                    // Fallback to emoji if image fails
+                                    const span = document.createElement('span');
+                                    span.className = 'text-3xl';
+                                    span.innerText = isEarned ? '🏆' : '🔒';
+                                    e.target.parentElement.appendChild(span);
+                                  }}
+                                />
+                            ) : (
+                                <span className="text-3xl">
+                                  {isEarned ? "🏆" : "🔒"}
+                                </span>
+                            )}
                           </div>
                           <h3 className="font-spartan font-bold text-bmBlack text-sm mb-2">
                             {badge.name}

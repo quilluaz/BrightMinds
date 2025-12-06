@@ -1,0 +1,207 @@
+[
+  {
+    "name": "Amulet Ace",
+    "description": "Score a perfect 100% on The Secret of the Amulet! You're Liam's superstar, saving the village!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073161/AmuletAce_plgoi7.png",
+    "condition": {
+      "type": "score",
+      "value": 100,
+      "story": "The Secret of the Amulet"
+    }
+  },
+  {
+    "name": "Plains Pathfinder",
+    "description": "Finish The Secret of the Amulet in under 10 minutes! You're zooming through plains like a speedy hero!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073167/PlainsPathfinder_ohfd1g.png",
+    "condition": {
+      "type": "score_time",
+      "score": 0,
+      "time_minutes": 10,
+      "story": "The Secret of the Amulet"
+    }
+  },
+  {
+    "name": "Scrapbook Sorcerer",
+    "description": "Score 90% or higher on Leah's Scrapbook! You're a magical organizer of minerals!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073170/ScrapbookSorcerer_o2sdcq.png",
+    "condition": {
+      "type": "score",
+      "value": 90,
+      "story": "Leah's Scrapbook"
+    }
+  },
+  {
+    "name": "Speedy Sorter",
+    "description": "Finish Leah's Scrapbook before Mom arrives in under 5 minutes! You're a turbo tidier!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073163/SpeedySorter_xa7dek.png",
+    "condition": {
+      "type": "score_time",
+      "score": 0,
+      "time_minutes": 5,
+      "story": "Leah's Scrapbook"
+    }
+  },
+  {
+    "name": "Hero Historian",
+    "description": "Score 95% or higher on Hiraya's Heroes! You're a genius at solving hero sequences!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073185/HeroHistorian_q8zfvj.png",
+    "condition": {
+      "type": "score",
+      "value": 95,
+      "story": "Hiraya's Heroes"
+    }
+  },
+  {
+    "name": "Auntie's Ally",
+    "description": "Complete Hiraya's Heroes 3 times! You're Aunt Marietta's favorite sidekick!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073188/AuntiesAlly_c0fqpa.png",
+    "condition": {
+      "type": "completion",
+      "value": 3,
+      "story": "Hiraya's Heroes"
+    }
+  },
+  {
+    "name": "Village Victory",
+    "description": "Improve your score by any amount on any attempt of The Secret of the Amulet! You're Liam's comeback king!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073201/VillageVictory_rnvunh.png",
+    "condition": {
+      "type": "score_improvement",
+      "boolean": false,
+      "story": "The Secret of the Amulet"
+    }
+  },
+  {
+    "name": "Mineral Maestro",
+    "description": "Get every mineral question right in Leah's Scrapbook! You're a rock star at arranging!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073182/MineralMaestro_dxuygm.png",
+    "condition": {
+      "type": "perfect_category",
+      "category": "mineral_questions",
+      "story": "Leah's Scrapbook"
+    }
+  },
+  {
+    "name": "Sequence Superstar",
+    "description": "Perfectly solve the hero sequence in Hiraya's Heroes! You're a timeline wizard!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073198/SequenceSuperstar_kvvkrz.png",
+    "condition": {
+      "type": "perfect_category",
+      "category": "sequence_questions",
+      "story": "Hiraya's Heroes"
+    }
+  },
+  {
+    "name": "Early Amulet Explorer",
+    "description": "Finish The Secret of the Amulet in its first week! You're the fastest village saver!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761073183/EarlyAmuletExplorer_pkofdx.png",
+    "condition": {
+      "type": "completion_time",
+      "value": 1,
+      "timeframe": "first_week",
+      "story": "The Secret of the Amulet"
+    }
+  },
+  {
+    "name": "Super Story Smasher",
+    "description": "Blast to a perfect 100% on any story! You're a scoring superhero, tung tung tung sahur!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075417/SuperStorySmasher_cqepyx.png",
+    "condition": {
+      "type": "score",
+      "value": 100,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Quest Crusader",
+    "description": "Complete all 3 stories! You're a brave adventurer conquering every tale!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075406/QuestCrusader_mxcgld.png",
+    "condition": {
+      "type": "completion",
+      "value": 3,
+      "story": "unique"
+    }
+  },
+  {
+    "name": "Speedy Story Sprinter",
+    "description": "Finish any story in under 7 minutes with 80% or more! You're zooming like a silly cheetah!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075411/SpeedyStorySprinter_prtpqu.png",
+    "condition": {
+      "type": "score_time",
+      "score": 80,
+      "time_minutes": 7,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Story Streak Star",
+    "description": "Score 85% or higher on 2 stories in a row! You're a ninja with a sparkly streak!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075398/StoryStreakStar_stk34b.png",
+    "condition": {
+      "type": "score_consecutive",
+      "value": 85,
+      "story": "any",
+      "count": 2
+    }
+  },
+  {
+    "name": "Bouncy Brainiac",
+    "description": "Score 90% or higher on any story! Your brain is bouncing with smarts!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075416/BouncyBraniac_bvptuj.png",
+    "condition": {
+      "type": "score",
+      "value": 90,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Retry Rocketeer",
+    "description": "Boost your score by 15% on any story retry! You're blasting off to better scores!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075425/Retry_Rocketeer_dvbiqv.png",
+    "condition": {
+      "type": "score_improvement",
+      "value": 15,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Goofy Zero Guru",
+    "description": "Score 0% on any story! You're a wacky guru of oopsies, tung tung tung sahur!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075422/Goofy_Zero_Guru_lxfrjr.png",
+    "condition": {
+      "type": "score",
+      "value": 0,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Turtle Tickler",
+    "description": "Take over 20 minutes to finish any story! You're a giggling turtle taking your time!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075403/TurtleTickler_bvitn6.png",
+    "condition": {
+      "type": "time",
+      "time_minutes": 20,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Wobbly Wanderer",
+    "description": "Get a lower score on a retry of any story! You're wandering backward with a goofy grin!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075439/WobblyWanderer_wglumt.png",
+    "condition": {
+      "type": "score_decrease",
+      "value": -1,
+      "story": "any"
+    }
+  },
+  {
+    "name": "Jungle Jumper",
+    "description": "Complete 5 stories total! You're hopping through the story jungle like a happy frog!",
+    "imageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761075400/JungleJumper_ngdhmw.png",
+    "condition": {
+      "type": "completion",
+      "value": 5,
+      "story": "any"
+    }
+  }
+]
