@@ -27,6 +27,18 @@ api.interceptors.response.use(
   (res) => res,
   (err) => {
     const status = err?.response?.status;
+    if (status === 429) {
+       // Ideally we would use a Toast here, but since this is a pure JS file, we might not have access to UI context.
+       // However, we can modify the error message so the UI component consuming it can display it.
+       const retryAfter = err.response.headers['retry-after'];
+       const msg = `Server is busy. Please try again in ${retryAfter || 1} seconds.`;
+       // If the app has a global alert system attached to window (common in legacy or simple apps), trigger it.
+       if (window.alert) console.warn("Rate limit hit:", msg); // Don't use window.alert as it blocks execution.
+       
+       err.message = msg;
+       // Fall through to reject so the UI handles it
+    }
+
     if (status === 401 || status === 419) {
       // attempt refresh once
       return api
