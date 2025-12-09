@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import BubbleMenu from "@/components/ui/BubbleMenu";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
-import ProfileCard from "@/components/ui/ProfileCard/ProfileCard";
+
 import CircularProfile from "@/components/ui/CircularProfile/CircularProfile";
 import LogoLoop from "@/components/ui/LogoLoop";
 import CountUp from "@/components/ui/CountUp";
@@ -33,7 +33,7 @@ const teamMembers = [
   },
   {
     name: "Justin Labajos",
-    role: "Full Stack Dev",
+    role: "QA ● Developer",
     imageUrl:
       "https://res.cloudinary.com/dymjwplal/image/upload/v1765298865/lex_d1vwev.png",
   },
@@ -45,12 +45,12 @@ const logos = [
 ];
 
 const SECTION_IMAGES = {
-  hero: "https://res.cloudinary.com/dymjwplal/image/upload/v1765300155/uploaded_image_1765300154709_t9j8z9.png", // Using the user's uploaded image as placeholder/example
+  hero: "/LogoIconStackLight.svg", // Using the user's uploaded image as placeholder/example
   stats: "https://res.cloudinary.com/dymjwplal/image/upload/v1765303367/team_sjyipn.png",
   why: {
-    gamified: "", // Add URL here
-    story: "", // Add URL here
-    community: "https://res.cloudinary.com/dymjwplal/image/upload/v1765303365/why2_t8gjjz.jpg",
+    gamified: "https://res.cloudinary.com/dymjwplal/image/upload/v1765303365/why1_matlbm.jpg",
+    story: "https://res.cloudinary.com/dymjwplal/image/upload/v1765303365/why3_mdnglp.jpg",
+    community: "https://res.cloudinary.com/dymjwplal/image/upload/v1765307303/why2_vtbdd1.jpg",
   }
 };
 
@@ -103,17 +103,13 @@ export default function About() {
                 to create an unforgettable learning experience.
               </p>
             </div>
-            {/* Circle Image Holder */}
+            {/* Logo Image */}
             <div className="md:w-1/2 flex justify-center md:justify-end">
-              <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-4 border-white/30 bg-black/20 backdrop-blur-sm flex items-center justify-center relative">
-                {SECTION_IMAGES.hero ? (
-                   <img src={SECTION_IMAGES.hero} alt="Hero" className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-white/50 font-spartan text-xl">
-                    Image Placeholder
-                  </span>
-                )}
-              </div>
+               <img 
+                 src={SECTION_IMAGES.hero} 
+                 alt="BrightMinds Logo" 
+                 className="w-[300px] md:w-[400px] h-auto object-contain drop-shadow-2xl" 
+               />
             </div>
           </div>
         </div>
@@ -141,13 +137,10 @@ export default function About() {
               {/* Text - Right on Desktop */}
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="text-2xl font-bold font-spartan mb-4">
-                  Gamified Learning
+                  Technology That Meets Students Where They Are
                 </h3>
                 <p className="font-lexend text-lg leading-relaxed">
-                  We believe that learning shouldn't be a chore. By integrating
-                  game mechanics, rewards, and interactive challenges, we
-                  transform complex subjects into exciting adventures that
-                  students want to conquer.
+                  We don't just build software; we ensure it works for the learner. As seen here, our approach involves direct engagement with students to refine the user experience. Whether navigating a "Drag and Drop" game or following a bilingual story in English and Tagalog, our interface is crafted to be intuitive, allowing students to focus on learning rather than struggling with the tool.
                 </p>
               </div>
             </div>
@@ -165,13 +158,10 @@ export default function About() {
               </div>
               <div className="w-full md:w-1/2 text-center md:text-right md:order-1">
                 <h3 className="text-2xl font-bold font-spartan mb-4">
-                  Story-Driven Education
+                  Your Technical Partner in the Classroom
                 </h3>
                 <p className="font-lexend text-lg leading-relaxed md:ml-auto">
-                  Facts are easier to remember when they're part of a story. Our
-                  platform weaves educational concepts into immersive narratives,
-                  giving context to knowledge and helping students understand the
-                  "why" behind the "what".
+                  We understand that great ed-tech must first serve the teacher. BrightMinds isn't a "set it and forget it" product; it comes with robust support for our "Game Masters." We equip educators with powerful dashboards to track progress and analytics, and we stand by them to ensure the technology seamlessly integrates into their curriculum, letting them do what they do best: teach.
                 </p>
               </div>
             </div>
@@ -191,12 +181,10 @@ export default function About() {
               {/* Text - Right on Desktop */}
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="text-2xl font-bold font-spartan mb-4">
-                  Community & Collaboration
+                  Turning Education into Achievement
                 </h3>
                 <p className="font-lexend text-lg leading-relaxed">
-                  Learning is better together. We foster a supportive community
-                  where students can share achievements, collaborate on projects,
-                  and inspire each other to reach new heights.
+                  The ultimate proof of our method is in the student's reaction. By gamifying the curriculum with immediate feedback, visual rewards, and story-driven milestones, we transform passive listening into active conquest. BrightMinds creates moments like this—where hitting that 100% score isn't just a grade, but a victory to be celebrated together.
                 </p>
               </div>
             </div>

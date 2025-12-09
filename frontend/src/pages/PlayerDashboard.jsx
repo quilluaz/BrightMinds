@@ -97,20 +97,18 @@ export default function PlayerDashboard() {
 
   return (
     <main className="min-h-screen bg-bmGreen text-bmBlack">
-      <BubbleMenu />
+      <BubbleMenu useFixedPosition />
 
       {/* Header */}
-      <div className="bg-bmYellow border-b-4 border-bmBlack p-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
-            PLAYER DASHBOARD
-          </h1>
-          <p className="text-center text-bmBlack font-lexend mt-2">
-            Welcome back, {user.fName} {user.lName}!
-          </p>
-          <p className="text-center text-bmBlack font-lexend text-sm">
-            Player ID: {user.userId} | Role: {user.role}
-          </p>
+      <div className="p-8">
+        <div className="max-w-7xl mx-auto flex justify-center">
+          <div className="bg-white border-4 border-bmBlack shadow-[6px_6px_0_#000] px-8 py-4 transform -rotate-1 hover:rotate-0 transition-transform duration-200">
+            <h1 className="text-3xl md:text-5xl font-spartan font-black text-bmBlack uppercase tracking-tight text-center">
+              PLAYER: <span className="text-bmBlack">
+                {user.firstName || user.fName || "Hero"} {user.lastName || user.lName || ""}
+              </span>
+            </h1>
+          </div>
         </div>
       </div>
 

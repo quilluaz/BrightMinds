@@ -78,11 +78,7 @@ export default function GamePageMCQ() {
     // Use API data if available, fallback to static JSON
     const bgMusicData = storyData?.backgroundMusic || game1Data.backgroundMusic;
 
-    console.log("initializeBackgroundMusic called:");
-    console.log("- storyData:", storyData);
-    console.log("- storyData?.backgroundMusic:", storyData?.backgroundMusic);
-    console.log("- game1Data.backgroundMusic:", game1Data.backgroundMusic);
-    console.log("- bgMusicData:", bgMusicData);
+    // Console logs removed
 
     if (storyId === "1" && bgMusicData) {
       const bgMusic = new Howl({
@@ -91,15 +87,7 @@ export default function GamePageMCQ() {
         volume: (bgMusicData.volume / 100) * (masterVolume / 100),
         mute: isMuted,
         onload: () => {
-          console.log(
-            `Background music loaded successfully with volume: ${
-              bgMusicData.volume
-            }% (${storyData ? "API" : "JSON"}) * ${masterVolume}% (master) = ${(
-              (bgMusicData.volume / 100) *
-              (masterVolume / 100) *
-              100
-            ).toFixed(1)}%`
-          );
+          // Console log removed
           bgMusic.play();
         },
         onloaderror: (id, error) => {
@@ -140,17 +128,11 @@ export default function GamePageMCQ() {
       if (duck) {
         // Duck to 30% of current volume
         backgroundMusic.volume(currentVolume * 0.3);
-        console.log(
-          `Ducking background music to ${(currentVolume * 0.3 * 100).toFixed(
-            1
-          )}%`
-        );
+        // Console log removed
       } else {
         // Restore to full volume
         backgroundMusic.volume(currentVolume);
-        console.log(
-          `Restoring background music to ${(currentVolume * 100).toFixed(1)}%`
-        );
+        // Console log removed
       }
     }
   };
@@ -207,11 +189,7 @@ export default function GamePageMCQ() {
     }
 
     const shouldShow = backgroundOverlayCountRef.current > 0;
-    console.log(
-      `Background overlay: ${show ? "requested" : "released"}, count: ${
-        backgroundOverlayCountRef.current
-      }, showing: ${shouldShow}`
-    );
+    // Console log removed
 
     // Show overlay if any sprites are requesting it, hide if none are
     setShowBackgroundOverlay(shouldShow);
@@ -222,14 +200,14 @@ export default function GamePageMCQ() {
     try {
       const user = JSON.parse(localStorage.getItem("bm_user"));
       if (!user?.userId) {
-        console.log("No user found, starting fresh");
+        // No user found, starting fresh
         return null;
       }
 
       const response = await api.get(
         `/game/progress/check/${user.userId}/${storyId}`
       );
-      console.log("Progress check response:", response.data);
+      // Console log removed
 
       if (response.data.hasExistingProgress) {
         setExistingProgress(response.data);
@@ -254,7 +232,7 @@ export default function GamePageMCQ() {
       const response = await api.post(
         `/game/continue/${user.userId}/${storyId}`
       );
-      console.log("Continue game response:", response.data);
+      // Console log removed
 
       if (response.data.hasExistingProgress) {
         // Load the scene where user left off (next available scene)
@@ -279,14 +257,10 @@ export default function GamePageMCQ() {
             ).includes("correct");
             if (hasCorrectAnswer) {
               setIsAnswerLocked(true);
-              console.log(
-                "Restored answer lock state - correct answer already selected"
-              );
+              // Restored answer lock state
             } else {
               setIsAnswerLocked(false);
-              console.log(
-                "Restored answer state - wrong answers selected, allowing more attempts"
-              );
+              // Restored answer state
             }
           } else if (progress.perQuestionState) {
             // Fallback to perQuestionState if answerStates is not available
@@ -297,14 +271,10 @@ export default function GamePageMCQ() {
             ).includes("correct");
             if (hasCorrectAnswer) {
               setIsAnswerLocked(true);
-              console.log(
-                "Restored answer lock state from perQuestionState - correct answer already selected"
-              );
+              // Restored answer lock state
             } else {
               setIsAnswerLocked(false);
-              console.log(
-                "Restored answer state from perQuestionState - wrong answers selected, allowing more attempts"
-              );
+              // Restored answer state
             }
           }
 
@@ -316,10 +286,7 @@ export default function GamePageMCQ() {
           // Restore per-question mistake tracking from progress
           if (progress.questionMistakes) {
             setQuestionMistakes(progress.questionMistakes);
-            console.log(
-              "Restored per-question mistakes:",
-              progress.questionMistakes
-            );
+            // Console log removed
           }
 
           // Set game start time for continued games (use current time as fallback)
@@ -354,7 +321,7 @@ export default function GamePageMCQ() {
       const response = await api.post(
         `/game/restart/${user.userId}/${storyId}`
       );
-      console.log("Restart game response:", response.data);
+      // Console log removed
 
       // Start fresh from the beginning
       setCurrentSceneIndex(0);
@@ -382,10 +349,10 @@ export default function GamePageMCQ() {
         const { data: gameScene } = await api.get(
           `/game/scene/${scene.sceneId}`
         );
-        console.log(`Scene ${scene.sceneId} data:`, gameScene);
+        // Console log removed
         if (gameScene.question) {
           questionCount++;
-          console.log(`Found question in scene ${scene.sceneId}`);
+          // Console log removed
         }
       } catch (err) {
         console.error(
@@ -399,11 +366,11 @@ export default function GamePageMCQ() {
     // Fallback: if no questions found via API, use hardcoded count for story 1
     if (questionCount === 0 && storyId === "1") {
       questionCount = 9; // Story 1 has 9 questions based on the data provided
-      console.log("Using fallback count for story 1:", questionCount);
+      // Console log removed
     }
 
     setTotalQuestions(questionCount);
-    console.log("Total questions in story:", questionCount);
+    // Console log removed
   };
 
   // Cleanup function for audio when component unmounts
@@ -437,11 +404,7 @@ export default function GamePageMCQ() {
 
         // Fetch full story data including backgroundMusic
         const storyResponse = await api.get(`/stories/${storyId}`);
-        console.log("Story API response:", storyResponse.data);
-        console.log(
-          "BackgroundMusic from API:",
-          storyResponse.data.backgroundMusic
-        );
+        // Console log removed
         setStoryData(storyResponse.data);
 
         const scenesResponse = await api.get(`/stories/${storyId}/scenes`);
@@ -543,7 +506,7 @@ export default function GamePageMCQ() {
 
             sound.play();
             soundRef.current = sound;
-            console.log("Playing audio asset:", audioAsset.filePath);
+            // Console log removed
           }
         }
       }
@@ -666,10 +629,7 @@ export default function GamePageMCQ() {
           const duration = shakeConfig.duration || 500;
           const intensity = shakeConfig.intensity || 5;
 
-          console.log(
-            `Triggering click-based screen shake for asset ${asset.name}:`,
-            shakeConfig
-          );
+          // Console log removed
           triggerScreenShake(duration, intensity);
         }
       });
@@ -723,9 +683,7 @@ export default function GamePageMCQ() {
 
     if (gameState === "finished" && !showScore) {
       // User clicked during "Story Completed!" - show score immediately
-      console.log(
-        "User clicked during finished state, showing score immediately"
-      );
+      // Console log removed
       handleScoreDisplay();
       return;
     }
@@ -765,7 +723,7 @@ export default function GamePageMCQ() {
     try {
       // Skip saving in demo mode
       if (isDemoMode) {
-        console.log("Demo mode: Skipping scene progress save");
+        // Demo mode: Skipping scene progress save
         return;
       }
 
@@ -785,11 +743,7 @@ export default function GamePageMCQ() {
       };
 
       await api.post("/game/save-scene-progress", progressData);
-      console.log("Scene progress saved:", {
-        sceneId,
-        pointsEarned,
-        selectedAnswers,
-      });
+      // Scene progress saved
     } catch (error) {
       console.error("Failed to save scene progress:", error);
     }
@@ -799,7 +753,7 @@ export default function GamePageMCQ() {
     try {
       // Skip saving in demo mode
       if (isDemoMode) {
-        console.log("Demo mode: Skipping wrong answer state save");
+        // Demo mode: Skipping wrong answer state save
         return;
       }
 
@@ -819,11 +773,7 @@ export default function GamePageMCQ() {
       };
 
       await api.post("/game/save-wrong-answer", progressData);
-      console.log("Wrong answer state saved:", {
-        sceneId,
-        selectedAnswers,
-        mistakeCount,
-      });
+      // Console log removed
     } catch (error) {
       console.error("Failed to save wrong answer state:", error);
     }
@@ -853,12 +803,7 @@ export default function GamePageMCQ() {
       };
 
       await api.post("/game/save-wrong-answer", progressData);
-      console.log("Wrong answer state saved with data:", {
-        sceneId,
-        answerStates,
-        mistakeCount: progressData.mistakeCount,
-        questionMistakes: progressData.questionMistakes,
-      });
+      // Console log removed
     } catch (error) {
       console.error("Failed to save wrong answer state with data:", error);
     }
@@ -868,7 +813,7 @@ export default function GamePageMCQ() {
     try {
       // Skip saving in demo mode
       if (isDemoMode) {
-        console.log("Demo mode: Skipping game attempt save");
+        // Demo mode: Skipping game attempt save
         return;
       }
 
@@ -900,37 +845,9 @@ export default function GamePageMCQ() {
         endAttemptDate: endTimeISO,
       });
 
-      // Debug: Log the actual values being sent
-      console.log(
-        "Debug - userId type:",
-        typeof user.userId,
-        "value:",
-        user.userId
-      );
-      console.log("Debug - storyId type:", typeof storyId, "value:", storyId);
-      console.log(
-        "Debug - score type:",
-        typeof score.earnedPoints,
-        "value:",
-        score.earnedPoints
-      );
-      console.log(
-        "Debug - totalPossibleScore type:",
-        typeof score.totalPossiblePoints,
-        "value:",
-        score.totalPossiblePoints
-      );
+      // Debug logs removed
 
-      console.log("Saving game attempt:", {
-        userId: user.userId,
-        storyId: storyId,
-        score: score.earnedPoints,
-        totalPossibleScore: score.totalPossiblePoints,
-        startAttemptDate: startTimeISO,
-        endAttemptDate: endTimeISO,
-      });
-
-      console.log("URLSearchParams data:", attemptData.toString());
+      // Console log removed
 
       const response = await api.post("/game-attempts", attemptData, {
         headers: {
@@ -938,9 +855,7 @@ export default function GamePageMCQ() {
         },
       });
 
-      console.log("Game attempt saved successfully:", response.data);
-      console.log("Response status:", response.status);
-      console.log("Response headers:", response.headers);
+      // Console log removed
     } catch (error) {
       console.error("Failed to save game attempt:", error);
       console.error("Error details:", {
@@ -959,7 +874,7 @@ export default function GamePageMCQ() {
 
       const response = await api.get(`/game-attempts/test/user/${user.userId}`);
       setMatchHistory(response.data);
-      console.log("Match history fetched:", response.data);
+      // Console log removed
     } catch (error) {
       console.error("Failed to fetch match history:", error);
       console.error("Error details:", {
@@ -973,9 +888,7 @@ export default function GamePageMCQ() {
 
   // Metadata-based screen shake effect
   const triggerScreenShake = (duration = 500, intensity = 5) => {
-    console.log(
-      `Triggering screen shake: duration=${duration}ms, intensity=${intensity}px`
-    );
+    // Console log removed
     setIsShaking(true);
     setShakeOffset(0);
 
@@ -1006,10 +919,7 @@ export default function GamePageMCQ() {
         const duration = shakeConfig.duration || 500;
         const intensity = shakeConfig.intensity || 5;
 
-        console.log(
-          `Scheduled screen shake for asset ${asset.name}:`,
-          shakeConfig
-        );
+        // Console log removed
 
         setTimeout(() => {
           triggerScreenShake(duration, intensity);
@@ -1023,7 +933,7 @@ export default function GamePageMCQ() {
 
     // Don't allow selecting an answer that has already been selected
     if (selectedAnswers[choice.choiceId]) {
-      console.log("Answer already selected:", choice.choiceId);
+      // Console log removed
       return;
     }
 
@@ -1049,15 +959,7 @@ export default function GamePageMCQ() {
       const pointsPerQuestion = currentSceneData?.question?.points || 4;
       const pointsEarned = Math.max(0, pointsPerQuestion - currentMistakes);
 
-      console.log(
-        `Correct answer for question ${questionId}! Points calculation:`,
-        {
-          pointsPerQuestion,
-          mistakesForThisQuestion: currentMistakes,
-          pointsEarned,
-          questionMistakes: questionMistakes,
-        }
-      );
+      // Console log removed
 
       // Save progress with points earned for correct answer
       const currentSceneId =
@@ -1084,20 +986,13 @@ export default function GamePageMCQ() {
         updatedQuestionMistakes[questionId] =
           (updatedQuestionMistakes[questionId] || 0) + 1;
         setQuestionMistakes(updatedQuestionMistakes);
-        console.log(
-          `Wrong answer for question ${questionId}! Mistakes for this question:`,
-          updatedQuestionMistakes[questionId],
-          "Previous mistakes:",
-          questionMistakes[questionId] || 0,
-          "All question mistakes:",
-          updatedQuestionMistakes
-        );
+        // Console log removed
       }
 
       // Also increment global mistake count for backward compatibility
       const newGlobalMistakeCount = mistakeCount + 1;
       setMistakeCount(newGlobalMistakeCount);
-      console.log("Wrong answer! Global mistake count:", newGlobalMistakeCount);
+      // Console log removed
 
       // Save wrong answer state immediately with current state
       const currentSceneId =
@@ -1118,7 +1013,7 @@ export default function GamePageMCQ() {
           updatedQuestionMistakes,
           newGlobalMistakeCount
         );
-        console.log("Wrong answer state saved to progress");
+        // Console log removed
       } catch (error) {
         console.error("Failed to save wrong answer progress:", error);
       }
@@ -1129,11 +1024,7 @@ export default function GamePageMCQ() {
   };
 
   const calculateStoryScore = async () => {
-    console.log("Calculating score with:", {
-      totalQuestions,
-      questionMistakes,
-      mistakeCount,
-    });
+    // Console log removed
 
     // Each question is worth 4 points (as specified in requirements)
     const pointsPerQuestion = 4;
@@ -1170,22 +1061,20 @@ export default function GamePageMCQ() {
       wrongAttempts: totalWrongAttempts,
     };
 
-    console.log("Calculated score:", score);
-    console.log("Per-question mistakes:", questionMistakes);
+    // Console log removed
     setStoryScore(score);
 
     // Save the game attempt to the backend
-    console.log("About to call saveGameAttempt with score:", score);
+    // Console log removed
     try {
       await saveGameAttempt(score);
-      console.log("saveGameAttempt completed successfully");
+      // Console log removed
     } catch (error) {
       console.error("Error in saveGameAttempt:", error);
     }
   };
 
   const handleScoreDisplay = () => {
-    console.log("Showing score display, storyScore:", storyScore);
     setShowScore(true);
   };
 
@@ -1225,7 +1114,7 @@ export default function GamePageMCQ() {
         isTransitioning.current = false;
       }, 200);
     } else {
-      console.log("Story completed! Setting finished state");
+      // Story completed! Setting finished state
       // Save progress for the last scene
       const currentSceneId =
         scenes[currentSceneIndex].sceneId ||
@@ -1236,14 +1125,14 @@ export default function GamePageMCQ() {
       // Calculate the story score using frontend counters and save the attempt
       calculateStoryScore()
         .then(() => {
-          console.log("Story score calculated and attempt saved");
+          // Story score calculated and attempt saved
         })
         .catch((error) => {
           console.error("Error calculating score or saving attempt:", error);
         });
       // Show score after 3 seconds or when user clicks
       setTimeout(() => {
-        console.log("3 seconds passed, showing score");
+        // 3 seconds passed, showing score
         handleScoreDisplay();
       }, 3000);
       // Don't reset isTransitioning for finished state
@@ -1265,8 +1154,7 @@ export default function GamePageMCQ() {
   // Dynamically render sprites based on backend data
   const renderSprites = () => {
     return spriteAssets.map((asset) => {
-      // Debug logging
-      console.log(`Asset ${asset.name} metadata:`, asset.metadata);
+      // Debug logging removed
 
       // Check if this asset has animation metadata
       const hasAnimation =
@@ -1288,7 +1176,7 @@ export default function GamePageMCQ() {
             asset={asset}
             gameState={gameState}
             onAnimationComplete={(assetId) => {
-              console.log(`Animation completed for asset: ${assetId}`);
+              // Animation completed
             }}
             onBackgroundOverlay={handleBackgroundOverlay}
           />
@@ -1341,17 +1229,7 @@ export default function GamePageMCQ() {
 
       const transformStyle = transforms.join(" ");
 
-      // Debug logging
-      if (scale !== 1) {
-        console.log(
-          `Static sprite ${asset.name} scale:`,
-          scale,
-          "transform:",
-          transformStyle,
-          "metadata:",
-          asset.metadata
-        );
-      }
+      // Debug logging removed
 
       return (
         <img
@@ -1438,12 +1316,6 @@ export default function GamePageMCQ() {
           </div>
         );
       case "finished":
-        console.log(
-          "Rendering finished state, showScore:",
-          showScore,
-          "storyScore:",
-          storyScore
-        );
         if (showScore && storyScore) {
           return (
             <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-20">
