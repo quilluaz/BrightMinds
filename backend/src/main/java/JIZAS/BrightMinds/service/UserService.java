@@ -77,6 +77,8 @@ public class UserService {
         // Only hash password if it's being updated (not empty)
         if (req.getPassword() != null && !req.getPassword().trim().isEmpty()) {
             u.setPassword(passwordEncoder.encode(req.getPassword()));
+            // When a user updates their password, clear the must-change flag
+            u.setMustChangePassword(false);
         }
 
         return toView(repo.save(u));

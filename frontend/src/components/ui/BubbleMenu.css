@@ -1,18 +1,6 @@
 /* BubbleMenu component styles */
-.bubble-menu .menu-line {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: center;
-}
 
-.bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-  margin-left: calc(100% / 6);
-}
-
-.bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-  margin-left: calc(100% / 3);
-  margin-top: 3rem;
-}
-
+/* Rotations and hover effects */
 @media (min-width: 900px) {
   .bubble-menu-items .pill-link {
     transform: rotate(var(--item-rot));
@@ -32,18 +20,6 @@
 }
 
 @media (max-width: 899px) {
-  .bubble-menu-items {
-    padding-top: 120px;
-    align-items: flex-start;
-  }
-  .bubble-menu-items .pill-list {
-    row-gap: 16px;
-  }
-  .bubble-menu-items .pill-list .pill-col {
-    flex: 0 0 100% !important;
-    margin-left: 0 !important;
-    overflow: visible;
-  }
   .bubble-menu-items .pill-link {
     font-size: clamp(1.2rem, 3vw, 4rem);
     padding: clamp(1rem, 2vw, 2rem) 0;

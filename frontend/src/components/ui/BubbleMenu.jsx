@@ -22,7 +22,7 @@ const getMenuItems = () => {
 
   const baseItems = [
     {
-      label: "home",
+      label: "games",
       href: "/home",
       ariaLabel: "Home",
       rotation: -8,
@@ -105,6 +105,9 @@ export default function BubbleMenu({
 
   const menuItems = items?.length ? items : getMenuItems();
 
+  const isGamePage = location.pathname.startsWith("/play/");
+  const showLogo = !isGamePage;
+
   const containerClassName = [
     "bubble-menu",
     useFixedPosition ? "fixed" : "absolute",
@@ -117,6 +120,17 @@ export default function BubbleMenu({
   ]
     .filter(Boolean)
     .join(" ");
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   const handleToggle = () => {
     const nextState = !isMenuOpen;
@@ -252,30 +266,32 @@ export default function BubbleMenu({
         className={containerClassName}
         style={style}
         aria-label="Main navigation">
-        <div
-          className={[
-            "bubble logo-bubble",
-            "inline-flex items-center justify-center",
-            "pointer-events-auto",
-            "will-change-transform",
-            "ml-5",
-          ].join(" ")}
-          aria-label="Logo"
-          style={{
-            background: "transparent",
-          }}>
-          <span
+        {showLogo && (
+          <div
             className={[
-              "logo-content",
-              "inline-flex items-center justify-center",
-            ].join(" ")}>
-            <img
-              src="/LogoIconSideLight.svg"
-              alt="BrightMinds Logo"
-              className="bubble-logo max-h-16 md:max-h-18 object-contain block"
-            />
-          </span>
-        </div>
+              "bubble logo-bubble",
+              "hidden md:inline-flex items-center justify-center",
+              "pointer-events-auto",
+              "will-change-transform",
+              "ml-5",
+            ].join(" ")}
+            aria-label="Logo"
+            style={{
+              background: "transparent",
+            }}>
+            <span
+              className={[
+                "logo-content",
+                "inline-flex items-center justify-center",
+              ].join(" ")}>
+              <img
+                src="/LogoIconSideLight.svg"
+                alt="BrightMinds Logo"
+                className="bubble-logo max-h-16 md:max-h-18 object-contain block"
+              />
+            </span>
+          </div>
+        )}
 
         <button
           type="button"
@@ -290,32 +306,39 @@ export default function BubbleMenu({
             "w-12 h-12 md:w-14 md:h-14",
             "border-0 cursor-pointer p-0",
             "will-change-transform",
+            // Push to right if logo is hidden
+            "ml-auto",
           ].join(" ")}
           onClick={handleToggle}
           aria-label={menuAriaLabel}
           aria-pressed={isMenuOpen}
           style={{ background: menuBg }}>
-          <span
-            className="menu-line block mx-auto rounded-[2px]"
-            style={{
-              width: 26,
-              height: 2,
-              background: menuContentColor,
-              transform: isMenuOpen ? "translateY(4px) rotate(45deg)" : "none",
-            }}
-          />
-          <span
-            className="menu-line short block mx-auto rounded-[2px]"
-            style={{
-              marginTop: "6px",
-              width: 26,
-              height: 2,
-              background: menuContentColor,
-              transform: isMenuOpen
-                ? "translateY(-4px) rotate(-45deg)"
-                : "none",
-            }}
-          />
+          {isMenuOpen ? (
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span
+                className="absolute block h-0.5 rounded-full bg-current transition-transform duration-300 ease-in-out"
+                style={{
+                  width: 24,
+                  backgroundColor: menuContentColor,
+                  transform: "rotate(45deg)",
+                }}
+              />
+              <span
+                className="absolute block h-0.5 rounded-full bg-current transition-transform duration-300 ease-in-out"
+                style={{
+                  width: 24,
+                  backgroundColor: menuContentColor,
+                  transform: "rotate(-45deg)",
+                }}
+              />
+            </div>
+          ) : (
+            <span
+              className="font-spartan font-bold text-xs md:text-sm uppercase tracking-wide"
+              style={{ color: menuContentColor }}>
+              Menu
+            </span>
+          )}
         </button>
       </nav>
       {showOverlay && (
@@ -323,13 +346,14 @@ export default function BubbleMenu({
           ref={overlayRef}
           className={[
             "bubble-menu-items",
-            useFixedPosition ? "fixed" : "absolute",
-            "inset-0",
+            "fixed inset-0",
             "flex items-center justify-center",
             "backdrop-blur-md backdrop-saturate-150 bg-black/30",
             "transition-opacity duration-200",
-            "pointer-events-none", // keep overlay non-interactive; see note below
+            "pointer-events-none",
             "z-[1000]",
+            "overflow-y-auto",
+            "overscroll-y-contain",
           ].join(" ")}
           style={{ opacity: 0 }}
           aria-hidden={!isMenuOpen}>
@@ -339,8 +363,10 @@ export default function BubbleMenu({
               "list-none m-0 px-6",
               "w-full max-w-[1600px] mx-auto",
               "flex flex-wrap",
-              "gap-x-0 gap-y-1",
+              "justify-center",
+              "gap-4 md:gap-8",
               "pointer-events-auto",
+              "py-10",
             ].join(" ")}
             role="menu"
             aria-label="Menu links">
@@ -357,9 +383,10 @@ export default function BubbleMenu({
                   className={[
                     "pill-col",
                     "flex justify-center items-stretch",
-                    "[flex:0_0_calc(100%/3)]",
+                    "w-[calc(100%-1rem)] md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)]",
                     "box-border",
-                  ].join(" ")}>
+                  ].join(" ")}
+                  style={{ flex: "none" }}>
                   <button
                     type="button"
                     role="menuitem"

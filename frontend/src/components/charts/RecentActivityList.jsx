@@ -21,33 +21,37 @@ export default function RecentActivityList({ data }) {
     return 'text-red-600';
   };
 
+  // Cap at 20 activities
+  const activities = data.slice(0, 20);
+
   return (
-    <div className="bg-white border-2 border-bmBlack rounded-lg p-4">
-      <h3 className="text-bmBlack font-spartan font-bold text-lg mb-4 text-center">
-        Recent Activity (Last 7 Days)
+    <div className="bg-white border-2 border-bmBlack rounded-lg p-6 shadow-[4px_4px_0_#000]">
+      <h3 className="text-bmBlack font-spartan font-bold text-xl mb-6 text-center">
+        Recent Class Activity
       </h3>
-      <div className="space-y-3 max-h-96 overflow-y-auto">
-        {data.map((activity, index) => (
+      <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+        {activities.map((activity, index) => (
           <div 
-            key={index}
-            className="bg-gray-50 border border-gray-300 rounded-lg p-3 hover:bg-gray-100 transition-colors"
+            key={index} 
+            className="bg-white border-2 border-bmBlack rounded-lg p-4 shadow-[2px_2px_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_#000] transition-all"
           >
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <p className="font-spartan font-bold text-bmBlack">
-                  {activity.studentName}
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-spartan font-bold text-bmBlack text-lg">
+                {activity.studentName}
+              </span>
+              <span className={`font-spartan font-bold text-lg ${getScoreColor(activity.score)}`}>
+                {Math.round(activity.score)}%
+              </span>
+            </div>
+            
+            <div className="flex justify-between items-end">
+              <div>
+                <p className="font-lexend text-sm text-bmBlack">
+                  {activity.storyTitle}
                 </p>
-                <p className="font-lexend text-sm text-gray-600">
-                  Completed: {activity.storyTitle}
-                </p>
-                <p className="font-lexend text-xs text-gray-500">
+                <p className="font-lexend text-xs text-gray-500 mt-1">
                   {formatDate(activity.date)}
                 </p>
-              </div>
-              <div className="text-right">
-                <span className={`font-spartan font-bold text-lg ${getScoreColor(activity.score)}`}>
-                  {Math.round(activity.score)}%
-                </span>
               </div>
             </div>
           </div>

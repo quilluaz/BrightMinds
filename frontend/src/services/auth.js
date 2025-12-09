@@ -25,10 +25,16 @@ export async function login(data) {
 
 export async function signup(data) {
   const payload = normalizeSignup(data);
-  const { data: user } = await api.post("/users", payload);
-  if (user?.token) localStorage.setItem("bm_at", user.token);
-  localStorage.setItem("bm_user", JSON.stringify(user));
-  return user;
+  // Create account
+  const { data: created } = await api.post("/users", payload);
+  // Immediately login to obtain JWT
+  const { data: loggedIn } = await api.post("/auth/login", {
+    email: payload.email,
+    password: payload.password,
+  });
+  if (loggedIn?.token) localStorage.setItem("bm_at", loggedIn.token);
+  localStorage.setItem("bm_user", JSON.stringify(loggedIn || created));
+  return loggedIn || created;
 }
 
 export async function me() {

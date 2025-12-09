@@ -77,6 +77,8 @@ export default {
       animation: {
         float: "float 3s ease-in-out infinite",
         "float-slow": "float 4s ease-in-out infinite",
+        "spin-slow": "spin 12s linear infinite",
+        "spin-slowest": "spin 40s linear infinite",
       },
     },
   },

@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const BACKEND_URL =
   process.env.BACKEND_URL || process.argv[2] || "http://localhost:8080";
-const GAME_FILE = "game1.json";
+const GAME_FILE = process.argv[3] || "game1.json";
 
 console.log("🌱 BrightMinds Game Seeder");
 console.log("========================");
@@ -109,11 +109,14 @@ async function seedGameData() {
 
 // Show usage if help requested
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
-  console.log("Usage: node seed-game1.js [BACKEND_URL]");
+  console.log("Usage: node seed-game1.js [BACKEND_URL] [GAME_FILE]");
   console.log("");
   console.log("Arguments:");
   console.log(
     "  BACKEND_URL    Backend API URL (default: http://localhost:8080)"
+  );
+  console.log(
+    "  GAME_FILE      JSON file containing game data (default: game1.json)"
   );
   console.log("");
   console.log("Environment Variables:");

@@ -597,6 +597,18 @@ export default function GamePageSEQ() {
     }
   }, [currentSceneData]);
 
+  // Auto-enter question state for scenes without dialogue
+  useEffect(() => {
+    if (
+      gameState === "playing" &&
+      currentSceneData?.question &&
+      (!currentSceneData?.dialogues ||
+        currentSceneData.dialogues.length === 0)
+    ) {
+      setGameState("question");
+    }
+  }, [currentSceneData, gameState]);
+
   // Typing effect for dialogues
   useEffect(() => {
     if (

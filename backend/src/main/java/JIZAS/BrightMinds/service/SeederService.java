@@ -161,29 +161,51 @@ public class SeederService {
     }
 
     public void seedBadges() {
-        // Check if badges already exist to avoid duplicates
-        if (badgeRepository.count() > 0) {
-            System.out.println("Badges already exist. Skipping seed.");
-            return;
-        }
+        System.out.println("Seeding badges...");
 
-        // Create default badges with different score thresholds
-        createBadge("Bronze Star", "Complete your first game", "/badges/bronze-star.png", 1);
-        createBadge("Silver Star", "Earn 50 points", "/badges/silver-star.png", 50);
-        createBadge("Gold Star", "Earn 100 points", "/badges/gold-star.png", 100);
-        createBadge("Platinum Star", "Earn 200 points", "/badges/platinum-star.png", 200);
-        createBadge("Diamond Star", "Earn 300 points", "/badges/diamond-star.png", 300);
-        createBadge("Master Player", "Earn 500 points", "/badges/master-player.png", 500);
-        
-        System.out.println("Successfully seeded badges.");
+        // Story Specific - Amulet
+        createBadge("Amulet Ace", "Score a perfect 100% on The Secret of the Amulet! You're Liam's superstar, saving the village!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073161/AmuletAce_plgoi7.png", 100);
+        createBadge("Plains Pathfinder", "Finish The Secret of the Amulet in under 10 minutes! You're zooming through plains like a speedy hero!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073167/PlainsPathfinder_ohfd1g.png", 0);
+        createBadge("Village Victory", "Improve your score by any amount on any attempt of The Secret of the Amulet! You're Liam's comeback king!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073201/VillageVictory_rnvunh.png", 0);
+        createBadge("Early Amulet Explorer", "Finish The Secret of the Amulet in its first week! You're the fastest village saver!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073183/EarlyAmuletExplorer_pkofdx.png", 1);
+
+        // Story Specific - Scrapbook
+        createBadge("Scrapbook Sorcerer", "Score 90% or higher on Leah's Scrapbook! You're a magical organizer of minerals!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073170/ScrapbookSorcerer_o2sdcq.png", 90);
+        createBadge("Speedy Sorter", "Finish Leah's Scrapbook before Mom arrives in under 5 minutes! You're a turbo tidier!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073163/SpeedySorter_xa7dek.png", 0);
+        createBadge("Mineral Maestro", "Get every mineral question right in Leah's Scrapbook! You're a rock star at arranging!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073182/MineralMaestro_dxuygm.png", 100);
+
+        // Story Specific - Heroes
+        createBadge("Hero Historian", "Score 95% or higher on Hiraya's Heroes! You're a genius at solving hero sequences!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073185/HeroHistorian_q8zfvj.png", 95);
+        createBadge("Auntie's Ally", "Complete Hiraya's Heroes 3 times! You're Aunt Marietta's favorite sidekick!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073188/AuntiesAlly_c0fqpa.png", 3);
+        createBadge("Sequence Superstar", "Perfectly solve the hero sequence in Hiraya's Heroes! You're a timeline wizard!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761073198/SequenceSuperstar_kvvkrz.png", 100);
+
+        // Generalized
+        createBadge("Super Story Smasher", "Blast to a perfect 100% on any story! You're a scoring superhero, tung tung tung sahur!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075417/SuperStorySmasher_cqepyx.png", 100);
+        createBadge("Quest Crusader", "Complete all 3 stories! You're a brave adventurer conquering every tale!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075406/QuestCrusader_mxcgld.png", 3);
+        createBadge("Speedy Story Sprinter", "Finish any story in under 7 minutes with 80% or more! You're zooming like a silly cheetah!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075411/SpeedyStorySprinter_prtpqu.png", 7);
+        createBadge("Story Streak Star", "Score 85% or higher on 2 stories in a row! You're a ninja with a sparkly streak!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075398/StoryStreakStar_stk34b.png", 85);
+        createBadge("Bouncy Brainiac", "Score 90% or higher on any story! Your brain is bouncing with smarts!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075416/BouncyBraniac_bvptuj.png", 90);
+        createBadge("Retry Rocketeer", "Boost your score by 15% on any story retry! You're blasting off to better scores!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075425/Retry_Rocketeer_dvbiqv.png", 15);
+        createBadge("Goofy Zero Guru", "Score 0% on any story! You're a wacky guru of oopsies, tung tung tung sahur!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075422/Goofy_Zero_Guru_lxfrjr.png", 0);
+        createBadge("Turtle Tickler", "Take over 20 minutes to finish any story! You're a giggling turtle taking your time!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075403/TurtleTickler_bvitn6.png", 20);
+        createBadge("Wobbly Wanderer", "Get a lower score on a retry of any story! You're wandering backward with a goofy grin!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075439/WobblyWanderer_wglumt.png", 0);
+        createBadge("Jungle Jumper", "Complete 5 stories total! You're hopping through the story jungle like a happy frog!", "https://res.cloudinary.com/dymjwplal/image/upload/v1761075400/JungleJumper_ngdhmw.png", 5);
+
+        System.out.println("Badge seeding completed.");
     }
 
     private void createBadge(String name, String description, String imageUrl, int condition) {
+        if (badgeRepository.findByName(name).isPresent()) {
+            System.out.println("Badge '" + name + "' already exists. Skipping.");
+            return;
+        }
+        
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(description);
         badge.setImageUrl(imageUrl);
         badge.setCondition(condition);
         badgeRepository.save(badge);
+        System.out.println("Created badge: " + name);
     }
 }
