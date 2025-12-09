@@ -21,6 +21,7 @@ public class SeederService {
     @Autowired private AnswerRepository answerRepository;
     @Autowired private SceneAssetRepository sceneAssetRepository;
     @Autowired private BadgeRepository badgeRepository;
+    @Autowired private UserResponseRepository userResponseRepository;
 
     public void seedStory(StorySeedDTO storyDTO) {
         // Check if story exists to update it instead of creating a duplicate
@@ -58,6 +59,9 @@ public class SeederService {
                 // Delete Questions (and their Choices/Answers)
                 List<Question> questions = questionRepository.findBySceneId(oldScene.getSceneId());
                 for (Question q : questions) {
+                    // Delete UserResponses linked to this question first (FK cleanup)
+                    userResponseRepository.deleteByQuestion(q);
+                    
                     choiceRepository.deleteByQuestion(q);
                     answerRepository.deleteByQuestion(q);
                     questionRepository.delete(q);

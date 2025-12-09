@@ -17,6 +17,8 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
     // Custom query to find user responses for questions in a specific story
     @Query("SELECT ur FROM UserResponse ur JOIN ur.question q JOIN Scene s ON q.sceneId = s.sceneId WHERE ur.user.userId = :userId AND s.story.storyId = :storyId")
     List<UserResponse> findByUserAndStory(@Param("userId") Long userId, @Param("storyId") Integer storyId);
+
+    void deleteByQuestion(JIZAS.BrightMinds.entity.Question question);
 }
 
 
