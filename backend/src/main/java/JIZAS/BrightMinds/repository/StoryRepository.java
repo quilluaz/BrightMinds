@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface StoryRepository extends JpaRepository<Story, Integer> {
     List<Story> findAllByOrderByStoryOrderAsc();
+    java.util.Optional<Story> findByTitle(String title);
 }
 
 

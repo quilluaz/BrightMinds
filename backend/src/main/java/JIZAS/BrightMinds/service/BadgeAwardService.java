@@ -247,9 +247,47 @@ public class BadgeAwardService {
     /**
      * Check and award badges for a specific user (useful for retroactive badge awarding)
      */
+    /**
+     * Check and award badges for a specific user (retroactive)
+     * Iterates through all past attempts and re-runs eligibility checks.
+     */
     public void checkAndAwardRetroactiveBadges(Long userId) {
-        // Simplified bioactive check just running the award logic for latest attempts
-        // Real implementation would iterate through history.
-        // Keeping it simple for now as per current requirements focus.
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        List<GameAttempt> allAttempts = gameAttemptRepository.findByUserUserIdOrderByEndAttemptDateDesc(userId, org.springframework.data.domain.Pageable.unpaged()).getContent();
+
+        System.out.println("BadgeAwardService: Running retroactive check for user " + userId + " on " + allAttempts.size() + " attempts.");
+
+        // Iterate through all attempts to catch per-attempt badges (Score, Time, Story-Specific)
+        for (GameAttempt attempt : allAttempts) {
+            if (attempt.getStory() == null) continue;
+            
+            // We reuse the existing logic. 
+            // NOTE: 'Streak' logic in awardPerformanceBasedBadges relies on "current most recent", 
+            // so historical streaks might not trigger if they aren't currently the most recent.
+            // But per-attempt badges (100% score, speed runs) will work perfectly.
+            awardBadgesForGameCompletion(
+                user, 
+                attempt.getStory(), 
+                attempt.getScore(), 
+                attempt.getTotalPossibleScore(), 
+                attempt.getPercentage()
+            );
+        }
+        
+        // Also explicitly check global counters (quests, total stories) just in case
+        // (Though awardBadgesForGameCompletion calls awardCompletionBasedBadges, so this is covered)
+    }
+
+
+    /**
+     * Check and award badges for ALL users (retroactive)
+     */
+    public void checkAndAwardRetroactiveBadgesForAll() {
+        List<User> allUsers = userRepository.findAll();
+        System.out.println("BadgeAwardService: Running global retroactive check for " + allUsers.size() + " users.");
+        
+        for (User user : allUsers) {
+            checkAndAwardRetroactiveBadges(user.getUserId());
+        }
     }
 }

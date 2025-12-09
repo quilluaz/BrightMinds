@@ -4,6 +4,7 @@ import JIZAS.BrightMinds.dto.UserBadgeDTO;
 import JIZAS.BrightMinds.entity.User;
 import JIZAS.BrightMinds.entity.UserBadge;
 import JIZAS.BrightMinds.service.UserBadgeService;
+import JIZAS.BrightMinds.service.BadgeAwardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,9 @@ public class UserBadgeController {
 
     @Autowired
     private UserBadgeService userBadgeService;
+
+    @Autowired
+    private BadgeAwardService badgeAwardService;
 
     @PostMapping
     @Operation(summary = "Create a user badge relationship", description = "Creates a new user badge relationship")
@@ -49,6 +53,28 @@ public class UserBadgeController {
             return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/retroactive/{userId}")
+    @Operation(summary = "Check and award retroactive badges", description = "Checks past game attempts for a user and awards badges if conditions were met but badge wasn't awarded.")
+    public ResponseEntity<String> checkRetroactiveBadges(@Parameter(description = "User ID") @PathVariable Long userId) {
+        try {
+            badgeAwardService.checkAndAwardRetroactiveBadges(userId);
+            return ResponseEntity.ok("Retroactive badge check completed for user " + userId);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/retroactive/all")
+    @Operation(summary = "Check and award retroactive badges for ALL users", description = "Checks past game attempts for ALL users and awards badges.")
+    public ResponseEntity<String> checkRetroactiveBadgesForAll() {
+        try {
+            badgeAwardService.checkAndAwardRetroactiveBadgesForAll();
+            return ResponseEntity.ok("Global retroactive badge check initiated.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 
