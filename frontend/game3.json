@@ -9,1638 +9,1677 @@
     "volume": 30
   },
   "scenes": [
-      {
-          "sceneOrder": 1,
-          "assets": [
-              {
-                  "name": "s3_scene1_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761070307/Story3CoverMuseumv3_hjq8e4.png"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "GAME",
-                  "lineText": "Click to progress the story",
-                  "orderIndex": 1
-              }
-          ]
-      },
-      {
-          "sceneOrder": 2,
-          "assets": [
-              {
-                  "name": "s3_scene2_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830187/HirayaBedWakeUp_nleauv.png",
-                  "metadata": {}
-              },
-              {
-                  "name": "narrator_voice_st3_sc2",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator1_hza8h1.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The morning sunlight peeked through the window, painting golden lines across Hiraya’s room. She stretched and smiled - today was National Heroes Day!",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc2"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 3,
-          "assets": [
-              {
-                  "name": "s3_scene3_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaDeparture_tzn3ko.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "appearAfter": 1
-                  }
-              },
-              {
-                  "name": "Hiraya_waked",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
-                  "positionX": 5,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "state": "aloof",
-                      "facing": "left",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "narrator_voice_st3_sc3",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator2_acllqb.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Her Tita Marietta entered with her usual warm smile, carrying a woven bag and a sense of excitement.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc3"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 4,
-          "assets": [
-              {
-                  "name": "s3_scene4_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking"
-                  }
-              },
-              {
-                  "name": "Hiraya_huh",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
-                  "positionX": 5,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "state": "thinking",
-                      "facing": "left"
-                  }
-              },
-              {
-                  "name": "marietta_voice_st3_sc4",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670929/s3_marietta1_hyfpuz.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "Good morning, Hiraya! Are you ready for an adventure?",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc4"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 5,
-          "assets": [
-              {
-                  "name": "s3_scene5_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking"
-                  }
-              },
-              {
-                  "name": "hiraya_voice_st3_sc5",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670896/s3_hiraya1_cfdfh2.wav"
-              },
-              {
-                  "name": "Hiraya_excited",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaExcited2_oekago.png",
-                  "positionX": 4,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "facing": "left",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "appearAfter": 0.1
-                  }
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "HIRAYA",
-                  "lineText": "Yes, Tita! Are we really going to the Museum of Heroes?",
-                  "orderIndex": 1,
-                  "voiceover": "hiraya_voice_st3_sc5"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 6,
-          "assets": [
-              {
-                  "name": "s3_scene6_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759833375/LivingRoom_nfla3k.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -4.6,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "Hiraya_listening",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
-                  "positionX": 4.6,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "facing": "left",
-                      "state": "listening",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "marietta_voice_st3_sc6",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670931/s3_marietta2_ttztn4.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "We are. They say that on this day, the museum whispers the stories of our heroes to those who truly listen.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc6"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 7,
-          "assets": [
-              {
-                  "name": "s3_scene7_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759833375/LivingRoom_nfla3k.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -4.7,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking"
-                  }
-              },
-              {
-                  "name": "Hiraya_eager",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaExcited1_wrewtv.png",
-                  "positionX": 4.7,
-                  "positionY": -11,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "facing": "left",
-                      "state": "listening",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "narrator_voice_st3_sc7",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator3_x4fcam.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Hiraya’s heart raced. Today wasn’t just about seeing old artifacts — it was about meeting the soul of history.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc7"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 8,
-          "assets": [
-              {
-                  "name": "s3_scene8_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc8",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator4_ewmmo3.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The grand Museo ng mga Bayani shimmered like it was alive. Banners of red, blue, and gold fluttered proudly. Inside, statues of heroes stood tall beneath a dome painted with the Philippine flag.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc8"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 9,
-          "assets": [
-              {
-                  "name": "s3_scene9_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
-              },
-              {
-                   "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right",
-                      "appearAfter": 0.1
-                      
-                  }
-              },
-              {
-                  "name": "marietta_voice_st3_sc9",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670931/s3_marietta3_engyax.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "Each wing of this museum tells the story of our heroes — from Luzon, Visayas, and Mindanao.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc9"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 10,
-          "assets": [
-              {
-                  "name": "s3_scene10_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
-              },
-{
-                                "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "appearAfter": 0.1
-                  
-                  }
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right",
-                      "appearAfter": 0.1
-                      
-                  }
-              },
-              {
-                  "name": "narrator_voice_st3_sc10",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator5_y4rsap.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "As they stepped closer, the archway ahead began to shimmer — golden and alive.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc10"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 11,
-          "assets": [
-              {
-                  "name": "s3_scene11_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
-              },
-              {
-                  "name": "Marietta_walking",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking"
-                  
-                  }
-              },
-              {
-                  "name": "Hiraya_shocked",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazedPointing_yxksjy.png",
-                  "positionX": 2,
-                  "positionY": -18,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "left"
-                  }
-              },
-              {
-                  "name": "hiraya_voice_st3_sc11",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670853/s3_hiraya2_ytdcms.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "HIRAYA",
-                  "lineText": "Tita… it's glowing.",
-                  "orderIndex": 1,
-                  "voiceover": "hiraya_voice_st3_sc11"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 12,
-          "assets": [
-              {
-                  "name": "s3_scene12_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
-              },
-              {
-                  "name": "Marietta_telling",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaStorytime_jhtd78.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "telling",
-                      "appearAfter": 0.1
-                  }
-              },
- {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right"
-                      
-                  }
-              },
-              {
-                  "name": "marietta_voice_st3_sc12",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta4_h9vifj.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "The museum is inviting you, anak. Go on — your journey begins.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc12"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 13,
-          "assets": [
-              {
-                  "name": "s3_scene13_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761038213/HallwayMuseumEntrance_tu5j9v.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc13",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator6_g8fidl.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The first room glowed softly, filled with the calm strength of learning.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc13"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 14,
-          "assets": [
-              {
-                  "name": "s3_scene14_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761038337/HallwayMuseumCalambaLaguna_riiabv.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc14",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator7_vqbffv.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Before them was Calamba, Laguna — José Rizal's hometown. The pictures on the wall began to glow one by one.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc14"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 15,
-          "assets": [
-              {
-                  "name": "s3_scene15_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761697726/HallwayMuseum_cj7o56_81e21e.png"
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": -2,
-                  "positionY": -30,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.9,
-                      "state": "excited",
-                      "facing": "left",
-                      "appearAfter": 0.2
-                  }
-              },
-              {
-                  "name": "narrator_voice_st3_sc15",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761686231/s3_narrator44_hb971s.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "As Hiraya walked down the hallway, the pictures on the wall began to glow one by one.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc15"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 16,
-          "assets": [
-              {
-                  "name": "s3_scene16_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc16",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670576/s3_narrator8_wifuxo.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The first showed a young José Rizal reading books by candlelight in his home in Calamba.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc16"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 17,
-          "assets": [
-              {
-                  "name": "s3_scene17_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc17",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta5_rimdlk.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "Rizal loved to learn. He studied hard in Manila and dreamed of helping others.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc17"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 18,
-          "assets": [
-              {
-                  "name": "s3_scene18_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc18",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670576/s3_narrator9_abe0ch.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Next came Rizal on a ship, waves crashing against the side.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc18"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 19,
-          "assets": [
-              {
-                  "name": "s3_scene19_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc19",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670925/s3_marietta6_b24jw5.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "He went to Europe to study medicine. There, he saw how free other countries were and wanted the same for Filipinos.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc19"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 20,
-          "assets": [
-              {
-                  "name": "s3_scene20_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc20",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator10_l8ebf1.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Then a picture showed Rizal writing at a desk, his books \"Noli Me Tangere\" and \"El Filibusterismo\" open beside him.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc20"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 21,
-          "assets": [
-              {
-                  "name": "s3_scene21_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc21",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670906/s3_narrator11_v3qk0j.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "These books opened the eyes of our people. They told the truth about unfair treatment and gave hope to stand for what is right.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc21"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 22,
-          "assets": [
-              {
-                  "name": "s3_scene22_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc22",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670907/s3_narrator12_gu4e1c.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The last picture showed Rizal standing bravely in Bagumbayan.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc22"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 23,
-          "assets": [
-              {
-                  "name": "s3_scene23_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc23",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670926/s3_marietta7_e7j3ok.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "Even when he was about to die, Rizal was not afraid. He knew his words would wake the nation.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc23"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 24,
-          "assets": [
-              {
-                  "name": "s3_scene24_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761039175/GlassPaneGame_s2p9d1.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc24",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670907/s3_narrator13_tnhbrn.mp3"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Now, the glass panel ahead shimmered, showing four glowing tiles — but they were mixed up!",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc24"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 25,
-          "assets": [
-              {
-                  "name": "s3_scene25_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761039175/GlassPaneGame_s2p9d1.png"
-              }
-          ],
-          "dialogues": [],
-          "question": {
-              "type": "Sequence",
-              "promptText": "Arrange the events of Rizal's story in the correct order.",
-              "points": 5,
-              "choices": [
-                  {
-                      "choiceText": "The Writer of Freedom: He wrote Noli Me Tangere and El Filibusterismo to help open people's eyes.",
-                      "orderIndex": 3,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
-                  },
-                  {
-                      "choiceText": "The Young Scholar: Rizal studied hard in Calamba and Manila, excelling in science, art, and literature.",
-                      "orderIndex": 1,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
-                  },
-                  {
-                      "choiceText": "The Legacy of Courage: Rizal stood firm and bravely and was executed in Bagumbayan, but his words inspired freedom.",
-                      "orderIndex": 4,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
-                  },
-                  {
-                      "choiceText": "The Global Student: He traveled to Europe to learn medicine and saw the world outside the Philippines.",
-                      "orderIndex": 2,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
-                  }
-              ]
+    {
+      "sceneOrder": 1,
+      "assets": [
+        {
+          "name": "s3_scene1_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761070307/Story3CoverMuseumv3_hjq8e4.png"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "GAME",
+          "lineText": "Click to progress the story",
+          "orderIndex": 1
+        }
+      ]
+    },
+    {
+      "sceneOrder": 2,
+      "assets": [
+        {
+          "name": "s3_scene2_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830187/HirayaBedWakeUp_nleauv.png",
+          "metadata": {}
+        },
+        {
+          "name": "narrator_voice_st3_sc2",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator1_hza8h1.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The morning sunlight peeked through the window, painting golden lines across Hiraya’s room. She stretched and smiled - today was National Heroes Day!",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc2",
+          "lineTextTl": "Sumilip ang sikat ng araw sa bintana, na nagpinta ng mga ginintuang linya sa buong kuwarto ni Hiraya. Nag-unat siya at ngumiti - Araw ng mga Bayani ngayon!"
+        }
+      ]
+    },
+    {
+      "sceneOrder": 3,
+      "assets": [
+        {
+          "name": "s3_scene3_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaDeparture_tzn3ko.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "appearAfter": 1
           }
-      },
-      {
-          "sceneOrder": 41,
-          "assets": [
-              {
-                  "name": "s3_scene41_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760531033/BahayKuboLeadingOutwardsWithGoldenPath_fcn8qw.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc41",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator23_rz9n5g.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The light from the bahay kubo spread outward, forming another golden path.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc41"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 42,
-          "assets": [
-              {
-                  "name": "s3_scene42_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761041189/LapuLapuWaterHallwayMuseum_rki7gf.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc42",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator24_mmthyf.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The next hall shimmered like the sea, waves dancing on the walls. This was the Visayas Heroes Wing.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc42"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 43,
-          "assets": [
-              {
-                  "name": "s3_scene43_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc43",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator25_hatzam.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The first picture showed foreign ships arriving at the shores of Mactan.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc43"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 44,
-          "assets": [
-              {
-                  "name": "s3_scene44_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc44",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670927/s3_marietta11_dcjcqs.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "That’s when Magellan came to the Philippines. He wanted the chiefs to obey him.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc44"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 45,
-          "assets": [
-              {
-                  "name": "s3_scene45_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc45",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator26_pc1tdo.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Next was Lapu-Lapu standing strong with his men.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc45"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 46,
-          "assets": [
-              {
-                  "name": "s3_scene46_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc46",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator27_as0ohf.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Lapu-Lapu was the ruler of Mactan. He refused to surrender and said the island belongs to its people.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc46"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 47,
-          "assets": [
-              {
-                  "name": "s3_scene47_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc47",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator28_zzepln.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Then came the Battle of Mactan — warriors shouting, waves crashing.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc47"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 48,
-          "assets": [
-              {
-                  "name": "s3_scene48_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc48",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670928/s3_marietta12_pplorx.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "They fought bravely using spears and shields. Even without armor, they protected their home.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc48"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 49,
-          "assets": [
-              {
-                  "name": "s3_scene49_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc49",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator29_jbjpze.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The final picture showed Lapu-Lapu raising his spear in victory.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc49"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 50,
-          "assets": [
-              {
-                  "name": "s3_scene50_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc50",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator30_imsrtp.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Magellan was defeated. Lapu-Lapu became our first hero who fought for freedom.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc50"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 51,
-          "assets": [
-              {
-                  "name": "s3_scene51_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959915/LapuLapuInteractivePanelv1_jvpsvh.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc51",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator31_kwwjks.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "As the paintings intertwined around her, Hiraya found herself before a glass podium, its surface scattered with a jumbled arrangement.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc51"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 52,
-          "assets": [
-              {
-                  "name": "s3_scene52_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959909/LapuLapuInteractivePanelv2_ooonuj.png"
-              }
-          ],
-          "dialogues": [],
-          "question": {
-              "type": "Sequence",
-              "promptText": "Arrange the events of Lapu-Lapu’s story in the right order.",
-              "points": 5,
-              "choices": [
-                  {
-                      "choiceText": "The Arrival: Foreign ships led by Magellan arrived in Mactan.",
-                      "orderIndex": 1,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
-                  },
-                  {
-                      "choiceText": "The Defiance: Lapu-Lapu refused to surrender his island.",
-                      "orderIndex": 2,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
-                  },
-                  {
-                      "choiceText": "The Battle of Mactan: His warriors fought bravely against the invaders.",
-                      "orderIndex": 3,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
-                  },
-                  {
-                      "choiceText": "The Triumph of Mactan: Magellan was defeated, and freedom was protected.",
-                      "orderIndex": 4,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
-                  }
-              ]
+        },
+        {
+          "name": "Hiraya_waked",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
+          "positionX": 5,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "state": "aloof",
+            "facing": "left",
+            "appearAfter": 0.1
           }
-      },
-      {
-          "sceneOrder": 53,
-          "assets": [
-              {
-                  "name": "s3_scene53_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042501/LapuLapuVictoryDiorama_tvii80.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc53",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator32_htkcmf.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The sound of waves and drums echoed as the diorama blazed with light — Lapu-Lapu stood tall, spear raised in victory.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc53"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 54,
-          "assets": [
-              {
-                  "name": "s3_scene54_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratHallwayMuseum_licttx.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc54",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator33_gsbdhf.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The final hallway glowed with brass and gold. Beautiful Maguindanao patterns covered the walls.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc54"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 55,
-          "assets": [
-              {
-                  "name": "s3_scene55_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc55",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator34_yraxgm.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The first picture showed a proud sultan on his throne in Maguindanao.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc55"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 56,
-          "assets": [
-              {
-                  "name": "s3_scene56_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc56",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator35_du9ecx.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "That’s Sultan Muhammad Dipatuan Kudarat. He was a wise and strong leader who wanted peace for his people.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc56"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 57,
-          "assets": [
-              {
-                  "name": "s3_scene57_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc57",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator37_qoh1wh.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "When the Spaniards tried to take Mindanao, Kudarat united the Muslim clans to defend their land.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc57"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 58,
-          "assets": [
-              {
-                  "name": "s3_scene58_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc58",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator36_quzpj2.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Next was a battle scene with foreign soldiers.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc58"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 59,
-          "assets": [
-              {
-                  "name": "s3_scene59_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc59",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator37_qoh1wh.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "When the Spaniards tried to take Mindanao, Kudarat united the Muslim clans to defend their land.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc59"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 60,
-          "assets": [
-              {
-                  "name": "s3_scene60_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc60",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator38_oztry7.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "Then came Kudarat speaking to other leaders, pointing to the sky.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc60"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 61,
-          "assets": [
-              {
-                  "name": "s3_scene61_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc61",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta14_q7prxn.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "He reminded them to stay strong and never lose their freedom. The last picture showed Kudarat standing tall, the flag of Maguindanao behind him.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc61"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 62,
-          "assets": [
-              {
-                  "name": "s3_scene62_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc62",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator39_qc4fsj.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The last picture showed Kudarat standing tall, the flag of Maguindanao behind him.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc62"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 63,
-          "assets": [
-              {
-                  "name": "s3_scene63_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc63",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670912/s3_narrator40_hsxoe7.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "He was never conquered. His courage still lives in the people of Mindanao.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc63"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 64,
-          "assets": [
-              {
-                  "name": "s3_scene64_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962711/SultanKudaratInteractivePanel_jtse51.png"
-              }
-          ],
-          "dialogues": [],
-          "question": {
-              "type": "Sequence",
-              "promptText": "Arrange the events of Lapu-Lapu’s story in the right order.",
-              "points": 5,
-              "choices": [
-                  {
-                      "choiceText": "The Sultan of Maguindanao: “He ruled his land with wisdom and strength.",
-                      "orderIndex": 1,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
-                  },
-                  {
-                      "choiceText": "The Defender of Freedom: “He united the Muslim clans against the invaders.",
-                      "orderIndex": 2,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
-                  },
-                  {
-                      "choiceText": "The Voice of Unity: “He inspired leaders to stay proud and brave.",
-                      "orderIndex": 3,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
-                  },
-                  {
-                      "choiceText": "The Unconquered Legacy: “He was never defeated and remains a symbol of freedom.",
-                      "orderIndex": 4,
-                      "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
-                  }
-              ]
+        },
+        {
+          "name": "narrator_voice_st3_sc3",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator2_acllqb.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Her Tita Marietta entered with her usual warm smile, carrying a woven bag and a sense of excitement.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc3",
+          "lineTextTl": "Pumasok ang kanyang Tita Marietta na mayroon ang kanyang karaniwang mainit na ngiti, may bitbit na hinabing bag at punung-puno ng pananabik."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 4,
+      "assets": [
+        {
+          "name": "s3_scene4_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking"
           }
-      },
-      {
-          "sceneOrder": 65,
-          "assets": [
-              {
-                  "name": "s3_scene65_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962703/HirayaRadiantBeamsSurroundingHer_yo6vqo.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc65",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670912/s3_narrator41_jtilzu.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "The brass hall glowed as all four heroes’ lights merged into one radiant beam surrounding Hiraya.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc65"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 66,
-          "assets": [
-              {
-                  "name": "s3_scene66_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
-              },
-              {
-                  "name": "Marietta_rest",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "appearAfter": 0.1
-                  }
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right",
-                      "appearAfter": 0.1
-                      
-                  }
-              },
-              {
-                  "name": "marietta_voice_st3_sc9",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761689998/s3_marietta15_hyvuqf.wav"
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "TITA MARIETTA",
-                  "lineText": "You’ve listened well, Hiraya. The spirit of our heroes lives in every part of our islands — Luzon, Visayas, and Mindanao.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc66"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 67,
-          "assets": [
-              {
-                  "name": "s3_scene67_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
-              },
-              {
-                  "name": "marietta_voice_st3_sc67",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670904/s3_hiraya4_mjwjsm.wav"
-              },
-               {
-                  "name": "Marietta_rest",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking"
-                      
-                  }
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right"
-                    
-                      
-                  }
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "HIRAYA",
-                  "lineText": "I’ll remember their stories, Tita. They’re part of who we are.",
-                  "orderIndex": 1,
-                  "voiceover": "marietta_voice_st3_sc67"
-              }
-          ]
-      },
-      {
-          "sceneOrder": 68,
-          "assets": [
-              {
-                  "name": "s3_scene68_background",
-                  "type": "background",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
-              },
-              {
-                  "name": "narrator_voice_st3_sc68",
-                  "type": "audio",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761673363/s3_narrator42_ksngmg.wav"
-              },
-              {
-                  "name": "Marietta_rest",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
-                  "positionX": -3,
-                  "positionY": -9,
-                  "orderIndex": 1,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Marietta",
-                      "state": "thinking",
-                      "disappearAfter": 0.6
-                      
-                  }
-              },
-              {
-                  "name": "Hiraya_amazed",
-                  "type": "sprite",
-                  "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
-                  "positionX": 2,
-                  "positionY": -20,
-                  "orderIndex": 2,
-                  "isInteractive": false,
-                  "metadata": {
-                      "character": "Hiraya",
-                      "scale": 0.8,
-                      "state": "excited",
-                      "facing": "right",
-                      "disappearAfter": 0.6
-                      
-                  }
-              }
-          ],
-          "dialogues": [
-              {
-                  "characterName": "NARRATOR",
-                  "lineText": "And as they left the museum, the sunlight felt warmer — like the glow of every hero shining inside her heart.",
-                  "orderIndex": 1,
-                  "voiceover": "narrator_voice_st3_sc68"
-              }
-          ]
+        },
+        {
+          "name": "Hiraya_huh",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
+          "positionX": 5,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "state": "thinking",
+            "facing": "left"
+          }
+        },
+        {
+          "name": "marietta_voice_st3_sc4",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670929/s3_marietta1_hyfpuz.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "Good morning, Hiraya! Are you ready for an adventure?",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc4",
+          "lineTextTl": "Magandang umaga, Hiraya! Handa ka na ba para sa isang pakikipagsapalaran?"
+        }
+      ]
+    },
+    {
+      "sceneOrder": 5,
+      "assets": [
+        {
+          "name": "s3_scene5_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759830196/Scene_1_yjafp0.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking"
+          }
+        },
+        {
+          "name": "hiraya_voice_st3_sc5",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670896/s3_hiraya1_cfdfh2.wav"
+        },
+        {
+          "name": "Hiraya_excited",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaExcited2_oekago.png",
+          "positionX": 4,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "facing": "left",
+            "scale": 0.8,
+            "state": "excited",
+            "appearAfter": 0.1
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "HIRAYA",
+          "lineText": "Yes, Tita! Are we really going to the Museum of Heroes?",
+          "orderIndex": 1,
+          "voiceover": "hiraya_voice_st3_sc5",
+          "lineTextTl": "Oo, Tita! Talaga bang pupunta tayo sa Museo ng mga Bayani?"
+        }
+      ]
+    },
+    {
+      "sceneOrder": 6,
+      "assets": [
+        {
+          "name": "s3_scene6_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759833375/LivingRoom_nfla3k.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -4.6,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "Hiraya_listening",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaAloof_b0roeq.png",
+          "positionX": 4.6,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "facing": "left",
+            "state": "listening",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "marietta_voice_st3_sc6",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670931/s3_marietta2_ttztn4.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "We are. They say that on this day, the museum whispers the stories of our heroes to those who truly listen.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc6",
+          "lineTextTl": "Oo, pupunta tayo. Sabi nila, sa araw na ito, ibinubulong ng museo ang mga kuwento ng ating mga bayani doon sa mga taong tunay na nakikinig."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 7,
+      "assets": [
+        {
+          "name": "s3_scene7_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759833375/LivingRoom_nfla3k.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -4.7,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking"
+          }
+        },
+        {
+          "name": "Hiraya_eager",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759831459/HirayaExcited1_wrewtv.png",
+          "positionX": 4.7,
+          "positionY": -11,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "facing": "left",
+            "state": "listening",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "narrator_voice_st3_sc7",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator3_x4fcam.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Hiraya’s heart raced. Today wasn’t just about seeing old artifacts — it was about meeting the soul of history.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc7",
+          "lineTextTl": "Bumilis ang tibok ng puso ni Hiraya. Hindi lang tungkol sa pagtingin sa mga lumang artifak ang araw na ito — ito ay tungkol sa pagtatagpo sa kaluluwa ng kasaysayan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 8,
+      "assets": [
+        {
+          "name": "s3_scene8_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc8",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator4_ewmmo3.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The grand Museo ng mga Bayani shimmered like it was alive. Banners of red, blue, and gold fluttered proudly. Inside, statues of heroes stood tall beneath a dome painted with the Philippine flag.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc8",
+          "lineTextTl": "Ang kahanga-hangang Museo ng mga Bayani ay kumikislap na parang buhay. Ang mga bandila na pula, asul, at ginto ay may pagmamalaking iwinawagayway. Sa loob, ang mga estatwa ng mga bayani ay nakatayo nang tuwid sa ilalim ng isang kupolya na pininturahan ng bandila ng Pilipinas."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 9,
+      "assets": [
+        {
+          "name": "s3_scene9_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "marietta_voice_st3_sc9",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670931/s3_marietta3_engyax.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "Each wing of this museum tells the story of our heroes — from Luzon, Visayas, and Mindanao.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc9",
+          "lineTextTl": "Ang bawat pakpak (o bahagi) ng museong ito ay nagsasabi ng kuwento ng ating mga bayani — mula sa Luzon, Visayas, at Mindanao."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 10,
+      "assets": [
+        {
+          "name": "s3_scene10_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "narrator_voice_st3_sc10",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator5_y4rsap.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "As they stepped closer, the archway ahead began to shimmer — golden and alive.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc10",
+          "lineTextTl": "Habang sila ay palapit nang palapit, ang arko sa harapan ay nagsimulang kuminang — ginintuan at tila buhay."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 11,
+      "assets": [
+        {
+          "name": "s3_scene11_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
+        },
+        {
+          "name": "Marietta_walking",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759836407/MariettaAmazed1_hc4vfj.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking"
+          }
+        },
+        {
+          "name": "Hiraya_shocked",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazedPointing_yxksjy.png",
+          "positionX": 2,
+          "positionY": -18,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "left"
+          }
+        },
+        {
+          "name": "hiraya_voice_st3_sc11",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670853/s3_hiraya2_ytdcms.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "HIRAYA",
+          "lineText": "Tita… it's glowing.",
+          "orderIndex": 1,
+          "voiceover": "hiraya_voice_st3_sc11",
+          "lineTextTl": "Tita... kumikinang ito."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 12,
+      "assets": [
+        {
+          "name": "s3_scene12_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761691731/NationalHeroesDayMuseumHallway_zmdw9c.png"
+        },
+        {
+          "name": "Marietta_telling",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaStorytime_jhtd78.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "telling",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right"
+          }
+        },
+        {
+          "name": "marietta_voice_st3_sc12",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta4_h9vifj.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "The museum is inviting you, anak. Go on — your journey begins.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc12",
+          "lineTextTl": "Inaanyayahan ka ng museo, anak. Sige na — nagsisimula na ang paglalakbay mo."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 13,
+      "assets": [
+        {
+          "name": "s3_scene13_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761038213/HallwayMuseumEntrance_tu5j9v.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc13",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator6_g8fidl.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The first room glowed softly, filled with the calm strength of learning.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc13",
+          "lineTextTl": "Ang unang silid ay bahagyang lumiwanag, napuno ng payapang lakas ng pag-aaral."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 14,
+      "assets": [
+        {
+          "name": "s3_scene14_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761038337/HallwayMuseumCalambaLaguna_riiabv.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc14",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670575/s3_narrator7_vqbffv.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Before them was Calamba, Laguna — José Rizal's hometown. The pictures on the wall began to glow one by one.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc14",
+          "lineTextTl": "Sa kanilang harapan ay ang Calamba, Laguna — ang bayan ni José Rizal. Ang mga larawan sa dingding ay nagsimulang kuminang nang isa-isa."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 15,
+      "assets": [
+        {
+          "name": "s3_scene15_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761697726/HallwayMuseum_cj7o56_81e21e.png"
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": -2,
+          "positionY": -30,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.9,
+            "state": "excited",
+            "facing": "left",
+            "appearAfter": 0.2
+          }
+        },
+        {
+          "name": "narrator_voice_st3_sc15",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761686231/s3_narrator44_hb971s.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "As Hiraya walked down the hallway, the pictures on the wall began to glow one by one.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc15",
+          "lineTextTl": "Habang naglalakad si Hiraya sa pasilyo, ang mga larawan sa dingding ay nagsimulang kuminang nang isa-isa."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 16,
+      "assets": [
+        {
+          "name": "s3_scene16_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc16",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670576/s3_narrator8_wifuxo.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The first showed a young José Rizal reading books by candlelight in his home in Calamba.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc16",
+          "lineTextTl": "Ang una ay nagpakita ng isang batang si José Rizal na nagbabasa ng mga libro sa ilalim ng liwanag ng kandila sa kanilang tahanan sa Calamba."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 17,
+      "assets": [
+        {
+          "name": "s3_scene17_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc17",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta5_rimdlk.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "Rizal loved to learn. He studied hard in Manila and dreamed of helping others.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc17",
+          "lineTextTl": "Ang una ay nagpakita ng isang batang si José Rizal na nagbabasa ng mga libro sa ilalim ng liwanag ng kandila sa kanilang tahanan sa Calamba."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 18,
+      "assets": [
+        {
+          "name": "s3_scene18_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc18",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670576/s3_narrator9_abe0ch.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Next came Rizal on a ship, waves crashing against the side.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc18",
+          "lineTextTl": "Sumunod ay si Rizal sa isang barko, na may mga alon na humahampas sa tagiliran."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 19,
+      "assets": [
+        {
+          "name": "s3_scene19_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc19",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670925/s3_marietta6_b24jw5.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "He went to Europe to study medicine. There, he saw how free other countries were and wanted the same for Filipinos.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc19",
+          "lineTextTl": "Pumunta siya sa Europa upang mag-aral ng medisina. Doon, nakita niya kung gaano kalaya ang ibang mga bansa at nais din niya ang ganoon para sa mga Pilipino."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 20,
+      "assets": [
+        {
+          "name": "s3_scene20_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc20",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670574/s3_narrator10_l8ebf1.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Then a picture showed Rizal writing at a desk, his books \"Noli Me Tangere\" and \"El Filibusterismo\" open beside him.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc20",
+          "lineTextTl": "Pagkatapos, isang larawan ang nagpakita kay Rizal na nagsusulat sa isang mesa, na may nakabukas na mga aklat niyang \"Noli Me Tangere\" at \"El Filibusterismo sa tabi niya.\""
+        }
+      ]
+    },
+
+    {
+      "sceneOrder": 21,
+      "assets": [
+        {
+          "name": "s3_scene21_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc21",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670906/s3_narrator11_v3qk0j.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "These books opened the eyes of our people. They told the truth about unfair treatment and gave hope to stand for what is right.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc21",
+          "lineTextTl": "Ang mga aklat na ito ay nagbukas ng mata ng ating mga tao. Sinabi nila ang katotohanan tungkol sa hindi patas na pagtrato at nagbigay ng pag-asa upang tumayo para sa kung ano ang tama."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 22,
+      "assets": [
+        {
+          "name": "s3_scene22_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc22",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670907/s3_narrator12_gu4e1c.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The last picture showed Rizal standing bravely in Bagumbayan.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc22",
+          "lineTextTl": "Ang huling larawan ay nagpakita kay Rizal na matapang na nakatayo sa Bagumbayan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 23,
+      "assets": [
+        {
+          "name": "s3_scene23_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc23",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670926/s3_marietta7_e7j3ok.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "Even when he was about to die, Rizal was not afraid. He knew his words would wake the nation.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc23",
+          "lineTextTl": "Kahit noong malapit na siyang mamatay, hindi natakot si Rizal. Alam niyang gigisingin ng kanyang mga salita ang bayan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 24,
+      "assets": [
+        {
+          "name": "s3_scene24_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761039175/GlassPaneGame_s2p9d1.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc24",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670907/s3_narrator13_tnhbrn.mp3"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Now, the glass panel ahead shimmered, showing four glowing tiles — but they were mixed up!",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc24",
+          "lineTextTl": "Ngayon, ang salaming panel sa harapan ay kumikinang, na nagpapakita ng apat na kumikinang na tile — ngunit ang mga ito ay magkakahalo!"
+        }
+      ]
+    },
+    {
+      "sceneOrder": 25,
+      "assets": [
+        {
+          "name": "s3_scene25_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761039175/GlassPaneGame_s2p9d1.png"
+        }
+      ],
+      "dialogues": [],
+      "question": {
+        "type": "Sequence",
+        "promptText": "Arrange the events of Rizal's story in the correct order.",
+        "points": 5,
+        "choices": [
+          {
+            "choiceText": "The Writer of Freedom: He wrote Noli Me Tangere and El Filibusterismo to help open people's eyes.",
+            "orderIndex": 3,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092009/RizalSeq3_dbjec8.png"
+          },
+          {
+            "choiceText": "The Young Scholar: Rizal studied hard in Calamba and Manila, excelling in science, art, and literature.",
+            "orderIndex": 1,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092008/RizalSeq1_oupadl.png"
+          },
+          {
+            "choiceText": "The Legacy of Courage: Rizal stood firm and bravely and was executed in Bagumbayan, but his words inspired freedom.",
+            "orderIndex": 4,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092007/RizalSeq4_rtocoe.png"
+          },
+          {
+            "choiceText": "The Global Student: He traveled to Europe to learn medicine and saw the world outside the Philippines.",
+            "orderIndex": 2,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760092562/RizalSeq2_f1omqz.png"
+          }
+        ]
       }
+    },
+    {
+      "sceneOrder": 41,
+      "assets": [
+        {
+          "name": "s3_scene41_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760531033/BahayKuboLeadingOutwardsWithGoldenPath_fcn8qw.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc41",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator23_rz9n5g.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The light from the bahay kubo spread outward, forming another golden path.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc41",
+          "lineTextTl": "Ang liwanag mula sa bahay kubo ay kumalat palabas, na bumuo ng isa pang gintong landas."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 42,
+      "assets": [
+        {
+          "name": "s3_scene42_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761041189/LapuLapuWaterHallwayMuseum_rki7gf.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc42",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator24_mmthyf.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The next hall shimmered like the sea, waves dancing on the walls. This was the Visayas Heroes Wing.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc42",
+          "lineTextTl": "Ang susunod na bulwagan ay kumikinang na parang dagat, na may mga alon na sumasayaw sa mga dingding. Ito ang Bahagi (o Pakpak) ng mga Bayani ng Visayas."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 43,
+      "assets": [
+        {
+          "name": "s3_scene43_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc43",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator25_hatzam.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The first picture showed foreign ships arriving at the shores of Mactan.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc43",
+          "lineTextTl": "Ang unang larawan ay nagpakita ng mga dayuhang barko na dumarating sa mga dalampasigan ng Mactan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 44,
+      "assets": [
+        {
+          "name": "s3_scene44_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc44",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670927/s3_marietta11_dcjcqs.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "That’s when Magellan came to the Philippines. He wanted the chiefs to obey him.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc44",
+          "lineTextTl": "Iyon ang oras na dumating si Magellan sa Pilipinas. Gusto niyang sumunod sa kanya ang mga pinuno."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 45,
+      "assets": [
+        {
+          "name": "s3_scene45_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc45",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator26_pc1tdo.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Next was Lapu-Lapu standing strong with his men.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc45",
+          "lineTextTl": "Sumunod ay si Lapu-Lapu na matatag na nakatayo kasama ang kanyang mga tauhan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 46,
+      "assets": [
+        {
+          "name": "s3_scene46_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc46",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670909/s3_narrator27_as0ohf.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Lapu-Lapu was the ruler of Mactan. He refused to surrender and said the island belongs to its people.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc46",
+          "lineTextTl": "Si Lapu-Lapu ang pinuno ng Mactan. Tumanggi siyang sumuko at sinabing ang isla ay pag-aari ng mga tao nito."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 47,
+      "assets": [
+        {
+          "name": "s3_scene47_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc47",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator28_zzepln.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Then came the Battle of Mactan — warriors shouting, waves crashing.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc47",
+          "lineTextTl": "Pagkatapos ay dumating ang Labanan sa Mactan — ang mga mandirigma ay sumisigaw, ang mga alon ay humahampas."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 48,
+      "assets": [
+        {
+          "name": "s3_scene48_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc48",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670928/s3_marietta12_pplorx.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "They fought bravely using spears and shields. Even without armor, they protected their home.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc48",
+          "lineTextTl": "Matapang silang lumaban gamit ang mga sibat at kalasag. Kahit walang baluti (armor), pinrotektahan nila ang kanilang tahanan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 49,
+      "assets": [
+        {
+          "name": "s3_scene49_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc49",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator29_jbjpze.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The final picture showed Lapu-Lapu raising his spear in victory.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc49",
+          "lineTextTl": "Ang huling larawan ay nagpakita kay Lapu-Lapu na itinataas ang kanyang sibat sa pagtatagumpay."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 50,
+      "assets": [
+        {
+          "name": "s3_scene50_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc50",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator30_imsrtp.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Magellan was defeated. Lapu-Lapu became our first hero who fought for freedom.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc50",
+          "lineTextTl": "Natalo si Magellan. Si Lapu-Lapu ang naging una nating bayani na lumaban para sa kalayaan."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 51,
+      "assets": [
+        {
+          "name": "s3_scene51_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959915/LapuLapuInteractivePanelv1_jvpsvh.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc51",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator31_kwwjks.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "As the paintings intertwined around her, Hiraya found herself before a glass podium, its surface scattered with a jumbled arrangement.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc51",
+          "lineTextTl": "Habang ang mga pintura ay nagsasalikop sa paligid niya, natagpuan ni Hiraya ang sarili sa harap ng isang salaming podium, ang ibabaw nito ay nakakalat ng isang magulong ayos (jumbled arrangement)."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 52,
+      "assets": [
+        {
+          "name": "s3_scene52_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959909/LapuLapuInteractivePanelv2_ooonuj.png"
+        }
+      ],
+      "dialogues": [],
+      "question": {
+        "type": "Sequence",
+        "promptText": "Arrange the events of Lapu-Lapu’s story in the right order.",
+        "points": 5,
+        "choices": [
+          {
+            "choiceText": "The Arrival: Foreign ships led by Magellan arrived in Mactan.",
+            "orderIndex": 1,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959914/LapuLapuForeignShipsArriving_dbfepc.png"
+          },
+          {
+            "choiceText": "The Defiance: Lapu-Lapu refused to surrender his island.",
+            "orderIndex": 2,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042517/LapuLapuStandingBraveVictory_hqnj8a.png"
+          },
+          {
+            "choiceText": "The Battle of Mactan: His warriors fought bravely against the invaders.",
+            "orderIndex": 3,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959913/LapuLapuBattleOfMactan_um5nrw.png"
+          },
+          {
+            "choiceText": "The Triumph of Mactan: Magellan was defeated, and freedom was protected.",
+            "orderIndex": 4,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760959918/LapuLapuRaisingHisSpearInVictory_aew6m4.png"
+          }
+        ]
+      }
+    },
+    {
+      "sceneOrder": 53,
+      "assets": [
+        {
+          "name": "s3_scene53_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761042501/LapuLapuVictoryDiorama_tvii80.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc53",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670910/s3_narrator32_htkcmf.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The sound of waves and drums echoed as the diorama blazed with light — Lapu-Lapu stood tall, spear raised in victory.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc53",
+          "lineTextTl": "Ang tunog ng mga alon at tambol ay umalingawngaw habang ang diorama ay nagliyab sa liwanag — si Lapu-Lapu ay nakatayong matayog, nakataas ang sibat sa tagumpay."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 54,
+      "assets": [
+        {
+          "name": "s3_scene54_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratHallwayMuseum_licttx.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc54",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator33_gsbdhf.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The final hallway glowed with brass and gold. Beautiful Maguindanao patterns covered the walls.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc54",
+          "lineTextTl": "Ang huling pasilyo ay kumikinang sa tanso at ginto. Ang magagandang disenyo ng Maguindanao ay bumabalot sa mga dingding."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 55,
+      "assets": [
+        {
+          "name": "s3_scene55_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc55",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator34_yraxgm.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The first picture showed a proud sultan on his throne in Maguindanao.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc55",
+          "lineTextTl": "Ang unang larawan ay nagpakita ng isang mapagmataas na sultan sa kanyang trono sa Maguindanao."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 56,
+      "assets": [
+        {
+          "name": "s3_scene56_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc56",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator35_du9ecx.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "That’s Sultan Muhammad Dipatuan Kudarat. He was a wise and strong leader who wanted peace for his people.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc56",
+          "lineTextTl": "Iyan si Sultan Muhammad Dipatuan Kudarat. Siya ay isang matalino at malakas na pinuno na nagnanais ng kapayapaan para sa kanyang mga tao."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 57,
+      "assets": [
+        {
+          "name": "s3_scene57_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc57",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator37_qoh1wh.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "When the Spaniards tried to take Mindanao, Kudarat united the Muslim clans to defend their land.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc57",
+          "lineTextTl": "Nang subukan ng mga Kastila na kunin ang Mindanao, pinagkaisa ni Kudarat ang mga Muslim na angkan upang ipagtanggol ang kanilang lupain."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 58,
+      "assets": [
+        {
+          "name": "s3_scene58_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc58",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator36_quzpj2.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Next was a battle scene with foreign soldiers.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc58",
+          "lineTextTl": "Sumunod ay isang eksena ng labanan na may mga dayuhang sundalo."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 59,
+      "assets": [
+        {
+          "name": "s3_scene59_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc59",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator37_qoh1wh.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "When the Spaniards tried to take Mindanao, Kudarat united the Muslim clans to defend their land.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc59",
+          "lineTextTl": "Nang subukan ng mga Kastila na kunin ang Mindanao, pinagkaisa ni Kudarat ang mga Muslim na angkan upang ipagtanggol ang kanilang lupain."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 60,
+      "assets": [
+        {
+          "name": "s3_scene60_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc60",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator38_oztry7.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "Then came Kudarat speaking to other leaders, pointing to the sky.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc60",
+          "lineTextTl": "Pagkatapos ay si Kudarat na nakikipag-usap sa ibang mga pinuno, na nakaturo sa langit."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 61,
+      "assets": [
+        {
+          "name": "s3_scene61_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc61",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670930/s3_marietta14_q7prxn.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "He reminded them to stay strong and never lose their freedom. The last picture showed Kudarat standing tall, the flag of Maguindanao behind him.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc61",
+          "lineTextTl": "Pinaalalahanan niya sila na manatiling matatag at huwag na huwag mawawala ang kanilang kalayaan. Ang huling larawan ay nagpakita kay Kudarat na nakatayong matayog, ang bandila ng Maguindanao sa likuran niya."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 62,
+      "assets": [
+        {
+          "name": "s3_scene62_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc62",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670911/s3_narrator39_qc4fsj.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The last picture showed Kudarat standing tall, the flag of Maguindanao behind him.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc62",
+          "lineTextTl": "Ang huling larawan ay nagpakita kay Kudarat na nakatayong matayog, ang bandila ng Maguindanao sa likuran niya."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 63,
+      "assets": [
+        {
+          "name": "s3_scene63_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc63",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670912/s3_narrator40_hsxoe7.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "He was never conquered. His courage still lives in the people of Mindanao.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc63",
+          "lineTextTl": "Hindi siya kailanman nasakop. Ang kanyang tapang ay nabubuhay pa rin sa mga tao ng Mindanao."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 64,
+      "assets": [
+        {
+          "name": "s3_scene64_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962711/SultanKudaratInteractivePanel_jtse51.png"
+        }
+      ],
+      "dialogues": [],
+      "question": {
+        "type": "Sequence",
+        "promptText": "Arrange the events of Lapu-Lapu’s story in the right order.",
+        "points": 5,
+        "choices": [
+          {
+            "choiceText": "The Sultan of Maguindanao: “He ruled his land with wisdom and strength.",
+            "orderIndex": 1,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962710/SultanKudaratProudKingSittingOnHisThrone_hlfuml.png"
+          },
+          {
+            "choiceText": "The Defender of Freedom: “He united the Muslim clans against the invaders.",
+            "orderIndex": 2,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962714/SultanKudaratBattleWithForeignSoldiers_tdiqno.png"
+          },
+          {
+            "choiceText": "The Voice of Unity: “He inspired leaders to stay proud and brave.",
+            "orderIndex": 3,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962713/SultanKudaratSpeakingToTheOtherLeaders_jjyppl.png"
+          },
+          {
+            "choiceText": "The Unconquered Legacy: “He was never defeated and remains a symbol of freedom.",
+            "orderIndex": 4,
+            "choiceImageUrl": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962707/SultanKudaratStandingTall_vd6len.png"
+          }
+        ]
+      }
+    },
+    {
+      "sceneOrder": 65,
+      "assets": [
+        {
+          "name": "s3_scene65_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1760962703/HirayaRadiantBeamsSurroundingHer_yo6vqo.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc65",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670912/s3_narrator41_jtilzu.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "The brass hall glowed as all four heroes’ lights merged into one radiant beam surrounding Hiraya.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc65",
+          "lineTextTl": "Ang bulwagan na may tanso ay kumikinang habang ang mga liwanag ng lahat ng apat na bayani ay nagsama sa isang nag-iisang sinag na bumabalot kay Hiraya."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 66,
+      "assets": [
+        {
+          "name": "s3_scene66_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
+        },
+        {
+          "name": "Marietta_rest",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right",
+            "appearAfter": 0.1
+          }
+        },
+        {
+          "name": "marietta_voice_st3_sc9",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761689998/s3_marietta15_hyvuqf.wav"
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "TITA MARIETTA",
+          "lineText": "You’ve listened well, Hiraya. The spirit of our heroes lives in every part of our islands — Luzon, Visayas, and Mindanao.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc66",
+          "lineTextTl": "Mabuti ang pakikinig mo, Hiraya. Ang diwa ng ating mga bayani ay nabubuhay sa bawat bahagi ng ating mga isla — Luzon, Visayas, at Mindanao."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 67,
+      "assets": [
+        {
+          "name": "s3_scene67_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
+        },
+        {
+          "name": "marietta_voice_st3_sc67",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761670904/s3_hiraya4_mjwjsm.wav"
+        },
+        {
+          "name": "Marietta_rest",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking"
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right"
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "HIRAYA",
+          "lineText": "I’ll remember their stories, Tita. They’re part of who we are.",
+          "orderIndex": 1,
+          "voiceover": "marietta_voice_st3_sc67",
+          "lineTextTl": "Tatandaan ko ang kanilang mga kuwento, Tita. Bahagi sila kung sino tayo."
+        }
+      ]
+    },
+    {
+      "sceneOrder": 68,
+      "assets": [
+        {
+          "name": "s3_scene68_background",
+          "type": "background",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1761692021/NationalHeroesDayMuseum_nx4vyn_c5ac99.png"
+        },
+        {
+          "name": "narrator_voice_st3_sc68",
+          "type": "audio",
+          "filePath": "https://res.cloudinary.com/dymjwplal/video/upload/v1761673363/s3_narrator42_ksngmg.wav"
+        },
+        {
+          "name": "Marietta_rest",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759832583/MariettaRest_hkuevb.png",
+          "positionX": -3,
+          "positionY": -9,
+          "orderIndex": 1,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Marietta",
+            "state": "thinking",
+            "disappearAfter": 0.6
+          }
+        },
+        {
+          "name": "Hiraya_amazed",
+          "type": "sprite",
+          "filePath": "https://res.cloudinary.com/dymjwplal/image/upload/v1759837416/HirayaAmazed2_d94m38.png",
+          "positionX": 2,
+          "positionY": -20,
+          "orderIndex": 2,
+          "isInteractive": false,
+          "metadata": {
+            "character": "Hiraya",
+            "scale": 0.8,
+            "state": "excited",
+            "facing": "right",
+            "disappearAfter": 0.6
+          }
+        }
+      ],
+      "dialogues": [
+        {
+          "characterName": "NARRATOR",
+          "lineText": "And as they left the museum, the sunlight felt warmer — like the glow of every hero shining inside her heart.",
+          "orderIndex": 1,
+          "voiceover": "narrator_voice_st3_sc68",
+          "lineTextTl": "At habang nilisan nila ang museo, ang sikat ng araw ay tila mas mainit — parang ang liwanag ng bawat bayani na kumikinang sa loob ng kanyang puso."
+        }
+      ]
+    }
   ]
 }
