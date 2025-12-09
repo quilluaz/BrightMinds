@@ -21,7 +21,10 @@ public class SeederService {
     @Autowired private BadgeRepository badgeRepository;
 
     public void seedStory(StorySeedDTO storyDTO) {
-        Story story = new Story();
+        // Check if story exists to update it instead of creating a duplicate
+        Story story = storyRepository.findByTitle(storyDTO.getTitle())
+                .orElse(new Story());
+
         story.setTitle(storyDTO.getTitle());
         story.setDescription(storyDTO.getDescription());
         story.setStoryOrder(storyDTO.getStoryOrder());
@@ -37,7 +40,15 @@ public class SeederService {
         
         story.setSequenceGraph(storyDTO.getSequenceGraph());
         story = storyRepository.save(story);
+
+        // If updating an existing story, clear old scenes to ensure a clean sync of the new structure
         if (storyDTO.getScenes() != null) {
+            // Note: We delete all existing scenes for this story to avoid ordering conflicts or stale scenes.
+            // This is safe because game_attempts link to the Story, not individual Scenes/Questions usually.
+            // Even if they did, this is a 'reset' of the game content while keeping the container (Story).
+            sceneRepository.deleteByStory(story);
+            sceneRepository.flush(); // Ensure delete is committed before inserting new scenes
+
             for (SceneSeedDTO sceneDTO : storyDTO.getScenes()) {
                 seedScene(sceneDTO, story);
             }
