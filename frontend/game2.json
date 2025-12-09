@@ -81,7 +81,8 @@
           "characterName": "NARRATOR",
           "lineText": "In a cozy village home, young Leah woke up one sunny morning, bubbling with curiosity. She tiptoed to her mom's bookshelf, hunting for a fun cartoon book about spring adventures.",
           "orderIndex": 1,
-          "voiceover": "s2_ntr1"
+          "voiceover": "s2_ntr1", 
+	    "lineTextTl": "Sa isang maligayang tahanan sa nayon, nagising ang batang si Leah isang maaraw na uamga, na punong-puno ng kuryusidad. Dahan-dahan siyang naglakad patungo sa estante ng libro ng kanyang ina, naghahanap ng isang masayang aklat ng kartun tungkol sa mga pakikipagsapalaran sa tagsibol."
         }
       ]
     },
@@ -126,7 +127,8 @@
           "characterName": "NARRATOR",
           "lineText": "Oops! A dusty scrapbook tumbled to the floor, its pages all jumbled and torn.",
           "orderIndex": 1,
-          "voiceover": "s2_ntr2"
+          "voiceover": "s2_ntr2", 
+	    "lineTextTl": "Naku! Isang maalikabok na album ng alaala (scrapbook) ang nahulog sa sahig, na ang mga pahina ay gulo-gulo at punit-punit."
         }
       ]
     },
@@ -187,7 +189,8 @@
           "characterName": "NARRATOR",
           "lineText": "The left page sparkled with words about tanso, a super cool reddish-brown mineral.",
           "orderIndex": 1,
-          "voiceover": "s2_ntr3"
+          "voiceover": "s2_ntr3", 
+	    "lineTextTl": "Ang kaliwang pahina ay kumikinang sa mga slaita tungkol sa tanso, isang napakagandang mapula-pulang kayumangging mineral."
         }
       ]
     },
@@ -293,7 +296,8 @@
           "characterName": "NARRATOR",
           "lineText": "Suddenly, four minerals popped out of the book! Can you help Leah drag the correct one to the empty spot?",
           "orderIndex": 1,
-          "voiceover": "s2_ntr4"
+          "voiceover": "s2_ntr4", 
+	    "lineTextTl": "Bigla, apaat na mineral ang luumabas sa libro! Matutulungan mo ba si Leah na i-drag ang tamang mineral papunta sa walang laman na puwesto?"
         }
       ],
       "question": {
@@ -328,7 +332,8 @@
               "characterName": "NARRATOR",
               "lineText": "That's it! The shiny reddish-brown Tanso fits perfectly. Leah smiled, one step closer to fixing the scrapbook!",
               "orderIndex": 1,
-              "voiceover": "s2_ntr5"
+              "voiceover": "s2_ntr5", 
+	    "lineTextTl": "Iyon na! Ang makintab na mapula-pulang kayumangging Tanso ay perpektong nagkasya. Ngumiti si Leah, isang hakbang na lang at maayos na niya ang album ng alaala!"
             }
           ],
           "assets": [
@@ -436,7 +441,8 @@
           "characterName": "NARRATOR",
           "lineText": "Leah turned the page. This one glowed with words about 'Pilak'. The minerals appeared again, ready to be placed!",
           "orderIndex": 1,
-          "voiceover": "s2_ntr6"
+          "voiceover": "s2_ntr6", 
+	    "lineTextTl": "Binaliktad ni Leah ang pahina. Ang isang ito ay sumikat sa mga salita tungkol sa ‘Pilak’. Ang mga mineral ay lumitaw muli, handa nang ilagay!"
         }
       ],
       "question": {
@@ -471,7 +477,8 @@
               "characterName": "NARRATOR",
               "lineText": "Amazing! The dazzling Pilak is in its place. The scrapbook is starting to look beautiful again!",
               "orderIndex": 1,
-              "voiceover": "s2_ntr7"
+              "voiceover": "s2_ntr7", 
+	    "lineTextTl": "Kahanga-hanga! Ang nakasisilaw na Pilak ay nasa tamang puwesto na. Ang album ng alaala ay nagsisimula nang maging maganda ulit!"
             }
           ],
           "assets": [
@@ -579,7 +586,8 @@
           "characterName": "NARRATOR",
           "lineText": "The scrapbook was starting to shine! Now for a page about ginto. Can you find the golden mineral?",
           "orderIndex": 1,
-          "voiceover": "s2_ntr8"
+          "voiceover": "s2_ntr8", 
+	    "lineTextTl": "Ang album ng alaala ay nagsisimula nang kuminang! Ngayon naman, para sa isang pahina tungkol sa ginto. Mahahnap mo ba ang gintong mineral?"
         }
       ],
       "question": {
@@ -614,7 +622,8 @@
               "characterName": "NARRATOR",
               "lineText": "Perfect! The Ginto picture is sparkling like a tiny sun. Great job!",
               "orderIndex": 1,
-              "voiceover": "s2_ntr9"
+              "voiceover": "s2_ntr9", 
+	    "lineTextTl": "Perpekto! Ang larawan ng Ginto ay kumikinang na parang isang maliit na araw. Mahusay!"
             }
           ],
           "assets": [
@@ -722,7 +731,8 @@
           "characterName": "NARRATOR",
           "lineText": "Leah flipped to a page about bakal, a strong, dark mineral. Help her find the right one!",
           "orderIndex": 1,
-          "voiceover": "s2_ntr10"
+          "voiceover": "s2_ntr10", 
+	    "lineTextTl": "Binaliktad ni Leah ang pahina tungkol sa bakal, isang malakas at madilim na mineral. Tulungan mo siyang mahanap ang tamang isa!"
         }
       ],
       "question": {
@@ -757,7 +767,8 @@
               "characterName": "NARRATOR",
               "lineText": "That's the one! The tough-looking Bakal picture is complete.",
               "orderIndex": 1,
-              "voiceover": "s2_ntr11"
+              "voiceover": "s2_ntr11", 
+	    "lineTextTl": "Iyong na! Kumpleto na ang larawan ng matapang-tingnang Bakal."
             }
           ],
           "assets": [
@@ -804,7 +815,8 @@
           "characterName": "NARRATOR",
           "lineText": "Leah paused to admire her sparkly scrapbook. The next page explained that these treasures are called minerals—special rocks that help people every day!",
           "orderIndex": 1,
-          "voiceover": "s2_ntr12"
+          "voiceover": "s2_ntr12", 
+	    "lineTextTl": "Sandaling tumigil si Leah upang hangaan ang kanyang kumikinang na album ng alaala. Ipaliwanag ng susunod na pahina na pahina na ang mga kayamanang ito ay tinatawag na mineral-mga espesyal na bato na tumutulong sa mga tao araw-araw!"
         }
       ]
     },
@@ -903,7 +915,8 @@
           "characterName": "NARRATOR",
           "lineText": "Leah flipped to a page about asin, a white mineral from the sea. Which one is it?",
           "orderIndex": 1,
-          "voiceover": "s2_ntr13"
+          "voiceover": "s2_ntr13", 
+	    "lineTextTl": "Binaliktad ni Leah ang pahina tungkol sa asin, isang puting mineral na galing sa dagat. Alin kaya ito?"
         }
       ],
       "question": {
@@ -938,7 +951,8 @@
               "characterName": "NARRATOR",
               "lineText": "You got it! The crystal picture of Asin is shining bright.",
               "orderIndex": 1,
-              "voiceover": "s2_ntr14"
+              "voiceover": "s2_ntr14", 
+	    "lineTextTl": "Nakuha mo! Ang mala-kristal na larawn ng Asin ay kumikinang nang maliwanag."
             }
           ],
           "assets": [
@@ -1046,7 +1060,8 @@
           "characterName": "NARRATOR",
           "lineText": "The next page glowed with karbon, a dark mineral that powers the world. Which one is it?",
           "orderIndex": 1,
-          "voiceover": "s2_ntr15"
+          "voiceover": "s2_ntr15", 
+	    "lineTextTl": "Ang susunod na pahina ay kumikinang sa karbon, isang madilim na mineral na nagbibigay-lakas sa mundo. Alin kaya ito?"
         }
       ],
       "question": {
@@ -1081,7 +1096,8 @@
               "characterName": "NARRATOR",
               "lineText": "Yes! The shiny coal picture is complete. You've lit up the page!",
               "orderIndex": 1,
-              "voiceover": "s2_ntr16"
+              "voiceover": "s2_ntr16", 
+	    "lineTextTl": "Oo! Kumpleto na ang larawan ng makintab na uling (o karbon). Nasindihan mo ang pahina!"
             }
           ],
           "assets": [
@@ -1189,7 +1205,8 @@
           "characterName": "NARRATOR",
           "lineText": "Leah turned to a page about langis, a special liquid mineral. Help her finish the picture!",
           "orderIndex": 1,
-          "voiceover": "s2_ntr17"
+          "voiceover": "s2_ntr17", 
+	    "lineTextTl": "Binaliktad ni Leah ang pahina tungkol sa langis, isang espesyal na likidong mineral. Tulungan mo siyang tapusin ang larawan!"
         }
       ],
       "question": {
@@ -1224,7 +1241,8 @@
               "characterName": "NARRATOR",
               "lineText": "Wonderful! The oil drop picture is complete!",
               "orderIndex": 1,
-              "voiceover": "s2_ntr18"
+              "voiceover": "s2_ntr18", 
+	    "lineTextTl": "Napakganda! Kumpleto na ang larawan ng tulo ng langis!"
             }
           ],
           "assets": [
@@ -1332,7 +1350,8 @@
           "characterName": "NARRATOR",
           "lineText": "The final page sparkled with hiyas, the most beautiful minerals. Which one is it?",
           "orderIndex": 1,
-          "voiceover": "s2_ntr19"
+          "voiceover": "s2_ntr19", 
+	    "lineTextTl": "Ang huling pahina ay kumikinang sa hiyas, ang pinakamagandang mineral. Alin kaya ito?"
         }
       ],
       "question": {
@@ -1383,10 +1402,10 @@
           "characterName": "NARRATOR",
           "lineText": "You did it! The scrapbook is complete! All the beautiful minerals are back where they belong.",
           "orderIndex": 1,
-          "voiceover": "s2_ntr20"
+          "voiceover": "s2_ntr20", 
+	    "lineTextTl": "Nagawa mo! Kumpleto na ang album ng alaala! Lahat ng magagandang mineral ay nakabalik na sa kanilang tamang kinalalagyan."
         }
       ]
     }
   ]
 }
-
