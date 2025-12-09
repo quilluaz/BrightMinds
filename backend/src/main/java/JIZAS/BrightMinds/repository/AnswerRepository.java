@@ -30,4 +30,5 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     @Query("SELECT a FROM Answer a JOIN FETCH a.question WHERE a.question.questionId = :questionId")
     List<Answer> findAnswersWithQuestionDetails(@Param("questionId") Integer questionId);
 
+    void deleteByQuestion(JIZAS.BrightMinds.entity.Question question);
 }

@@ -26,4 +26,6 @@ public interface ChoiceRepository extends JpaRepository<Choice, Integer> {
     // Custom query to find choices with question details
     @Query("SELECT c FROM Choice c JOIN FETCH c.question WHERE c.question.questionId = :questionId")
     List<Choice> findChoicesWithQuestionDetails(@Param("questionId") Integer questionId);
+
+    void deleteByQuestion(JIZAS.BrightMinds.entity.Question question);
 }
