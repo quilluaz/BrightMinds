@@ -86,6 +86,7 @@ public class SecurityConfig {
                         
                         // TODO: Remove seeder permitAll after production seeding is complete
                         .requestMatchers("/api/seeder/**").permitAll()
+                        .requestMatchers("/api/user-badges/retroactive/**").permitAll()
                         
                         // All other API endpoints require authentication
                         .requestMatchers("/api/**").authenticated()
