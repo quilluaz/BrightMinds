@@ -34,4 +34,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     // Custom query to find all questions for a story through scenes
     @Query("SELECT q FROM Question q JOIN Scene s ON q.sceneId = s.sceneId WHERE s.story.storyId = :storyId")
     List<Question> findQuestionsByStoryId(@Param("storyId") Integer storyId);
+
+    void deleteBySceneId(Integer sceneId);
 }

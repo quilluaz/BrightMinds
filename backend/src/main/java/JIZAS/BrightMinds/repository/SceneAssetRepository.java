@@ -15,6 +15,8 @@ public interface SceneAssetRepository extends JpaRepository<SceneAsset, Long> {
     
     @Query("SELECT sa FROM SceneAsset sa JOIN sa.asset a JOIN sa.scene s WHERE a.name = :assetName AND s.sceneOrder = :sceneOrder")
     Optional<SceneAsset> findByAssetNameAndSceneOrder(@Param("assetName") String assetName, @Param("sceneOrder") Integer sceneOrder);
+    
+    void deleteByScene(JIZAS.BrightMinds.entity.Scene scene);
 }
 
 

@@ -14,6 +14,8 @@ public interface DialogueRepository extends JpaRepository<Dialogue, UUID> {
     List<Dialogue> findBySceneOrderByOrderIndexAsc(Scene scene);
     @Query("SELECT d FROM Dialogue d LEFT JOIN FETCH d.voiceAsset WHERE d.scene.sceneId = :sceneId ORDER BY d.orderIndex ASC")
     List<Dialogue> findByScene_SceneIdOrderByOrderIndexAsc(Integer sceneId);
+
+    void deleteByScene(Scene scene);
 }
 
 

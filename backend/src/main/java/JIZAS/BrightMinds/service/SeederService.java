@@ -43,9 +43,27 @@ public class SeederService {
 
         // If updating an existing story, clear old scenes to ensure a clean sync of the new structure
         if (storyDTO.getScenes() != null) {
-            // Note: We delete all existing scenes for this story to avoid ordering conflicts or stale scenes.
-            // This is safe because game_attempts link to the Story, not individual Scenes/Questions usually.
-            // Even if they did, this is a 'reset' of the game content while keeping the container (Story).
+            
+            // Manual Cascade Delete: Delete all children of existing scenes first to avoid FK constraint errors
+            List<Scene> existingScenes = sceneRepository.findByStoryOrderBySceneOrderAsc(story);
+            for (Scene oldScene : existingScenes) {
+                // Delete SceneAssets
+                sceneAssetRepository.deleteByScene(oldScene);
+                
+                // Delete Dialogues
+                dialogueRepository.deleteByScene(oldScene);
+                
+                // Delete Questions (and their Choices/Answers)
+                List<Question> questions = questionRepository.findBySceneId(oldScene.getSceneId());
+                for (Question q : questions) {
+                    choiceRepository.deleteByQuestion(q);
+                    answerRepository.deleteByQuestion(q);
+                    questionRepository.delete(q);
+                }
+            }
+            sceneRepository.flush(); // Ensure children are deleted
+
+            // Now safely delete the scenes
             sceneRepository.deleteByStory(story);
             sceneRepository.flush(); // Ensure delete is committed before inserting new scenes
 
