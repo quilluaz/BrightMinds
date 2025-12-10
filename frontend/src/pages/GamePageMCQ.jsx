@@ -1068,6 +1068,9 @@ export default function GamePageMCQ() {
     // Console log removed
     try {
       await saveGameAttempt(score);
+      // Trigger immediate badge check
+      console.log("GamePageMCQ: Dispatching badge-check event");
+      window.dispatchEvent(new CustomEvent('badge-check'));
       // Console log removed
     } catch (error) {
       console.error("Error in saveGameAttempt:", error);

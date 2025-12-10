@@ -765,6 +765,10 @@ export default function GamePageDnD() {
     calculateStoryScore()
       .then(() => {
         console.log("Story score calculated and attempt saved");
+        // Trigger immediate badge check
+        console.log("GamePageDnD: Dispatching badge-check event");
+        window.dispatchEvent(new CustomEvent('badge-check'));
+        
         // Show score after 3 seconds or when user clicks
         setTimeout(() => {
           console.log("3 seconds passed, showing score");
