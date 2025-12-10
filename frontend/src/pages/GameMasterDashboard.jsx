@@ -11,6 +11,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
+import ConfirmationModal from "@/components/ui/ConfirmationModal";
 import BubbleMenu from "@/components/ui/BubbleMenu";
 import {
   MostPlayedGamesChart,
@@ -693,61 +694,41 @@ export default function GameMasterDashboard() {
         </DialogContent>
       </Dialog>
       {/* Delete Confirmation Modal */}
-      <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
-        <DialogContent className="sm:max-w-md bg-bmLightYellow text-bmBlack border-4 border-bmBlack rounded-2xl shadow-[6px_6px_0_#000] [&>button]:hidden">
-          <DialogHeader>
-            <DialogTitle className="font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
-              Confirm Deletion
-            </DialogTitle>
-            <DialogDescription className="text-center text-bmBlack font-lexend mt-2">
+      <ConfirmationModal
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={confirmDeleteStudent}
+        title="Confirm Deletion"
+        description={
+            <>
               Are you sure you want to delete <strong>{studentToDelete?.firstName} {studentToDelete?.lastName}</strong>?
               <br />
               This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="mt-4 flex-col sm:flex-row gap-2 sm:gap-0">
-            <Button
-              onClick={() => setShowDeleteConfirm(false)}
-              className="bg-gray-400 hover:bg-gray-500 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]">
-              Cancel
-            </Button>
-            <Button
-              onClick={confirmDeleteStudent}
-              className="bg-bmRed hover:bg-red-700 text-white font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
-              disabled={loading}>
-              {loading ? "Deleting..." : "Delete Student"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            </>
+        }
+        confirmText="Delete Student"
+        confirmButtonClass="bg-bmRed hover:bg-red-700 text-white"
+        isLoading={loading}
+        loadingText="Deleting..."
+      />
       {/* Password Reset Confirmation Modal */}
-      <Dialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
-        <DialogContent className="sm:max-w-md bg-bmLightYellow text-bmBlack border-4 border-bmBlack rounded-2xl shadow-[6px_6px_0_#000] [&>button]:hidden">
-          <DialogHeader>
-            <DialogTitle className="font-spartan font-black [-webkit-text-stroke:0.035em_black] text-center text-bmBlack">
-              Confirm Password Reset
-            </DialogTitle>
-            <DialogDescription className="text-center text-bmBlack font-lexend mt-2">
+      <ConfirmationModal
+        isOpen={showResetConfirm}
+        onClose={() => setShowResetConfirm(false)}
+        onConfirm={confirmResetPassword}
+        title="Confirm Password Reset"
+        description={
+            <>
               Are you sure you want to reset the password for <strong>{studentToReset?.firstName} {studentToReset?.lastName}</strong>?
               <br />
               The password will be reset to: <strong>brightmindsplayer</strong>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="mt-4 flex-col sm:flex-row gap-2 sm:gap-0">
-            <Button
-              onClick={() => setShowResetConfirm(false)}
-              className="bg-gray-400 hover:bg-gray-500 text-white font-spartan font-bold border-2 border-bmBlack shadow-[2px_2px_0_#000]">
-              Cancel
-            </Button>
-            <Button
-              onClick={confirmResetPassword}
-              className="bg-bmOrange hover:bg-orange-600 text-white font-spartan font-bold border-2 border-bmBlack shadow-[4px_4px_0_#000]"
-              disabled={loading}>
-              {loading ? "Resetting..." : "Reset Password"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            </>
+        }
+        confirmText="Reset Password"
+        confirmButtonClass="bg-bmOrange hover:bg-orange-600 text-white"
+        isLoading={loading}
+        loadingText="Resetting..."
+      />
     </main>
   );
 }

@@ -7,10 +7,12 @@ import Settings from "@/pages/Settings";
 import GameMasterDashboard from "@/pages/GameMasterDashboard";
 import PlayerDashboard from "@/pages/PlayerDashboard";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import BadgeNotification from "@/components/BadgeNotification";
 
 function App() {
   return (
     <Router>
+      <BadgeNotification />
       <Routes>
         <Route path="/" element={<LandingPage />} />
 

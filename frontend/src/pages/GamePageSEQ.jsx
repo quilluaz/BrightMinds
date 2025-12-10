@@ -1329,14 +1329,21 @@ export default function GamePageSEQ() {
         .then(() => {
           console.log("Story score calculated and attempt saved");
         })
+        .then(() => {
+        console.log("Story score calculated and attempt saved");
+        // Trigger immediate badge check
+        console.log("GamePageSEQ: Dispatching badge-check event");
+        window.dispatchEvent(new CustomEvent('badge-check'));
+
+        // Show score after 3 seconds or when user clicks
+        setTimeout(() => {
+          console.log("3 seconds passed, showing score");
+          handleScoreDisplay();
+        }, 3000);
+      })
         .catch((error) => {
           console.error("Error calculating score or saving attempt:", error);
         });
-      // Show score after 3 seconds or when user clicks
-      setTimeout(() => {
-        console.log("3 seconds passed, showing score");
-        handleScoreDisplay();
-      }, 3000);
       // Don't reset isTransitioning for finished state
     }
   };
